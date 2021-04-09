@@ -1,0 +1,60 @@
+---
+title: "1_MWAS Results"
+author: "Jesse Goodrich"
+date: "4/9/2021"
+output: html_document
+---
+
+
+```{r setup_select, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(styledom)
+library(kableExtra)
+library(cowplot)
+theme_set(theme_cowplot())
+# library(circlize)
+
+source(here::here("!directories.R"))
+source(here::here("!load_clean_data.R"))
+
+exposures = c("hexachlorobenzene_impute", 
+              "dde_impute",
+              "ocs",
+              "pbde_154_impute",
+              "pbde_47_impute", 
+              "pbde_100_ngml_detect",
+              "pbde_153_ngml_detect",    
+              "pbde_85_ngml_detect",          
+              "pcb_118_ngml_detect",   
+              "pcb_138_ngml_detect",          
+              "pcb_153_ngml_detect",     
+              "pcb_180_ngml_detect", 
+              "pcb_num_detect", 
+              "pbde_num_detect")
+
+
+
+```
+
+
+## Run SOLAR MWAS
+```{r}
+## Takes ~5 minutes, dont need to re-run
+# source("1.1_SOLAR_MWAS.R")
+```
+
+
+## Run CHS MWAS
+```{r}
+## Takes ~5 minutes, dont need to re-run
+source("1.2_CHS_MWAS.R")
+```
+
+
+## Get summary details about MWAS results
+```{r}
+source("1.3_MWAS_pvalue_summary_analysis.r")
+```
+
+

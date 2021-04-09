@@ -1,0 +1,151 @@
+---
+title: "LUCID Analysis"
+author: "Dom Grisafe"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    keep_md: FALSE
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+csl: hepatology.csl
+bibliography: "bib_helix_nafld.bib"
+---
+
+```{r setup_lucid, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(styledom)
+library(tidyverse)
+library(cowplot)
+  theme_set(theme_cowplot())
+library(LUCIDus)
+source("5.0.0_workflow_lucid.R")
+```
+
+# Genetic Fine Mapping
+
+Use [Sum of Single Effects (SuSiE)](https://stephenslab.github.io/susieR/index.html) regression to determine which SNPs are apart of the credible set of causal genes. 
+
+This will help eliminate highly covarying SNPs in LUCID models.
+
+[SuSiE Vignettes](https://stephenslab.github.io/susieR/articles/index.html) are helpful.
+
+
+# LUCIDus
+
+## Data Cleaning
+
+Create matrices for outcome, genetic exposure, and omics intermediates
+
+```{r}
+# SNP genetic exposure vars
+g_matrix <- df_lucid %>% 
+  # dplyr::select(starts_with("rs")) %>%             # include all SNPs
+  dplyr::select(target_features$snps_candidates) %>% # include target SNPs
+  as.matrix()
+
+# mutli-omics z vars
+z_matrix <- df_lucid %>% 
+  # dplyr::select(z_pro_IL4, z_pro_IL6, z_pro_Cpeptide) %>% 
+  dplyr::select(starts_with("pro_")) %>% 
+  norm_bio_features("pro_") %>% # normalize features for LUCID
+  as.matrix()
+
+# liver injury outcome vars
+y_matrix <- df_lucid %>% dplyr::select(i_q90_any) %>% 
+  dplyr::mutate(i_q90_any = as.integer(i_q90_any) - 1) %>% as.matrix
+```
+
+## Covariates
+
+Create matrices for covariates:
+
+Sociodemographic covariates of children and parents are included for the regression of the liver injury outcome on the intermediates.
+
+Technical covariates of children multi-omics measurements are included for the regression of the latent cluster intermediate on the genetic exposures.
+
+```{r}
+# sociodem covariates
+cov_y <- df_lucid %>% 
+  dplyr::select(starts_with("cov_y"), starts_with("cov_z")) %>%
+  as.matrix()
+
+# covariates for latent variable on genes
+cov_z <- NULL
+```
+
+
+## est.lucid()	
+
+Estimate latent clusters using multi-omics data with/without the outcome of interest, 
+and producing an lucid object; missing values in biomarker data (Z) are allowed
+
+```{r, echo = TRUE}
+# LUCIDus::sim2 %>% summary()
+# g_matrix %>% summary()
+# z_matrix %>% summary()
+# y_matrix %>% summary()
+
+# set.seed(14312)
+# tune.K <- tune.lucid(
+#   # family = "binary",   # many errors
+#   G = g_matrix, 
+#   Z = z_matrix, 
+#   Y = y_matrix, 
+#   K = 2:3)
+# tune.K
+
+```
+
+
+```{r}
+set.seed(133)
+
+# g_matrix
+fit <- est.lucid(
+  G = g_matrix, 
+  # CoG = cov_z,
+  Z = z_matrix, 
+  Y = y_matrix, 
+  CoY = cov_y,
+  K = 2, family = "binary"
+  )
+```
+
+
+### Errors
+
+Errors from **tune.lucid()** function  
+
+* glm.fit: algorithm did not converge  
+* [glm.fit: fitted probabilities numerically 0 or 1 occurred](https://discuss.analyticsvidhya.com/t/glm-fit-fitted-probabilities-numerically-0-or-1-occurred-warning-message-when-i-run-logistic-regression/10390/6)  
+
+
+## boot.lucid()	
+
+Inference about the parameters of LUCID model based on bootstrap resampling method
+
+
+
+## summary()
+
+Summarize the results of LUCID model estimated by est.lucid(). 
+It presents the results in a nice table with detailed explanation for parameters
+
+```{r}
+summary(fit)
+```
+
+
+## plot()
+
+Use a Sankey diagram to visualize the LUCID model
+
+```{r}
+plot(fit)
+```
+
+
+## predict()	
+
+Predict the outcome based on a fitted LUCID model given new genetic data and biomarkers

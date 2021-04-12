@@ -247,17 +247,17 @@ write_csv(hilic_single_matching_only,
 
 
 # Combine with MWAS results  ----------------------------------------------
-single_matches <- bind_rows(hilic_single_matching_only, 
-                            c18_single_matching_only)
+solar_single_matches <- bind_rows(hilic_single_matching_only, 
+                                c18_single_matching_only)
 
 
-single_matches_w_mwas <- left_join(single_matches, 
-                                   mwas_results %>% 
-                                     mutate(mz = as.character(mz))) %>% 
-  mutate(across(c(mz, rt, p_value, t_score), as.numeric ))
+solar_single_matches_w_mwas <- left_join(solar_single_matches, 
+                                       mwas_results %>% 
+                                         mutate(mz = as.character(mz))) %>% 
+  mutate(across(c(mz, rt, p_value, t_score, beta), as.numeric ))
 
 
-single_matches_w_mwas <- single_matches_w_mwas %>% 
+solar_single_matches_w_mwas <- solar_single_matches_w_mwas %>% 
   droplevels() %>% 
   mutate(super_pathway = fct_lump(main_super_pathway, 7,
                                   other_level = "Multiple/other") %>% 
@@ -267,7 +267,7 @@ single_matches_w_mwas <- single_matches_w_mwas %>%
   arrange(super_pathway) %>% 
   ungroup()
 
-single_matches_w_mwas <- single_matches_w_mwas %>% 
+solar_single_matches_w_mwas <- solar_single_matches_w_mwas %>% 
   group_by(exposure) %>%
   mutate(q_value = p.adjust(p_value, method = "BY")) %>% 
   mutate(cpdnum = row_number(), 
@@ -279,41 +279,9 @@ single_matches_w_mwas <- single_matches_w_mwas %>%
            str_replace_all("_", " ") %>% 
            str_replace("HEXACHLOROBENZENE", "HCB"),
          exposure2 = if_else(str_detect(exposure, "ngml_detect"), 
-                             paste0(exposure2, "*"), exposure2)) %>% 
+                             paste0(exposure2, "*"), exposure2), 
+  ) %>% 
   ungroup()
-
-#########################
-ggplot(single_matches_w_mwas,
-       aes(x = cpdnum,
-           y = -log(p_value),
-           color = q_value < 0.05, 
-           fill = super_pathway)) +
-  # geom_hline(yintercept = -log(0.05/369), 
-  #            color = "grey80", 
-  #            size = .5, linetype =2) +
-  geom_point(size = .75, shape = 21) +
-  scale_color_manual(values = c("black", ""))
-# geom_text(aes(label = cpd_sig)) + 
-facet_wrap(~exposure2) + 
-  xlab("Compound Number (ordered by p-value within superpathway)") + 
-  ylab("-log P")
-
-
-
-ggplot(single_matches_w_mwas,
-       aes(x = cpdnum,
-           y = -log(p_value),
-           color = q_value < 0.05, 
-           fill = super_pathway)) +
-  # geom_hline(yintercept = -log(0.05/369), 
-  #            color = "grey80", 
-  #            size = .5, linetype =2) +
-  geom_point(size = .75, shape = 21) +
-  scale_color_manual(values = c("black", ""))
-# geom_text(aes(label = cpd_sig)) + 
-facet_wrap(~exposure2) + 
-  xlab("Compound Number (ordered by p-value within superpathway)") + 
-  ylab("-log P")
 
 
 

@@ -12,19 +12,19 @@ folders <- list.files(here("Temporary results"))
 
 folders <- folders[folders %in% exposures]
 
-i = 1
+
 for(i in 1:length(folders)){
   # Clean MWAS data  --------------------------------------------------------
   #  Set working directory for first folder, input data
   setwd(here::here("Temporary results",
-                   folders[i],  "SOLAR"))
+                   folders[i],  "chs"))
   
   dir.create(file.path(here::here("Temporary results",
-                                  folders[i],  "SOLAR"), 
+                                  folders[i],  "chs"), 
                        "c18"), showWarnings = FALSE)
   
   dir.create(file.path(here::here("Temporary results",
-                                  folders[i],  "SOLAR"), 
+                                  folders[i],  "chs"), 
                        "hilic"), showWarnings = FALSE)
   
   
@@ -43,7 +43,7 @@ for(i in 1:length(folders)){
   rm(mwas_results, hilic, c18)
   
   # Run mummichog on HILIC positive  ----------------------------------------
-  setwd(here::here("Temporary results", folders[i], "SOLAR", "hilic"))
+  setwd(here::here("Temporary results", folders[i], "chs", "hilic"))
   
   ##  Create objects for storing processed data from the MS peaks to pathways module
   mSet<-InitDataObjects(data.type = "mass_all",
@@ -83,13 +83,13 @@ for(i in 1:length(folders)){
   # Write pathway results 
   write_csv(pathways, here::here("Temporary results", 
                                  "mum_pathway_results",
-                                 "SOLAR",
+                                 "chs",
                                  paste(folders[i], "mum_pathway_hilic.csv", sep = "_")))
   
   # Run mummichog on C18 negative  ----------------------------------------
   rm(Set, mSet)
   # Set wd for c18 analysis
-  setwd(here::here("Temporary results", folders[i],"SOLAR", "c18"))
+  setwd(here::here("Temporary results", folders[i],"chs", "c18"))
   
   ##  Create objects for storing processed data from the MS peaks to pathways module
   mSet<-InitDataObjects(data.type = "mass_all",
@@ -129,6 +129,6 @@ for(i in 1:length(folders)){
   # Write pathway results 
   write_csv(pathways, here::here("Temporary results", 
                                  "mum_pathway_results",
-                                 "SOLAR",
+                                 "chs",
                                  paste(folders[i], "mum_pathway_c18.csv", sep = "_")))
 }

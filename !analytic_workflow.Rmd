@@ -32,9 +32,6 @@ exposures = c("hexachlorobenzene_impute",
               "pcb_180_ngml_detect", 
               "pcb_num_detect", 
               "pbde_num_detect")
-
-
-
 ```
 
 
@@ -48,7 +45,7 @@ exposures = c("hexachlorobenzene_impute",
 ## Run CHS MWAS
 ```{r}
 ## Takes ~5 minutes, dont need to re-run
-source("1.2_CHS_MWAS.R")
+# source("1.2_CHS_MWAS.R")
 ```
 
 

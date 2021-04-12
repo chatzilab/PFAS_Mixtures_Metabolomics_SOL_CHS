@@ -91,9 +91,7 @@ saveRDS(HILIC_mwas_results,
 
 
 
-# Save into seperate folders---------------------------------------------
-
-
+# Save into separate folders---------------------------------------------
 exposure_merge_n_save = function(exposures){
   c18_data = 
     c18_mwas_results %>% 

@@ -1,3 +1,5 @@
+# CHS Get tentative cpd matches from Mummichog
+
 library(tidyverse)
 library(ggplot2)
 library(cowplot)
@@ -15,12 +17,13 @@ key = readxl::read_xlsx(here::here("Supporting files",
 
 # Clean MWAS data  --------------------------------------------------------
 #  Set working directory for first folder, input data
-mwas_results_c18 <- read_rds(here::here("Temporary results", "1.1.0_chs_c18_mwas.rds"))
-mwas_results_hilic <- read_rds(here::here("Temporary results", "1.1.0_chs_hilic_mwas.rds"))
+mwas_results_c18 <- read_rds(here::here("Temporary results", "1_1_chs_c18_mwas.rds"))
+mwas_results_hilic <- read_rds(here::here("Temporary results", "1_1_chs_hilic_mwas.rds"))
 mwas_results <- bind_rows(mwas_results_c18, 
                           mwas_results_hilic) %>% 
   janitor::clean_names() %>% 
-  rename(mz = m_z, rt = r_t)
+  rename(mz = m_z, rt = r_t) %>% 
+  mutate(across(mz:t_score, as.numeric))
 
 # Get min p value for each feature
 mwas_min_p_vals <- mwas_results %>% 
@@ -43,10 +46,10 @@ hilic_mwas_min_p_vals <- mwas_min_p_vals %>%
 
 # C18: Load Mummichog data ------------------------------------------------
 chs_c18_set <- read_rds(here::here("Temporary results",
-                                   folders[i], "chs",
-                                   "c18", 
-                                   paste0(folders[i],
-                                          "_c18_mumichog_results.rds")))
+                                     folders[i], "chs",
+                                     "c18", 
+                                     paste0(folders[i],
+                                            "_c18_mumichog_results.rds")))
 # Get MZ and retention time key
 mzkey_c18 <- chs_c18_set$mz2cpd_dict
 
@@ -84,25 +87,22 @@ c18_cpds_to_pathways <- pivot_wider(output2,
                                     values_from = hit, 
                                     names_from = name)
 
-###  Join wide cpd/pathway data with mzkey
-# mzkey_c18_w_pathways <- inner_join(mzkey_c18, 
-#                                    cpds_to_pathways)
-
 # Merge compounds/pathways with superpathways
 output2_superpathways <- left_join(output2, 
                                    key %>% rename(name = pathway))
 
-# Get number of pathways withing superpathways for each mz
+# Get number of pathways within superpathways for each mz
 output3_superpathways <- output2_superpathways %>% 
-  select(-name) %>% 
   group_by(cpd, super_pathway) %>% 
-  summarise(n_pathways_within_superpatwhay = sum(hit)) %>% 
+  summarise(n_pathways_within_superpatwhay = sum(hit), 
+            pathways = paste(unique(name), collapse = "; ")) %>% 
   ungroup()
 
 # Concatenate superpathways 
 cpds_to_superpathways <- output3_superpathways %>% 
   group_by(cpd) %>% 
-  summarise(n_superpathways = length(super_pathway),  
+  summarise(n_superpathways = length(super_pathway), 
+            pathways = pathways[1],
             main_super_pathway = if_else(n_superpathways == 1, 
                                          super_pathway[1], 
                                          paste(super_pathway, collapse = ", "))) %>% 
@@ -128,13 +128,13 @@ c18_1cpd_mult_mz <- x1_c18 %>%
   group_by(cpd) %>% 
   filter(min_p_value == min(min_p_value))
 
-# Filter only single mz/cpd matches
+# Create unique mz/cpd matches
 c18_single_matching_only <- c18_1cpd_mult_mz %>% 
   group_by(mz) %>% 
   summarise(n_matches = length(cpd), 
+            cpd = paste(cpd, collapse = "; "),
             across(everything(), ~.x[1])) %>% 
-  filter(n_matches == 1) %>% 
-  select(mz, rt, cpd, main_super_pathway, main_super_pathway_categorized) %>% 
+  select(mz, rt, cpd, pathways, main_super_pathway, main_super_pathway_categorized) %>% 
   mutate(mode = "negative")
 
 
@@ -144,10 +144,10 @@ write_csv(c18_single_matching_only,
 
 # HILIC: Load Mummichog data ------------------------------------------------
 chs_hilic_set <- read_rds(here::here("Temporary results",
-                                     folders[i], "chs",
-                                     "hilic", 
-                                     paste0(folders[i],
-                                            "_hilic_mumichog_results.rds")))
+                                       folders[i], "chs",
+                                       "hilic", 
+                                       paste0(folders[i],
+                                              "_hilic_mumichog_results.rds")))
 # Get MZ and retention time key
 mzkey_hilic <- chs_hilic_set$mz2cpd_dict
 
@@ -195,15 +195,16 @@ output2_superpathways <- left_join(output2,
 
 # Get number of pathways withing superpathways for each mz
 output3_superpathways <- output2_superpathways %>% 
-  select(-name) %>% 
   group_by(cpd, super_pathway) %>% 
-  summarise(n_pathways_within_superpatwhay = sum(hit)) %>% 
+  summarise(n_pathways_within_superpatwhay = sum(hit), 
+            pathways = paste(unique(name), collapse = "; ")) %>% 
   ungroup()
 
 # Concatenate superpathways 
 cpds_to_superpathways <- output3_superpathways %>% 
   group_by(cpd) %>% 
   summarise(n_superpathways = length(super_pathway),  
+            pathways = pathways[1],
             main_super_pathway = if_else(n_superpathways == 1, 
                                          super_pathway[1], 
                                          paste(super_pathway, collapse = ", "))) %>% 
@@ -233,9 +234,9 @@ hilic_1cpd_mult_mz <- x1_hilic %>%
 hilic_single_matching_only <- hilic_1cpd_mult_mz %>% 
   group_by(mz) %>% 
   summarise(n_matches = length(cpd), 
+            cpd = paste(cpd, collapse = "; "),
             across(everything(), ~.x[1])) %>% 
-  filter(n_matches == 1) %>% 
-  select(mz, rt, cpd, main_super_pathway, main_super_pathway_categorized) %>% 
+  select(mz, rt, cpd, pathways, main_super_pathway, main_super_pathway_categorized) %>% 
   mutate(mode = "positive")
 
 
@@ -248,14 +249,14 @@ write_csv(hilic_single_matching_only,
 
 # Combine with MWAS results  ----------------------------------------------
 chs_single_matches <- bind_rows(hilic_single_matching_only, 
-                                c18_single_matching_only)
+                                  c18_single_matching_only)
 
 
 chs_single_matches_w_mwas <- left_join(chs_single_matches, 
-                                       mwas_results %>% 
-                                         mutate(mz = as.character(mz))) %>% 
-  mutate(across(c(mz, rt, p_value, t_score, beta), as.numeric ))
-
+                                         mwas_results %>% 
+                                           mutate(mz = as.character(mz))) %>% 
+  mutate(across(c(mz, rt, p_value, t_score, beta, conf_low, conf_high), 
+                as.numeric ))
 
 chs_single_matches_w_mwas <- chs_single_matches_w_mwas %>% 
   droplevels() %>% 
@@ -279,40 +280,12 @@ chs_single_matches_w_mwas <- chs_single_matches_w_mwas %>%
            str_replace_all("_", " ") %>% 
            str_replace("HEXACHLOROBENZENE", "HCB"),
          exposure2 = if_else(str_detect(exposure, "ngml_detect"), 
-                             paste0(exposure2, "*"), exposure2), 
-  ) %>% 
+                             paste0(exposure2, "*"), exposure2)) %>% 
   ungroup()
 
-#########################
-ggplot(single_matches_w_mwas,
-       aes(x = cpdnum,
-           y = -log(p_value),
-           color = super_pathway)) +
-  geom_hline(yintercept = -log(0.05/532),
-             color = "grey80",
-             size = .5, linetype =2) +
-  geom_point(size = .75, shape = 21) +
-  # geom_text(aes(label = cpd_sig)) + 
-  facet_wrap(~exposure2) + 
-  xlab("Compound Number (ordered by p-value within superpathway)") + 
-  ylab("-log P")
-
-
-
-ggplot(chs_single_matches_w_mwas,
-       aes(x = beta,
-           y = -log(p_value),
-           color = super_pathway)) +
-  # geom_hline(yintercept = -log(0.05),
-  #            color = "grey80",
-  #            size = .5, linetype =2) +
-  geom_point(size = .75, shape = 21) +
-  # geom_text(aes(label = cpd_sig)) + 
-  facet_wrap(~exposure2)
-xlab("Compound Number (ordered by p-value within superpathway)") + 
-  ylab("-log P")
+write_rds(chs_single_matches_w_mwas, here::here("Temporary results", 
+                                                "chs_mz_cpd_pathway_key_w_mwas.rds"))
 
 
 
 
-hist(chs_single_matches_w_mwas$beta, breaks = 100)

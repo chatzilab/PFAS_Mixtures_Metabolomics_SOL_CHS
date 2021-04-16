@@ -1,5 +1,4 @@
 # 0.1.2 exposure_outcome Data Cleaning
-source(here::here("0.0.2_data_cleaning_funs.R"))
 
 # Load Exposure Outcome Data from Server 
 load(file = fs::path(dir_solar_data_secure, 
@@ -8,7 +7,7 @@ load(file = fs::path(dir_solar_data_secure,
                  "All Final Datasets.Rdata", 
                  sep = ""))
 # Remove unnecessary datasets
-rm(afd, amd, chsf, chsm, chsog, longitudinal, solar_ogtt)
+# rm(afd, amd, chs3f, chsm, chsog, longitudinal, solar_ogtt)
 
 # Rename Datasets 
 solar_exposure_outcome <- baseline; rm(baseline)
@@ -46,5 +45,5 @@ chs_exposure_outcome <- chs_exposure_outcome %>%
 # Filter out non-physiological responses
 chs_exposure_outcome <- chs_exposure_outcome %>% filter(og_glu_5 < 240)
 
-rm(cuberoot, pfas_dicot, transpose_ft, untranspose_ft, vzdt)
+# rm(cuberoot, pfas_dicot, transpose_ft, untranspose_ft, vzdt)
 

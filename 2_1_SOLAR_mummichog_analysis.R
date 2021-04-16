@@ -1,4 +1,4 @@
-# MUMMICHOG METABOANALYST code
+# RUN MUMMICHOG METABOANALYST code
 library(MetaboAnalystR)
 library(tidyverse)
 library(fs)

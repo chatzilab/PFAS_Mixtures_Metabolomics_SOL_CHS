@@ -1,8 +1,8 @@
 #read in temporary dataset
 chs_c18_mwas_results_1 = read_rds(file = here::here('Temporary results',
-                                                      '1.1.0_chs_c18_mwas.rds')) 
+                                                      '1_1_chs_c18_mwas.rds')) 
 chs_hilic_mwas_results_1 = read_rds(file =  here::here('Temporary results',
-                                                         '1.1.0_chs_hilic_mwas.rds')) 
+                                                         '1_1_chs_hilic_mwas.rds')) 
 
 chs_c18_n_metab <- table(chs_c18_mwas_results_1$exposure)[1] 
 chs_hilic_n_metab <- table(chs_hilic_mwas_results_1$exposure)[1] 

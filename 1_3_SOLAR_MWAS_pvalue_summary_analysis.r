@@ -1,8 +1,8 @@
 #read in temporary dataset
 solar_c18_mwas_results_1 = read_rds(file = here::here('Temporary results',
-                                                   '1.1.0_SOLAR_c18_mwas.rds')) 
+                                                   '1_1_SOLAR_c18_mwas.rds')) 
 solar_hilic_mwas_results_1 = read_rds(file =  here::here('Temporary results',
-                                                      '1.1.0_SOLAR_hilic_mwas.rds')) 
+                                                      '1_1_SOLAR_hilic_mwas.rds')) 
 
 solar_c18_n_metab <- table(solar_c18_mwas_results_1$exposure)[1] 
 solar_hilic_n_metab <- table(solar_hilic_mwas_results_1$exposure)[1] 

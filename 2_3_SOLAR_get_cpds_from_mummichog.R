@@ -15,12 +15,13 @@ key = readxl::read_xlsx(here::here("Supporting files",
 
 # Clean MWAS data  --------------------------------------------------------
 #  Set working directory for first folder, input data
-mwas_results_c18 <- read_rds(here::here("Temporary results", "1.1.0_SOLAR_c18_mwas.rds"))
-mwas_results_hilic <- read_rds(here::here("Temporary results", "1.1.0_SOLAR_hilic_mwas.rds"))
+mwas_results_c18 <- read_rds(here::here("Temporary results", "1_1_SOLAR_c18_mwas.rds"))
+mwas_results_hilic <- read_rds(here::here("Temporary results", "1_1_SOLAR_hilic_mwas.rds"))
 mwas_results <- bind_rows(mwas_results_c18, 
                           mwas_results_hilic) %>% 
   janitor::clean_names() %>% 
-  rename(mz = m_z, rt = r_t)
+  rename(mz = m_z, rt = r_t) %>% 
+  mutate(across(mz:t_score, as.numeric))
 
 # Get min p value for each feature
 mwas_min_p_vals <- mwas_results %>% 
@@ -92,17 +93,18 @@ c18_cpds_to_pathways <- pivot_wider(output2,
 output2_superpathways <- left_join(output2, 
                                    key %>% rename(name = pathway))
 
-# Get number of pathways withing superpathways for each mz
+# Get number of pathways within superpathways for each mz
 output3_superpathways <- output2_superpathways %>% 
-  select(-name) %>% 
   group_by(cpd, super_pathway) %>% 
-  summarise(n_pathways_within_superpatwhay = sum(hit)) %>% 
+  summarise(n_pathways_within_superpatwhay = sum(hit), 
+            pathways = paste(unique(name), collapse = "; ")) %>% 
   ungroup()
 
 # Concatenate superpathways 
 cpds_to_superpathways <- output3_superpathways %>% 
   group_by(cpd) %>% 
-  summarise(n_superpathways = length(super_pathway),  
+  summarise(n_superpathways = length(super_pathway), 
+            pathways = pathways[1],
             main_super_pathway = if_else(n_superpathways == 1, 
                                          super_pathway[1], 
                                          paste(super_pathway, collapse = ", "))) %>% 
@@ -128,15 +130,18 @@ c18_1cpd_mult_mz <- x1_c18 %>%
   group_by(cpd) %>% 
   filter(min_p_value == min(min_p_value))
 
-# Filter only single mz/cpd matches
+# Create unique mz/cpd matches
 c18_single_matching_only <- c18_1cpd_mult_mz %>% 
   group_by(mz) %>% 
   summarise(n_matches = length(cpd), 
+            cpd = paste(cpd, collapse = "; "),
             across(everything(), ~.x[1])) %>% 
-  filter(n_matches == 1) %>% 
-  select(mz, rt, cpd, main_super_pathway, main_super_pathway_categorized) %>% 
+  select(mz, rt, cpd, pathways, main_super_pathway, main_super_pathway_categorized) %>% 
   mutate(mode = "negative")
 
+
+
+length(unique(c18_single_matching_only$cpd))
 
 write_csv(c18_single_matching_only, 
           here::here("Temporary results", 
@@ -195,15 +200,16 @@ output2_superpathways <- left_join(output2,
 
 # Get number of pathways withing superpathways for each mz
 output3_superpathways <- output2_superpathways %>% 
-  select(-name) %>% 
   group_by(cpd, super_pathway) %>% 
-  summarise(n_pathways_within_superpatwhay = sum(hit)) %>% 
+  summarise(n_pathways_within_superpatwhay = sum(hit), 
+            pathways = paste(unique(name), collapse = "; ")) %>% 
   ungroup()
 
 # Concatenate superpathways 
 cpds_to_superpathways <- output3_superpathways %>% 
   group_by(cpd) %>% 
   summarise(n_superpathways = length(super_pathway),  
+            pathways = pathways[1],
             main_super_pathway = if_else(n_superpathways == 1, 
                                          super_pathway[1], 
                                          paste(super_pathway, collapse = ", "))) %>% 
@@ -233,9 +239,9 @@ hilic_1cpd_mult_mz <- x1_hilic %>%
 hilic_single_matching_only <- hilic_1cpd_mult_mz %>% 
   group_by(mz) %>% 
   summarise(n_matches = length(cpd), 
+            cpd = paste(cpd, collapse = "; "),
             across(everything(), ~.x[1])) %>% 
-  filter(n_matches == 1) %>% 
-  select(mz, rt, cpd, main_super_pathway, main_super_pathway_categorized) %>% 
+  select(mz, rt, cpd, pathways, main_super_pathway, main_super_pathway_categorized) %>% 
   mutate(mode = "positive")
 
 
@@ -254,7 +260,8 @@ solar_single_matches <- bind_rows(hilic_single_matching_only,
 solar_single_matches_w_mwas <- left_join(solar_single_matches, 
                                        mwas_results %>% 
                                          mutate(mz = as.character(mz))) %>% 
-  mutate(across(c(mz, rt, p_value, t_score, beta), as.numeric ))
+  mutate(across(c(mz, rt, p_value, t_score, beta, conf_low, conf_high), 
+                as.numeric ))
 
 
 solar_single_matches_w_mwas <- solar_single_matches_w_mwas %>% 
@@ -279,11 +286,9 @@ solar_single_matches_w_mwas <- solar_single_matches_w_mwas %>%
            str_replace_all("_", " ") %>% 
            str_replace("HEXACHLOROBENZENE", "HCB"),
          exposure2 = if_else(str_detect(exposure, "ngml_detect"), 
-                             paste0(exposure2, "*"), exposure2), 
-  ) %>% 
+                             paste0(exposure2, "*"), exposure2)) %>% 
   ungroup()
 
 
-
-
-
+write_rds(solar_single_matches_w_mwas, here::here("Temporary results", 
+                                                "solar_mz_cpd_pathway_key_w_mwas.rds"))

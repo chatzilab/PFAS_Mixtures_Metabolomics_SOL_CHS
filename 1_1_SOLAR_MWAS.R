@@ -1,7 +1,10 @@
 # script for MWAS analysis (regression)
 # C8 and hilic metabolites separated
 # Jesse Goodrich 040821
+library(broom)
 
+exposure = "dde_impute"
+met_name = "87.00887596_159.3062312"
 
 # C18 --------------------------------------
 C18_MWAS_reg = function(exposure, met_name){
@@ -16,19 +19,22 @@ C18_MWAS_reg = function(exposure, met_name){
                    '~',
                    'solar_exposure_outcome$',
                    exposure,'+', covar)
-  lmfit = lm(formula = formula)
+  lmfit = lm(formula = formula) %>% 
+     tidy(., conf.int = TRUE)
   
   #p-value for exposure in regression
-  p.value =  coef(summary(lmfit))[2,4]
+  p.value =  lmfit$p.value[2]
   #t.score for exposure in regression
-  t.score = coef(summary(lmfit))[2,3]
-  #beta for exposure in regression
-  beta = coef(summary(lmfit))[2,1]
+  t.score = lmfit$statistic[2]
+  #beta & confint for exposure in regression
+  beta = lmfit$estimate[2]
+  conf.low = lmfit$conf.low[2]
+  conf.high = lmfit$conf.high[2]
   
   m.z = as.numeric(str_split(met_name,'_')[[1]][1])
   r.t = as.numeric(str_split(met_name,'_')[[1]][2])
   mode = 'negative'
-  return(c(m.z, r.t, beta, p.value, t.score, mode)) 
+  return(c(m.z, r.t, p.value, t.score, beta, conf.low, conf.high, mode)) 
 }
 
 input_data = cbind.data.frame(rep(exposures, 
@@ -39,14 +45,18 @@ names(input_data) = c('exposure','met_name')
 
 #need to use plyr function
 #this will take some time
-c18_mwas_results = plyr::mdply(input_data,.fun = C18_MWAS_reg,.progress = 'text')
-names(c18_mwas_results) = c('exposure','metabolite','m.z','r.t', 'beta','p.value', 't.score', 'mode' )
+c18_mwas_results = plyr::mdply(input_data,
+                               .fun = C18_MWAS_reg,
+                               .progress = 'text')
+names(c18_mwas_results) = c('exposure','metabolite',"m.z", "r.t", 
+                            "p.value", "t.score", "beta", 
+                            "conf.low", "conf.high", "mode")
 
 #version 1: new LC-MS Data
-saveRDS(c18_mwas_results, file = here::here('Temporary results','1.1.0_SOLAR_c18_mwas.rds'))
+saveRDS(c18_mwas_results, file = here::here('Temporary results','1_1_SOLAR_c18_mwas.rds'))
 
 ##HILIC mwas ---------------------------------------------
-HILIC_MWAS_reg = function(exposure, met_name){
+hilic_mwas_reg = function(exposure, met_name){
   covar = 'solar_exposure_outcome$age + 
   solar_exposure_outcome$sex + 
   solar_exposure_outcome$bmi + 
@@ -58,19 +68,22 @@ HILIC_MWAS_reg = function(exposure, met_name){
                    '~',
                    'solar_exposure_outcome$',
                    exposure,'+', covar)
-  lmfit = lm(formula = formula)
+  lmfit = lm(formula = formula) %>% 
+    tidy(., conf.int = TRUE)
   
   #p-value for exposure in regression
-  p.value =  coef(summary(lmfit))[2,4]
+  p.value =  lmfit$p.value[2]
   #t.score for exposure in regression
-  t.score = coef(summary(lmfit))[2,3]
-  #beta for exposure in regression
-  beta = coef(summary(lmfit))[2,1]
+  t.score = lmfit$statistic[2]
+  #beta & confint for exposure in regression
+  beta = lmfit$estimate[2]
+  conf.low = lmfit$conf.low[2]
+  conf.high = lmfit$conf.high[2]
   
   m.z = as.numeric(str_split(met_name,'_')[[1]][1])
   r.t = as.numeric(str_split(met_name,'_')[[1]][2])
   mode = 'positive'
-  return(c(m.z, r.t, beta, p.value, t.score,mode)) 
+  return(c(m.z, r.t, p.value, t.score, beta, conf.low, conf.high, mode)) 
 }
 
 #this is slightly different from c18
@@ -82,13 +95,16 @@ names(input_data) = c('exposure','met_name')
 
 #need to use plyr function
 #this will take some time
-HILIC_mwas_results = plyr::mdply(input_data,.fun = HILIC_MWAS_reg,.progress = 'text')
-names(HILIC_mwas_results) = c('exposure','metabolite','m.z','r.t','beta', 'p.value', 't.score','mode' )
+hilic_mwas_results = plyr::mdply(input_data,
+                               .fun = hilic_mwas_reg,
+                               .progress = 'text')
+names(hilic_mwas_results) = c('exposure','metabolite',"m.z", "r.t", 
+                              "p.value", "t.score", "beta", 
+                              "conf.low", "conf.high", "mode")
 
 # Save HILIC MWAS 
-saveRDS(HILIC_mwas_results, 
-        file = here::here('Temporary results','1.1.0_SOLAR_hilic_mwas.rds'))
-
+saveRDS(hilic_mwas_results, 
+        file = here::here('Temporary results','1_1_SOLAR_hilic_mwas.rds'))
 
 
 # Save into separate folders---------------------------------------------
@@ -97,13 +113,13 @@ exposure_merge_n_save = function(exposures){
     c18_mwas_results %>% 
     dplyr::filter(exposure==exposures)  %>% 
     ungroup() %>%
-    dplyr::select(m.z,r.t ,beta, t.score, p.value,  mode)
+    dplyr::select(m.z,r.t ,beta, t.score, p.value,beta, conf.low, conf.high, mode)
   
   hilic_data = 
-    HILIC_mwas_results %>% 
+    hilic_mwas_results %>% 
     dplyr::filter(exposure==exposures)  %>% 
     ungroup() %>%
-    dplyr::select( m.z,r.t,beta, t.score, p.value,  mode)
+    dplyr::select( m.z,r.t,beta, t.score, p.value,beta, conf.low, conf.high, mode)
   
   merged_data = dplyr::union(c18_data,hilic_data) 
 

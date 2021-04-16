@@ -9,9 +9,9 @@ output: html_document
 ```{r setup_select, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
-library(styledom)
 library(kableExtra)
 library(cowplot)
+library(fs)
 theme_set(theme_cowplot())
 # library(circlize)
 

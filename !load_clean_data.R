@@ -1,10 +1,6 @@
-library(tidyverse)
-library(fs)
-setwd(here::here())
-source(here::here("!directories.R"))
 
 # load formats for variables
-source(here::here("0.0.1_format_vars_funs.R"))
+source(here::here("0_0.1_format_vars_funs.R"))
 
 # load separate data sets
 
@@ -26,7 +22,7 @@ chs_hilic <- read_csv(fs::path(dir_data_chs,
 
 
 
-source(here::here("0.1.2_SOLAR_exposure_outcome_data_cleaning.R"))
+source(here::here("0_1.2_SOLAR_exposure_outcome_data_cleaning.R"))
 #
  
 

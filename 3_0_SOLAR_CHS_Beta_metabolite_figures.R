@@ -17,7 +17,6 @@ single_matches_w_mwas_final <- inner_join(solar_single_matches_w_mwas,
                        "Not-sig"))
 
 
-
 # Coefficient plots -------
 for(i in exposures){
   solar_exposure_data <- solar_single_matches_w_mwas %>% 
@@ -57,7 +56,7 @@ for(i in exposures){
   
   
   
-  ## CHS HCB -------------------
+  ## CHS   -------------------
   chs_exposure_data <- chs_single_matches_w_mwas %>% 
     filter(exposure == exposure[1]) %>% 
     group_by(cpd) %>% 

@@ -2,16 +2,25 @@
 # ignore file on github
 library(fs)
 # home directory for project
-dir_home <- here::here()
+dir_home <- dirname(here::here())
 
-# SOLAR data folder on secure server
+dir_projects <- dirname(dir_home)
+
+# SOLAR data folder on secure server 
 dir_solar_data_secure <- fs::path("R:/SOLAR EDCs")
-dir_solar_data_secure_temp <- fs::path("C:/Users/jagoodri/Desktop", 
-                                   "temp_lcms_cleaning/13.Untargeted Metabolomics 2021")
-                              
+
+# SOLAR metabolomics data
+dir_solar_metabolomics <- fs::path(dir_projects, 
+                                   "Metabolomics Data Cleaning SOLAR", 
+                                   "2 Cleaned Data")
+
+# CHS metabolomics data
+dir_chs_metabolomics <- fs::path(dir_projects, 
+                                   "Metabolomics Data Cleaning CHS", 
+                                   "2 Cleaned Data")
+
 # CHS data folder on secure server
-# dir_chs_data_secure <- fs::path("R:/MetaChem")
-dir_chs_data_secure <- fs::path("C:/Users/jagoodri/Desktop/temp_lcms_cleaning/")
+dir_chs_data_secure <- fs::path("R:/MetaChem")
 
 # SOLAR Metabolomics Data Folder
 dir_data_solar <- fs::path(paste0(dir_solar_data_secure,"/13.Untargeted Metabolomics 2021"))
@@ -19,18 +28,9 @@ dir_data_solar <- fs::path(paste0(dir_solar_data_secure,"/13.Untargeted Metabolo
 # CHS Metabolomics Data Folder
 dir_data_chs <- fs::path(paste0(dir_chs_data_secure,"/CHS Metabolomics Data"))
 
-# # reports folder
+# reports folder
 dir_report <- fs::path(dir_home, "3 Reports")
 
-
-
-# 
-# # reports folder
-# dir_program <- paste0("/Users/domusc/Documents/GitHub/multiomicsnafld")
-# 
-
-# 
-# 
-# # discussion folder
+# discussion folder
 # dir_discuss <- paste0(dir_home, "/4 Discussions")
-# 
+ 

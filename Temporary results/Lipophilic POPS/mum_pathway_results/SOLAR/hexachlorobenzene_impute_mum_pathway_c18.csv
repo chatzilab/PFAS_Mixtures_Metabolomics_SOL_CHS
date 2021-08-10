@@ -1,0 +1,84 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+hexachlorobenzene_impute,c18,Bile acid biosynthesis,23,23,7,3.9391,0.058333,0.14051,0.070425,0
+hexachlorobenzene_impute,c18,Vitamin D3 (cholecalciferol) metabolism,10,10,4,1.7126,0.059173,0.20001,0.070526,53
+hexachlorobenzene_impute,c18,Pentose phosphate pathway,12,12,4,2.0552,0.10806,0.2913,0.076697,268
+hexachlorobenzene_impute,c18,Aspartate and asparagine metabolism,37,37,9,6.3368,0.11778,0.21694,0.077996,3052
+hexachlorobenzene_impute,c18,Pyruvate Metabolism,8,8,3,1.3701,0.11999,0.36813,0.078295,0
+hexachlorobenzene_impute,c18,"Fatty acid oxidation, peroxisome",1,1,1,0.17126,0.15902,1,0.0838,0
+hexachlorobenzene_impute,c18,Starch and Sucrose Metabolism,9,9,3,1.5414,0.15979,0.42834,0.083913,458
+hexachlorobenzene_impute,c18,Glutathione Metabolism,5,5,2,0.85632,0.18126,0.57751,0.087138,1059
+hexachlorobenzene_impute,c18,Glutamate metabolism,5,5,2,0.85632,0.18126,0.57751,0.087138,2335
+hexachlorobenzene_impute,c18,Carnitine shuttle,25,25,6,4.2816,0.19368,0.35916,0.08907,87
+hexachlorobenzene_impute,c18,Drug metabolism - other enzymes,25,25,6,4.2816,0.19368,0.35916,0.08907,914
+hexachlorobenzene_impute,c18,Histidine metabolism,15,15,4,2.569,0.20463,0.43085,0.090814,443
+hexachlorobenzene_impute,c18,Tryptophan metabolism,54,54,11,9.2483,0.22622,0.34232,0.094371,5855
+hexachlorobenzene_impute,c18,Limonene and pinene degradation,6,6,2,1.0276,0.24461,0.6446,0.097533,3273
+hexachlorobenzene_impute,c18,Phytanic acid peroxisomal oxidation,6,6,2,1.0276,0.24461,0.6446,0.097533,40
+hexachlorobenzene_impute,c18,Hexose phosphorylation,11,11,3,1.8839,0.24832,0.53886,0.098185,293
+hexachlorobenzene_impute,c18,Mono-unsaturated fatty acid beta-oxidation,2,2,1,0.34253,0.29289,1,0.10645,0
+hexachlorobenzene_impute,c18,Keratan sulfate biosynthesis,2,2,1,0.34253,0.29289,1,0.10645,4575
+hexachlorobenzene_impute,c18,Proteoglycan biosynthesis,2,2,1,0.34253,0.29289,1,0.10645,4575
+hexachlorobenzene_impute,c18,Glycosphingolipid biosynthesis - ganglioseries,7,7,2,1.1989,0.30863,0.7011,0.10956,2563
+hexachlorobenzene_impute,c18,Drug metabolism - cytochrome P450,19,19,4,3.254,0.35707,0.59853,0.11987,5466
+hexachlorobenzene_impute,c18,Caffeine metabolism,8,8,2,1.3701,0.37151,0.74867,0.12316,5680
+hexachlorobenzene_impute,c18,Vitamin B6 (pyridoxine) metabolism,8,8,2,1.3701,0.37151,0.74867,0.12316,5369
+hexachlorobenzene_impute,c18,Ubiquinone Biosynthesis,8,8,2,1.3701,0.37151,0.74867,0.12316,0
+hexachlorobenzene_impute,c18,N-Glycan biosynthesis,14,14,3,2.3977,0.38933,0.67536,0.12739,1898
+hexachlorobenzene_impute,c18,Arginine and Proline Metabolism,14,14,3,2.3977,0.38933,0.67536,0.12739,1852
+hexachlorobenzene_impute,c18,Fatty acid oxidation,3,3,1,0.51379,0.40558,1,0.1314,1336
+hexachlorobenzene_impute,c18,1- and 2-Methylnaphthalene degradation,3,3,1,0.51379,0.40558,1,0.1314,3833
+hexachlorobenzene_impute,c18,Tyrosine metabolism,93,93,16,15.928,0.40578,0.5116,0.13145,9520
+hexachlorobenzene_impute,c18,Glycerophospholipid metabolism,45,45,8,7.7069,0.42619,0.5841,0.13671,891
+hexachlorobenzene_impute,c18,Urea cycle/amino group metabolism,33,33,6,5.6517,0.43118,0.61703,0.13804,7192
+hexachlorobenzene_impute,c18,Butanoate metabolism,9,9,2,1.5414,0.432,0.78871,0.13826,1704
+hexachlorobenzene_impute,c18,Chondroitin sulfate degradation,4,4,1,0.68506,0.5004,1,0.15824,3894
+hexachlorobenzene_impute,c18,Di-unsaturated fatty acid beta-oxidation,4,4,1,0.68506,0.5004,1,0.15824,51
+hexachlorobenzene_impute,c18,Glycosphingolipid biosynthesis - globoseries,4,4,1,0.68506,0.5004,1,0.15824,4345
+hexachlorobenzene_impute,c18,3-oxo-10R-octadecatrienoate beta-oxidation,11,11,2,1.8839,0.54282,0.85076,0.17252,4887
+hexachlorobenzene_impute,c18,Ascorbate (Vitamin C) and Aldarate Metabolism,11,11,2,1.8839,0.54282,0.85076,0.17252,9231
+hexachlorobenzene_impute,c18,Linoleate metabolism,31,31,5,5.3092,0.56403,0.74838,0.1803,7301
+hexachlorobenzene_impute,c18,Vitamin B9 (folate) metabolism,5,5,1,0.85632,0.58019,1,0.18655,6238
+hexachlorobenzene_impute,c18,Saturated fatty acids beta-oxidation,5,5,1,0.85632,0.58019,1,0.18655,2581
+hexachlorobenzene_impute,c18,Heparan sulfate degradation,5,5,1,0.85632,0.58019,1,0.18655,6171
+hexachlorobenzene_impute,c18,Carbon fixation,5,5,1,0.85632,0.58019,1,0.18655,0
+hexachlorobenzene_impute,c18,Nitrogen metabolism,5,5,1,0.85632,0.58019,1,0.18655,4479
+hexachlorobenzene_impute,c18,Methionine and cysteine metabolism,25,25,4,4.2816,0.58082,0.78291,0.1868,5731
+hexachlorobenzene_impute,c18,"Valine, leucine and isoleucine degradation",12,12,2,2.0552,0.59237,0.87461,0.19145,6007
+hexachlorobenzene_impute,c18,Fructose and mannose metabolism,12,12,2,2.0552,0.59237,0.87461,0.19145,6480
+hexachlorobenzene_impute,c18,Keratan sulfate degradation,6,6,1,1.0276,0.6473,1,0.21592,7924
+hexachlorobenzene_impute,c18,Alanine and Aspartate Metabolism,6,6,1,1.0276,0.6473,1,0.21592,4188
+hexachlorobenzene_impute,c18,Pentose and Glucuronate Interconversions,6,6,1,1.0276,0.6473,1,0.21592,8023
+hexachlorobenzene_impute,c18,Omega-6 fatty acid metabolism,6,6,1,1.0276,0.6473,1,0.21592,1437
+hexachlorobenzene_impute,c18,Omega-3 fatty acid metabolism,7,7,1,1.1989,0.70375,1,0.24596,6829
+hexachlorobenzene_impute,c18,Porphyrin metabolism,7,7,1,1.1989,0.70375,1,0.24596,6079
+hexachlorobenzene_impute,c18,N-Glycan Degradation,7,7,1,1.1989,0.70375,1,0.24596,2730
+hexachlorobenzene_impute,c18,"Glycine, serine, alanine and threonine metabolism",37,37,5,6.3368,0.72692,0.86238,0.2601,1836
+hexachlorobenzene_impute,c18,Lysine metabolism,16,16,2,2.7402,0.75052,0.93765,0.27584,9798
+hexachlorobenzene_impute,c18,Vitamin B5 - CoA biosynthesis from pantothenate,8,8,1,1.3701,0.75121,1,0.27632,4363
+hexachlorobenzene_impute,c18,Propanoate metabolism,8,8,1,1.3701,0.75121,1,0.27632,3038
+hexachlorobenzene_impute,c18,D4&E4-neuroprostanes formation,8,8,1,1.3701,0.75121,1,0.27632,6198
+hexachlorobenzene_impute,c18,Selenoamino acid metabolism,8,8,1,1.3701,0.75121,1,0.27632,7029
+hexachlorobenzene_impute,c18,Pyrimidine metabolism,39,39,5,6.6793,0.77039,0.88909,0.29028,3699
+hexachlorobenzene_impute,c18,Galactose metabolism,17,17,2,2.9115,0.78079,0.94767,0.29834,3019
+hexachlorobenzene_impute,c18,Glycosphingolipid metabolism,17,17,2,2.9115,0.78079,0.94767,0.29834,4333
+hexachlorobenzene_impute,c18,Aminosugars metabolism,17,17,2,2.9115,0.78079,0.94767,0.29834,1700
+hexachlorobenzene_impute,c18,Beta-Alanine metabolism,9,9,1,1.5414,0.79112,1,0.3067,2049
+hexachlorobenzene_impute,c18,Glycolysis and Gluconeogenesis,18,18,2,3.0828,0.80782,0.95609,0.32111,7127
+hexachlorobenzene_impute,c18,Biopterin metabolism,10,10,1,1.7126,0.82466,1,0.33685,6437
+hexachlorobenzene_impute,c18,Sialic acid metabolism,11,11,1,1.8839,0.85284,1,0.36655,5493
+hexachlorobenzene_impute,c18,Squalene and cholesterol biosynthesis,11,11,1,1.8839,0.85284,1,0.36655,6270
+hexachlorobenzene_impute,c18,Vitamin B3 (nicotinate and nicotinamide) metabolism,11,11,1,1.8839,0.85284,1,0.36655,5330
+hexachlorobenzene_impute,c18,Xenobiotics metabolism,37,37,4,6.3368,0.86612,0.9491,0.38232,9984
+hexachlorobenzene_impute,c18,Vitamin E metabolism,21,21,2,3.5966,0.87201,0.97409,0.38975,3510
+hexachlorobenzene_impute,c18,Phosphatidylinositol phosphate metabolism,14,14,1,2.3977,0.91311,1,0.45148,9035
+hexachlorobenzene_impute,c18,Fatty Acid Metabolism,15,15,1,2.569,0.92714,1,0.47807,9305
+hexachlorobenzene_impute,c18,Androgen and estrogen biosynthesis and metabolism,25,25,2,4.2816,0.92724,0.98721,0.47827,8699
+hexachlorobenzene_impute,c18,TCA cycle,16,16,1,2.7402,0.93891,1,0.5037,9385
+hexachlorobenzene_impute,c18,Prostaglandin formation from arachidonate,44,44,4,7.5356,0.93932,0.98011,0.50465,8825
+hexachlorobenzene_impute,c18,Purine metabolism,54,54,5,9.2483,0.94988,0.98166,0.53124,9164
+hexachlorobenzene_impute,c18,Fatty acid activation,29,29,2,4.9667,0.95949,0.99371,0.55945,8871
+hexachlorobenzene_impute,c18,De novo fatty acid biosynthesis,19,19,1,3.254,0.96405,1,0.5746,9230
+hexachlorobenzene_impute,c18,Arachidonic acid metabolism,31,31,2,5.3092,0.96997,0.99559,0.5966,8047
+hexachlorobenzene_impute,c18,Vitamin A (retinol) metabolism,21,21,1,3.5966,0.97478,1,0.6169,9591
+hexachlorobenzene_impute,c18,C21-steroid hormone biosynthesis and metabolism,49,49,3,8.392,0.99062,0.99815,0.71515,9961
+hexachlorobenzene_impute,c18,Leukotriene metabolism,41,41,2,7.0218,0.99363,0.99927,0.74649,8376

@@ -1,0 +1,82 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pfos,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,19,9.7319,5.8196e-4,0.001566,0.028051,0
+pfos,hilic,Methionine and cysteine metabolism,28,28,11,4.6982,0.0017384,0.0060821,0.028119,0
+pfos,hilic,Purine metabolism,38,38,13,6.3761,0.0029159,0.0083623,0.028188,0
+pfos,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,11,5.0338,0.0033239,0.010514,0.028212,18
+pfos,hilic,Carnitine shuttle,30,30,10,5.0338,0.010952,0.030368,0.028665,4
+pfos,hilic,Alanine and Aspartate Metabolism,20,20,7,3.3558,0.024602,0.072846,0.029496,2
+pfos,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,8,4.1948,0.028699,0.075587,0.029751,4
+pfos,hilic,Glycerophospholipid metabolism,50,50,13,8.3896,0.034318,0.069088,0.030104,3
+pfos,hilic,Omega-6 fatty acid metabolism,9,9,4,1.5101,0.037048,0.14857,0.030277,0
+pfos,hilic,Pyruvate Metabolism,3,3,2,0.50338,0.064232,0.39462,0.032063,0
+pfos,hilic,Vitamin B2 (riboflavin) metabolism,3,3,2,0.50338,0.064232,0.39462,0.032063,0
+pfos,hilic,Arginine and Proline Metabolism,44,44,11,7.3828,0.064385,0.1246,0.032074,2
+pfos,hilic,Vitamin B9 (folate) metabolism,12,12,4,2.0135,0.10006,0.27724,0.0346,10
+pfos,hilic,Glutamate metabolism,12,12,4,2.0135,0.10006,0.27724,0.0346,0
+pfos,hilic,Histidine metabolism,32,32,8,5.3693,0.10728,0.21049,0.035138,2876
+pfos,hilic,Nitrogen metabolism,8,8,3,1.3423,0.1127,0.35532,0.035548,0
+pfos,hilic,Beta-Alanine metabolism,18,18,5,3.0203,0.1318,0.29575,0.037035,26
+pfos,hilic,Biopterin metabolism,9,9,3,1.5101,0.15053,0.41439,0.038563,303
+pfos,hilic,Glycosphingolipid biosynthesis - lactoseries,1,1,1,0.16779,0.1548,1,0.038921,0
+pfos,hilic,Blood Group Biosynthesis,1,1,1,0.16779,0.1548,1,0.038921,0
+pfos,hilic,Glycosphingolipid biosynthesis - neolactoseries,1,1,1,0.16779,0.1548,1,0.038921,0
+pfos,hilic,Keratan sulfate biosynthesis,1,1,1,0.16779,0.1548,1,0.038921,0
+pfos,hilic,O-Glycan biosynthesis,1,1,1,0.16779,0.1548,1,0.038921,0
+pfos,hilic,Proteoglycan biosynthesis,1,1,1,0.16779,0.1548,1,0.038921,0
+pfos,hilic,Aminosugars metabolism,19,19,5,3.188,0.15759,0.33334,0.039157,221
+pfos,hilic,3-oxo-10R-octadecatrienoate beta-oxidation,5,5,2,0.83896,0.17339,0.56712,0.040524,104
+pfos,hilic,Urea cycle/amino group metabolism,76,76,15,12.752,0.18263,0.26947,0.041348,2762
+pfos,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,10,8.2218,0.21453,0.33588,0.044345,67
+pfos,hilic,Pyrimidine metabolism,44,44,9,7.3828,0.22961,0.36283,0.045848,97
+pfos,hilic,Glyoxylate and Dicarboxylate Metabolism,6,6,2,1.0068,0.23461,0.63405,0.046359,0
+pfos,hilic,Polyunsaturated fatty acid biosynthesis,6,6,2,1.0068,0.23461,0.63405,0.046359,224
+pfos,hilic,Glycosphingolipid metabolism,23,23,5,3.8592,0.27692,0.48254,0.050954,2412
+pfos,hilic,Vitamin D3 (cholecalciferol) metabolism,12,12,3,2.0135,0.28034,0.57283,0.051348,1193
+pfos,hilic,Glycosphingolipid biosynthesis - globoseries,2,2,1,0.33558,0.28576,1,0.051979,1645
+pfos,hilic,Sphingolipid metabolism,2,2,1,0.33558,0.28576,1,0.051979,1264
+pfos,hilic,Aspartate and asparagine metabolism,83,83,15,13.927,0.29359,0.39801,0.052907,4087
+pfos,hilic,N-Glycan biosynthesis,7,7,2,1.1745,0.29678,0.69067,0.05329,291
+pfos,hilic,De novo fatty acid biosynthesis,30,30,6,5.0338,0.31472,0.50095,0.055508,716
+pfos,hilic,Fatty acid activation,36,36,7,6.0405,0.3175,0.48692,0.055862,157
+pfos,hilic,Glutathione Metabolism,13,13,3,2.1813,0.32611,0.61831,0.056972,633
+pfos,hilic,Saturated fatty acids beta-oxidation,8,8,2,1.3423,0.35814,0.73858,0.061338,3690
+pfos,hilic,Carbon fixation,8,8,2,1.3423,0.35814,0.73858,0.061338,1710
+pfos,hilic,Sialic acid metabolism,14,14,3,2.3491,0.37187,0.66,0.063331,1184
+pfos,hilic,Fatty Acid Metabolism,26,26,5,4.3626,0.37567,0.58546,0.063894,1593
+pfos,hilic,D4&E4-neuroprostanes formation,3,3,1,0.50338,0.39653,1,0.067102,0
+pfos,hilic,Phosphatidylinositol phosphate metabolism,15,15,3,2.5169,0.41704,0.69797,0.070445,4307
+pfos,hilic,Omega-3 fatty acid metabolism,9,9,2,1.5101,0.41745,0.77911,0.070515,1597
+pfos,hilic,Bile acid biosynthesis,28,28,5,4.6982,0.44193,0.64713,0.074775,2775
+pfos,hilic,TCA cycle,16,16,3,2.6847,0.46112,0.73239,0.078334,1570
+pfos,hilic,Drug metabolism - other enzymes,16,16,3,2.6847,0.46112,0.73239,0.078334,3568
+pfos,hilic,Electron transport chain,4,4,1,0.67117,0.4902,1,0.084129,4424
+pfos,hilic,"Fatty acid oxidation, peroxisome",4,4,1,0.67117,0.4902,1,0.084129,0
+pfos,hilic,Glycolysis and Gluconeogenesis,11,11,2,1.8457,0.52692,0.84236,0.092225,4597
+pfos,hilic,Porphyrin metabolism,18,18,3,3.0203,0.54454,0.79132,0.096455,3198
+pfos,hilic,Di-unsaturated fatty acid beta-oxidation,5,5,1,0.83896,0.5694,1,0.10285,2702
+pfos,hilic,Caffeine metabolism,5,5,1,0.83896,0.5694,1,0.10285,9136
+pfos,hilic,Fatty acid oxidation,12,12,2,2.0135,0.57623,0.86686,0.1047,347
+pfos,hilic,Limonene and pinene degradation,12,12,2,2.0135,0.57623,0.86686,0.1047,9830
+pfos,hilic,Linoleate metabolism,47,47,7,7.8862,0.60973,0.75595,0.11442,9807
+pfos,hilic,Fructose and mannose metabolism,13,13,2,2.1813,0.62171,0.88758,0.11819,5308
+pfos,hilic,Arachidonic acid metabolism,27,27,4,4.5304,0.62195,0.81112,0.11826,2782
+pfos,hilic,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,1.0068,0.63635,1,0.12301,1667
+pfos,hilic,Vitamin E metabolism,22,22,3,3.6914,0.68665,0.87596,0.14174,4679
+pfos,hilic,Galactose metabolism,15,15,2,2.5169,0.70124,0.91988,0.14791,8625
+pfos,hilic,Putative anti-Inflammatory metabolites formation from EPA,8,8,1,1.3423,0.74078,1,0.16664,2473
+pfos,hilic,Vitamin B5 - CoA biosynthesis from pantothenate,8,8,1,1.3423,0.74078,1,0.16664,9573
+pfos,hilic,Xenobiotics metabolism,46,46,6,7.7184,0.74184,0.86162,0.16719,9471
+pfos,hilic,Tryptophan metabolism,93,93,12,15.605,0.80513,0.87614,0.20556,9719
+pfos,hilic,Selenoamino acid metabolism,10,10,1,1.6779,0.81534,1,0.21303,3315
+pfos,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,19,19,2,3.188,0.819,0.95938,0.21581,8144
+pfos,hilic,Tyrosine metabolism,125,125,16,20.974,0.84404,0.89649,0.23658,9980
+pfos,hilic,Ubiquinone Biosynthesis,11,11,1,1.8457,0.84418,1,0.23671,6369
+pfos,hilic,Butanoate metabolism,29,29,3,4.866,0.85166,0.95274,0.24359,7517
+pfos,hilic,Lysine metabolism,47,47,5,7.8862,0.87755,0.94816,0.27038,9938
+pfos,hilic,Hexose phosphorylation,13,13,1,2.1813,0.88911,1,0.28419,9942
+pfos,hilic,Drug metabolism - cytochrome P450,32,32,3,5.3693,0.89533,0.96925,0.29218,9410
+pfos,hilic,Leukotriene metabolism,24,24,2,4.027,0.90713,0.98269,0.30865,8242
+pfos,hilic,"Valine, leucine and isoleucine degradation",25,25,2,4.1948,0.91908,0.98541,0.32743,5266
+pfos,hilic,Vitamin B6 (pyridoxine) metabolism,15,15,1,2.5169,0.92114,1,0.33092,9995
+pfos,hilic,Prostaglandin formation from arachidonate,26,26,2,4.3626,0.92958,0.98771,0.34612,5069
+pfos,hilic,Pentose phosphate pathway,17,17,1,2.8525,0.94395,1,0.37615,8020

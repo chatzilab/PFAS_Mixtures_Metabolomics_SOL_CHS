@@ -1,0 +1,30 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_85_ngml_detect,c18,Phosphatidylinositol phosphate metabolism,14,14,3,0.53103,0.011125,0.079636,0.0014253,31
+pbde_85_ngml_detect,c18,Porphyrin metabolism,7,7,2,0.26552,0.022622,0.21654,0.0014896,102
+pbde_85_ngml_detect,c18,Squalene and cholesterol biosynthesis,11,11,2,0.41724,0.054248,0.31909,0.0016828,114
+pbde_85_ngml_detect,c18,Glycerophospholipid metabolism,45,45,4,1.7069,0.068474,0.19512,0.001778,214
+pbde_85_ngml_detect,c18,1- and 2-Methylnaphthalene degradation,3,3,1,0.11379,0.10208,1,0.0020263,1091
+pbde_85_ngml_detect,c18,Tryptophan metabolism,54,54,4,2.0483,0.11635,0.27883,0.0021424,1755
+pbde_85_ngml_detect,c18,Di-unsaturated fatty acid beta-oxidation,4,4,1,0.15172,0.13381,1,0.0022941,32
+pbde_85_ngml_detect,c18,Lipoate metabolism,4,4,1,0.15172,0.13381,1,0.0022941,2280
+pbde_85_ngml_detect,c18,Dynorphin metabolism,4,4,1,0.15172,0.13381,1,0.0022941,19
+pbde_85_ngml_detect,c18,Propanoate metabolism,8,8,1,0.30345,0.25018,1,0.0036448,1147
+pbde_85_ngml_detect,c18,Caffeine metabolism,8,8,1,0.30345,0.25018,1,0.0036448,2152
+pbde_85_ngml_detect,c18,Urea cycle/amino group metabolism,33,33,2,1.2517,0.32553,0.68873,0.0049553,4121
+pbde_85_ngml_detect,c18,Vitamin B3 (nicotinate and nicotinamide) metabolism,11,11,1,0.41724,0.32736,1,0.0049929,594
+pbde_85_ngml_detect,c18,Ascorbate (Vitamin C) and Aldarate Metabolism,11,11,1,0.41724,0.32736,1,0.0049929,4385
+pbde_85_ngml_detect,c18,"Valine, leucine and isoleucine degradation",12,12,1,0.45517,0.35134,1,0.0055138,1794
+pbde_85_ngml_detect,c18,Xenobiotics metabolism,37,37,2,1.4034,0.37811,0.73059,0.0061659,6481
+pbde_85_ngml_detect,c18,Histidine metabolism,15,15,1,0.56897,0.41838,1,0.0073093,2239
+pbde_85_ngml_detect,c18,Fatty Acid Metabolism,15,15,1,0.56897,0.41838,1,0.0073093,2473
+pbde_85_ngml_detect,c18,Drug metabolism - cytochrome P450,19,19,1,0.72069,0.49741,1,0.010289,5380
+pbde_85_ngml_detect,c18,De novo fatty acid biosynthesis,19,19,1,0.72069,0.49741,1,0.010289,3275
+pbde_85_ngml_detect,c18,Bile acid biosynthesis,23,23,1,0.87241,0.56598,1,0.013993,779
+pbde_85_ngml_detect,c18,Purine metabolism,54,54,2,2.0483,0.5788,0.85523,0.014841,4095
+pbde_85_ngml_detect,c18,Drug metabolism - other enzymes,25,25,1,0.94828,0.59677,1,0.016129,4502
+pbde_85_ngml_detect,c18,Fatty acid activation,29,29,1,1.1,0.65213,1,0.020985,3527
+pbde_85_ngml_detect,c18,Tyrosine metabolism,93,93,3,3.5276,0.65361,0.8452,0.021137,8052
+pbde_85_ngml_detect,c18,Linoleate metabolism,31,31,1,1.1759,0.67697,1,0.023706,6821
+pbde_85_ngml_detect,c18,Aspartate and asparagine metabolism,37,37,1,1.4034,0.7416,1,0.033027,7436
+pbde_85_ngml_detect,c18,Pyrimidine metabolism,39,39,1,1.4793,0.76021,1,0.03651,5248
+pbde_85_ngml_detect,c18,C21-steroid hormone biosynthesis and metabolism,49,49,1,1.8586,0.83542,1,0.056503,7623

@@ -1,0 +1,49 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pcb_138_ngml_detect,c18,Arginine and Proline Metabolism,14,14,4,1.0299,0.011794,0.061899,0.038384,1
+pcb_138_ngml_detect,c18,TCA cycle,16,16,4,1.177,0.019329,0.086555000000000007,0.038957,52
+pcb_138_ngml_detect,c18,Methionine and cysteine metabolism,25,25,5,1.8391,0.023214,0.080771,0.039256,87
+pcb_138_ngml_detect,c18,Phytanic acid peroxisomal oxidation,6,6,2,0.44138,0.057632,0.34215,0.042021,6
+pcb_138_ngml_detect,c18,Prostaglandin formation from dihomo gama-linoleic acid,8,8,2,0.58851,0.098487,0.42821,0.045589,409
+pcb_138_ngml_detect,c18,"Glycine, serine, alanine and threonine metabolism",37,37,5,2.7218,0.10112,0.23323,0.045831,22
+pcb_138_ngml_detect,c18,Mono-unsaturated fatty acid beta-oxidation,2,2,1,0.14713,0.13201,1,0.048773,0
+pcb_138_ngml_detect,c18,Arachidonic acid metabolism,31,31,4,2.2805,0.15542,0.34689,0.051145,611
+pcb_138_ngml_detect,c18,3-oxo-10R-octadecatrienoate beta-oxidation,11,11,2,0.8092,0.16977,0.53694,0.052665,921
+pcb_138_ngml_detect,c18,Prostaglandin formation from arachidonate,44,44,5,3.2368,0.17511,0.34237,0.053244,1383
+pcb_138_ngml_detect,c18,Urea cycle/amino group metabolism,33,33,4,2.4276,0.18288,0.38503,0.054097,3570
+pcb_138_ngml_detect,c18,Drug metabolism - other enzymes,25,25,3,1.8391,0.24052,0.51092,0.06095,1576
+pcb_138_ngml_detect,c18,Di-unsaturated fatty acid beta-oxidation,4,4,1,0.29425,0.24683,1,0.06176,23
+pcb_138_ngml_detect,c18,Electron transport chain,4,4,1,0.29425,0.24683,1,0.06176,3826
+pcb_138_ngml_detect,c18,Pyrimidine metabolism,39,39,4,2.869,0.27319,0.49559,0.065278,373
+pcb_138_ngml_detect,c18,Tyrosine metabolism,93,93,8,6.8414,0.2965,0.43715,0.068585,8440
+pcb_138_ngml_detect,c18,Nitrogen metabolism,5,5,1,0.36782,0.29849,1,0.068876,1276
+pcb_138_ngml_detect,c18,Aminosugars metabolism,17,17,2,1.2506,0.32558,0.69694,0.072988,103
+pcb_138_ngml_detect,c18,Parathio degradation,6,6,1,0.44138,0.34666,1,0.07639,2861
+pcb_138_ngml_detect,c18,Glyoxylate and Dicarboxylate Metabolism,6,6,1,0.44138,0.34666,1,0.07639,0
+pcb_138_ngml_detect,c18,Alanine and Aspartate Metabolism,6,6,1,0.44138,0.34666,1,0.07639,380
+pcb_138_ngml_detect,c18,Omega-6 fatty acid metabolism,6,6,1,0.44138,0.34666,1,0.07639,88
+pcb_138_ngml_detect,c18,Glycerophospholipid metabolism,45,45,4,3.3103,0.36976,0.5959,0.080333,949
+pcb_138_ngml_detect,c18,Omega-3 fatty acid metabolism,7,7,1,0.51494,0.39158,1,0.084285,4304
+pcb_138_ngml_detect,c18,Porphyrin metabolism,7,7,1,0.51494,0.39158,1,0.084285,3612
+pcb_138_ngml_detect,c18,D4&E4-neuroprostanes formation,8,8,1,0.58851,0.43345,1,0.092543,3666
+pcb_138_ngml_detect,c18,Vitamin B6 (pyridoxine) metabolism,8,8,1,0.58851,0.43345,1,0.092543,5884
+pcb_138_ngml_detect,c18,Ubiquinone Biosynthesis,8,8,1,0.58851,0.43345,1,0.092543,455
+pcb_138_ngml_detect,c18,Selenoamino acid metabolism,8,8,1,0.58851,0.43345,1,0.092543,4531
+pcb_138_ngml_detect,c18,Xenobiotics metabolism,37,37,3,2.7218,0.47034,0.72687,0.10065,9185
+pcb_138_ngml_detect,c18,Beta-Alanine metabolism,9,9,1,0.66207,0.47248,1,0.10115,302
+pcb_138_ngml_detect,c18,Bile acid biosynthesis,23,23,2,1.692,0.47435,0.80223,0.10158,37
+pcb_138_ngml_detect,c18,Purine metabolism,54,54,4,3.9724,0.51251,0.72084,0.11102,3733
+pcb_138_ngml_detect,c18,Leukotriene metabolism,41,41,3,3.0161,0.54146,0.77875,0.11893,1440
+pcb_138_ngml_detect,c18,Hexose phosphorylation,11,11,1,0.8092,0.54277,1,0.1193,2050
+pcb_138_ngml_detect,c18,Ascorbate (Vitamin C) and Aldarate Metabolism,11,11,1,0.8092,0.54277,1,0.1193,9124
+pcb_138_ngml_detect,c18,Phosphatidylinositol phosphate metabolism,14,14,1,1.0299,0.63126,1,0.14856,5479
+pcb_138_ngml_detect,c18,Histidine metabolism,15,15,1,1.1034,0.65683,1,0.15876,5018
+pcb_138_ngml_detect,c18,C21-steroid hormone biosynthesis and metabolism,49,49,3,3.6046,0.66627,0.85757,0.16277,7329
+pcb_138_ngml_detect,c18,Galactose metabolism,17,17,1,1.2506,0.70284,1,0.1797,2323
+pcb_138_ngml_detect,c18,Glycosphingolipid metabolism,17,17,1,1.2506,0.70284,1,0.1797,3128
+pcb_138_ngml_detect,c18,Aspartate and asparagine metabolism,37,37,2,2.7218,0.73515,0.92777,0.19683,8926
+pcb_138_ngml_detect,c18,Vitamin E metabolism,21,21,1,1.5448,0.7774,1,0.22314,2208
+pcb_138_ngml_detect,c18,Vitamin A (retinol) metabolism,21,21,1,1.5448,0.7774,1,0.22314,6784
+pcb_138_ngml_detect,c18,Carnitine shuttle,25,25,1,1.8391,0.83347,1,0.26762,3620
+pcb_138_ngml_detect,c18,Fatty acid activation,29,29,1,2.1333,0.87559,1,0.31212,6906
+pcb_138_ngml_detect,c18,Linoleate metabolism,31,31,1,2.2805,0.89251,1,0.33413,9451
+pcb_138_ngml_detect,c18,Tryptophan metabolism,54,54,1,3.9724,0.98049,1,0.55746,9971

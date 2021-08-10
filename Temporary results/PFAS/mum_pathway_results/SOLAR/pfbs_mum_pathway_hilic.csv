@@ -1,0 +1,61 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pfbs,hilic,Purine metabolism,38,38,9,3.5178,0.0033544,0.011287,0.013323,2
+pfbs,hilic,Carnitine shuttle,30,30,7,2.7772,0.01054,0.034914,0.013567,10
+pfbs,hilic,Pyrimidine metabolism,44,44,7,4.0733,0.073781,0.16024,0.015933,69
+pfbs,hilic,Butanoate metabolism,29,29,5,2.6847,0.09391,0.22479,0.016777,267
+pfbs,hilic,Galactose metabolism,15,15,3,1.3886,0.12965,0.36631,0.0184,1911
+pfbs,hilic,Leukotriene metabolism,24,24,4,2.2218,0.14175,0.33102,0.018987,282
+pfbs,hilic,Saturated fatty acids beta-oxidation,8,8,2,0.7406,0.14418,0.50775,0.019108,1078
+pfbs,hilic,Omega-3 fatty acid metabolism,9,9,2,0.83317,0.17545,0.54965,0.020735,624
+pfbs,hilic,Linoleate metabolism,47,47,6,4.351,0.20622,0.36488,0.022487,7329
+pfbs,hilic,Selenoamino acid metabolism,10,10,2,0.92575,0.20767,0.58802,0.022574,34
+pfbs,hilic,Starch and Sucrose Metabolism,3,3,1,0.27772,0.23516,1,0.024286,462
+pfbs,hilic,De novo fatty acid biosynthesis,30,30,4,2.7772,0.24972,0.47291,0.025251,566
+pfbs,hilic,Alkaloid biosynthesis II,12,12,2,1.1109,0.27346,0.65532,0.026917,3146
+pfbs,hilic,Fatty acid oxidation,12,12,2,1.1109,0.27346,0.65532,0.026917,79
+pfbs,hilic,Electron transport chain,4,4,1,0.3703,0.30066,1,0.02898,1644
+pfbs,hilic,"Fatty acid oxidation, peroxisome",4,4,1,0.3703,0.30066,1,0.02898,0
+pfbs,hilic,Hexose phosphorylation,13,13,2,1.2035,0.30642,0.68477,0.029439,6231
+pfbs,hilic,Glycosphingolipid metabolism,23,23,3,2.1292,0.31271,0.5928,0.02995,2939
+pfbs,hilic,Xenobiotics metabolism,46,46,5,4.2584,0.3558,0.55575,0.033732,5022
+pfbs,hilic,3-oxo-10R-octadecatrienoate beta-oxidation,5,5,1,0.46287,0.3606,1,0.034187,336
+pfbs,hilic,Phytanic acid peroxisomal oxidation,5,5,1,0.46287,0.3606,1,0.034187,27
+pfbs,hilic,Fatty acid activation,36,36,4,3.3327,0.37007,0.6001,0.035103,323
+pfbs,hilic,Phosphatidylinositol phosphate metabolism,15,15,2,1.3886,0.37134,0.73639,0.035228,3200
+pfbs,hilic,Vitamin B6 (pyridoxine) metabolism,15,15,2,1.3886,0.37134,0.73639,0.035228,7553
+pfbs,hilic,Polyunsaturated fatty acid biosynthesis,6,6,1,0.55545,0.41546,1,0.039906,2180
+pfbs,hilic,Prostaglandin formation from dihomo gama-linoleic acid,6,6,1,0.55545,0.41546,1,0.039906,441
+pfbs,hilic,Beta-Alanine metabolism,18,18,2,1.6663,0.46378,0.79855,0.045877,2264
+pfbs,hilic,N-Glycan biosynthesis,7,7,1,0.64802,0.46565,1,0.046128,907
+pfbs,hilic,Putative anti-Inflammatory metabolites formation from EPA,8,8,1,0.7406,0.51157,1,0.052841,816
+pfbs,hilic,Vitamin B5 - CoA biosynthesis from pantothenate,8,8,1,0.7406,0.51157,1,0.052841,6805
+pfbs,hilic,Histidine metabolism,32,32,3,2.9624,0.52479,0.76998,0.054983,8490
+pfbs,hilic,Omega-6 fatty acid metabolism,9,9,1,0.83317,0.55359,1,0.060026,672
+pfbs,hilic,Ubiquinone Biosynthesis,11,11,1,1.0183,0.62718,1,0.075728,4137
+pfbs,hilic,Tyrosine metabolism,125,125,10,11.572,0.6433,0.75332,0.079828,9534
+pfbs,hilic,Vitamin B9 (folate) metabolism,12,12,1,1.1109,0.65934,1,0.084193,4703
+pfbs,hilic,Limonene and pinene degradation,12,12,1,1.1109,0.65934,1,0.084193,9798
+pfbs,hilic,Glutamate metabolism,12,12,1,1.1109,0.65934,1,0.084193,4525
+pfbs,hilic,Fatty Acid Metabolism,26,26,2,2.4069,0.66686,0.90203,0.086346,3739
+pfbs,hilic,Arachidonic acid metabolism,27,27,2,2.4995,0.68742,0.91051,0.092606,3565
+pfbs,hilic,Fructose and mannose metabolism,13,13,1,1.2035,0.68875,1,0.09303,6306
+pfbs,hilic,Methionine and cysteine metabolism,28,28,2,2.5921,0.70695,0.91826,0.099113,5542
+pfbs,hilic,Sialic acid metabolism,14,14,1,1.296,0.71564,1,0.10221,3987
+pfbs,hilic,Aspartate and asparagine metabolism,83,83,6,7.6837,0.732,0.85041,0.10839,9189
+pfbs,hilic,TCA cycle,16,16,1,1.4812,0.76272,1,0.12147,4009
+pfbs,hilic,Drug metabolism - cytochrome P450,32,32,2,2.9624,0.7752,0.94315,0.12741,8008
+pfbs,hilic,Squalene and cholesterol biosynthesis,17,17,1,1.5738,0.78328,1,0.13149,3122
+pfbs,hilic,Aminosugars metabolism,19,19,1,1.7589,0.81925,1,0.15216,6846
+pfbs,hilic,Alanine and Aspartate Metabolism,20,20,1,1.8515,0.83496,1,0.16276,9943
+pfbs,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,3,5.3693,0.88897,0.96544,0.21014,4610
+pfbs,hilic,"Valine, leucine and isoleucine degradation",25,25,1,2.3144,0.89536,1,0.21732,6542
+pfbs,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,1,2.3144,0.89536,1,0.21732,9849
+pfbs,hilic,Prostaglandin formation from arachidonate,26,26,1,2.4069,0.9045,1,0.22839,4637
+pfbs,hilic,Urea cycle/amino group metabolism,76,76,4,7.0357,0.90596,0.96525,0.23026,9957
+pfbs,hilic,Bile acid biosynthesis,28,28,1,2.5921,0.92048,1,0.25055,6945
+pfbs,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,1,2.7772,0.93381,1,0.27263,9126
+pfbs,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,2,4.5362,0.93396,0.98805,0.27291,8926
+pfbs,hilic,Glycerophospholipid metabolism,50,50,2,4.6287,0.93879,0.9891,0.28199,8014
+pfbs,hilic,Tryptophan metabolism,93,93,4,8.6095,0.96767,0.98993,0.35599,9894
+pfbs,hilic,Arginine and Proline Metabolism,44,44,1,4.0733,0.98185,1,0.41827,9950
+pfbs,hilic,Lysine metabolism,47,47,1,4.351,0.98628,1,0.44661,9997

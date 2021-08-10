@@ -1,0 +1,84 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pfda,hilic,Bile acid biosynthesis,28,28,11,4.3472,8.8512e-4,0.0033754,0.02204,5
+pfda,hilic,Squalene and cholesterol biosynthesis,17,17,7,2.6393,0.0059961,0.02423,0.022292,0
+pfda,hilic,Carnitine shuttle,30,30,10,4.6577,0.0062515,0.018855,0.022305,0
+pfda,hilic,Vitamin B2 (riboflavin) metabolism,3,3,2,0.46577,0.05544,0.36942,0.024901,0
+pfda,hilic,D4&E4-neuroprostanes formation,3,3,2,0.46577,0.05544,0.36942,0.024901,0
+pfda,hilic,Vitamin D3 (cholecalciferol) metabolism,12,12,4,1.8631,0.079261,0.23751,0.026276,168
+pfda,hilic,Purine metabolism,38,38,9,5.8997,0.080794,0.16045,0.026368,93
+pfda,hilic,Saturated fatty acids beta-oxidation,8,8,3,1.242,0.093452,0.31855,0.027135,779
+pfda,hilic,Dimethyl-branched-chain fatty acid mitochondrial beta-oxidation,1,1,1,0.15526,0.14324,1,0.030406,0
+pfda,hilic,Di-unsaturated fatty acid beta-oxidation,5,5,2,0.77628,0.15212,0.53665,0.031034,213
+pfda,hilic,Glycerophospholipid metabolism,50,50,10,7.7628,0.16574,0.27343,0.032026,139
+pfda,hilic,Pentose phosphate pathway,17,17,4,2.6393,0.21737,0.44435,0.036122,500
+pfda,hilic,Glycosphingolipid metabolism,23,23,5,3.5709,0.22399,0.41868,0.036689,1827
+pfda,hilic,Limonene and pinene degradation,12,12,3,1.8631,0.24052,0.52717,0.038149,8429
+pfda,hilic,Porphyrin metabolism,18,18,4,2.7946,0.25038,0.48388,0.039051,761
+pfda,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,6,4.6577,0.25109,0.42802,0.039117,2312
+pfda,hilic,Glycosphingolipid biosynthesis - globoseries,2,2,1,0.31051,0.26607,1,0.040537,1387
+pfda,hilic,Mono-unsaturated fatty acid beta-oxidation,2,2,1,0.31051,0.26607,1,0.040537,0
+pfda,hilic,Sphingolipid metabolism,2,2,1,0.31051,0.26607,1,0.040537,957
+pfda,hilic,Hexose phosphorylation,13,13,3,2.0183,0.28202,0.57235,0.042114,5998
+pfda,hilic,Drug metabolism - cytochrome P450,32,32,6,4.9682,0.30377,0.48755,0.044379,3635
+pfda,hilic,Fatty Acid Metabolism,26,26,5,4.0366,0.31172,0.51881,0.045242,1013
+pfda,hilic,Prostaglandin formation from arachidonate,26,26,5,4.0366,0.31172,0.51881,0.045242,92
+pfda,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,10,9.0048,0.31175,0.44618,0.045245,497
+pfda,hilic,Tryptophan metabolism,93,93,15,14.439,0.34802,0.45548,0.049434,7067
+pfda,hilic,Linoleate metabolism,47,47,8,7.297,0.35652,0.5134,0.050481,8941
+pfda,hilic,Lysine metabolism,47,47,8,7.297,0.35652,0.5134,0.050481,7007
+pfda,hilic,R Group Synthesis,3,3,1,0.46577,0.37138,1,0.052372,9
+pfda,hilic,Parathio degradation,3,3,1,0.46577,0.37138,1,0.052372,7
+pfda,hilic,Starch and Sucrose Metabolism,3,3,1,0.46577,0.37138,1,0.052372,981
+pfda,hilic,TCA cycle,16,16,3,2.4841,0.40784,0.68875,0.057374,1252
+pfda,hilic,Fatty acid activation,36,36,6,5.5892,0.41339,0.59892,0.058183,322
+pfda,hilic,Hyaluronan Metabolism,4,4,1,0.62102,0.46167,1,0.065833,3706
+pfda,hilic,Electron transport chain,4,4,1,0.62102,0.46167,1,0.065833,3377
+pfda,hilic,Ubiquinone Biosynthesis,11,11,2,1.7078,0.4824,0.81682,0.069484,1837
+pfda,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,19,19,3,2.9499,0.52656,0.77795,0.078119,5017
+pfda,hilic,Vitamin B9 (folate) metabolism,12,12,2,1.8631,0.53077,0.84316,0.07901,2524
+pfda,hilic,Fatty acid oxidation,12,12,2,1.8631,0.53077,0.84316,0.07901,283
+pfda,hilic,Chondroitin sulfate degradation,5,5,1,0.77628,0.53905,1,0.080798,3468
+pfda,hilic,3-oxo-10R-octadecatrienoate beta-oxidation,5,5,1,0.77628,0.53905,1,0.080798,857
+pfda,hilic,Caffeine metabolism,5,5,1,0.77628,0.53905,1,0.080798,8418
+pfda,hilic,CoA Catabolism,5,5,1,0.77628,0.53905,1,0.080798,8112
+pfda,hilic,Arachidonic acid metabolism,27,27,4,4.1919,0.55573,0.76363,0.084555,2238
+pfda,hilic,Fructose and mannose metabolism,13,13,2,2.0183,0.576,0.86572,0.089418,5716
+pfda,hilic,Methionine and cysteine metabolism,28,28,4,4.3472,0.58625,0.78555,0.09201,3783
+pfda,hilic,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,0.93153,0.60537,1,0.097111,1780
+pfda,hilic,Propanoate metabolism,6,6,1,0.93153,0.60537,1,0.097111,6607
+pfda,hilic,Polyunsaturated fatty acid biosynthesis,6,6,1,0.93153,0.60537,1,0.097111,4024
+pfda,hilic,N-Glycan Degradation,6,6,1,0.93153,0.60537,1,0.097111,9022
+pfda,hilic,Prostaglandin formation from dihomo gama-linoleic acid,6,6,1,0.93153,0.60537,1,0.097111,1067
+pfda,hilic,Sialic acid metabolism,14,14,2,2.1736,0.61799,0.88506,0.10068,2848
+pfda,hilic,Arginine and Proline Metabolism,44,44,6,6.8312,0.62083,0.77512,0.1015,3194
+pfda,hilic,Vitamin E metabolism,22,22,3,3.4156,0.63108,0.84407,0.10456,3605
+pfda,hilic,De novo fatty acid biosynthesis,30,30,4,4.6577,0.6435,0.82439,0.10842,3440
+pfda,hilic,Galactose metabolism,15,15,2,2.3288,0.65672,0.90163,0.11274,7606
+pfda,hilic,Phosphatidylinositol phosphate metabolism,15,15,2,2.3288,0.65672,0.90163,0.11274,6313
+pfda,hilic,Vitamin B6 (pyridoxine) metabolism,15,15,2,2.3288,0.65672,0.90163,0.11274,9647
+pfda,hilic,N-Glycan biosynthesis,7,7,1,1.0868,0.6622,1,0.1146,1712
+pfda,hilic,Keratan sulfate degradation,7,7,1,1.0868,0.6622,1,0.1146,8701
+pfda,hilic,Heparan sulfate degradation,7,7,1,1.0868,0.6622,1,0.1146,6473
+pfda,hilic,Drug metabolism - other enzymes,16,16,2,2.4841,0.69228,0.91582,0.12556,6667
+pfda,hilic,Vitamin B5 - CoA biosynthesis from pantothenate,8,8,1,1.242,0.71089,1,0.13307,9007
+pfda,hilic,Carbon fixation,8,8,1,1.242,0.71089,1,0.13307,3910
+pfda,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,3,3.8814,0.71866,0.8919,0.13639,8363
+pfda,hilic,Biopterin metabolism,9,9,1,1.3973,0.7526,1,0.15235,8286
+pfda,hilic,Omega-3 fatty acid metabolism,9,9,1,1.3973,0.7526,1,0.15235,6667
+pfda,hilic,Aminosugars metabolism,19,19,2,2.9499,0.78111,0.9473,0.16793,5812
+pfda,hilic,Alanine and Aspartate Metabolism,20,20,2,3.1051,0.80533,0.95493,0.18313,9828
+pfda,hilic,Glycolysis and Gluconeogenesis,11,11,1,1.7078,0.81891,1,0.19261,7193
+pfda,hilic,Glutamate metabolism,12,12,1,1.8631,0.84511,1,0.21328,6399
+pfda,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,5,7.6075,0.85512,0.93628,0.22217,6405
+pfda,hilic,Histidine metabolism,32,32,3,4.9682,0.86017,0.95579,0.2269,9835
+pfda,hilic,Aspartate and asparagine metabolism,83,83,9,12.886,0.86721,0.92654,0.23378,9719
+pfda,hilic,Vitamin A (retinol) metabolism,13,13,1,2.0183,0.86754,1,0.23411,4255
+pfda,hilic,Glutathione Metabolism,13,13,1,2.0183,0.86754,1,0.23411,7815
+pfda,hilic,Urea cycle/amino group metabolism,76,76,8,11.799,0.87764,0.9359,0.2447,9893
+pfda,hilic,"Valine, leucine and isoleucine degradation",25,25,2,3.8814,0.89408,0.97943,0.26393,5089
+pfda,hilic,Pyrimidine metabolism,44,44,4,6.8312,0.89722,0.96274,0.26793,7805
+pfda,hilic,Tyrosine metabolism,125,125,13,19.407,0.93302,0.96156,0.32408,9988
+pfda,hilic,Butanoate metabolism,29,29,2,4.5024,0.93633,0.98905,0.33061,9046
+pfda,hilic,Beta-Alanine metabolism,18,18,1,2.7946,0.93954,1,0.33721,8820
+pfda,hilic,Xenobiotics metabolism,46,46,3,7.1418,0.97169,0.99341,0.42932,9956
+pfda,hilic,Leukotriene metabolism,24,24,1,3.7261,0.97653,1,0.4505,9481

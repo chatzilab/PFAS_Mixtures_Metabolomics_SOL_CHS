@@ -1,0 +1,33 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_47_impute,c18,Aspartate and asparagine metabolism,37,37,5,1.4885,0.0099467,0.040796,0.0012739,199
+pbde_47_impute,c18,Tryptophan metabolism,54,54,6,2.1724,0.012252,0.040726,0.0012854,284
+pbde_47_impute,c18,Vitamin B1 (thiamin) metabolism,6,6,2,0.24138,0.01851,0.19938,0.0013172,16
+pbde_47_impute,c18,Aminosugars metabolism,17,17,3,0.68391,0.022672,0.12374,0.0013388,8
+pbde_47_impute,c18,Beta-Alanine metabolism,9,9,2,0.36207,0.041395,0.28402,0.0014405,7
+pbde_47_impute,c18,Arginine and Proline Metabolism,14,14,2,0.56322,0.093126,0.40616,0.0017659,432
+pbde_47_impute,c18,Lysine metabolism,16,16,2,0.64368,0.11726,0.44913,0.0019433,2278
+pbde_47_impute,c18,Urea cycle/amino group metabolism,33,33,3,1.3276,0.12113,0.33879,0.0019735,1702
+pbde_47_impute,c18,Vitamin B2 (riboflavin) metabolism,4,4,1,0.16092,0.14146,1,0.0021401,500
+pbde_47_impute,c18,Glycolysis and Gluconeogenesis,18,18,2,0.72414,0.14279,0.48907,0.0021515,742
+pbde_47_impute,c18,Drug metabolism - cytochrome P450,19,19,2,0.76437,0.15598,0.50797,0.0022681,1520
+pbde_47_impute,c18,Vitamin B9 (folate) metabolism,5,5,1,0.20115,0.17367,1,0.002435,1231
+pbde_47_impute,c18,Saturated fatty acids beta-oxidation,5,5,1,0.20115,0.17367,1,0.002435,483
+pbde_47_impute,c18,Glutathione Metabolism,5,5,1,0.20115,0.17367,1,0.002435,825
+pbde_47_impute,c18,Glutamate metabolism,5,5,1,0.20115,0.17367,1,0.002435,1121
+pbde_47_impute,c18,Prostaglandin formation from arachidonate,44,44,3,1.7701,0.22353,0.48198,0.0029794,1786
+pbde_47_impute,c18,Glycerophospholipid metabolism,45,45,3,1.8103,0.23366,0.49413,0.003105,1203
+pbde_47_impute,c18,Pyruvate Metabolism,8,8,1,0.32184,0.2634,1,0.0035072,136
+pbde_47_impute,c18,Propanoate metabolism,8,8,1,0.32184,0.2634,1,0.0035072,1723
+pbde_47_impute,c18,Vitamin B6 (pyridoxine) metabolism,8,8,1,0.32184,0.2634,1,0.0035072,2965
+pbde_47_impute,c18,Prostaglandin formation from dihomo gama-linoleic acid,8,8,1,0.32184,0.2634,1,0.0035072,1803
+pbde_47_impute,c18,Biopterin metabolism,10,10,1,0.4023,0.31789,1,0.0043954,1252
+pbde_47_impute,c18,Arachidonic acid metabolism,31,31,2,1.2471,0.32392,0.68804,0.0045077,1871
+pbde_47_impute,c18,Fructose and mannose metabolism,12,12,1,0.48276,0.36845,1,0.0054379,2653
+pbde_47_impute,c18,"Glycine, serine, alanine and threonine metabolism",37,37,2,1.4885,0.40693,0.75218,0.0064096,1826
+pbde_47_impute,c18,Xenobiotics metabolism,37,37,2,1.4885,0.40693,0.75218,0.0064096,6628
+pbde_47_impute,c18,Fatty Acid Metabolism,15,15,1,0.60345,0.43753,1,0.0073175,2272
+pbde_47_impute,c18,Tyrosine metabolism,93,93,4,3.7414,0.46466,0.67414,0.0082405,6453
+pbde_47_impute,c18,Carnitine shuttle,25,25,1,1.0057,0.61878,1,0.016701,2663
+pbde_47_impute,c18,Methionine and cysteine metabolism,25,25,1,1.0057,0.61878,1,0.016701,5293
+pbde_47_impute,c18,Leukotriene metabolism,41,41,1,1.6494,0.79726,1,0.04252,4275
+pbde_47_impute,c18,Purine metabolism,54,54,1,2.1724,0.87965,1,0.072169,7422

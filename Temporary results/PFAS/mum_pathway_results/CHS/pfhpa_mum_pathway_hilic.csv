@@ -1,0 +1,47 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pfhpa,hilic,Tyrosine metabolism,151,151,16,6.9834,2.7147e-4,7.3692e-4,0.002993,4158
+pfhpa,hilic,"Valine, leucine and isoleucine degradation",30,30,6,1.3874,0.0012071,0.0067347,0.0030022,0
+pfhpa,hilic,Butanoate metabolism,42,42,4,1.9424,0.099098,0.25432,0.0041548,506
+pfhpa,hilic,Lysine metabolism,44,44,4,2.0349,0.11299,0.27748,0.0043531,5188
+pfhpa,hilic,Vitamin B6 (pyridoxine) metabolism,14,14,2,0.64747,0.11674,0.45147,0.0044084,3200
+pfhpa,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,16,16,2,0.73997,0.14595,0.49685,0.0048654,468
+pfhpa,hilic,Carnitine shuttle,32,32,3,1.4799,0.15193,0.38995,0.004965,1
+pfhpa,hilic,Glutamate metabolism,19,19,2,0.87871,0.19213,0.5581,0.0056943,525
+pfhpa,hilic,C5-Branched dibasic acid metabolism,5,5,1,0.23124,0.19577,1,0.0057657,0
+pfhpa,hilic,Phytanic acid peroxisomal oxidation,6,6,1,0.27749,0.23015,1,0.0064906,11
+pfhpa,hilic,Vitamin B1 (thiamin) metabolism,7,7,1,0.32373,0.26308,1,0.0072779,311
+pfhpa,hilic,Bile acid biosynthesis,24,24,2,1.1099,0.27225,0.64432,0.0075152,123
+pfhpa,hilic,Leukotriene metabolism,24,24,2,1.1099,0.27225,0.64432,0.0075152,212
+pfhpa,hilic,Glycosphingolipid biosynthesis - ganglioseries,8,8,1,0.36998,0.29463,1,0.0081302,234
+pfhpa,hilic,"Fatty acid oxidation, peroxisome",8,8,1,0.36998,0.29463,1,0.0081302,1
+pfhpa,hilic,Aspartate and asparagine metabolism,109,109,6,5.041,0.31633,0.48457,0.0087793,3239
+pfhpa,hilic,Vitamin D3 (cholecalciferol) metabolism,9,9,1,0.41623,0.32485,1,0.0090493,116
+pfhpa,hilic,Saturated fatty acids beta-oxidation,9,9,1,0.41623,0.32485,1,0.0090493,6
+pfhpa,hilic,"Glycine, serine, alanine and threonine metabolism",69,69,4,3.1911,0.33764,0.55993,0.009472,1930
+pfhpa,hilic,Urea cycle/amino group metabolism,92,92,5,4.2548,0.35338,0.54522,0.010022,9029
+pfhpa,hilic,3-oxo-10R-octadecatrienoate beta-oxidation,10,10,1,0.46248,0.3538,1,0.010037,622
+pfhpa,hilic,Squalene and cholesterol biosynthesis,11,11,1,0.50873,0.38153,1,0.011096,397
+pfhpa,hilic,TCA cycle,11,11,1,0.50873,0.38153,1,0.011096,972
+pfhpa,hilic,Arginine and Proline Metabolism,53,53,3,2.4511,0.39503,0.66128,0.011656,7710
+pfhpa,hilic,Propanoate metabolism,12,12,1,0.55497,0.40809,1,0.012227,722
+pfhpa,hilic,Omega-3 fatty acid metabolism,13,13,1,0.60122,0.43354,1,0.013432,792
+pfhpa,hilic,Vitamin E metabolism,15,15,1,0.69372,0.48125,1,0.016066,4036
+pfhpa,hilic,Selenoamino acid metabolism,15,15,1,0.69372,0.48125,1,0.016066,196
+pfhpa,hilic,Histidine metabolism,38,38,2,1.7574,0.488,0.80725,0.016484,5068
+pfhpa,hilic,Fatty Acid Metabolism,18,18,1,0.83246,0.54551,1,0.020592,899
+pfhpa,hilic,Beta-Alanine metabolism,20,20,1,0.92496,0.58394,1,0.023996,683
+pfhpa,hilic,Alanine and Aspartate Metabolism,21,21,1,0.9712,0.60194,1,0.025814,6530
+pfhpa,hilic,Methionine and cysteine metabolism,49,49,2,2.2661,0.62841,0.8815,0.028792,1552
+pfhpa,hilic,Sialic acid metabolism,23,23,1,1.0637,0.63568,1,0.02968,1321
+pfhpa,hilic,Glycosphingolipid metabolism,27,27,1,1.2487,0.69496,1,0.038309,2534
+pfhpa,hilic,Pentose phosphate pathway,27,27,1,1.2487,0.69496,1,0.038309,3902
+pfhpa,hilic,Androgen and estrogen biosynthesis and metabolism,28,28,1,1.2949,0.70823,1,0.040648,5304
+pfhpa,hilic,De novo fatty acid biosynthesis,29,29,1,1.3412,0.72094,1,0.043056,2050
+pfhpa,hilic,Aminosugars metabolism,30,30,1,1.3874,0.7331,1,0.045533,3827
+pfhpa,hilic,Pyrimidine metabolism,63,63,2,2.9136,0.76259,0.93662,0.052343,4161
+pfhpa,hilic,Fatty acid activation,37,37,1,1.7112,0.80483,1,0.064643,3065
+pfhpa,hilic,Linoleate metabolism,43,43,1,1.9887,0.85098,1,0.08316,9813
+pfhpa,hilic,Purine metabolism,45,45,1,2.0812,0.86383,1,0.089693,6355
+pfhpa,hilic,Xenobiotics metabolism,47,47,1,2.1736,0.8756,1,0.096382,8384
+pfhpa,hilic,Tryptophan metabolism,113,113,3,5.226,0.87625,0.95905,0.096774,9538
+pfhpa,hilic,Glycerophospholipid metabolism,60,60,1,2.7749,0.93113,1,0.14266,7327

@@ -1,0 +1,50 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+dde_impute,hilic,Sphingolipid metabolism,2,2,2,0.10415,0.0022674,0.092123,0.0046531,0
+dde_impute,hilic,Glycosphingolipid metabolism,23,23,4,1.1977,0.021335,0.090032,0.0049416,159
+dde_impute,hilic,Vitamin B6 (pyridoxine) metabolism,15,15,3,0.7811,0.03165,0.15494,0.0051054,1195
+dde_impute,hilic,Keratan sulfate degradation,7,7,2,0.36451,0.040743,0.28754,0.0052547,902
+dde_impute,hilic,Linoleate metabolism,47,47,5,2.4474,0.069812,0.1764,0.0057636,3833
+dde_impute,hilic,3-Chloroacrylic acid degradation,2,2,1,0.10415,0.093818,1,0.0062235,0
+dde_impute,hilic,Vitamin D3 (cholecalciferol) metabolism,12,12,2,0.62488,0.10987,0.44152,0.0065528,338
+dde_impute,hilic,Prostaglandin formation from arachidonate,26,26,3,1.3539,0.12498,0.34943,0.0068795,46
+dde_impute,hilic,Fructose and mannose metabolism,13,13,2,0.67695,0.12598,0.46814,0.0069018,1266
+dde_impute,hilic,Arachidonic acid metabolism,27,27,3,1.406,0.13602,0.36695,0.0071294,309
+dde_impute,hilic,Parathio degradation,3,3,1,0.15622,0.13743,1,0.0071621,39
+dde_impute,hilic,Methionine and cysteine metabolism,28,28,3,1.4581,0.14739,0.38429,0.0073968,647
+dde_impute,hilic,Squalene and cholesterol biosynthesis,17,17,2,0.88525,0.19484,0.56271,0.0086353,159
+dde_impute,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,4,2.5516,0.20506,0.41028,0.0089303,969
+dde_impute,hilic,Chondroitin sulfate degradation,5,5,1,0.26037,0.21857,1,0.0093369,599
+dde_impute,hilic,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,0.31244,0.25628,1,0.010582,230
+dde_impute,hilic,Polyunsaturated fatty acid biosynthesis,6,6,1,0.31244,0.25628,1,0.010582,463
+dde_impute,hilic,N-Glycan Degradation,6,6,1,0.31244,0.25628,1,0.010582,3863
+dde_impute,hilic,Prostaglandin formation from dihomo gama-linoleic acid,6,6,1,0.31244,0.25628,1,0.010582,75
+dde_impute,hilic,Heparan sulfate degradation,7,7,1,0.36451,0.2922,1,0.011937,2552
+dde_impute,hilic,Leukotriene metabolism,24,24,2,1.2498,0.32207,0.69011,0.013209,1538
+dde_impute,hilic,Saturated fatty acids beta-oxidation,8,8,1,0.41659,0.32642,1,0.013406,2305
+dde_impute,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,2,1.3018,0.34014,0.70504,0.014049,5463
+dde_impute,hilic,Arginine and Proline Metabolism,44,44,3,2.2912,0.35517,0.62608,0.014794,4366
+dde_impute,hilic,Omega-3 fatty acid metabolism,9,9,1,0.46866,0.35901,1,0.014991,2723
+dde_impute,hilic,Carnitine shuttle,30,30,2,1.5622,0.42789,0.76974,0.019071,2370
+dde_impute,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,2,1.5622,0.42789,0.76974,0.019071,3343
+dde_impute,hilic,Glycerophospholipid metabolism,50,50,3,2.6037,0.43557,0.69629,0.019598,1940
+dde_impute,hilic,Fatty acid oxidation,12,12,1,0.62488,0.44778,1,0.02047,271
+dde_impute,hilic,Drug metabolism - cytochrome P450,32,32,2,1.6663,0.46137,0.79152,0.021492,4331
+dde_impute,hilic,Tryptophan metabolism,93,93,5,4.8428,0.46751,0.65421,0.021972,6054
+dde_impute,hilic,Hexose phosphorylation,13,13,1,0.67695,0.47459,1,0.022542,6252
+dde_impute,hilic,Sialic acid metabolism,14,14,1,0.72903,0.50013,1,0.02474,2196
+dde_impute,hilic,Galactose metabolism,15,15,1,0.7811,0.52445,1,0.027063,5312
+dde_impute,hilic,Porphyrin metabolism,18,18,1,0.93732,0.59065,1,0.034779,3267
+dde_impute,hilic,Alanine and Aspartate Metabolism,20,20,1,1.0415,0.62966,1,0.040538,9216
+dde_impute,hilic,Xenobiotics metabolism,46,46,2,2.3954,0.66107,0.89655,0.046022,6790
+dde_impute,hilic,Urea cycle/amino group metabolism,76,76,3,3.9576,0.72311,0.88743,0.059806,9479
+dde_impute,hilic,Fatty Acid Metabolism,26,26,1,1.3539,0.72608,1,0.06059,4293
+dde_impute,hilic,Bile acid biosynthesis,28,28,1,1.4581,0.75238,1,0.068126,4171
+dde_impute,hilic,Butanoate metabolism,29,29,1,1.5101,0.76458,1,0.072038,7251
+dde_impute,hilic,De novo fatty acid biosynthesis,30,30,1,1.5622,0.77619,1,0.076043,4977
+dde_impute,hilic,Histidine metabolism,32,32,1,1.6663,0.79775,1,0.084312,9079
+dde_impute,hilic,Fatty acid activation,36,36,1,1.8746,0.83493,1,0.10179,4130
+dde_impute,hilic,Purine metabolism,38,38,1,1.9788,0.85091,1,0.11093,7081
+dde_impute,hilic,Tyrosine metabolism,125,125,4,6.5092,0.87092,0.94756,0.12422,9644
+dde_impute,hilic,Pyrimidine metabolism,44,44,1,2.2912,0.8903,1,0.13964,9104
+dde_impute,hilic,Aspartate and asparagine metabolism,83,83,2,4.3221,0.92082,0.9845,0.17144,9860
+dde_impute,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,1,3.0203,0.94674,1,0.21082,6342

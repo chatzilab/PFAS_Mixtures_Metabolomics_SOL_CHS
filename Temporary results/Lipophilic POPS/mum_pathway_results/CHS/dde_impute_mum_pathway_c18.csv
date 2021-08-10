@@ -1,0 +1,76 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+dde_impute,c18,Arachidonic acid metabolism,24,24,10,3.2901,3.3981e-4,0.0016012,0.029297,46
+dde_impute,c18,Fatty acid activation,38,38,12,5.2094,0.0016603,0.0052535,0.02938,6
+dde_impute,c18,Vitamin A (retinol) metabolism,14,14,6,1.9192,0.0049178,0.023632,0.029586,37
+dde_impute,c18,Putative anti-Inflammatory metabolites formation from EPA,11,11,5,1.508,0.0077471,0.04011,0.029766,22
+dde_impute,c18,Leukotriene metabolism,35,35,10,4.7981,0.0090789,0.025244,0.029852,78
+dde_impute,c18,Phosphatidylinositol phosphate metabolism,12,12,5,1.6451,0.011934,0.054392,0.030035,19
+dde_impute,c18,Prostaglandin formation from arachidonate,48,48,11,6.5802,0.033613,0.071459,0.03147,77
+dde_impute,c18,De novo fatty acid biosynthesis,20,20,5,2.7418,0.10068,0.24224,0.036411,1062
+dde_impute,c18,Keratan sulfate degradation,5,5,2,0.68544,0.12533,0.49361,0.038438,5286
+dde_impute,c18,Glycosphingolipid biosynthesis - lactoseries,1,1,1,0.13709,0.12798,1,0.038663,0
+dde_impute,c18,Blood Group Biosynthesis,1,1,1,0.13709,0.12798,1,0.038663,0
+dde_impute,c18,Glycosphingolipid biosynthesis - neolactoseries,1,1,1,0.13709,0.12798,1,0.038663,0
+dde_impute,c18,3-Chloroacrylic acid degradation,1,1,1,0.13709,0.12798,1,0.038663,0
+dde_impute,c18,O-Glycan biosynthesis,1,1,1,0.13709,0.12798,1,0.038663,0
+dde_impute,c18,Benzoate degradation via CoA ligation,1,1,1,0.13709,0.12798,1,0.038663,0
+dde_impute,c18,Linoleate metabolism,34,34,7,4.661,0.13247,0.25551,0.039048,849
+dde_impute,c18,C21-steroid hormone biosynthesis and metabolism,48,48,9,6.5802,0.14836,0.25638,0.040446,499
+dde_impute,c18,Drug metabolism - cytochrome P450,17,17,4,2.3305,0.16253,0.36889,0.041739,1212
+dde_impute,c18,Androgen and estrogen biosynthesis and metabolism,24,24,5,3.2901,0.18303,0.36361,0.043693,1877
+dde_impute,c18,Galactose metabolism,19,19,4,2.6047,0.21755,0.44156,0.047222,815
+dde_impute,c18,Prostaglandin formation from dihomo gama-linoleic acid,7,7,2,0.95962,0.22233,0.61467,0.047735,887
+dde_impute,c18,Fructose and mannose metabolism,13,13,3,1.7821,0.22564,0.50649,0.048094,4560
+dde_impute,c18,Keratan sulfate biosynthesis,2,2,1,0.27418,0.23969,1,0.049652,1438
+dde_impute,c18,Hexose phosphorylation,14,14,3,1.9192,0.26205,0.54788,0.052255,1304
+dde_impute,c18,Omega-3 fatty acid metabolism,8,8,2,1.0967,0.27289,0.66394,0.053572,1446
+dde_impute,c18,Fatty Acid Metabolism,15,15,3,2.0563,0.29915,0.58681,0.056921,6319
+dde_impute,c18,Carnitine shuttle,22,22,4,3.0159,0.30739,0.54383,0.058022,181
+dde_impute,c18,Pentose phosphate pathway,22,22,4,3.0159,0.30739,0.54383,0.058022,6825
+dde_impute,c18,Aspartate and asparagine metabolism,37,37,6,5.0723,0.33272,0.51601,0.061562,5464
+dde_impute,c18,Glycosphingolipid biosynthesis - globoseries,3,3,1,0.41126,0.33718,1,0.062211,1006
+dde_impute,c18,Glyoxylate and Dicarboxylate Metabolism,3,3,1,0.41126,0.33718,1,0.062211,0
+dde_impute,c18,"Fatty acid oxidation, peroxisome",3,3,1,0.41126,0.33718,1,0.062211,1
+dde_impute,c18,Proteoglycan biosynthesis,3,3,1,0.41126,0.33718,1,0.062211,295
+dde_impute,c18,Propanoate metabolism,10,10,2,1.3709,0.37288,0.74451,0.0677,538
+dde_impute,c18,Butanoate metabolism,10,10,2,1.3709,0.37288,0.74451,0.0677,432
+dde_impute,c18,Carbon fixation,10,10,2,1.3709,0.37288,0.74451,0.0677,3681
+dde_impute,c18,Starch and Sucrose Metabolism,11,11,2,1.508,0.42091,0.77727,0.07601,5192
+dde_impute,c18,Hyaluronan Metabolism,4,4,1,0.54835,0.42226,1,0.07626,1244
+dde_impute,c18,Di-unsaturated fatty acid beta-oxidation,4,4,1,0.54835,0.42226,1,0.07626,3172
+dde_impute,c18,Electron transport chain,5,5,1,0.68544,0.49649,1,0.091689,7265
+dde_impute,c18,Lipoate metabolism,5,5,1,0.68544,0.49649,1,0.091689,9129
+dde_impute,c18,Fatty acid oxidation,5,5,1,0.68544,0.49649,1,0.091689,1761
+dde_impute,c18,Vitamin B6 (pyridoxine) metabolism,5,5,1,0.68544,0.49649,1,0.091689,664
+dde_impute,c18,N-Glycan Degradation,5,5,1,0.68544,0.49649,1,0.091689,8370
+dde_impute,c18,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,0.82253,0.56125,1,0.10836,6054
+dde_impute,c18,Omega-6 fatty acid metabolism,6,6,1,0.82253,0.56125,1,0.10836,1883
+dde_impute,c18,Purine metabolism,47,47,6,6.4431,0.57158,0.73497,0.11136,4457
+dde_impute,c18,Xenobiotics metabolism,48,48,6,6.5802,0.59351,0.75237,0.11808,8814
+dde_impute,c18,Pyrimidine metabolism,57,57,7,7.814,0.61111,0.75434,0.12385,7786
+dde_impute,c18,Pyruvate Metabolism,7,7,1,0.95962,0.61774,1,0.12612,0
+dde_impute,c18,Beta-Alanine metabolism,7,7,1,0.95962,0.61774,1,0.12612,1201
+dde_impute,c18,Glycerophospholipid metabolism,50,50,6,6.8544,0.63558,0.78462,0.1325,8005
+dde_impute,c18,Pentose and Glucuronate Interconversions,8,8,1,1.0967,0.667,1,0.14481,6769
+dde_impute,c18,Vitamin E metabolism,26,26,3,3.5643,0.66742,0.86343,0.14498,173
+dde_impute,c18,Glycosphingolipid metabolism,26,26,3,3.5643,0.66742,0.86343,0.14498,2075
+dde_impute,c18,TCA cycle,18,18,2,2.4676,0.69297,0.91514,0.15616,9690
+dde_impute,c18,Aminosugars metabolism,19,19,2,2.6047,0.72192,0.92611,0.17032,6591
+dde_impute,c18,N-Glycan biosynthesis,10,10,1,1.3709,0.74741,1,0.18432,8612
+dde_impute,c18,Ubiquinone Biosynthesis,10,10,1,1.3709,0.74741,1,0.18432,6963
+dde_impute,c18,Urea cycle/amino group metabolism,39,39,4,5.3464,0.75821,0.89272,0.19075,8877
+dde_impute,c18,Histidine metabolism,13,13,1,1.7821,0.83332,1,0.24667,3694
+dde_impute,c18,D4&E4-neuroprostanes formation,14,14,1,1.9192,0.85493,1,0.26775,4134
+dde_impute,c18,Porphyrin metabolism,14,14,1,1.9192,0.85493,1,0.26775,6783
+dde_impute,c18,Lysine metabolism,14,14,1,1.9192,0.85493,1,0.26775,9864
+dde_impute,c18,"Valine, leucine and isoleucine degradation",16,16,1,2.1934,0.89015,1,0.30974,8765
+dde_impute,c18,Vitamin D3 (cholecalciferol) metabolism,17,17,1,2.3305,0.90444,1,0.33049,6390
+dde_impute,c18,Ascorbate (Vitamin C) and Aldarate Metabolism,17,17,1,2.3305,0.90444,1,0.33049,9888
+dde_impute,c18,Glycolysis and Gluconeogenesis,18,18,1,2.4676,0.91688,1,0.35098,7013
+dde_impute,c18,Arginine and Proline Metabolism,20,20,1,2.7418,0.93714,1,0.39098,9673
+dde_impute,c18,Tryptophan metabolism,37,37,2,5.0723,0.96199,0.99404,0.45878,9961
+dde_impute,c18,Drug metabolism - other enzymes,26,26,1,3.5643,0.97291,1,0.50101,9909
+dde_impute,c18,Tyrosine metabolism,89,89,6,12.201,0.9817,0.99334,0.54633,9965
+dde_impute,c18,Bile acid biosynthesis,29,29,1,3.9756,0.98225,1,0.54975,4679
+dde_impute,c18,Methionine and cysteine metabolism,29,29,1,3.9756,0.98225,1,0.54975,9984
+dde_impute,c18,"Glycine, serine, alanine and threonine metabolism",44,44,2,6.0319,0.98367,0.99779,0.55881,9844

@@ -11,47 +11,63 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(kableExtra)
 library(cowplot)
+library(here)
 library(fs)
 theme_set(theme_cowplot())
-# library(circlize)
+
 
 source(here::here("!directories.R"))
-source(here::here("!load_clean_data.R"))
+# source(here::here("!load_clean_data.R"))
 
-exposures = c("hexachlorobenzene_impute", 
-              "dde_impute",
-              "ocs",
-              "pbde_154_impute",
-              "pbde_47_impute", 
-              "pbde_100_ngml_detect",
-              "pbde_153_ngml_detect",    
-              "pbde_85_ngml_detect",          
-              "pcb_118_ngml_detect",   
-              "pcb_138_ngml_detect",          
-              "pcb_153_ngml_detect",     
-              "pcb_180_ngml_detect", 
-              "pcb_num_detect", 
-              "pbde_num_detect")
+exposure_type = "PFAS"
+
+exposures = c("netfosaa","nmefosaab","pfbs","pfda","pfdoa","pfds","pfhpa",
+              "pfhps","pfhxa","pfhxs","pfna","pfns","pfoa","pfos","pfpes",
+              "pfuda", "x82fts")
+
+exposures_oc <- c("hexachlorobenzene_impute", "dde_impute", "ocs",
+                  "pbde_154_impute", "pbde_47_impute",
+                  "pbde_100_ngml_detect", "pbde_153_ngml_detect", 
+                  "pbde_85_ngml_detect", "pcb_118_ngml_detect", 
+                  "pcb_138_ngml_detect", "pcb_153_ngml_detect", 
+                  "pcb_180_ngml_detect",
+                  "pcb_num_detect", "pbde_num_detect")
+
+outcomes = list(
+  glucose_outcomes   = c("og_glu_5","og_glu30","og_glu60","og_glu120","guac"),
+  insulin_outcomes   = c("og_ins_5","og_ins30","og_ins60","og_ins120","iuac","a1c"),
+  lipid_outcomes     = c("tag","tot_chol","og_ffa_5","og_ffa120"),
+  glucose_homeostasis= c("homa","matsuda","cubert_igi","si","sg","air","di"),
+  body_composition   = c("bmi","saat","iaat","tot_pf","tot_fat_kg","tot_lm_kg"),
+  proteins           = c("ttesto","ftesto","estrad","dhs",
+                         "shbg","il6","tnfa","igf","il1b","il8",
+                         "leptin","cortisol","adiponec"))
 ```
 
 
 ## Run SOLAR MWAS
 ```{r}
 ## Takes ~5 minutes, dont need to re-run
-# source("1.1_SOLAR_MWAS.R")
+# source("1_1_SOLAR_MWAS.R")
 ```
 
 
 ## Run CHS MWAS
 ```{r}
 ## Takes ~5 minutes, dont need to re-run
-# source("1.2_CHS_MWAS.R")
+# source("1_2_CHS_MWAS.R")
 ```
 
 
 ## Get summary details about MWAS results
 ```{r}
-source("1.3_MWAS_pvalue_summary_analysis.r")
+# Creates 4 summary data frames: 
+# solar_c18_mwas_results, solar_helic_mwas_results, 
+# chs_c18_mwas_results, helic_helic_mwas_results, 
+source("1_3_SOLAR_MWAS_pvalue_summary_analysis.r")
+source("1_4_CHS_MWAS_pvalue_summary_analysis.r")
+
+
 ```
 
 

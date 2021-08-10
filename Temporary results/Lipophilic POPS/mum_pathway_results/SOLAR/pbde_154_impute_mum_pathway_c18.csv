@@ -1,0 +1,16 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_154_impute,c18,Urea cycle/amino group metabolism,33,33,2,0.53103,0.084056,0.37448,0.0013202,1132
+pbde_154_impute,c18,Caffeine metabolism,8,8,1,0.12874,0.11387,1,0.0014924,615
+pbde_154_impute,c18,Beta-Alanine metabolism,9,9,1,0.14483,0.12722,1,0.001577,72
+pbde_154_impute,c18,3-oxo-10R-octadecatrienoate beta-oxidation,11,11,1,0.17701,0.15337,1,0.0017576,695
+pbde_154_impute,c18,Histidine metabolism,15,15,1,0.24138,0.2035,1,0.0021674,1181
+pbde_154_impute,c18,Fatty Acid Metabolism,15,15,1,0.24138,0.2035,1,0.0021674,1262
+pbde_154_impute,c18,Carnitine shuttle,25,25,1,0.4023,0.31702,1,0.0035169,792
+pbde_154_impute,c18,Fatty acid activation,29,29,1,0.46667,0.35807,1,0.0042058,1641
+pbde_154_impute,c18,Tyrosine metabolism,93,93,2,1.4966,0.41233,0.74543,0.0053475,5730
+pbde_154_impute,c18,"Glycine, serine, alanine and threonine metabolism",37,37,1,0.5954,0.43338,1,0.0058774,1974
+pbde_154_impute,c18,Xenobiotics metabolism,37,37,1,0.5954,0.43338,1,0.0058774,6478
+pbde_154_impute,c18,Aspartate and asparagine metabolism,37,37,1,0.5954,0.43338,1,0.0058774,4182
+pbde_154_impute,c18,Glycerophospholipid metabolism,45,45,1,0.72414,0.50042,1,0.0079842,3311
+pbde_154_impute,c18,Tryptophan metabolism,54,54,1,0.86897,0.567,1,0.010931,5825
+pbde_154_impute,c18,Purine metabolism,54,54,1,0.86897,0.567,1,0.010931,4048

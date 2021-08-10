@@ -1,0 +1,53 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_154_impute,hilic,Glycolysis and Gluconeogenesis,11,11,3,0.53038,0.010625,0.07967,0.0014546,220
+pbde_154_impute,hilic,Fructose and mannose metabolism,13,13,3,0.62681,0.017292,0.10694,0.0014927,281
+pbde_154_impute,hilic,Galactose metabolism,15,15,3,0.72324,0.025834,0.13631,0.001543,322
+pbde_154_impute,hilic,Carbon fixation,8,8,2,0.38573,0.045747,0.30073,0.0016672,102
+pbde_154_impute,hilic,Drug metabolism - cytochrome P450,32,32,4,1.5429,0.04964,0.15965,0.0016927,441
+pbde_154_impute,hilic,Pyruvate Metabolism,3,3,1,0.14465,0.12771,1,0.0022999,217
+pbde_154_impute,hilic,Phosphatidylinositol phosphate metabolism,15,15,2,0.72324,0.14091,0.48977,0.0024234,1112
+pbde_154_impute,hilic,Hyaluronan Metabolism,4,4,1,0.19286,0.16662,1,0.0026843,731
+pbde_154_impute,hilic,Electron transport chain,4,4,1,0.19286,0.16662,1,0.0026843,732
+pbde_154_impute,hilic,Caffeine metabolism,5,5,1,0.24108,0.20382,1,0.0031157,3587
+pbde_154_impute,hilic,Glyoxylate and Dicarboxylate Metabolism,6,6,1,0.2893,0.2394,1,0.0035972,390
+pbde_154_impute,hilic,N-Glycan Degradation,6,6,1,0.2893,0.2394,1,0.0035972,4476
+pbde_154_impute,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,4,2.7965,0.25473,0.46982,0.0038285,650
+pbde_154_impute,hilic,Glycosphingolipid metabolism,23,23,2,1.109,0.27279,0.64498,0.0041216,2641
+pbde_154_impute,hilic,N-Glycan biosynthesis,7,7,1,0.33751,0.27341,1,0.0041322,1216
+pbde_154_impute,hilic,Keratan sulfate degradation,7,7,1,0.33751,0.27341,1,0.0041322,4996
+pbde_154_impute,hilic,Heparan sulfate degradation,7,7,1,0.33751,0.27341,1,0.0041322,3209
+pbde_154_impute,hilic,Xenobiotics metabolism,46,46,3,2.2179,0.33606,0.60703,0.0053526,2988
+pbde_154_impute,hilic,Biopterin metabolism,9,9,1,0.43394,0.33703,1,0.0053744,4660
+pbde_154_impute,hilic,Omega-3 fatty acid metabolism,9,9,1,0.43394,0.33703,1,0.0053744,2711
+pbde_154_impute,hilic,Methionine and cysteine metabolism,28,28,2,1.35,0.35667,0.71738,0.0058345,2134
+pbde_154_impute,hilic,Butanoate metabolism,29,29,2,1.3983,0.37312,0.73001,0.0062528,3100
+pbde_154_impute,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,2,1.4465,0.38942,0.74209,0.0066993,2666
+pbde_154_impute,hilic,Ubiquinone Biosynthesis,11,11,1,0.53038,0.39519,1,0.0068654,1944
+pbde_154_impute,hilic,Alkaloid biosynthesis II,12,12,1,0.57859,0.42236,1,0.0077109,4138
+pbde_154_impute,hilic,Fatty acid oxidation,12,12,1,0.57859,0.42236,1,0.0077109,654
+pbde_154_impute,hilic,Limonene and pinene degradation,12,12,1,0.57859,0.42236,1,0.0077109,7032
+pbde_154_impute,hilic,Vitamin A (retinol) metabolism,13,13,1,0.62681,0.44833,1,0.0086262,1243
+pbde_154_impute,hilic,Glutathione Metabolism,13,13,1,0.62681,0.44833,1,0.0086262,4110
+pbde_154_impute,hilic,Sialic acid metabolism,14,14,1,0.67502,0.47316,1,0.0096135,2391
+pbde_154_impute,hilic,Fatty acid activation,36,36,2,1.7358,0.48295,0.80422,0.010036,1325
+pbde_154_impute,hilic,Purine metabolism,38,38,2,1.8322,0.51222,0.82146,0.011429,3770
+pbde_154_impute,hilic,TCA cycle,16,16,1,0.77146,0.51957,1,0.011811,1402
+pbde_154_impute,hilic,Pentose phosphate pathway,17,17,1,0.81967,0.54125,1,0.013025,3448
+pbde_154_impute,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,19,19,1,0.9161,0.58177,1,0.015688,3396
+pbde_154_impute,hilic,Aminosugars metabolism,19,19,1,0.9161,0.58177,1,0.015688,4500
+pbde_154_impute,hilic,Tryptophan metabolism,93,93,4,4.4841,0.60684,0.78864,0.017643,6329
+pbde_154_impute,hilic,Linoleate metabolism,47,47,2,2.2662,0.63031,0.88235,0.01973,7810
+pbde_154_impute,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,2,2.3626,0.65343,0.89282,0.022069,5829
+pbde_154_impute,hilic,Glycerophospholipid metabolism,50,50,2,2.4108,0.66456,0.8977,0.023311,4658
+pbde_154_impute,hilic,Leukotriene metabolism,24,24,1,1.1572,0.66835,1,0.023752,4791
+pbde_154_impute,hilic,Tyrosine metabolism,125,125,5,6.027,0.67131,0.81515,0.024103,8106
+pbde_154_impute,hilic,Fatty Acid Metabolism,26,26,1,1.2536,0.69783,1,0.027543,4053
+pbde_154_impute,hilic,Prostaglandin formation from arachidonate,26,26,1,1.2536,0.69783,1,0.027543,2872
+pbde_154_impute,hilic,Arachidonic acid metabolism,27,27,1,1.3018,0.71159,1,0.029557,4755
+pbde_154_impute,hilic,Bile acid biosynthesis,28,28,1,1.35,0.72474,1,0.03165,4040
+pbde_154_impute,hilic,De novo fatty acid biosynthesis,30,30,1,1.4465,0.74929,1,0.036067,5027
+pbde_154_impute,hilic,Arginine and Proline Metabolism,44,44,1,2.1215,0.87028,1,0.074598,9250
+pbde_154_impute,hilic,Pyrimidine metabolism,44,44,1,2.1215,0.87028,1,0.074598,8664
+pbde_154_impute,hilic,Lysine metabolism,47,47,1,2.2662,0.88749,1,0.084276,9257
+pbde_154_impute,hilic,Urea cycle/amino group metabolism,76,76,1,3.6644,0.97218,1,0.19023,9948
+pbde_154_impute,hilic,Aspartate and asparagine metabolism,83,83,1,4.0019,0.98026,1,0.2169,9926

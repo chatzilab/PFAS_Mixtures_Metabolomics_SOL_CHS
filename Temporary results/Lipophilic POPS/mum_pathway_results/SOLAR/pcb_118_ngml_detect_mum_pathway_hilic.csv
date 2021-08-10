@@ -1,0 +1,70 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pcb_118_ngml_detect,hilic,Carnitine shuttle,30,30,8,3.3558,0.0084382,0.027021,0.0068526,9
+pcb_118_ngml_detect,hilic,Histidine metabolism,32,32,8,3.5796,0.012702,0.037607,0.0069388,1268
+pcb_118_ngml_detect,hilic,Aspartate and asparagine metabolism,83,83,15,9.2845,0.017884,0.035797,0.0070451,669
+pcb_118_ngml_detect,hilic,Urea cycle/amino group metabolism,76,76,14,8.5014,0.018755,0.038443,0.0070631,988
+pcb_118_ngml_detect,hilic,Sialic acid metabolism,14,14,4,1.5661,0.047642,0.16531,0.0076901,68
+pcb_118_ngml_detect,hilic,Hyaluronan Metabolism,4,4,2,0.44744,0.055145,0.35102,0.0078625,348
+pcb_118_ngml_detect,hilic,Pyrimidine metabolism,44,44,8,4.9219,0.074588,0.15432,0.0083288,231
+pcb_118_ngml_detect,hilic,Lysine metabolism,47,47,8,5.2575,0.10196,0.19704,0.0090363,2598
+pcb_118_ngml_detect,hilic,Glycosphingolipid biosynthesis - lactoseries,1,1,1,0.11186,0.1032,1,0.0090698,0
+pcb_118_ngml_detect,hilic,Blood Group Biosynthesis,1,1,1,0.11186,0.1032,1,0.0090698,0
+pcb_118_ngml_detect,hilic,Glycosphingolipid biosynthesis - neolactoseries,1,1,1,0.11186,0.1032,1,0.0090698,0
+pcb_118_ngml_detect,hilic,Keratan sulfate biosynthesis,1,1,1,0.11186,0.1032,1,0.0090698,0
+pcb_118_ngml_detect,hilic,O-Glycan biosynthesis,1,1,1,0.11186,0.1032,1,0.0090698,0
+pcb_118_ngml_detect,hilic,Porphyrin metabolism,18,18,4,2.0135,0.10573,0.2773,0.0091386,150
+pcb_118_ngml_detect,hilic,N-Glycan Degradation,6,6,2,0.67117,0.12019,0.4775,0.009543,1589
+pcb_118_ngml_detect,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,19,19,4,2.1254,0.12372,0.30665,0.0096447,1047
+pcb_118_ngml_detect,hilic,Aminosugars metabolism,19,19,4,2.1254,0.12372,0.30665,0.0096447,339
+pcb_118_ngml_detect,hilic,N-Glycan biosynthesis,7,7,2,0.78303,0.15726,0.53125,0.010671,224
+pcb_118_ngml_detect,hilic,Keratan sulfate degradation,7,7,2,0.78303,0.15726,0.53125,0.010671,2727
+pcb_118_ngml_detect,hilic,Heparan sulfate degradation,7,7,2,0.78303,0.15726,0.53125,0.010671,958
+pcb_118_ngml_detect,hilic,Arginine and Proline Metabolism,44,44,7,4.9219,0.15944,0.29029,0.010741,1466
+pcb_118_ngml_detect,hilic,Galactose metabolism,15,15,3,1.6779,0.19555,0.46426,0.011988,2361
+pcb_118_ngml_detect,hilic,Glycosphingolipid biosynthesis - globoseries,2,2,1,0.22372,0.19584,1,0.011998,588
+pcb_118_ngml_detect,hilic,Drug metabolism - other enzymes,16,16,3,1.7898,0.22366,0.49919,0.013067,1412
+pcb_118_ngml_detect,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,7,5.4812,0.23462,0.38595,0.013516,959
+pcb_118_ngml_detect,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,4,2.7965,0.25298,0.47992,0.014307,3852
+pcb_118_ngml_detect,hilic,D4&E4-neuroprostanes formation,3,3,1,0.33558,0.27898,1,0.015514,310
+pcb_118_ngml_detect,hilic,Starch and Sucrose Metabolism,3,3,1,0.33558,0.27898,1,0.015514,3431
+pcb_118_ngml_detect,hilic,Beta-Alanine metabolism,18,18,3,2.0135,0.28186,0.56456,0.015655,1228
+pcb_118_ngml_detect,hilic,Alanine and Aspartate Metabolism,20,20,3,2.2372,0.34126,0.62365,0.018891,7448
+pcb_118_ngml_detect,hilic,Vitamin H (biotin) metabolism,4,4,1,0.44744,0.35359,1,0.019651,2531
+pcb_118_ngml_detect,hilic,3-oxo-10R-octadecatrienoate beta-oxidation,5,5,1,0.55931,0.42054,1,0.024429,917
+pcb_118_ngml_detect,hilic,Caffeine metabolism,5,5,1,0.55931,0.42054,1,0.024429,7815
+pcb_118_ngml_detect,hilic,Lipoate metabolism,5,5,1,0.55931,0.42054,1,0.024429,5461
+pcb_118_ngml_detect,hilic,Phytanic acid peroxisomal oxidation,5,5,1,0.55931,0.42054,1,0.024429,261
+pcb_118_ngml_detect,hilic,Phosphatidylinositol phosphate metabolism,15,15,2,1.6779,0.46898,0.80402,0.028708,3877
+pcb_118_ngml_detect,hilic,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,0.67117,0.48061,1,0.029859,1628
+pcb_118_ngml_detect,hilic,Pentose and Glucuronate Interconversions,6,6,1,0.67117,0.48061,1,0.029859,419
+pcb_118_ngml_detect,hilic,TCA cycle,16,16,2,1.7898,0.50402,0.82434,0.03234,1460
+pcb_118_ngml_detect,hilic,Bile acid biosynthesis,28,28,3,3.1321,0.56536,0.7996,0.040067,2666
+pcb_118_ngml_detect,hilic,Nitrogen metabolism,8,8,1,0.89489,0.58284,1,0.042653,7443
+pcb_118_ngml_detect,hilic,Butanoate metabolism,29,29,3,3.244,0.59016,0.81557,0.043795,5108
+pcb_118_ngml_detect,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,3,3.3558,0.61404,0.83041,0.047784,5206
+pcb_118_ngml_detect,hilic,Biopterin metabolism,9,9,1,1.0068,0.6262,1,0.049985,6468
+pcb_118_ngml_detect,hilic,Drug metabolism - cytochrome P450,32,32,3,3.5796,0.65897,0.85692,0.05656,6517
+pcb_118_ngml_detect,hilic,Selenoamino acid metabolism,10,10,1,1.1186,0.66509,1,0.057904,1430
+pcb_118_ngml_detect,hilic,Vitamin E metabolism,22,22,2,2.4609,0.68127,0.90913,0.061654,3613
+pcb_118_ngml_detect,hilic,Ubiquinone Biosynthesis,11,11,1,1.2305,0.69996,1,0.066376,4199
+pcb_118_ngml_detect,hilic,Glycosphingolipid metabolism,23,23,2,2.5728,0.70525,0.91861,0.067795,7122
+pcb_118_ngml_detect,hilic,Leukotriene metabolism,24,24,2,2.6847,0.72773,0.92711,0.07428,5237
+pcb_118_ngml_detect,hilic,Vitamin D3 (cholecalciferol) metabolism,12,12,1,1.3423,0.73123,1,0.075361,5281
+pcb_118_ngml_detect,hilic,Vitamin B9 (folate) metabolism,12,12,1,1.3423,0.73123,1,0.075361,6920
+pcb_118_ngml_detect,hilic,Limonene and pinene degradation,12,12,1,1.3423,0.73123,1,0.075361,9804
+pcb_118_ngml_detect,hilic,Glutamate metabolism,12,12,1,1.3423,0.73123,1,0.075361,7793
+pcb_118_ngml_detect,hilic,Linoleate metabolism,47,47,4,5.2575,0.73409,0.87758,0.076258,9448
+pcb_118_ngml_detect,hilic,"Valine, leucine and isoleucine degradation",25,25,2,2.7965,0.74876,0.93473,0.081096,4631
+pcb_118_ngml_detect,hilic,Fatty Acid Metabolism,26,26,2,2.9084,0.76839,0.94156,0.088231,4658
+pcb_118_ngml_detect,hilic,Prostaglandin formation from arachidonate,26,26,2,2.9084,0.76839,0.94156,0.088231,2617
+pcb_118_ngml_detect,hilic,Glycerophospholipid metabolism,50,50,4,5.5931,0.77841,0.90275,0.092202,5369
+pcb_118_ngml_detect,hilic,Squalene and cholesterol biosynthesis,17,17,1,1.9016,0.84523,1,0.12645,3937
+pcb_118_ngml_detect,hilic,Tyrosine metabolism,125,125,10,13.983,0.85689,0.91554,0.13431,9728
+pcb_118_ngml_detect,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,4,6.4879,0.8686,0.94878,0.143,4397
+pcb_118_ngml_detect,hilic,Xenobiotics metabolism,46,46,3,5.1456,0.87199,0.95936,0.14568,9050
+pcb_118_ngml_detect,hilic,Fatty acid activation,36,36,2,4.027,0.90184,0.98076,0.17338,5322
+pcb_118_ngml_detect,hilic,Arachidonic acid metabolism,27,27,1,3.0203,0.94908,1,0.24326,8260
+pcb_118_ngml_detect,hilic,Methionine and cysteine metabolism,28,28,1,3.1321,0.95447,1,0.25509,9135
+pcb_118_ngml_detect,hilic,De novo fatty acid biosynthesis,30,30,1,3.3558,0.9636,1,0.27857,8686
+pcb_118_ngml_detect,hilic,Purine metabolism,38,38,1,4.2507,0.9852,1,0.36846,9657
+pcb_118_ngml_detect,hilic,Tryptophan metabolism,93,93,1,10.403,0.99997,1,0.76418,10000

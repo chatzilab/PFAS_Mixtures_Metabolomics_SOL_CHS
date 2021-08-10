@@ -1,0 +1,44 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_85_ngml_detect,hilic,Linoleate metabolism,43,43,9,2.9267,9.2276e-4,0.0036783,0.009444,1132
+pbde_85_ngml_detect,hilic,Xenobiotics metabolism,47,47,8,3.199,0.007049,0.022193,0.0095977,14
+pbde_85_ngml_detect,hilic,Tryptophan metabolism,113,113,10,7.6911,0.16108,0.2581,0.014509,6962
+pbde_85_ngml_detect,hilic,Glycerophospholipid metabolism,60,60,6,4.0838,0.16765,0.31121,0.014772,165
+pbde_85_ngml_detect,hilic,Biopterin metabolism,14,14,2,0.95288,0.21713,0.59288,0.016931,6400
+pbde_85_ngml_detect,hilic,C21-steroid hormone biosynthesis and metabolism,52,52,5,3.5393,0.22207,0.40328,0.017165,545
+pbde_85_ngml_detect,hilic,Vitamin H (biotin) metabolism,5,5,1,0.34031,0.27677,1,0.020011,523
+pbde_85_ngml_detect,hilic,D4&E4-neuroprostanes formation,5,5,1,0.34031,0.27677,1,0.020011,132
+pbde_85_ngml_detect,hilic,Porphyrin metabolism,17,17,2,1.1571,0.28883,0.66465,0.020706,1337
+pbde_85_ngml_detect,hilic,Drug metabolism - other enzymes,18,18,2,1.2251,0.3127,0.68568,0.022165,473
+pbde_85_ngml_detect,hilic,Parathio degradation,6,6,1,0.40838,0.32227,1,0.022782,404
+pbde_85_ngml_detect,hilic,Caffeine metabolism,6,6,1,0.40838,0.32227,1,0.022782,1423
+pbde_85_ngml_detect,hilic,Lipoate metabolism,6,6,1,0.40838,0.32227,1,0.022782,1979
+pbde_85_ngml_detect,hilic,CoA Catabolism,8,8,1,0.5445,0.40495,1,0.029004,3726
+pbde_85_ngml_detect,hilic,Histidine metabolism,38,38,3,2.5864,0.42978,0.69477,0.031238,4986
+pbde_85_ngml_detect,hilic,Glyoxylate and Dicarboxylate Metabolism,9,9,1,0.61257,0.44247,1,0.032456,4330
+pbde_85_ngml_detect,hilic,Limonene and pinene degradation,9,9,1,0.61257,0.44247,1,0.032456,8912
+pbde_85_ngml_detect,hilic,Vitamin B9 (folate) metabolism,10,10,1,0.68063,0.47765,1,0.036132,2989
+pbde_85_ngml_detect,hilic,Omega-6 fatty acid metabolism,10,10,1,0.68063,0.47765,1,0.036132,12
+pbde_85_ngml_detect,hilic,Alkaloid biosynthesis II,11,11,1,0.74869,0.51064,1,0.040031,1950
+pbde_85_ngml_detect,hilic,TCA cycle,11,11,1,0.74869,0.51064,1,0.040031,1391
+pbde_85_ngml_detect,hilic,Prostaglandin formation from arachidonate,27,27,2,1.8377,0.51333,0.82494,0.04037,400
+pbde_85_ngml_detect,hilic,Purine metabolism,45,45,3,3.0628,0.54484,0.78127,0.044611,2622
+pbde_85_ngml_detect,hilic,De novo fatty acid biosynthesis,29,29,2,1.9738,0.55269,0.84638,0.04575,501
+pbde_85_ngml_detect,hilic,Carnitine shuttle,32,32,2,2.178,0.60749,0.87378,0.054764,15
+pbde_85_ngml_detect,hilic,Vitamin B5 - CoA biosynthesis from pantothenate,15,15,1,1.0209,0.62325,1,0.057751,3234
+pbde_85_ngml_detect,hilic,Drug metabolism - cytochrome P450,34,34,2,2.3141,0.64117,0.8893,0.0614,7887
+pbde_85_ngml_detect,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,16,16,1,1.089,0.64714,1,0.062681,1383
+pbde_85_ngml_detect,hilic,Fructose and mannose metabolism,18,18,1,1.2251,0.69053,1,0.073088,5987
+pbde_85_ngml_detect,hilic,Vitamin A (retinol) metabolism,19,19,1,1.2932,0.7102,1,0.078547,3331
+pbde_85_ngml_detect,hilic,Arachidonic acid metabolism,19,19,1,1.2932,0.7102,1,0.078547,2101
+pbde_85_ngml_detect,hilic,Tyrosine metabolism,151,151,8,10.277,0.75214,0.84791,0.092146,10000
+pbde_85_ngml_detect,hilic,Leukotriene metabolism,24,24,1,1.6335,0.7915,1,0.10805,2720
+pbde_85_ngml_detect,hilic,"Glycine, serine, alanine and threonine metabolism",69,69,3,4.6963,0.82271,0.93742,0.12364,7495
+pbde_85_ngml_detect,hilic,Glycosphingolipid metabolism,27,27,1,1.8377,0.82898,1,0.12718,3250
+pbde_85_ngml_detect,hilic,Urea cycle/amino group metabolism,92,92,4,6.2618,0.84562,0.93614,0.13735,9998
+pbde_85_ngml_detect,hilic,"Valine, leucine and isoleucine degradation",30,30,1,2.0419,0.8598,1,0.14709,4113
+pbde_85_ngml_detect,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,34,34,1,2.3141,0.89252,1,0.17448,9534
+pbde_85_ngml_detect,hilic,Pyrimidine metabolism,63,63,2,4.288,0.91706,0.9839,0.20164,6571
+pbde_85_ngml_detect,hilic,Aspartate and asparagine metabolism,109,109,4,7.4188,0.9252,0.97303,0.21251,9551
+pbde_85_ngml_detect,hilic,Butanoate metabolism,42,42,1,2.8586,0.937,1,0.23057,9222
+pbde_85_ngml_detect,hilic,Lysine metabolism,44,44,1,2.9948,0.94491,1,0.24461,9999
+pbde_85_ngml_detect,hilic,Arginine and Proline Metabolism,53,53,1,3.6073,0.96996,1,0.30679,9997

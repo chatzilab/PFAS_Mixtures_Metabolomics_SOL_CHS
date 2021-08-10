@@ -3,9 +3,6 @@
 # Jesse Goodrich 040821
 library(broom)
 
-exposure = "dde_impute"
-met_name = "87.00887596_159.3062312"
-
 # C18 --------------------------------------
 C18_MWAS_reg = function(exposure, met_name){
   covar = 'solar_exposure_outcome$age + 
@@ -53,9 +50,11 @@ names(c18_mwas_results) = c('exposure','metabolite',"m.z", "r.t",
                             "conf.low", "conf.high", "mode")
 
 #version 1: new LC-MS Data
-saveRDS(c18_mwas_results, file = here::here('Temporary results','1_1_SOLAR_c18_mwas.rds'))
+saveRDS(c18_mwas_results, file = here::here('Temporary results', 
+                                            exposure_type, 
+                                            '1_1_SOLAR_c18_mwas.rds'))
 
-##HILIC mwas ---------------------------------------------
+# HILIC mwas ---------------------------------------------
 hilic_mwas_reg = function(exposure, met_name){
   covar = 'solar_exposure_outcome$age + 
   solar_exposure_outcome$sex + 
@@ -98,26 +97,29 @@ names(input_data) = c('exposure','met_name')
 hilic_mwas_results = plyr::mdply(input_data,
                                .fun = hilic_mwas_reg,
                                .progress = 'text')
+
 names(hilic_mwas_results) = c('exposure','metabolite',"m.z", "r.t", 
                               "p.value", "t.score", "beta", 
                               "conf.low", "conf.high", "mode")
 
 # Save HILIC MWAS 
 saveRDS(hilic_mwas_results, 
-        file = here::here('Temporary results','1_1_SOLAR_hilic_mwas.rds'))
+        file = here::here('Temporary results',
+                          exposure_type,
+                          '1_1_SOLAR_hilic_mwas.rds'))
 
 
 # Save into separate folders---------------------------------------------
-exposure_merge_n_save = function(exposures){
+exposure_merge_n_save = function(exposure_name){
   c18_data = 
     c18_mwas_results %>% 
-    dplyr::filter(exposure==exposures)  %>% 
+    dplyr::filter(exposure==exposure_name)  %>% 
     ungroup() %>%
     dplyr::select(m.z,r.t ,beta, t.score, p.value,beta, conf.low, conf.high, mode)
   
   hilic_data = 
     hilic_mwas_results %>% 
-    dplyr::filter(exposure==exposures)  %>% 
+    dplyr::filter(exposure==exposure_name)  %>% 
     ungroup() %>%
     dplyr::select( m.z,r.t,beta, t.score, p.value,beta, conf.low, conf.high, mode)
   
@@ -125,8 +127,8 @@ exposure_merge_n_save = function(exposures){
 
   #save csv
   write_csv(merged_data,
-            file = fs::path(here::here('Temporary results'), exposures, "SOLAR",
-                        paste0("SOLAR_", exposures,'_MWAS_c18_hilic.csv')))
+            file = fs::path(here::here('Temporary results'), exposure_type, 
+                        paste0("SOLAR_", exposure_type,'_MWAS_c18_hilic.csv')))
 }
 
 #run the merge and save for all exposure

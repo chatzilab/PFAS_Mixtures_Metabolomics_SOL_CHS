@@ -1,0 +1,55 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_85_ngml_detect,c18,Glycolysis and Gluconeogenesis,18,18,3,0.72689,0.027276,0.13885,0.0040152,14
+pbde_85_ngml_detect,c18,"Glycine, serine, alanine and threonine metabolism",44,44,4,1.7768,0.078929,0.21608,0.0047691,379
+pbde_85_ngml_detect,c18,Fructose and mannose metabolism,13,13,2,0.52497,0.083106,0.38684,0.0048363,1650
+pbde_85_ngml_detect,c18,Lysine metabolism,14,14,2,0.56536,0.094706,0.40964,0.0050282,1811
+pbde_85_ngml_detect,c18,Glycosylphosphatidylinositol(GPI)-anchor biosynthesis,3,3,1,0.12115,0.10899,1,0.0052757,654
+pbde_85_ngml_detect,c18,"Fatty acid oxidation, peroxisome",3,3,1,0.12115,0.10899,1,0.0052757,28
+pbde_85_ngml_detect,c18,Di-unsaturated fatty acid beta-oxidation,4,4,1,0.16153,0.14268,1,0.0059123,458
+pbde_85_ngml_detect,c18,Nucleotide Sugar Metabolism,4,4,1,0.16153,0.14268,1,0.0059123,166
+pbde_85_ngml_detect,c18,Aminosugars metabolism,19,19,2,0.76727,0.15839,0.51183,0.0062367,766
+pbde_85_ngml_detect,c18,Aspartate and asparagine metabolism,37,37,3,1.4942,0.15941,0.39809,0.0062584,2097
+pbde_85_ngml_detect,c18,Keratan sulfate degradation,5,5,1,0.20191,0.17513,1,0.0066033,2938
+pbde_85_ngml_detect,c18,Lipoate metabolism,5,5,1,0.20191,0.17513,1,0.0066033,3844
+pbde_85_ngml_detect,c18,Fatty acid oxidation,5,5,1,0.20191,0.17513,1,0.0066033,148
+pbde_85_ngml_detect,c18,N-Glycan Degradation,5,5,1,0.20191,0.17513,1,0.0066033,2430
+pbde_85_ngml_detect,c18,Carnitine shuttle,22,22,2,0.88842,0.19968,0.56465,0.0071835,205
+pbde_85_ngml_detect,c18,Parathio degradation,6,6,1,0.2423,0.20638,1,0.007351,3134
+pbde_85_ngml_detect,c18,Omega-6 fatty acid metabolism,6,6,1,0.2423,0.20638,1,0.007351,174
+pbde_85_ngml_detect,c18,Arachidonic acid metabolism,24,24,2,0.96918,0.22792,0.59672,0.0079189,2893
+pbde_85_ngml_detect,c18,Pyruvate Metabolism,7,7,1,0.28268,0.23648,1,0.0081576,0
+pbde_85_ngml_detect,c18,Prostaglandin formation from dihomo gama-linoleic acid,7,7,1,0.28268,0.23648,1,0.0081576,1012
+pbde_85_ngml_detect,c18,Purine metabolism,47,47,3,1.898,0.25883,0.52387,0.0088184,1694
+pbde_85_ngml_detect,c18,Omega-3 fatty acid metabolism,8,8,1,0.32306,0.26546,1,0.0090253,1852
+pbde_85_ngml_detect,c18,Prostaglandin formation from arachidonate,48,48,3,1.9384,0.26931,0.53551,0.0091479,1803
+pbde_85_ngml_detect,c18,Glycerophospholipid metabolism,50,50,3,2.0191,0.29043,0.55824,0.0098531,3307
+pbde_85_ngml_detect,c18,Caffeine metabolism,9,9,1,0.36344,0.29337,1,0.0099558,745
+pbde_85_ngml_detect,c18,Bile acid biosynthesis,29,29,2,1.1711,0.2994,0.66718,0.01017,191
+pbde_85_ngml_detect,c18,Methionine and cysteine metabolism,29,29,2,1.1711,0.2994,0.66718,0.01017,3873
+pbde_85_ngml_detect,c18,N-Glycan biosynthesis,10,10,1,0.40383,0.32025,1,0.010951,3306
+pbde_85_ngml_detect,c18,Propanoate metabolism,10,10,1,0.40383,0.32025,1,0.010951,1746
+pbde_85_ngml_detect,c18,Butanoate metabolism,10,10,1,0.40383,0.32025,1,0.010951,1040
+pbde_85_ngml_detect,c18,Carbon fixation,10,10,1,0.40383,0.32025,1,0.010951,3139
+pbde_85_ngml_detect,c18,Putative anti-Inflammatory metabolites formation from EPA,11,11,1,0.44421,0.34613,1,0.012013,980
+pbde_85_ngml_detect,c18,Starch and Sucrose Metabolism,11,11,1,0.44421,0.34613,1,0.012013,2977
+pbde_85_ngml_detect,c18,Pyrimidine metabolism,57,57,3,2.3018,0.36511,0.63173,0.012863,4607
+pbde_85_ngml_detect,c18,Phosphatidylinositol phosphate metabolism,12,12,1,0.48459,0.37106,1,0.013143,1828
+pbde_85_ngml_detect,c18,Leukotriene metabolism,35,35,2,1.4134,0.38398,0.73603,0.013774,2253
+pbde_85_ngml_detect,c18,Hexose phosphorylation,14,14,1,0.56536,0.41816,1,0.015611,2704
+pbde_85_ngml_detect,c18,Fatty acid activation,38,38,2,1.5345,0.42483,0.76504,0.016001,3765
+pbde_85_ngml_detect,c18,Urea cycle/amino group metabolism,39,39,2,1.5749,0.43815,0.77401,0.016812,4545
+pbde_85_ngml_detect,c18,Fatty Acid Metabolism,15,15,1,0.60574,0.4404,1,0.016953,5831
+pbde_85_ngml_detect,c18,"Valine, leucine and isoleucine degradation",16,16,1,0.64612,0.46181,1,0.018367,3335
+pbde_85_ngml_detect,c18,Vitamin D3 (cholecalciferol) metabolism,17,17,1,0.6865,0.48243,1,0.019854,2173
+pbde_85_ngml_detect,c18,Sialic acid metabolism,17,17,1,0.6865,0.48243,1,0.019854,4660
+pbde_85_ngml_detect,c18,Ascorbate (Vitamin C) and Aldarate Metabolism,17,17,1,0.6865,0.48243,1,0.019854,7666
+pbde_85_ngml_detect,c18,TCA cycle,18,18,1,0.72689,0.50228,1,0.021415,7237
+pbde_85_ngml_detect,c18,Galactose metabolism,19,19,1,0.76727,0.52138,1,0.023051,2886
+pbde_85_ngml_detect,c18,De novo fatty acid biosynthesis,20,20,1,0.80765,0.53977,1,0.024761,4723
+pbde_85_ngml_detect,c18,Pentose phosphate pathway,22,22,1,0.88842,0.57451,1,0.028407,7618
+pbde_85_ngml_detect,c18,Androgen and estrogen biosynthesis and metabolism,24,24,1,0.96918,0.60669,1,0.032351,5148
+pbde_85_ngml_detect,c18,Drug metabolism - other enzymes,26,26,1,1.0499,0.6365,1,0.03659,6333
+pbde_85_ngml_detect,c18,Linoleate metabolism,34,34,1,1.373,0.73522,1,0.056373,7134
+pbde_85_ngml_detect,c18,Xenobiotics metabolism,48,48,1,1.9384,0.8489,1,0.10023,9215
+pbde_85_ngml_detect,c18,C21-steroid hormone biosynthesis and metabolism,48,48,1,1.9384,0.8489,1,0.10023,6302
+pbde_85_ngml_detect,c18,Tyrosine metabolism,89,89,2,3.594,0.8655,0.96937,0.11037,8641

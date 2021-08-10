@@ -1,0 +1,74 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+x82fts,hilic,Caffeine metabolism,5,5,3,0.4243,0.0041361,0.050789,0.0099558,149
+x82fts,hilic,Bile acid biosynthesis,28,28,7,2.3761,0.0043232,0.016995,0.0099608,15
+x82fts,hilic,Vitamin D3 (cholecalciferol) metabolism,12,12,4,1.0183,0.010675,0.059132,0.010133,8
+x82fts,hilic,Limonene and pinene degradation,12,12,4,1.0183,0.010675,0.059132,0.010133,1411
+x82fts,hilic,Glycosphingolipid metabolism,23,23,5,1.9518,0.028584,0.095482,0.010636,158
+x82fts,hilic,Glycerophospholipid metabolism,50,50,8,4.243,0.035743,0.084423,0.010845,13
+x82fts,hilic,Purine metabolism,38,38,6,3.2247,0.069772,0.16444,0.011898,190
+x82fts,hilic,N-Glycan Degradation,6,6,2,0.50916,0.073908,0.38399,0.012033,1227
+x82fts,hilic,Dimethyl-branched-chain fatty acid mitochondrial beta-oxidation,1,1,1,0.08486,0.078292,1,0.012178,0
+x82fts,hilic,Sialic acid metabolism,14,14,3,1.188,0.089912,0.29606,0.012573,78
+x82fts,hilic,N-Glycan biosynthesis,7,7,2,0.59402,0.098315,0.43193,0.012867,44
+x82fts,hilic,Keratan sulfate degradation,7,7,2,0.59402,0.098315,0.43193,0.012867,1341
+x82fts,hilic,Galactose metabolism,15,15,3,1.2729,0.10626,0.32569,0.013151,1222
+x82fts,hilic,Phosphatidylinositol phosphate metabolism,15,15,3,1.2729,0.10626,0.32569,0.013151,770
+x82fts,hilic,Pyrimidine metabolism,44,44,6,3.7338,0.12263,0.2496,0.013759,299
+x82fts,hilic,Vitamin B5 - CoA biosynthesis from pantothenate,8,8,2,0.67888,0.1246,0.47617,0.013834,2511
+x82fts,hilic,Saturated fatty acids beta-oxidation,8,8,2,0.67888,0.1246,0.47617,0.013834,567
+x82fts,hilic,Pentose phosphate pathway,17,17,3,1.4426,0.14204,0.38387,0.01452,551
+x82fts,hilic,Glycosphingolipid biosynthesis - globoseries,2,2,1,0.16972,0.15052,1,0.014867,785
+x82fts,hilic,Mono-unsaturated fatty acid beta-oxidation,2,2,1,0.16972,0.15052,1,0.014867,0
+x82fts,hilic,Sphingolipid metabolism,2,2,1,0.16972,0.15052,1,0.014867,326
+x82fts,hilic,Biopterin metabolism,9,9,2,0.76374,0.15232,0.51701,0.014942,1520
+x82fts,hilic,Aminosugars metabolism,19,19,3,1.6123,0.18123,0.43987,0.016201,477
+x82fts,hilic,R Group Synthesis,3,3,1,0.25458,0.21714,1,0.017928,39
+x82fts,hilic,Vitamin B2 (riboflavin) metabolism,3,3,1,0.25458,0.21714,1,0.017928,260
+x82fts,hilic,Starch and Sucrose Metabolism,3,3,1,0.25458,0.21714,1,0.017928,1379
+x82fts,hilic,Histidine metabolism,32,32,4,2.7155,0.23717,0.45671,0.018979,6151
+x82fts,hilic,Vitamin B9 (folate) metabolism,12,12,2,1.0183,0.24057,0.62156,0.019164,586
+x82fts,hilic,Arginine and Proline Metabolism,44,44,5,3.7338,0.25725,0.44791,0.020102,1854
+x82fts,hilic,Fructose and mannose metabolism,13,13,2,1.1032,0.27072,0.65117,0.020895,2365
+x82fts,hilic,Fatty acid activation,36,36,4,3.055,0.30936,0.53779,0.023373,246
+x82fts,hilic,"Valine, leucine and isoleucine degradation",25,25,3,2.1215,0.31074,0.58947,0.023467,337
+x82fts,hilic,Chondroitin sulfate degradation,5,5,1,0.4243,0.33528,1,0.025219,1511
+x82fts,hilic,Di-unsaturated fatty acid beta-oxidation,5,5,1,0.4243,0.33528,1,0.025219,557
+x82fts,hilic,3-oxo-10R-octadecatrienoate beta-oxidation,5,5,1,0.4243,0.33528,1,0.025219,204
+x82fts,hilic,CoA Catabolism,5,5,1,0.4243,0.33528,1,0.025219,4440
+x82fts,hilic,Arachidonic acid metabolism,27,27,3,2.2912,0.35536,0.63242,0.026761,1002
+x82fts,hilic,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,0.50916,0.38756,1,0.029462,682
+x82fts,hilic,Propanoate metabolism,6,6,1,0.50916,0.38756,1,0.029462,3277
+x82fts,hilic,Polyunsaturated fatty acid biosynthesis,6,6,1,0.50916,0.38756,1,0.029462,1467
+x82fts,hilic,Squalene and cholesterol biosynthesis,17,17,2,1.4426,0.38949,0.74837,0.029634,443
+x82fts,hilic,De novo fatty acid biosynthesis,30,30,3,2.5458,0.42154,0.69025,0.032654,1415
+x82fts,hilic,Heparan sulfate degradation,7,7,1,0.59402,0.43576,1,0.034106,5084
+x82fts,hilic,Tryptophan metabolism,93,93,8,7.892,0.44606,0.59375,0.035204,6597
+x82fts,hilic,Drug metabolism - cytochrome P450,32,32,3,2.7155,0.46446,0.72455,0.037269,4876
+x82fts,hilic,Nitrogen metabolism,8,8,1,0.67888,0.48021,1,0.039149,7122
+x82fts,hilic,Xenobiotics metabolism,46,46,4,3.9036,0.49271,0.70725,0.040719,6072
+x82fts,hilic,Lysine metabolism,47,47,4,3.9884,0.51022,0.72133,0.043046,7969
+x82fts,hilic,Omega-6 fatty acid metabolism,9,9,1,0.76374,0.5212,1,0.044583,543
+x82fts,hilic,Urea cycle/amino group metabolism,76,76,6,6.4494,0.55776,0.71853,0.050197,8916
+x82fts,hilic,Leukotriene metabolism,24,24,2,2.0366,0.57313,0.85835,0.052809,3449
+x82fts,hilic,Glycolysis and Gluconeogenesis,11,11,1,0.93346,0.59383,1,0.056588,4275
+x82fts,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,2,2.1215,0.59595,0.86955,0.056994,8087
+x82fts,hilic,Fatty Acid Metabolism,26,26,2,2.2064,0.61786,0.87988,0.061399,3077
+x82fts,hilic,Prostaglandin formation from arachidonate,26,26,2,2.2064,0.61786,0.87988,0.061399,1187
+x82fts,hilic,Fatty acid oxidation,12,12,1,1.0183,0.62594,1,0.06313,767
+x82fts,hilic,Glutamate metabolism,12,12,1,1.0183,0.62594,1,0.06313,5555
+x82fts,hilic,Aspartate and asparagine metabolism,83,83,6,7.0434,0.64788,0.78944,0.068142,8824
+x82fts,hilic,Hexose phosphorylation,13,13,1,1.1032,0.65554,1,0.07001,8988
+x82fts,hilic,Vitamin A (retinol) metabolism,13,13,1,1.1032,0.65554,1,0.07001,2549
+x82fts,hilic,Methionine and cysteine metabolism,28,28,2,2.3761,0.65896,0.89817,0.070863,4989
+x82fts,hilic,Tyrosine metabolism,125,125,9,10.608,0.66358,0.77521,0.072038,9414
+x82fts,hilic,Butanoate metabolism,29,29,2,2.4609,0.67816,0.90625,0.075915,6041
+x82fts,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,4,4.9219,0.6817,0.84361,0.076895,2244
+x82fts,hilic,Carnitine shuttle,30,30,2,2.5458,0.69649,0.9137,0.081175,4939
+x82fts,hilic,TCA cycle,16,16,1,1.3578,0.73114,1,0.09249,3005
+x82fts,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,3,4.1581,0.75509,0.90637,0.10157,6173
+x82fts,hilic,Porphyrin metabolism,18,18,1,1.5275,0.77217,1,0.1088,5296
+x82fts,hilic,Beta-Alanine metabolism,18,18,1,1.5275,0.77217,1,0.1088,7042
+x82fts,hilic,Alanine and Aspartate Metabolism,20,20,1,1.6972,0.807,1,0.12598,9873
+x82fts,hilic,Vitamin E metabolism,22,22,1,1.8669,0.83655,1,0.14385,5730
+x82fts,hilic,Linoleate metabolism,47,47,2,3.9884,0.89684,0.97913,0.19551,9899
+x82fts,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,1,2.5458,0.9162,1,0.21933,8845

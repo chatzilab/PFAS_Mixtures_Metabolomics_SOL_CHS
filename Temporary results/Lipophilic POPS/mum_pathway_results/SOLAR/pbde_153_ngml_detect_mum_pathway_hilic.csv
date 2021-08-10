@@ -1,0 +1,71 @@
+exposure,mode,pathway,pathway_total,hits_total,hits_sig,expected,fet,ease,gamma,emp_hits
+pbde_153_ngml_detect,hilic,D4&E4-neuroprostanes formation,3,3,3,0.20251,2.3191e-4,0.010708,0.0082752,0
+pbde_153_ngml_detect,hilic,Ascorbate (Vitamin C) and Aldarate Metabolism,19,19,6,1.2825,6.7025e-4,0.0044668,0.0082853,5
+pbde_153_ngml_detect,hilic,N-Glycan biosynthesis,7,7,3,0.47252,0.0067611,0.063833,0.0084279,0
+pbde_153_ngml_detect,hilic,Starch and Sucrose Metabolism,3,3,2,0.20251,0.011016,0.17323,0.008529,0
+pbde_153_ngml_detect,hilic,Pentose phosphate pathway,17,17,4,1.1475,0.017706,0.081069,0.0086907,33
+pbde_153_ngml_detect,hilic,Prostaglandin formation from arachidonate,26,26,5,1.7551,0.019121,0.069807,0.0087253,2
+pbde_153_ngml_detect,hilic,Hexose phosphorylation,13,13,3,0.87753,0.042154,0.18745,0.0093099,1130
+pbde_153_ngml_detect,hilic,Glycosphingolipid metabolism,23,23,4,1.5526,0.049658,0.16302,0.0095093,367
+pbde_153_ngml_detect,hilic,Phosphatidylinositol phosphate metabolism,15,15,3,1.0125,0.061344,0.23371,0.0098291,442
+pbde_153_ngml_detect,hilic,TCA cycle,16,16,3,1.08,0.072224,0.25714,0.010137,62
+pbde_153_ngml_detect,hilic,Porphyrin metabolism,18,18,3,1.215,0.096345,0.30405,0.010858,137
+pbde_153_ngml_detect,hilic,Androgen and estrogen biosynthesis and metabolism,30,30,4,2.0251,0.11099,0.27824,0.011322,822
+pbde_153_ngml_detect,hilic,Glycosphingolipid biosynthesis - globoseries,2,2,1,0.135,0.12073,1,0.011643,673
+pbde_153_ngml_detect,hilic,Tyrosine metabolism,125,125,11,8.4378,0.14372,0.22848,0.01244,5800
+pbde_153_ngml_detect,hilic,Ubiquinone Biosynthesis,11,11,2,0.74253,0.14624,0.50347,0.012531,167
+pbde_153_ngml_detect,hilic,Lysine metabolism,47,47,5,3.1726,0.16278,0.32526,0.013146,3816
+pbde_153_ngml_detect,hilic,Benzoate degradation via CoA ligation,3,3,1,0.20251,0.17559,1,0.013644,0
+pbde_153_ngml_detect,hilic,Fructose and mannose metabolism,13,13,2,0.87753,0.19172,0.56315,0.014301,1808
+pbde_153_ngml_detect,hilic,Sialic acid metabolism,14,14,2,0.94503,0.21512,0.59028,0.015317,554
+pbde_153_ngml_detect,hilic,Vitamin H (biotin) metabolism,4,4,1,0.27000999999999997,0.22707,1,0.015865,189
+pbde_153_ngml_detect,hilic,Galactose metabolism,15,15,2,1.0125,0.23878,0.61575,0.016425,2849
+pbde_153_ngml_detect,hilic,Bile acid biosynthesis,28,28,3,1.8901,0.25093,0.52226,0.017027,974
+pbde_153_ngml_detect,hilic,Chondroitin sulfate degradation,5,5,1,0.33751,0.27537,1,0.018315,1189
+pbde_153_ngml_detect,hilic,Caffeine metabolism,5,5,1,0.33751,0.27537,1,0.018315,4805
+pbde_153_ngml_detect,hilic,Lipoate metabolism,5,5,1,0.33751,0.27537,1,0.018315,2096
+pbde_153_ngml_detect,hilic,CoA Catabolism,5,5,1,0.33751,0.27537,1,0.018315,3692
+pbde_153_ngml_detect,hilic,Squalene and cholesterol biosynthesis,17,17,2,1.1475,0.2864,0.6621,0.018931,268
+pbde_153_ngml_detect,hilic,C21-steroid hormone biosynthesis and metabolism,58,58,5,3.9151,0.29096,0.48307,0.019192,476
+pbde_153_ngml_detect,hilic,Beta-Alanine metabolism,18,18,2,1.215,0.31016,0.68316,0.020337,1382
+pbde_153_ngml_detect,hilic,Glycosphingolipid biosynthesis - ganglioseries,6,6,1,0.40501,0.3207,1,0.020999,535
+pbde_153_ngml_detect,hilic,Polyunsaturated fatty acid biosynthesis,6,6,1,0.40501,0.3207,1,0.020999,1143
+pbde_153_ngml_detect,hilic,N-Glycan Degradation,6,6,1,0.40501,0.3207,1,0.020999,6126
+pbde_153_ngml_detect,hilic,Keratan sulfate degradation,7,7,1,0.47252,0.36324,1,0.02392,7055
+pbde_153_ngml_detect,hilic,Heparan sulfate degradation,7,7,1,0.47252,0.36324,1,0.02392,4273
+pbde_153_ngml_detect,hilic,Fatty acid activation,36,36,3,2.4301,0.39135,0.66179,0.026101,458
+pbde_153_ngml_detect,hilic,Vitamin E metabolism,22,22,2,1.4851,0.40301,0.75522,0.027071,1395
+pbde_153_ngml_detect,hilic,Vitamin B5 - CoA biosynthesis from pantothenate,8,8,1,0.54001999999999994,0.40314,1,0.027082,5554
+pbde_153_ngml_detect,hilic,Saturated fatty acids beta-oxidation,8,8,1,0.54001999999999994,0.40314,1,0.027082,2954
+pbde_153_ngml_detect,hilic,Carbon fixation,8,8,1,0.54001999999999994,0.40314,1,0.027082,1890
+pbde_153_ngml_detect,hilic,Leukotriene metabolism,24,24,2,1.6201,0.44733,0.78492,0.031149,2317
+pbde_153_ngml_detect,hilic,"Valine, leucine and isoleucine degradation",25,25,2,1.6876,0.46881,0.79842,0.033377,1334
+pbde_153_ngml_detect,hilic,Fatty Acid Metabolism,26,26,2,1.7551,0.4898,0.81107,0.035733,2051
+pbde_153_ngml_detect,hilic,Glycolysis and Gluconeogenesis,11,11,1,0.74253,0.50864,1,0.038013,3810
+pbde_153_ngml_detect,hilic,Vitamin D3 (cholecalciferol) metabolism,12,12,1,0.81003,0.53955,1,0.042133,3430
+pbde_153_ngml_detect,hilic,Alkaloid biosynthesis II,12,12,1,0.81003,0.53955,1,0.042133,6217
+pbde_153_ngml_detect,hilic,Limonene and pinene degradation,12,12,1,0.81003,0.53955,1,0.042133,9565
+pbde_153_ngml_detect,hilic,Glutamate metabolism,12,12,1,0.81003,0.53955,1,0.042133,4756
+pbde_153_ngml_detect,hilic,Butanoate metabolism,29,29,2,1.9576,0.54964,0.84453,0.043591,4693
+pbde_153_ngml_detect,hilic,Carnitine shuttle,30,30,2,2.0251,0.56849,0.85432,0.046478,3652
+pbde_153_ngml_detect,hilic,De novo fatty acid biosynthesis,30,30,2,2.0251,0.56849,0.85432,0.046478,2587
+pbde_153_ngml_detect,hilic,Vitamin A (retinol) metabolism,13,13,1,0.87753,0.56853,1,0.046484,1884
+pbde_153_ngml_detect,hilic,Glutathione Metabolism,13,13,1,0.87753,0.56853,1,0.046484,5782
+pbde_153_ngml_detect,hilic,Glycerophospholipid metabolism,50,50,3,3.3751,0.61488,0.82673,0.05462,3075
+pbde_153_ngml_detect,hilic,Vitamin B6 (pyridoxine) metabolism,15,15,1,1.0125,0.62121,1,0.055861,8696
+pbde_153_ngml_detect,hilic,Drug metabolism - other enzymes,16,16,1,1.08,0.64512,1,0.060873,5301
+pbde_153_ngml_detect,hilic,Alanine and Aspartate Metabolism,20,20,1,1.35,0.72676,1,0.082885,9731
+pbde_153_ngml_detect,hilic,Pyrimidine metabolism,44,44,2,2.9701,0.77437,0.94181,0.10069,7289
+pbde_153_ngml_detect,hilic,Aspartate and asparagine metabolism,83,83,4,5.6027,0.77771,0.89974,0.10213,9439
+pbde_153_ngml_detect,hilic,Xenobiotics metabolism,46,46,2,3.1051,0.79562,0.94901,0.11036,8620
+pbde_153_ngml_detect,hilic,Vitamin B3 (nicotinate and nicotinamide) metabolism,25,25,1,1.6876,0.80319,1,0.11412,9541
+pbde_153_ngml_detect,hilic,Linoleate metabolism,47,47,2,3.1726,0.80558,0.95228,0.11534,9728
+pbde_153_ngml_detect,hilic,"Glycine, serine, alanine and threonine metabolism",49,49,2,3.3076,0.82424,0.9582,0.1256,7435
+pbde_153_ngml_detect,hilic,Arachidonic acid metabolism,27,27,1,1.8226,0.82748,1,0.12751,5693
+pbde_153_ngml_detect,hilic,Methionine and cysteine metabolism,28,28,1,1.8901,0.83848,1,0.13437,7331
+pbde_153_ngml_detect,hilic,Urea cycle/amino group metabolism,76,76,3,5.1302,0.86859,0.95672,0.1563,9894
+pbde_153_ngml_detect,hilic,Histidine metabolism,32,32,1,2.1601,0.87601,1,0.16259,9648
+pbde_153_ngml_detect,hilic,Drug metabolism - cytochrome P450,32,32,1,2.1601,0.87601,1,0.16259,8851
+pbde_153_ngml_detect,hilic,Purine metabolism,38,38,1,2.5651,0.91676,1,0.20648,7901
+pbde_153_ngml_detect,hilic,Tryptophan metabolism,93,93,3,6.2777,0.94184,0.98374,0.24628,9672
+pbde_153_ngml_detect,hilic,Arginine and Proline Metabolism,44,44,1,2.9701,0.94424,1,0.25094,9809

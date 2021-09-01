@@ -3,8 +3,7 @@ library(dendextend)
 library(gplots)
 
 # Get Correlation Matrix
-data <- solar_c18
-
+# Function
 met_cor_plot <- function(data, file.location){ 
   # Calculate Correlation Matrix
   temp_cor_matrix <- data %>% 
@@ -49,20 +48,37 @@ met_cor_plot <- function(data, file.location){
 
 
 
-
-met_cor_plot(solar_c18, 
+# Correlation plots, SOLAR
+met_cor_plot(met$solar$c18neg, 
              file.location = here::here("figures", 
-                                        "solar_c18_correlation_matrix.jpeg"))
-met_cor_plot(solar_hilic, 
-             file.location = 
-               here::here("figures", 
-                          "solar_hilic_correlation_matrix.jpeg"))
+                                        "solar_c18_neg_correlation_matrix.jpeg"))
+
+met_cor_plot(met$solar$c18pos, 
+             file.location = here::here("figures", 
+                                        "solar_c18_pos_correlation_matrix.jpeg"))
+
+met_cor_plot(met$solar$hilicneg, 
+             file.location = here::here("figures", 
+                                        "solar_hilic_neg_correlation_matrix.jpeg"))
+
+met_cor_plot(met$solar$hilicpos, 
+             file.location = here::here("figures", 
+                                        "solar_hilic_pos_correlation_matrix.jpeg"))
+
 
 # CHS
-met_cor_plot(chs_c18, 
+met_cor_plot(met$chs$c18neg, 
              file.location = here::here("figures", 
-                                        "chs_c18_correlation_matrix.jpeg"))
-met_cor_plot(chs_hilic, 
-             file.location = 
-               here::here("figures", 
-                          "chs_hilic_correlation_matrix.jpeg"))
+                                        "chs_c18_neg_correlation_matrix.jpeg"))
+
+met_cor_plot(met$chs$c18pos, 
+             file.location = here::here("figures", 
+                                        "chs_c18_pos_correlation_matrix.jpeg"))
+
+met_cor_plot(met$chs$hilicneg, 
+             file.location = here::here("figures", 
+                                        "chs_hilic_neg_correlation_matrix.jpeg"))
+
+met_cor_plot(met$chs$hilicpos, 
+             file.location = here::here("figures", 
+                                        "chs_hilic_pos_correlation_matrix.jpeg"

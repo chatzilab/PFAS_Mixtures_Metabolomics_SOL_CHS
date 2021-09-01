@@ -4,33 +4,32 @@ library(fs)
 # home directory for project
 dir_home <- dirname(here::here())
 
+# Project Directory
 dir_projects <- dirname(dir_home)
+
+# Metabolomics Data Cleaning Data Directory
+dir_metabolomics <- fs::path(
+  "C:/Users/jagoodri/Dropbox (USC Lab)/Project Directories", 
+  "HRE Metabolomics Data Cleaning SOL CHS", 
+  "3_clean_data")
+
+# reports folder
+dir_data <- fs::path(dir_home, "0_Data")
 
 # SOLAR data folder on secure server 
 dir_solar_data_secure <- fs::path("R:/SOLAR EDCs")
-
-# SOLAR metabolomics data
-dir_solar_metabolomics <- fs::path(dir_projects, 
-                                   "Metabolomics Data Cleaning SOLAR", 
-                                   "2 Cleaned Data")
-
-# CHS metabolomics data
-dir_chs_metabolomics <- fs::path(dir_projects, 
-                                   "Metabolomics Data Cleaning CHS", 
-                                   "2 Cleaned Data")
 
 # CHS data folder on secure server
 dir_chs_data_secure <- fs::path("R:/MetaChem")
 
 # SOLAR Metabolomics Data Folder
-dir_data_solar <- fs::path(paste0(dir_solar_data_secure,"/13.Untargeted Metabolomics 2021"))
+# dir_data_solar <- 
 
 # CHS Metabolomics Data Folder
-dir_data_chs <- fs::path(paste0(dir_chs_data_secure,"/CHS Metabolomics Data"))
-
-# reports folder
-dir_report <- fs::path(dir_home, "3 Reports")
+# dir_data_chs <- 
 
 # discussion folder
 # dir_discuss <- paste0(dir_home, "/4 Discussions")
- 
+
+# devtools::install_github("JAGoodrich/jag2")
+

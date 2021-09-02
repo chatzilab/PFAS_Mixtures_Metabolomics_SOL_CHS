@@ -21,11 +21,12 @@ names(solar_mwas_results) <- modes
 for(l in modes){
   print(paste("Start", l, Sys.time()))
   # Run MWAS for all exposures
-  mode_mwas <- mwas_all_exposures(cohort = "solar", 
-                                  metab_dat = met,
-                                  lcms_mode = l,
-                                  exp_cov_dat = exposure_outcome, 
-                                  analysis_exposures = exposures_for_analysis) %>% 
+  mode_mwas <- mwas_all_exposures(
+    cohort = "solar", 
+    metab_dat = met,
+    lcms_mode = l,
+    exp_cov_dat = exposure_outcome, 
+    analysis_exposures = exposures_for_analysis) %>% 
     list()
   
   # Add to results list

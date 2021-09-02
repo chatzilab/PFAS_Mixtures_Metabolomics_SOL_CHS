@@ -39,7 +39,7 @@ exposures_for_analysis <- c("lg2_pfda",
                             "netfosaa", "pfds", "pfbs", "x82fts") 
 
 source(here::here("!directories.R"))
-source(here::here("!load_data.R"))
+# source(here::here("!load_data.R"))
 
 source(here::here("0_0_3_analysis_funs.R"))
 

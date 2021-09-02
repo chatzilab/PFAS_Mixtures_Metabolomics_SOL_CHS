@@ -13,8 +13,14 @@ dir_metabolomics <- fs::path(
   "HRE Metabolomics Data Cleaning SOL CHS", 
   "3_clean_data")
 
-# reports folder
+# data folder
 dir_data <- fs::path(dir_home, "0_Data")
+
+# Temp results folder
+dir_temp <- here::here("Temporary results")
+
+# reports folder
+dir_reports <- fs::path(dir_home, "2_Reports")
 
 # SOLAR data folder on secure server 
 dir_solar_data_secure <- fs::path("R:/SOLAR EDCs")

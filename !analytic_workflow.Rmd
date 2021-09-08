@@ -39,9 +39,10 @@ exposures_for_analysis <- c("lg2_pfda",
                             "netfosaa", "pfds", "pfbs", "x82fts") 
 
 source(here::here("!directories.R"))
+source(here::here("0_0_1_format_vars_funs.R"))
 # source(here::here("!load_data.R"))
-
 source(here::here("0_0_3_analysis_funs.R"))
+
 
 # exposures_oc <- c("hexachlorobenzene_impute", "dde_impute", "ocs",
 #                   "pbde_154_impute", "pbde_47_impute",

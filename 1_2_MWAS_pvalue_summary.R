@@ -60,7 +60,7 @@ mwas_results_summary <- full_join(solar_summary_mwas, chs_summary_mwas,
                                   by = c("mode", "exposure", "n_features"), 
                                   suffix = c("_solar", "_chs"))
 
-write_excel_csv(mwas_results_summary, 
+write_excel_csv(mwas_results_summarysults_summary, 
           file = fs::path(dir_reports, "Summary of MWAS Results.csv"))
 
 # Volcano plots -----------------------

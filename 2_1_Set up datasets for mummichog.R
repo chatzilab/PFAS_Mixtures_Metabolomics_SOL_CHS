@@ -54,9 +54,6 @@ mwas_results <- list(solar = mwas_results_solar,
 # Clean environment
 rm(mwas_results_solar, mwas_results_chs)
 
-exposure_name = "pfoa"
-chrt = cohort[1]
-mode = modes[1]
 # Loop over exposures, cohort, and mode to save mwas data
 for(exposure_name in exposures){
   print(paste("Begin", exposure_name))

@@ -2,43 +2,177 @@ library(tidyverse)
 library(ggplot2)
 library(cowplot)
 library(here)
+library(ggrepel)
 library(fs)
 ggplot2::theme_set(cowplot::theme_cowplot())
+source(here::here("0_0_1_format_vars_funs.R"))
 
-i = 1
-# Get folder Directory
-folders <- list.files(here::here("Temporary results", exposure_type))
+# Set important vars
+exposure_type = "PFAS"
 
-folders <- folders[folders %in% exposures]
+exposures = c("netfosaa","nmefosaab","pfbs","pfda","pfdoa","pfds","pfhpa",
+              "pfhps","pfhxa","pfhxs","pfna","pfns","pfoa","pfos","pfpes",
+              "pfuda", "x82fts")
+cohort = c("solar", "chs")
+modes = c("c18pos","c18neg", "hilicpos", "hilicneg")
+
+# Temp Results folder architecture:
+## Exposure Type > Exposure Name > Cohort > modes
+
 #Key for superpathways
 key = readxl::read_xlsx(here::here("Supporting files",  
                                    "superpathway_key.xlsx"))
 
-# 3) SOLAR: Load HILIC Mummichog data ------------------------------------------------
-SOLAR_hilic_set <- read_rds(here::here("Temporary results", 
-                                       exposure_type,
-                                       folders[i], 
-                                       "SOLAR",
-                                       "hilic", 
-                                       paste0(folders[i], "_hilic_mumichog_results.rds")))
-# Get MZ and retention time key
-mzkey_hilic <- SOLAR_hilic_set$mz2cpd_dict
+# Get list of all results folders ------------------------
+dir_temp_exposures <- fs::path(dir_temp, exposure_type, exposures) 
 
-# Mutate from list to DF
-mzkey_hilic <- map2_dfr(mzkey_hilic, 
-                        names(mzkey_hilic),
-                        ~tibble(mz = .y, 
-                                cpd = .x))
+dir_temp_exposures_chrt_mode <- map(dir_temp_exposures,
+                                    ~fs::path(.x, cohort)) %>% 
+  unlist() %>% 
+  map(., ~fs::path(.x, modes)) %>% 
+  unlist()
+
+# Remove folder locations where mum. was not run.
+dir_temp_exposures_chrt_mode <- dir_temp_exposures_chrt_mode[
+  file_exists(fs::path(dir_temp_exposures_chrt_mode, 
+                       "mummichog_pathway_enrichment.csv"))]
+
+# 1) Load Mummichog pathway results ------------------------------------------------
+mum_pathway_results <- read_csv(fs::path(dir_temp_exposures_chrt_mode, 
+                                         "mummichog_pathway_enrichment.csv"), 
+                                id = "file_name") %>% 
+  janitor::clean_names() %>% 
+  rename(path = x1) %>% 
+  mutate(file_name = str_replace_all(file_name, "/", "_") %>% 
+           str_remove("_mummichog_pathway_enrichment.csv"))
+
+
+# Get columns for PFAS, cohort, and mode
+mum_pathway_results1 <- mum_pathway_results %>% 
+  mutate(temp = str_split(file_name,  '_PFAS_') %>% 
+           map_chr(2), 
+         pfas = str_split(temp,  '_') %>% 
+           map_chr(1),
+         cohort = str_split(temp,  '_') %>% 
+           map_chr(2), 
+         mode = str_split(temp,  '_') %>% 
+           map_chr(3), 
+         enrichment = hits_sig/hits_total, 
+         neg_logp = -log(fet),
+         pfas = rename_pfas(pfas,include_asterisk = TRUE), 
+         path_2  = str_replace(path, "metabolism", "met.") %>% 
+           str_replace("Metabolism", "met.") %>% 
+           str_replace(., " pathway", "")) %>% 
+  select(pfas, cohort, mode, everything(), -temp, -file_name, -pathway_number)
+
+
+# Filter based on p values and pathway size
+mum_pathway_results2 <- mum_pathway_results1 %>% 
+  filter(pathway_total > 3, 
+         # fet < 0.05,
+         # ease < 0.05,
+         # gamma < 0.05
+         )
+
+
+# Collapse across mode
+mum_pathway_results3 <- mum_pathway_results2 %>% 
+  group_by(pfas, path, cohort) %>% 
+  filter(fet == min(fet)) %>% 
+  ungroup()
+
+
+# Pivot wider
+mum_pathway_w1 <- pivot_wider(mum_pathway_results3, 
+                                    id_cols = c(pfas,  path, path_2), 
+                                    names_from = cohort, 
+                                    values_from = c(mode, pathway_total:neg_logp))
+
+
+
+# select only pathways significant in both cohorts
+mum_pathway_w2 <- mum_pathway_w1 %>% 
+  filter(!is.na(fet_solar), !is.na(fet_chs))%>% 
+  mutate(sig = case_when(fet_solar<0.05 & fet_chs < 0.05 ~ "Sig. Both Cohorts", 
+                         fet_solar<0.05 ~ "Sig. SOLAR Only", 
+                         fet_chs  <0.05 ~ "Sig. CHS Only", 
+                         TRUE ~ "Not Significant"))
+
+mum_pathway_w_onlysig <- mum_pathway_w2 %>% 
+  filter(sig == "Sig. Both Cohorts")
+
+# 2) Plot Mummichog Pathway Results -----------------------------------------
+# Figure without Pathways Labeled
+pfas_mum_pathwayfig_nolabel <- ggplot(mum_pathway_w2, 
+                              aes(x = neg_logp_solar, 
+                                  y = neg_logp_chs, 
+                                  color = sig,
+                                  shape = sig,
+                                  group = path)) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey20") +
+  geom_point() +
+  facet_wrap(~pfas, scales = "free") +
+  scale_shape_manual(values = c(16, 17, 18, 19))+ 
+  theme(legend.title = element_blank()) +
+  xlab("-log P (SOLAR)") + 
+  ylab("-log P (CHS)")
+
+# Save Fig
+ggsave(pfas_mum_pathwayfig_nolabel, 
+       filename = fs::path(dir_reports, 
+                           "Mummichog Pathways All PFAS SOL CHS no label.jpeg"), 
+       width = 14, height = 10)
+
+
+# Figure with Pathways Labeled
+pfas_mum_pathwayfig <- ggplot(mum_pathway_w2, 
+       aes(x = neg_logp_solar, 
+           y = neg_logp_chs, 
+           color = sig,
+           shape = sig,
+           group = path)) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "grey20") +
+  geom_point() +
+  geom_label_repel(data = mum_pathway_w_onlysig,
+                   aes(label = path_2), 
+                  color = "black",
+                   size = 3, 
+                  force = 2,
+                  min.segment.length = 0,
+                  max.overlaps = Inf) +
+  facet_wrap(~pfas, scales = "free") +
+  scale_shape_manual(values = c(16, 17, 18, 19))+ 
+  theme(legend.title = element_blank()) +
+  xlab("-log P (SOLAR)") + 
+  ylab("-log P (CHS)")
+
+# Save Fig
+ggsave(pfas_mum_pathwayfig, 
+       filename = fs::path(dir_reports, 
+                           "Mummichog Pathways All PFAS SOL CHS.jpeg"), 
+       width = 14, height = 10)
+
+
+# 3) Read in mz/rt data  ----------------------------
+mz_rt_key_files <- fs::path(dir_temp, exposure_type, exposures[1], cohort[1], modes, 
+                            "mummichog_matched_compound_all.csv")
+
+
+# Get MZ and retention time key
+mz_rt_key = lapply(mz_rt_key_files, read_csv) 
+names(mz_rt_key) <- modes
+
+
 
 # 4) SOLAR: Map HILIC compounds to pathways -----------------------------------------------
 # # get table of pathway p values
-output <- as.data.frame(SOLAR_hilic_set$mummi.resmat) %>%
+output <- as.data.frame(SOLAR_hilic$mummi.resmat) %>%
   rownames_to_column(., var = "name") %>%
   janitor::clean_names()
 
 # Get name of paths
-paths <- tibble(name = SOLAR_hilic_set$path.nms,
-                path.hits = SOLAR_hilic_set$path.hits)
+paths <- tibble(name = SOLAR_hilicpos_set$path.nms,
+                path.hits = SOLAR_hilicpos_set$path.hits)
 
 # Merge name of pathways and p values from output
 output1 <- inner_join(paths, output) %>%  

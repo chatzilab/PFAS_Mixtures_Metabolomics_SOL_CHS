@@ -56,7 +56,7 @@ solar_exposure_outcome <- solar_exposure_outcome  %>%
                 ~if_else(str_detect(.,"non"), 0, 1)), 
          across(all_of(exposures_continuous), 
                 ~log2(.),
-                  .names = "lg2_{col}")) %>% 
+                .names = "lg2_{col}")) %>% 
   mutate(pcb_num_detect = pcb_180_ngml_detect+pcb_153_ngml_detect+
            pcb_138_ngml_detect+pcb_118_ngml_detect, 
          pbde_num_detect = pbde_154_ngml_detect + 
@@ -87,3 +87,12 @@ exposure_outcome = list(solar = solar_exposure_outcome,
 
 # Clean Environment
 rm(chs_exposure_outcome, solar_exposure_outcome, ftdata, fts_chs, fts_sol)
+
+
+
+
+# Annotations 
+common_metabolite_annotation <- read_rds(fs::path(
+  dir_data, 
+  "4_Common_Metabolites_Annotation", 
+  "Common_Metabolites_SOLAR_CHS_V1.RDS"))

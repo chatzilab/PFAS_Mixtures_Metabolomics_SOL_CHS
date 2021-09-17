@@ -103,7 +103,7 @@ for(exposure_name in exposures){
         
         # Write pathway results 
         write_csv(pathways, 
-                  here::here("Temporary results", 
+                  fs::path(dir_temp, 
                              exposure_type,
                              "mum_pathway_results",
                              chrt,

@@ -2,7 +2,7 @@
 
 # SOLAR
 solar_mwas_results <- read_rds(
-  file = here::here('Temporary results',
+  file = fs::path(dir_temp,
                     exposure_type,
                     '1_1_SOLAR_mwas_results_two_hour_met.rds')) %>% 
   modify(~mutate(., 
@@ -17,7 +17,7 @@ solar_mwas_results_df <- solar_mwas_results %>%
 
 # CHS
 chs_mwas_results <- read_rds(
-  file = here::here('Temporary results',
+  file = fs::path(dir_temp,
                     exposure_type,
                     '1_1_CHS_mwas_results_two_hour_met.rds')) %>% 
   modify(~mutate(., 
@@ -92,7 +92,7 @@ mwas_results_long <- list(solar = solar_mwas_results %>%
 
 # 
 write_rds(mwas_results_long, 
-          here::here("Temporary results", 
+          fs::path(dir_temp, 
                      "PFAS", 
                      "SOL CHS all MWAS results long.rds"))
 
@@ -112,6 +112,6 @@ mwas_beta_coefs <- list(solar = sol_mwas_betas,
                         chs   = chs_mwas_betas)
 
 write_rds(mwas_beta_coefs, 
-          here::here("Temporary results", 
+          fs::path(dir_temp, 
                      "PFAS", 
                      "SOL CHS all MWAS beta coef.rds"))

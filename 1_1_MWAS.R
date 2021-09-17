@@ -35,9 +35,9 @@ for(l in modes){
 
 # Save results
 saveRDS(solar_mwas_results,
-        file = here::here('Temporary results',
-                          exposure_type,
-                          '1_1_SOLAR_mwas_results_two_hour_met.rds'))
+        file = fs::path(dir_temp,
+                        exposure_type,
+                        '1_1_SOLAR_mwas_results_two_hour_met.rds'))
 
 
 # CHS MWAS -------------------------------
@@ -66,7 +66,7 @@ for(l in modes){
 
 #version 1: new LC-MS Data
 saveRDS(chs_mwas_results,
-        file = here::here('Temporary results',
-                          exposure_type,
-                          '1_1_CHS_mwas_results_two_hour_met.rds'))
+        file = fs::path(dir_temp,
+                        exposure_type,
+                        '1_1_CHS_mwas_results_two_hour_met.rds'))
 

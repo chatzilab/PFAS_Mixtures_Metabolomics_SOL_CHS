@@ -148,14 +148,14 @@ mum_pw_final <- tidylog::left_join(mum_pw2,
 
 # Save Data 
 write_rds(mum_pw_final_w, 
-          here::here("Temporary results", 
+          fs::path(dir_temp, 
                      exposure_type, 
                      "mum_pathway_results", 
                      "SOL CHS PFAS Mummichog wide sig PW.RDS"))
 
 
 write_rds(mum_pw_final, 
-          here::here("Temporary results", 
+          fs::path(dir_temp, 
                      exposure_type, 
                      "mum_pathway_results", 
                      "SOL CHS PFAS Mummichog long sig PW.RDS"))
@@ -229,7 +229,7 @@ mzrtkey_lst <- split(mzrtkey2, f = mzrtkey2$mode)
 
 # Read in MWAS Beta Coefficients --------------------
 mwas_beta_coefs <- read_rds(
-  here::here("Temporary results", 
+  fs::path(dir_temp, 
              "PFAS", 
              "SOL CHS all MWAS beta coef.rds"))
 
@@ -366,7 +366,7 @@ mwas_beta_coefs <- read_rds(
 # 
 # 
 # # 7) CHS: Load HILIC Mummichog data ------------------------------------------------
-# CHS_hilic_set <- read_rds(here::here("Temporary results", exposure_type,
+# CHS_hilic_set <- read_rds(fs::path(dir_temp, exposure_type,
 #                                      folders[2], 
 #                                      "CHS",
 #                                      "hilic", 
@@ -471,7 +471,7 @@ mwas_beta_coefs <- read_rds(
 # solar_mult_mz_mult_cpd <- mz_cpd_df2 %>% 
 #   select(cpd, mode, aa_cho_lipid, contains("solar")) %>% 
 #   rename_all(~str_remove(.x, "_solar")) %>% 
-#   write_rds(here::here("Temporary results", exposure_type,
+#   write_rds(fs::path(dir_temp, exposure_type,
 #                        "cpd_mz_matching", 
 #                        "solar_mult_mz_mult_cpd.RDS"))
 # 
@@ -479,7 +479,7 @@ mwas_beta_coefs <- read_rds(
 # chs_mult_mz_mult_cpd <- mz_cpd_df2 %>% 
 #   select(cpd, mode,aa_cho_lipid, contains("chs")) %>% 
 #   rename_all(~str_remove(.x, "_chs")) %>% 
-#   write_rds(here::here("Temporary results", exposure_type,
+#   write_rds(fs::path(dir_temp, exposure_type,
 #                        "cpd_mz_matching", 
 #                        "chs_mult_mz_mult_cpd.RDS"))
 # 

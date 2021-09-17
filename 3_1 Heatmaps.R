@@ -6,7 +6,7 @@ library(gplots)
 
 # Read in MWAS Beta Coefficients --------------------
 mwas_results_long <- read_rds(
-  here::here("Temporary results", 
+  fs::path(dir_temp, 
              "PFAS", 
              "SOL CHS all MWAS results long.rds")) 
 
@@ -47,7 +47,7 @@ temp <- annotations$refmet_name %>%
   unique()
 
 write_csv(data.frame(met = temp), 
-          here::here("Temporary Results", "All Annotated Metabolites.csv"))
+          fs::path(dir_temp, "All Annotated Metabolites.csv"))
 
 
 
@@ -82,7 +82,7 @@ top_50 <- mwas_results_annotated_wide %>%
            slice_max(order_by = max_est, n = 50))
 
 # Save results for temp analysis of metabolites 
-# write_csv(top_50$solar, here::here("Temporary Results", "top 50.csv"))
+# write_csv(top_50$solar, fs::path(dir_temp, "top 50.csv"))
 
 # reorder super class results
 top_50 <- top_50 %>% 

@@ -34,13 +34,9 @@ met <- list(solar = fts_sol,
 # Load Sample Metadata
 samp_metadata <- read_rds(fs::path(dir_metabolomics, "sample_metadata_with_summaries.rds"))
 
-# Load Exposure Outcome Data from Server  ------------------------
-load(file = fs::path(dir_solar_data_secure, 
-                     "11.Jesse EDCs T2D 2021",
-                     "Datasets",
-                     "Final data",
-                     "All Final Datasets with HRE PFAS.Rdata", 
-                     sep = ""))
+# Load Exposure Outcome Data from drive  ------------------------
+load(fs::path(dir_solar_data_secure, 
+              "All Final Datasets with HRE PFAS.Rdata"))
 
 # Remove unnecessary datasets
 rm(sol_longitudinal, sol_ogtt, chs_ogtt)

@@ -1,10 +1,10 @@
 # 3_1_SOLAR Circos globe plot
 
 # Read in SOLAR and CHS mz/cpd key and mwas results
-chs_single_matches_w_mwas <- readRDS(here::here("Temporary results", 
+chs_single_matches_w_mwas <- readRDS(fs::path(dir_temp, 
                                                 "chs_mz_cpd_pathway_key_w_mwas.rds"))
 
-solar_single_matches_w_mwas <- readRDS(here::here("Temporary results", 
+solar_single_matches_w_mwas <- readRDS(fs::path(dir_temp, 
                                                   "solar_mz_cpd_pathway_key_w_mwas.rds"))
 
 single_matches_w_mwas_final <- inner_join(solar_single_matches_w_mwas, 

@@ -1,6 +1,7 @@
 # directory fs::paths for file architecture
 # ignore file on github
 library(fs)
+
 # home directory for project
 dir_home <- dirname(here::here())
 
@@ -17,13 +18,15 @@ dir_metabolomics <- fs::path(
 dir_data <- fs::path(dir_home, "0_Data")
 
 # Temp results folder
-dir_temp <- here::here("Temporary results")
+dir_temp <- fs::path(dir_home, "1_Code", "Temporary results")
 
 # reports folder
 dir_reports <- fs::path(dir_home, "2_Reports")
 
 # SOLAR data folder on secure server 
-dir_solar_data_secure <- fs::path("R:/SOLAR EDCs")
+dir_solar_data_secure <- fs::path("G:", 
+                                  "My Drive", 
+                                  "SOLAR CHS PFAS Metabolomics Data")
 
 # CHS data folder on secure server
 dir_chs_data_secure <- fs::path("R:/MetaChem")

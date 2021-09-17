@@ -37,7 +37,7 @@ samp_metadata <- read_rds(fs::path(dir_data,
                                    "sample_metadata_with_summaries.rds"))
 
 # Load Exposure Outcome Data from drive  ------------------------
-load(fs::path(dir_metabolomics, 
+load(fs::path(dir_data, 
               "All Final Datasets with HRE PFAS.Rdata"))
 
 # Remove unnecessary datasets
@@ -90,7 +90,7 @@ rm(chs_exposure_outcome, solar_exposure_outcome, ftdata, fts_chs, fts_sol)
 
 
 # Annotations 
-common_metabolite_annotation <- read_rds(fs::path(
-  dir_data, 
-  "4_Common_Metabolites_Annotation", 
-  "Common_Metabolites_SOLAR_CHS_V1.RDS"))
+# common_metabolite_annotation <- read_rds(fs::path(
+#   dir_data, 
+#   "4_Common_Metabolites_Annotation", 
+#   "Common_Metabolites_SOLAR_CHS_V1.RDS"))

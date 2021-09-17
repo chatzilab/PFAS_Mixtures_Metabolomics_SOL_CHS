@@ -7,7 +7,7 @@ source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!directories.R"))
 
 # Load Metabolomics Feature Tables --------------------------------------
-ftdata <- read_rds(fs::path(dir_metabolomics, 
+ftdata <- read_rds(fs::path(dir_data, 
                             "feature_tables_batch_corrected.rds"))
 
 ## Remove qc samples and get list of ids 
@@ -21,6 +21,7 @@ fts_sol <-ftdata$feature_tables %>%
   modify(~filter(., id %in% metab_ids, 
                  str_detect(id, "sol")) %>% 
            select(-class))
+
 # Get Feature Tables by cohort: CHS
 fts_chs <-ftdata$feature_tables %>% 
   modify(~filter(., id %in% metab_ids, 
@@ -32,10 +33,11 @@ met <- list(solar = fts_sol,
             chs = fts_chs)
 
 # Load Sample Metadata
-samp_metadata <- read_rds(fs::path(dir_metabolomics, "sample_metadata_with_summaries.rds"))
+samp_metadata <- read_rds(fs::path(dir_data,
+                                   "sample_metadata_with_summaries.rds"))
 
 # Load Exposure Outcome Data from drive  ------------------------
-load(fs::path(dir_solar_data_secure, 
+load(fs::path(dir_metabolomics, 
               "All Final Datasets with HRE PFAS.Rdata"))
 
 # Remove unnecessary datasets

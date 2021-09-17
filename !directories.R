@@ -8,14 +8,11 @@ dir_home <- dirname(here::here())
 # Project Directory
 dir_projects <- dirname(dir_home)
 
-# Metabolomics Data Cleaning Data Directory
-dir_metabolomics <- fs::path(
-  "C:/Users/jagoodri/Dropbox (USC Lab)/Project Directories", 
-  "HRE Metabolomics Data Cleaning SOL CHS", 
-  "3_clean_data")
-
 # data folder
-dir_data <- fs::path(dir_home, "0_Data")
+dir_data <- fs::path("G:", 
+                             "My Drive", 
+                             "SOL CHS PFAS Metabolomics", 
+                             "0_Data_mirror_do_not_edit")
 
 # Temp results folder
 dir_temp <- fs::path(dir_home, "1_Code", "Temporary results")
@@ -26,7 +23,8 @@ dir_reports <- fs::path(dir_home, "2_Reports")
 # SOLAR data folder on secure server 
 dir_solar_data_secure <- fs::path("G:", 
                                   "My Drive", 
-                                  "SOLAR CHS PFAS Metabolomics Data")
+                                  "SOLAR CHS PFAS Metabolomics Data", 
+                                  "0_Data_mirror_do_not_edit")
 
 # CHS data folder on secure server
 dir_chs_data_secure <- fs::path("R:/MetaChem")

@@ -15,7 +15,7 @@ dir_data <- fs::path("G:",
                      "0_Data_mirror_do_not_edit")
 
 # Temp results folder
-dir_temp <- fs::path(dir_home, "1_Code", "Temporary results")
+dir_temp <- fs::path(dir_home, "1_Code", "Temp results")
 
 # reports folder
 dir_reports <- fs::path(dir_home, "2_Reports")

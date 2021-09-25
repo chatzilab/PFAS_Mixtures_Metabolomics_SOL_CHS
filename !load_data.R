@@ -4,33 +4,11 @@ library(jag2)
 
 # load formats for variables
 source(here::here("0_0_1_format_vars_funs.R"))
-source(here::here("!directories.R"))
+
 
 # Load Metabolomics Feature Tables --------------------------------------
 ftdata <- read_rds(fs::path(dir_data, 
-                            "feature_tables_batch_corrected.rds"))
-
-## Remove qc samples and get list of ids 
-metab_samples <- ftdata$feature_tables$c18neg$id
-# IDs length 5 are CHS IDs, length 13 are SOLAR ids
-metab_ids <- metab_samples[nchar(metab_samples) == 5 | 
-                             nchar(metab_samples) == 13]
-
-# Get Feature Tables by cohort: SOLAR
-fts_sol <-ftdata$feature_tables %>% 
-  modify(~filter(., id %in% metab_ids, 
-                 str_detect(id, "sol")) %>% 
-           select(-class))
-
-# Get Feature Tables by cohort: CHS
-fts_chs <-ftdata$feature_tables %>% 
-  modify(~filter(., id %in% metab_ids, 
-                 str_detect(id, "sol", negate = TRUE)) %>% 
-           select(-class))
-
-
-met <- list(solar = fts_sol, 
-            chs = fts_chs)
+                            "sol_chs_batch_cor_scaled_untargeted_fts.rds"))
 
 # Load Sample Metadata
 samp_metadata <- read_rds(fs::path(dir_data,
@@ -63,7 +41,7 @@ solar_exposure_outcome <- solar_exposure_outcome  %>%
            pbde_153_ngml_detect+
            pbde_85_ngml_detect, 
          ocs = dde_impute + hexachlorobenzene_impute) %>% 
-  filter(id %in% metab_ids) 
+  filter(id %in% ftdata$solar$c18neg$id) 
 
 
 #CHS 
@@ -84,13 +62,11 @@ exposure_outcome = list(solar = solar_exposure_outcome,
                         chs = chs_exposure_outcome)
 
 # Clean Environment
-rm(chs_exposure_outcome, solar_exposure_outcome, ftdata, fts_chs, fts_sol)
+rm(chs_exposure_outcome, solar_exposure_outcome, ftdata)
 
 
-
-
-# Annotations 
-# common_metabolite_annotation <- read_rds(fs::path(
-#   dir_data, 
-#   "4_Common_Metabolites_Annotation", 
-#   "Common_Metabolites_SOLAR_CHS_V1.RDS"))
+  
+# Load annotated data ----------------------------------------------
+annotated_fts <- read_rds(
+  fs::path(dir_data, 
+           "sol_chs_batch_cor_scaled_annotated_fts.rds"))

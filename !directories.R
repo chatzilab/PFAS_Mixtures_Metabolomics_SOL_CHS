@@ -19,3 +19,6 @@ dir_temp <- fs::path(dir_home, "1_Code", "Temp results")
 
 # reports folder
 dir_reports <- fs::path(dir_home, "2_Reports")
+
+
+dir_data_local <- fs::path(dir_home, "0_Data")

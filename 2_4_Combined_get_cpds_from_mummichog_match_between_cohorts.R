@@ -98,8 +98,6 @@ ecd_pw_key <- map2(mum_pw_ecs, mum_pw_names,
         rename(empcpd_num = name)) %>% 
   bind_rows(.id = "chrt_pfas_mode")
 
-
-
 # get cohort, pfas, and mode
 ecd_pw_key_2 <- ecd_pw_key %>% 
   mutate(cohort = str_split_fixed(chrt_pfas_mode,"_", n = 3)[,1], 
@@ -117,7 +115,6 @@ ecd_pw_key_final <- ecd_pw_key_2 %>%
 
 
 # Combine mzrt key and ecd_pw_key -----------------------------------------
-
 final_key <- tidylog::full_join(ecd_pw_key_final, 
                                 mzrtkey_primary_ions, 
                                 by = c("ec_mode", "mode", "empirical_compound")) %>% 
@@ -125,6 +122,22 @@ final_key <- tidylog::full_join(ecd_pw_key_final,
   rename(name = feature) %>% 
   distinct()
 
-write_rds(final_key, fs::path(dir_temp, exposure_type,  "mummichog_pw_ec_feature_key.rds"))
+# Get Compound Names ----------------------------------------------------------
+# This data has 1,212 unique matched compounds:
+length(unique(final_key$matched_compound))
+
+# Save data to CSV to create key linking compound ids to compound names
+write_csv(data.frame(compound_id = unique(final_key$matched_compound)), 
+          fs::path(dir_data_local,
+                   "Supporting Files", 
+                   "Cpd id to name keys",
+                   "Mummichog cpd id to cpd name key raw.csv"))
+
+
+
+
+write_rds(final_key, fs::path(dir_data_local,
+                              "Supporting Files", 
+                              "mummichog_pw_ec_feature_key_cpd_id_only.rds"))
 
 

@@ -1,5 +1,5 @@
 # Identify main pathways of interest: Tyrosine and PFHxS
-library(MetaboAnalystR)
+# library(MetaboAnalystR)
 library(tidylog)
 library(RColorBrewer)
 library(dendextend)
@@ -179,9 +179,6 @@ library(gplots)
 
 # New, 9/25 ---------------------------------------------------------------
 
-
-
-
 # Read in MWAS Beta Coefficients --------------------
 mwas_beta_coefs <- read_rds(
   fs::path(dir_temp, 
@@ -195,26 +192,53 @@ mzrt_key <- read_rds(fs::path(dir_temp, exposure_type,  "mummichog_pw_ec_feature
 
 
 
+
+
 # Select most impacted pathwaysnv_snapshot_fixup_renv(records)
-key_pathway_met <- mzrt_key %>% filter(str_detect(pathway, "Arginine"))
 
 
-# Get MWAS Results
-pathway_mwas_results <- mwas_beta_coefs %>%
-  modify(~.x %>% 
-           filter(name %in% unique(key_pathway_met$name)) )%>% 
-  bind_rows(.id = "cohort") 
-
-
-pathway_mwas_results %>% 
-  filter(exposure == "lg2_pfda", cohort == "chs") %>% 
-  arrange(estimate) %>%
-  mutate(name = fct_reorder(name,estimate)) %>% 
+plot_pathway <- function(data,pfas_name, cohort_name, pathway_name){ 
+  
+  key_pathway_met <- data %>% filter(str_detect(pathway, pathway_name))
+  
+  # Get MWAS Results
+  pathway_mwas_results <- mwas_beta_coefs %>%
+    modify(~.x %>% 
+             filter(name %in% unique(key_pathway_met$name)) )%>% 
+    bind_rows(.id = "cohort") 
+  
+  
+  pathway_mwas_pfas_cohort <- pathway_mwas_results %>% 
+    filter(str_detect(exposure, pfas_name), 
+           cohort == cohort_name) %>% 
+    arrange(estimate) %>%
+    mutate(name = fct_reorder(name,estimate)) 
   #plot
-ggplot(aes(x = name, y = estimate, color = significancefdr)) +
-  geom_point(alpha = .7, size = .9) +
-  geom_hline(yintercept = 0, linetype = 2) +
-  theme(axis.text.x = element_blank()) +
-  geom_errorbar(aes(ymin = conf_low, 
-                    ymax = conf_high), width = 0)
+  
+  
+  plotout <- ggplot(pathway_mwas_pfas_cohort, 
+                      aes(x = name, y = estimate, color = significancefdr)) +
+    geom_point(alpha = .7, size = .9) +
+    geom_hline(yintercept = 0, linetype = 2) +
+    theme(axis.text.x = element_blank()) +
+    geom_errorbar(aes(ymin = conf_low, 
+                      ymax = conf_high), width = 0) + 
+    ggtitle(str_c(cohort_name, ", ", pfas_name, ", ", key_pathway_met$pathway[1]))
+  
+  return(plotout)
+  
+}
 
+
+
+## PFDA, SOLAR, Aspartate Metabolites
+plot_pathway(mzrt_key,"pfda", "solar", "Aspartate")
+
+
+# Tyrosine metabolism
+plot_pathway(mzrt_key,"pfos", "solar", "Tyrosine")
+
+
+# Arginine 
+
+plot_pathway(mzrt_key,"pfhxs", "solar", "Arginine")

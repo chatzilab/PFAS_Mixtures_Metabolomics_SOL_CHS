@@ -13,7 +13,8 @@ transpose_ft <- function(ft) {
 }
 
 # # Rename Compounds -----------------------
-rename_pfas <- function(pfas_names, include_asterisk = FALSE, arrange_by_class = FALSE){
+rename_pfas <- function(pfas_names, include_asterisk = FALSE, 
+                        arrange_by_class = FALSE){
   x <- tibble(pfas = pfas_names)
   pfas2 <-  x %>%
     mutate(pfas2 = case_when(

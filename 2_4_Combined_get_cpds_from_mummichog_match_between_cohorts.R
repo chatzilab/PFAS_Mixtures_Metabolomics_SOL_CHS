@@ -58,7 +58,7 @@ mzrtkey_primary_ions <- mzrtkey1 %>%
   mutate(mode = as.factor(mode), 
          feature = str_c(query_mass, retention_time, sep = "_"))
 
-
+length(unique(mzrtkey_primary_ions$matched_compound))
 # mzrt key list from mummichog
 # mzrtkey_lst <- split(mzrtkey2, f = mzrtkey2$mode)
 

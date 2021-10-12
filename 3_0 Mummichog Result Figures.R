@@ -5,18 +5,20 @@ exposure_type = "PFAS"
 
 mum_pw_wide <- read_rds(
   fs::path(dir_temp, 
-             exposure_type, 
-             "mum_pathway_results", 
-             "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
+           exposure_type, 
+           "mum_pathway_results", 
+           "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
   mutate(q_meta = p.adjust(fet_meta), 
-         sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"))
+         sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
+         hits_sig_meta = (hits_sig_solar + hits_sig_chs)/2) 
 
 # #Pivot longer on all values
 longer_df1 <- mum_pw_wide %>% 
   select(pfas, path, path_2, super_pathway, 
          functional_groupings, sig,sig_fdr,q_meta,
          fet_solar, fet_chs, fet_meta,
+         hits_sig_solar, hits_sig_chs,hits_sig_meta,
          enrichment_solar, enrichment_chs, enrichment_meta,
          neg_logp_solar,neg_logp_chs, neg_logp_meta) %>% 
   pivot_longer(names_to = "name", values_to = "value", 
@@ -35,9 +37,6 @@ mum_pw_long <- longer_df1 %>%
   pivot_wider(names_from = name, values_from = value) 
 
 
-
-
-
 # Create dataset for first two figs ---------------------------------------
 
 
@@ -52,9 +51,11 @@ mum_pw_w_onlysig <- mum_pw_wide %>%
   mutate(label = path_2) %>% 
   ungroup()
 
+
 # Final Dataset for Plots
 mum_pw_wide2 <- left_join(mum_pw_wide, mum_pw_w_onlysig) %>% 
   mutate(label = if_else(is.na(label), "", label))
+
 
 ## Figure without Pathways Labeled ---------------------
 # (pfas_mum_pathwayfig_nolabel <- ggplot(mum_pw_wide2,
@@ -128,13 +129,10 @@ mum_pw_long2 <- mum_pw_long %>%
                               aes(x = neg_logp,
                                   y = fct_rev(path_2),
                                   color = super_pathway,
-                                  size = enrichment)) +
+                                  size = hits_sig)) +
     geom_point(alpha = .75) +
     facet_grid(pfas~cohort, scales = "free_y", space = "free") + 
-    scale_size(name = "Enrichment") +
-    
-    # geom_vline(xintercept = -log(2.109881e-04), linetype = 2) +
-    geom_vline(xintercept = 8.5) +
+    scale_size(name = "Sig. Hits") +
     theme(panel.background = element_rect(fill="grey95"), 
           strip.background = element_rect(fill = "white"), 
           strip.text.y = element_text(angle = 0, hjust = 0)) +
@@ -149,4 +147,22 @@ ggsave(pfas_pw_bubbleplot,
        filename = fs::path(dir_reports,
                            "Mummichog buubble plot.jpeg"),
        width = 14, height = 11)
+
+
+
+
+# Save dataframe of results 
+temp_df <- mum_pw_long2 %>%
+  filter(cohort == "Combined") %>%
+  dplyr::select(pfas, 
+                path, 
+                super_pathway, 
+                functional_groupings, 
+                neg_logp) %>% 
+  arrange(path) %>% 
+  mutate(neg_logp = neg_logp[,1])
+
+length(unique(temp_df$path))
+write_csv(temp_df, 
+          file = fs::path(dir_temp, "Mummichog pathway results.csv"))
 

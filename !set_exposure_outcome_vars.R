@@ -28,7 +28,8 @@ modes = c("c18pos","c18neg", "hilicpos", "hilicneg")
 
 cohort = c("solar", "chs")
 
- 
+exp_cont_below_lod_na_not_trns <- str_c(exposures_continuous, "_w_na")
+
 # exposures_oc <- c("hexachlorobenzene_impute", "dde_impute", "ocs",
 #                   "pbde_154_impute", "pbde_47_impute",
 #                   "pbde_100_ngml_detect", "pbde_153_ngml_detect", 

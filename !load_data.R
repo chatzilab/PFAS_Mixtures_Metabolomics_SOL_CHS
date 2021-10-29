@@ -2,10 +2,6 @@ library(janitor)
 library(jag2)
 # library(tidylog)
 
-# load formats for variables
-source(here::here("0_0_1_format_vars_funs.R"))
-
-
 # Load Metabolomics Feature Tables --------------------------------------
 ftdata <- read_rds(fs::path(dir_data, 
                             "sol_chs_batch_cor_scaled_untargeted_fts.rds"))
@@ -15,15 +11,19 @@ samp_metadata <- read_rds(fs::path(dir_data,
                                    "sample_metadata_with_summaries.rds"))
 
 # Load Exposure Outcome Data from drive  ------------------------
-load(fs::path(dir_data, 
-              "All Final Datasets with HRE PFAS.Rdata"))
+sol <- read_rds(fs::path(dir_data,
+                         "SOLAR exposure outcome data HRE PFAS.rds"))
 
-# Remove unnecessary datasets
-rm(sol_longitudinal, sol_ogtt, chs_ogtt)
+chs <- read_rds(fs::path(dir_data,
+                         "CHS MetaAir exposure outcome data HRE PFAS.rds"))
 
-# Rename Datasets 
-solar_exposure_outcome <- sol_baseline; rm(sol_baseline)
-chs_exposure_outcome <- chs; rm(chs)
+
+# Rename Datasets and remove emory pfas
+solar_exposure_outcome <- sol$baseline %>% 
+  select(-contains("emory")); rm(sol)
+
+chs_exposure_outcome <- chs$baseline %>% 
+  select(-contains("emory")); rm(chs)
 
 
 # Calculate additional exposure variables: OC Chemichals --------------------------
@@ -57,16 +57,31 @@ chs_exposure_outcome <- chs_exposure_outcome %>%
          ocs = dde_impute + hexachlorobenzene_impute) 
 
 
+
+
 #bind to list
 exposure_outcome = list(solar = solar_exposure_outcome,
                         chs = chs_exposure_outcome)
 
+
+# Modify exposure outcome: change naming of vars with below lod as NA
+exposure_outcome <- exposure_outcome %>% 
+  modify(~rename_with(.,
+                      .cols = contains("conc_below_lod_na_"), 
+                      ~str_c(., "_w_na") %>% 
+                        str_remove_all("conc_below_lod_na_")))
+
 # Clean Environment
-rm(chs_exposure_outcome, solar_exposure_outcome, ftdata)
+rm(chs_exposure_outcome, solar_exposure_outcome)
 
 
-  
 # Load annotated data ----------------------------------------------
 annotated_fts <- read_rds(
   fs::path(dir_data, 
            "sol_chs_batch_cor_scaled_annotated_fts.rds"))
+
+
+# Load PFAS LOD Data 
+lod <- read_csv(
+  fs::path(dir_data, 
+           "hre_pfas_lod.csv"))

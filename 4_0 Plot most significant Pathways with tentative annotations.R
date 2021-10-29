@@ -27,6 +27,8 @@ mum_most_sig_pws <- mum_pw_wide %>%
 
 
 
+
+
 # Read in MWAS Beta Coefficients --------------------
 mwas_beta_coefs <- read_rds(
   fs::path(dir_temp, 
@@ -42,7 +44,7 @@ mzrt_key <- read_rds(fs::path(dir_data_local,
                               "Supporting Files",
                               "mummichog_pw_ec_feature_key_with_cpd_names.rds"))
 
-
+View(mzrt_key)
 # Set Pathway
 n = 26 # Tyrosine metabolism
 
@@ -54,7 +56,7 @@ pathway_name = "Tyrosine metabolism"
 
 # FUNCTION for creating figure---------------------------------
 
-make_pathway_fig <- function(pathway_name, pfas_name){
+# make_pathway_fig <- function(pathway_name, pfas_name){
   
   # Get mzrt key for specific pathway ----------------------
   key_pathway_met <- mzrt_key %>% 
@@ -77,7 +79,16 @@ make_pathway_fig <- function(pathway_name, pfas_name){
                                 " (", 
                                 length(unique(met_name)), 
                                 ")") %>% 
-                str_remove(" \\(1\\)") )
+                str_remove(" \\(1\\)") ) %>% 
+    mutate(met_name_first_only = 
+             case_when(
+               str_detect(met_name_all,  
+                          "3-methyl pyruvic acid, Acetoacetic acid") ~ "Acetoacetic acid", 
+               str_detect(met_name_all,  
+                          "Ascorbate, Glucuronolactone") ~ "Glucuronolactone", 
+               str_detect(met_name_all, 
+                          "Phosphorylcholine, Vanylglycol") ~ "Vanylglycol", 
+               TRUE ~ met_name_first_only))
   
   
   
@@ -148,7 +159,9 @@ make_pathway_fig <- function(pathway_name, pfas_name){
     ungroup() %>% 
     arrange(mean_effect) %>%
     mutate(matched_compound = fct_reorder(matched_compound,mean_effect), 
-           met_name = fct_reorder(met_name,mean_effect)) 
+           met_name = fct_reorder(met_name,mean_effect), 
+           met_name_first_only = fct_reorder(met_name_first_only,
+                                             mean_effect)) 
   
   # write_csv(data.frame(metabolite = unique(pathway_eff_est_wide$matched_compound)), 
   #           here::here("Aspartate and asparagine metabolism metabolites.csv"))
@@ -156,7 +169,7 @@ make_pathway_fig <- function(pathway_name, pfas_name){
   # Create Figures -------------------------------
   ## SOLAR ------------------
   (solar_efest_fig <- ggplot(single_pfas_effect_est,
-                             aes(x = met_name,
+                             aes(x = met_name_first_only,
                                  y = estimate_solar,
                                  color = sig_meta)) +
      geom_point(size = .9) +
@@ -175,7 +188,7 @@ make_pathway_fig <- function(pathway_name, pfas_name){
   
   ## CHS ----------------------------
   (chs_efest_fig <- ggplot(single_pfas_effect_est,
-                           aes(x = met_name,
+                           aes(x = met_name_first_only,
                                y = estimate_chs,
                                color = sig_meta)) +
      geom_point(size = .9) +
@@ -235,7 +248,7 @@ make_pathway_fig <- function(pathway_name, pfas_name){
   
   return(outfig)
   
-}
+# }
 
 outfig <- make_pathway_fig("Tyrosine metabolism", "PFHxS")
 
@@ -254,11 +267,11 @@ ggsave(outfig,
 
 
 # Function to create all plots (not complete) -------------------------------------
-# PFOS
-for(p in unique(mum_most_sig_pws$pfas)[4:11]){
-  plot_sol_chs(p)
-  
-}
-plot_sol_chs("PFDS*")
-
-
+# # PFOS
+# for(p in unique(mum_most_sig_pws$pfas)[4:11]){
+#   plot_sol_chs(p)
+#   
+# }
+# plot_sol_chs("PFDS*")
+# 
+# 

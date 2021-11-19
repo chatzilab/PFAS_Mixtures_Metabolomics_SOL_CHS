@@ -38,7 +38,6 @@ solar <- left_join(solar_eo,
 X.obs = solar[exposures_continuous] %>% 
   mutate(across(everything(), ~scale(log2(.))))
 
-
 # exclude outcome, leave only predictors:
 Y = solar %>%
   dplyr::select(colnames(sol_metab_dat)[2]:ncol(solar)) %>% 
@@ -102,7 +101,6 @@ chs <- left_join(chs_eo,
 X.obs = chs[exposures_continuous]  %>% 
   mutate(across(everything(), ~scale(log2(.))))
 
-
 Y = chs %>%
   dplyr::select(colnames(chs_metab_dat)[2]:ncol(chs)) %>% # exclude outcome, leave only predictors
   scale(center = F, scale = F) 
@@ -136,4 +134,3 @@ save.image(file = fs::path(dirname(here::here()),
                            "chs_mixtures_datasets_v3.Rdata"))
 
 rm(list = ls())
-

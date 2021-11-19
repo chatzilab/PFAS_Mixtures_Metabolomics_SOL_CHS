@@ -7,8 +7,11 @@ exposures = c("netfosaa","nmefosaab","pfbs","pfda","pfdoa","pfds","pfhpa",
               "pfhps","pfhxa","pfhxs","pfna","pfns","pfoa","pfos","pfpes",
               "pfuda", "x82fts")
 
-exposures_continuous <- c("pfda","pfhpa",
-                          "pfhps","pfhxs","pfna","pfoa","pfos","pfpes")
+# exposures_continuous_old <- c("pfda","pfhpa",
+#                           "pfhps","pfhxs","pfna","pfoa","pfos","pfpes")
+
+exposures_continuous <- c("pfda","pfhps","pfhxs","pfna","pfoa","pfos")
+
 
 exposures_for_analysis <- c("lg2_pfda",
                             "lg2_pfhpa",

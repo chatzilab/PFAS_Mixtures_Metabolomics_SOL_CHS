@@ -21,22 +21,22 @@ superpathwaykey <- readxl::read_xlsx(fs::path(dir_data,
   rename(path = pathway)
 
 # Get list of all results folders ------------------------
-dir_temp_exposures <- fs::path(dir_temp, exposure_type, exposures) 
+dir_results_exposures <- fs::path(dir_results, exposure_type, exposures) 
 
 
-dir_temp_exposures_chrt_mode <- map(dir_temp_exposures,
+dir_results_exposures_chrt_mode <- map(dir_results_exposures,
                                     ~fs::path(.x, cohort)) %>% 
   unlist() %>% 
   map(., ~fs::path(.x, modes)) %>% 
   unlist()
 
 # Remove folder locations where mum. was not run.
-dir_temp_exposures_chrt_mode <- dir_temp_exposures_chrt_mode[
-  file_exists(fs::path(dir_temp_exposures_chrt_mode, 
+dir_results_exposures_chrt_mode <- dir_results_exposures_chrt_mode[
+  file_exists(fs::path(dir_results_exposures_chrt_mode, 
                        "mummichog_pathway_enrichment.csv"))]
 
 # Get list of all mummichog files
-mum_rds_files = dir(dir_temp_exposures_chrt_mode, 
+mum_rds_files = dir(dir_results_exposures_chrt_mode, 
                     recursive=TRUE, 
                     full.names=TRUE,
                     pattern="\\.RDS$")
@@ -51,7 +51,7 @@ mum_rds_files = dir(dir_temp_exposures_chrt_mode,
 # # # Set Names
 # names(mum_results) <-  mum_rds_files_base
 # write_rds(mum_results, 
-#           fs::path(dir_temp,
+#           fs::path(dir_results,
 #                    exposure_type, 
 #                    "mum_pathway_results", 
 #                    "raw_mum_results_files.RDS"))
@@ -59,7 +59,7 @@ mum_rds_files = dir(dir_temp_exposures_chrt_mode,
 
 
 # 1) Load Mummichog pathway results --------------------------------------------
-mum_pw <- read_csv(fs::path(dir_temp_exposures_chrt_mode, 
+mum_pw <- read_csv(fs::path(dir_results_exposures_chrt_mode, 
                             "mummichog_pathway_enrichment.csv"), 
                    id = "file_name") %>% 
   janitor::clean_names() %>% 
@@ -153,14 +153,14 @@ rm(mum_pw, mum_pw1, mum_pw2, mum_pw_w1, wgt_chs, wgt_sol, mum_rds_files)
 
 # Save Data 
 write_rds(mum_pw_final_w, 
-          fs::path(dir_temp, 
+          fs::path(dir_results, 
                      exposure_type, 
                      "mum_pathway_results", 
                      "SOL CHS PFAS Mummichog wide sig PW.RDS"))
 
 
 write_rds(mum_pw_final, 
-          fs::path(dir_temp, 
+          fs::path(dir_results, 
                      exposure_type, 
                      "mum_pathway_results", 
                      "SOL CHS PFAS Mummichog long sig PW.RDS"))

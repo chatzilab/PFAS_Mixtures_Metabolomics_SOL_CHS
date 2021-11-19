@@ -10,6 +10,11 @@ ftdata <- read_rds(fs::path(dir_data,
 samp_metadata <- read_rds(fs::path(dir_data,
                                    "sample_metadata_with_summaries.rds"))
 
+# Obtain Feature metadata 
+ft_metadata <- ftdata$solar %>% 
+  modify(~data.frame(feature = colnames(.)[-1])) %>% 
+  bind_rows(.id = "mode")
+
 # Load Exposure Outcome Data from drive  ------------------------
 sol <- read_rds(fs::path(dir_data,
                          "SOLAR exposure outcome data HRE PFAS.rds"))
@@ -26,7 +31,7 @@ chs_exposure_outcome <- chs$baseline %>%
   select(-contains("emory")); rm(chs)
 
 
-# Calculate additional exposure variables: OC Chemichals --------------------------
+# Calculate additional exposure variables: OC Chemicals --------------------------
 solar_exposure_outcome <- solar_exposure_outcome  %>%
   mutate(across(contains("detect"), 
                 ~if_else(str_detect(.,"non"), 0, 1)), 
@@ -85,3 +90,4 @@ annotated_fts <- read_rds(
 lod <- read_csv(
   fs::path(dir_data, 
            "hre_pfas_lod.csv"))
+

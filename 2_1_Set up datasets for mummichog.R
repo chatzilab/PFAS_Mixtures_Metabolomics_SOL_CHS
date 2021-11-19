@@ -15,25 +15,25 @@ modes = c("c18pos","c18neg", "hilicpos", "hilicneg")
 # set up folder structure ------------------------------
 for(exposure_name in exposures){
   # Create Exposure Folder: Level 1 (Exposure)
-  dir.create(file.path(fs::path(dir_temp, exposure_type, 
+  dir.create(file.path(fs::path(dir_results, exposure_type, 
                                 exposure_name)), 
              showWarnings = TRUE)
   # Level 2 (Cohort): Create SOLAR Folder
-  dir.create(file.path(fs::path(dir_temp,exposure_type, exposure_name, 
+  dir.create(file.path(fs::path(dir_results,exposure_type, exposure_name, 
                                 "solar")), 
              showWarnings = TRUE)
   # Level 2 (Cohort): Create CHS Folder
-  dir.create(file.path(fs::path(dir_temp,exposure_type, exposure_name, 
+  dir.create(file.path(fs::path(dir_results,exposure_type, exposure_name, 
                                 "chs")), 
              showWarnings = TRUE)
   # Level 3 (Cohort): Create Modes
   for(mode in modes){
     #solar
-    dir.create(file.path(fs::path(dir_temp,exposure_type, exposure_name, 
+    dir.create(file.path(fs::path(dir_results,exposure_type, exposure_name, 
                                   "solar", mode)),
                showWarnings = TRUE)
     #chs
-    dir.create(file.path(fs::path(dir_temp,exposure_type, exposure_name, 
+    dir.create(file.path(fs::path(dir_results,exposure_type, exposure_name, 
                                   "chs", mode)),
                showWarnings = TRUE)
   }
@@ -42,10 +42,10 @@ for(exposure_name in exposures){
 
 
 # save mwas in analysis folders ------------------------------
-mwas_results_solar <- read_rds(fs::path(dir_temp, exposure_type, 
+mwas_results_solar <- read_rds(fs::path(dir_results, exposure_type, 
                                         "1_1_SOLAR_mwas_results_two_hour_met.rds"))
 
-mwas_results_chs <- read_rds(fs::path(dir_temp, exposure_type, 
+mwas_results_chs <- read_rds(fs::path(dir_results, exposure_type, 
                                       "1_1_CHS_mwas_results_two_hour_met.rds"))
 
 # Join mwas for each cohort into one list
@@ -76,7 +76,7 @@ for(exposure_name in exposures){
       # Save mwas to correct folder
       if(sum(is.na(temp_mwas2$p.value)) == 0){
         write_csv(temp_mwas2, 
-                  fs::path(dir_temp, exposure_type, exposure_name, chrt, mode,
+                  fs::path(dir_results, exposure_type, exposure_name, chrt, mode,
                            paste(chrt, 
                                  exposure_name, 
                                  mode, 

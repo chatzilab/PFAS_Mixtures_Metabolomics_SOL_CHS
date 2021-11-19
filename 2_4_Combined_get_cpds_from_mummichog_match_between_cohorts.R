@@ -21,7 +21,7 @@ source(here::here("2_3_Combine_mum_pw_between_chrts.R"))
 
 
 #2) Read in mz/rt data for all modes ------------------------------------------
-mz_rt_key_files <- fs::path(dir_temp, exposure_type, exposures[1], cohort[1], modes, 
+mz_rt_key_files <- fs::path(dir_results, exposure_type, exposures[1], cohort[1], modes, 
                             "mummichog_matched_compound_all.csv")
 
 # Get mz and retention time key
@@ -66,7 +66,7 @@ rm(mz_rt_key, mz_rt_key_files, mzrtkey1)
 
 # Create pw to ec dataset -------------------------------------
 # Read in raw mum_ results files
-raw_mum_rslts <- read_rds(fs::path(dir_temp,
+raw_mum_rslts <- read_rds(fs::path(dir_results,
                                    exposure_type, 
                                    "mum_pathway_results", 
                                    "raw_mum_results_files.RDS"))

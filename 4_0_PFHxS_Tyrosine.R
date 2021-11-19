@@ -8,7 +8,7 @@ library(gplots)
 
 # Read in MWAS Beta Coefficients --------------------
 # mwas_results_long <- read_rds(
-#   fs::path(dir_temp, exposure_type,
+#   fs::path(dir_results, exposure_type,
 #            "SOL CHS all MWAS results long.rds")) 
 # 
 # 
@@ -181,13 +181,13 @@ library(gplots)
 
 # Read in MWAS Beta Coefficients --------------------
 mwas_beta_coefs <- read_rds(
-  fs::path(dir_temp, 
+  fs::path(dir_results, 
            "PFAS", 
            "SOL CHS all MWAS results long.rds"))
 
 
 # Read in mzrt key
-mzrt_key <- read_rds(fs::path(dir_temp, exposure_type,  "mummichog_pw_ec_feature_key.rds")) 
+mzrt_key <- read_rds(fs::path(dir_results, exposure_type,  "mummichog_pw_ec_feature_key.rds")) 
 
 
 

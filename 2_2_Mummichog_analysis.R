@@ -34,7 +34,7 @@ for(exposure_name in exposures){
       print(paste("Begin",exposure_name,chrt, mode))
       t1 <- Sys.time()
       #  Set working directory for first folder
-      setwd(fs::path(dir_temp,exposure_type,exposure_name, chrt, mode))
+      setwd(fs::path(dir_results,exposure_type,exposure_name, chrt, mode))
 
       # Check to see if mwas results are in the file:
       if(file.info(paste(chrt, 
@@ -103,7 +103,7 @@ for(exposure_name in exposures){
         
         # Write pathway results 
         write_csv(pathways, 
-                  fs::path(dir_temp, 
+                  fs::path(dir_results, 
                              exposure_type,
                              "mum_pathway_results",
                              chrt,

@@ -5,20 +5,21 @@ library(fs)
 # home directory for project
 dir_home <- dirname(here::here())
 
-# Project Directory
-dir_projects <- dirname(dir_home)
-
 # data folder
 dir_data <- fs::path("G:", 
                      "My Drive", 
                      "SOL CHS PFAS Metabolomics", 
                      "0_Data_mirror_do_not_edit")
 
-# Temp results folder
-dir_temp <- fs::path(dir_home, "1_Code", "Temp results")
+# results results folder
+dir_results <- fs::path(dir_home, "2_Results")
 
 # reports folder
-dir_reports <- fs::path(dir_home, "2_Reports")
+dir_reports <- fs::path(dir_home, "3_Reports")
 
-
+# Local Data folder
 dir_data_local <- fs::path(dir_home, "0_Data")
+
+# Mixtures Data folder
+dir_data_mixtures <- fs::path(dir_data_local, "data_for_mixtures_analysis")
+

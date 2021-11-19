@@ -4,7 +4,7 @@ library(janitor)
 exposure_type = "PFAS"
 
 mum_pw_wide <- read_rds(
-  fs::path(dir_temp, 
+  fs::path(dir_results, 
            exposure_type, 
            "mum_pathway_results", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
@@ -164,5 +164,5 @@ temp_df <- mum_pw_long2 %>%
 
 length(unique(temp_df$path))
 write_csv(temp_df, 
-          file = fs::path(dir_temp, "Mummichog pathway results.csv"))
+          file = fs::path(dir_results, "Mummichog pathway results.csv"))
 

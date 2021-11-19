@@ -5,36 +5,51 @@ library(dendextend)
 library(gplots)
 
 # Read in MWAS Beta Coefficients --------------------
-mwas_results_long <- read_rds(
-  fs::path(dir_results, 
-             "PFAS", 
-             "SOL CHS all MWAS results long.rds")) 
+# read in mwas beta coefs 
+sol_mwas_results_long <- read_csv(
+  file = fs::path(dir_results, 
+                  'PFAS_Mixtures', 
+                  "sol_pfas_mixtures_results_final_v2.csv"))
 
+chs_mwas_results_long <- read_csv(
+  file = fs::path(dir_results, 
+                  'PFAS_Mixtures', 
+                  "chs_pfas_mixtures_results_final_v2.csv"))
+
+mwas_results_long <- list(solar = sol_mwas_results_long, 
+                          chs = chs_mwas_results_long)
+
+# Clean environment
+rm(sol_mwas_results_long, chs_mwas_results_long)
+
+# # select all features p < 0.05
+# p_05 <- mwas_results_long %>% 
+#   filter(p < 0.05)
+# 
+# met_any_pfas_05 <- p_05 %>% 
+#   filter(metabolite %in% p_05$metabolite)
 
 # Scale estimates 
 mwas_results_long <- mwas_results_long %>% 
   modify(~.x %>% 
            group_by(exposure) %>% 
-           mutate(estimate_scaled = scale(estimate, center = FALSE))) 
-         
-         
+           mutate(estimate_scaled = estimate)) #scale(estimate, center = FALSE)))  
+
+
 # Pivot wider, change non-sig estimates to 0
 mwas_results_wide <- mwas_results_long %>% 
-  modify(~mutate(.x, estimate_scaled = if_else(p_value < 0.05, estimate_scaled, 0)) %>%
-           # filter(str_detect(exposure, "lg2"), 
-           #        str_detect(exposure, "pfpes", negate = TRUE)) %>%
-           select(exposure, name, estimate_scaled) %>% 
-           pivot_wider(id_cols = name, 
+  modify(~mutate(.x, 
+                 estimate_scaled = if_else(p < 0.05, estimate_scaled, estimate_scaled)) %>%
+           select(exposure, feature, estimate_scaled) %>% 
+           pivot_wider(id_cols = feature, 
                        names_from = exposure, 
-                       values_from = estimate_scaled))
-
-
-
+                       values_from = estimate_scaled) %>% 
+           select(-`Mixture effect`))
 
 
 # Read in Dougs annotations ------------------------------------------------
 annotations <- read_rds(
-  fs::path(dir_data, 
+  fs::path(dir_data_local, 
            "4_Common_Metabolites_Annotation", 
            "Common_Metabolites_SOLAR_CHS_V1.RDS")) %>% 
   bind_rows(.id = "mode")
@@ -46,8 +61,8 @@ temp <- annotations$refmet_name %>%
   unlist() %>% 
   unique()
 
-write_csv(data.frame(met = temp), 
-          fs::path(dir_results, "All Annotated Metabolites.csv"))
+# write_csv(data.frame(met = temp), 
+#           fs::path(dir_results, "All Annotated Metabolites.csv"))
 
 
 
@@ -63,29 +78,32 @@ annotations2 <- annotations %>%
 
 # Join MWAS with annotations
 mwas_results_annotated_wide <- mwas_results_wide %>% 
-  modify(~inner_join(.x,annotations2, by = c("name")))
+  modify(~inner_join(.x, annotations2, by = c("feature" = "name")))
 
 # Filter top 50 metabolites
-top_50 <- mwas_results_annotated_wide %>% 
-  modify(~ .x %>% 
-           rowwise() %>% 
-           mutate(sum_abs_est = sum(abs(c_across(lg2_pfda:lg2_pfos))), 
-                  max_est = max(abs(c_across(lg2_pfda:lg2_pfos)))) %>%
-           ungroup() %>% 
+top_50 <- mwas_results_annotated_wide %>%
+  modify(~ .x %>%
+           rowwise() %>%
+           mutate(sum_abs_est = sum(abs(c_across(pfda:pfos))),
+                  # max_mix_effect = abs(`Mixture effect`),
+                  max_est = max(abs(c_across(pfda:pfos)))) %>%
+           ungroup() %>%
            group_by(refmet_name) %>%
-           filter(sum_abs_est == max(sum_abs_est), 
-                  sum_abs_est != 0) %>% 
+           filter( # max_mix_effect == abs(`Mixture effect`),
+                    sum_abs_est == max(sum_abs_est),
+                    sum_abs_est != 0) %>%
            filter(max_est == max(max_est)) %>%
            filter(mass_error_ppm == min(mass_error_ppm)) %>%
-           ungroup() %>% 
-           select(sum_abs_est, everything()) %>% 
-           slice_max(order_by = max_est, n = 50))
+           ungroup() %>%
+           select(sum_abs_est, everything()) %>%
+           slice_max(order_by = max_est, n = 1000))
 
 # Save results for temp analysis of metabolites 
 # write_csv(top_50$solar, fs::path(dir_results, "top 50.csv"))
 
 # reorder super class results
-top_50 <- top_50 %>% 
+# top_50 <- mwas_results_annotated_wide %>% 
+top_50 <- top_50 %>%
   modify(~mutate(.x, 
                  super_class = fct_infreq(super_class)) %>%
            arrange(super_class))
@@ -97,23 +115,19 @@ efest <- top_50 %>%
   modify(
     ~select(.x, 
             refmet_name, 
-            contains("lg2"), 
-            contains("pf"), 
-            contains("nme")) %>% 
+            all_of(unique(mwas_results_long$chs$exposure)[-7])) %>% 
       column_to_rownames(var = "refmet_name") %>% 
       as.matrix())
-
 
 
 # Hierarchical clustering of Exposures  ----------------------------------
 
 # Run Correlation Matrix
-exposure_cor_matrix <- map(efest, 
-                           ~polycor::hetcor(.x))
+exposure_cor_matrix <- map(efest, ~cor(.x, method = "spearman") )
 
 # Get pearson dissimilarity & run clustering
 temp_dend_exposure <- map(exposure_cor_matrix, 
-                          ~as.dist(1 - .x$correlations) %>% 
+                          ~as.dist(1 - .x) %>% 
                             hclust(method = "complete") %>%
                             as.dendrogram() )
 
@@ -128,7 +142,7 @@ col_labels <- dend1 %>%
   map(~get_leaves_branches_col(.x))
 
 col_labels <- map2(col_labels,dend1, 
-                    ~.x[order(order.dendrogram(.y))])
+                   ~.x[order(order.dendrogram(.y))])
 
 
 # Clustering of metabolites based on chemical class ---------------------------
@@ -190,7 +204,7 @@ out <- data.frame(super_class = unique(top_50$solar$super_class),
 
 top_50 <- top_50 %>%
   modify(~.x %>% 
-           select(-color) %>% 
+           # select(-color) %>% 
            left_join(out))
 
 # Plot Heatmap ------------------------------------------------------------
@@ -199,9 +213,9 @@ top_50 <- top_50 %>%
 color.scheme <- rev(diverging_hcl(palette = "Cork",n = 100))
 
 # Create Plot
-# jpeg(file=file.location)
-# out <-
-heatmap.2(efest$solar,# reorderfun = 
+jpeg(file=fs::path(dir_reports, "Heatmaps", "SOLAR PFAS Mixtures Heatmap.jpg"))
+out <-
+heatmap.2(efest$solar,
           Colv = dend1$solar,
           # Rowv = met_cluster,
           dendrogram = "both", #c("both","row","column","none"),
@@ -219,28 +233,32 @@ heatmap.2(efest$solar,# reorderfun =
           key.xlab = "Effect Estimate",
           # ColSideColors = col_labels,
           
-          margins =c(5,15), 
+          margins = c(5,1), 
           
           col = color.scheme,
           srtCol = 20,
-      
+          
           # Plot Labels
           xlab = "PFAS",
           # ylab = "Metabolite",
           main = "SOLAR",
-          
-          labRow = top_50$solar$refmet_name
-          # labCol = NULL
+          labRow = "",
+          # labRow = top_50$solar$refmet_name
+          # labCol = FALSE
 )
-# dev.off()
+dev.off()
 
-# }
+
 
 
 
 
 # CHS Heatmap -------------------------------------------------------------
 
+jpeg(file=fs::path(dir_reports,
+                   "Heatmaps",
+                   "CHS PFAS Mixtures Heatmap.jpg"))
+out <-
 heatmap.2(efest$chs,# reorderfun = 
           Colv = dend1$chs,
           # Rowv = met_cluster,
@@ -260,20 +278,20 @@ heatmap.2(efest$chs,# reorderfun =
           # Change Color of row names
           colRow = top_50$chs$color,
           
-          margins =c(5,15), 
+          margins = c(5,1), 
           
           col = color.scheme,
           srtCol = 20,
           
           # Plot Labels
           xlab = "PFAS",
-          ylab = "Metabolite",
+          # ylab = "Metabolite",
           main = "CHS",
-          
-          labRow = top_50$chs$refmet_name
+          labRow = ""
+          # labRow = top_50$chs$refmet_name
           # labCol = NULL
 )
-
+dev.off()
 
 
 

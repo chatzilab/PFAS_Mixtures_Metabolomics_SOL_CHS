@@ -11,7 +11,6 @@ mwas <- function(metab_dat, exp_cov_dat, name_of_exposure, cohort){
     if(cohort == "solar"){ 
       MWAS_output_lm <- data %>%
         dplyr::select(colnames(metab_dat)[2]:ncol(data)) %>%  # exclude outcome, leave only predictors
-        scale(.) %>% 
         as_tibble() %>%
         map(~lm(.x ~ data[[name_of_exposure]] +
                   data$age + data$sex + data$bmi + 
@@ -24,7 +23,6 @@ mwas <- function(metab_dat, exp_cov_dat, name_of_exposure, cohort){
     if(cohort == "chs"){ 
       MWAS_output_lm <- data %>%
         dplyr::select(colnames(metab_dat)[2]:ncol(data)) %>%  # exclude outcome, leave only predictors
-        scale(.) %>% 
         as_tibble() %>%
         map(~lm(.x ~ data[[name_of_exposure]] +
                   data$age + data$sex + data$ses, 

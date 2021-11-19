@@ -7,7 +7,7 @@ library(janitor)
 exposure_type = "PFAS"
 
 mum_pw_wide <- read_rds(
-  fs::path(dir_temp, 
+  fs::path(dir_results, 
            exposure_type, 
            "mum_pathway_results", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
@@ -31,7 +31,7 @@ mum_most_sig_pws <- mum_pw_wide %>%
 
 # Read in MWAS Beta Coefficients --------------------
 mwas_beta_coefs <- read_rds(
-  fs::path(dir_temp, 
+  fs::path(dir_results, 
            "PFAS", 
            "SOL CHS all MWAS results long.rds")) %>% 
   modify(~.x %>% mutate(exposure2 = exposure %>% 

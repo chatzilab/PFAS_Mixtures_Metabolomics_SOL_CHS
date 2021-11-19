@@ -2,7 +2,7 @@
 
 # Read in MWAS Beta Coefficients --------------------
 mwas_beta_coefs <- read_rds(
-   fs::path(dir_temp, 
+   fs::path(dir_results, 
             "PFAS", 
             "SOL CHS all MWAS results long.rds")) %>% 
    bind_rows(.id = "cohort") 

@@ -90,7 +90,7 @@ mwas_results_long <- list(solar = solar_mwas_results %>%
                           chs   = chs_mwas_results %>% 
                             bind_rows(.id = "mode"))
 
-# 
+# Save Data -----------------------------------------------------
 write_rds(mwas_results_long, 
           fs::path(dir_results, 
                      "PFAS", 

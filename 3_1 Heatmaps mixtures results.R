@@ -9,12 +9,12 @@ library(gplots)
 sol_mwas_results_long <- read_csv(
   file = fs::path(dir_results, 
                   'PFAS_Mixtures', 
-                  "sol_pfas_mixtures_results_final_v2.csv"))
+                  "sol_pfas_mixtures_results_final_v3.csv"))
 
 chs_mwas_results_long <- read_csv(
   file = fs::path(dir_results, 
                   'PFAS_Mixtures', 
-                  "chs_pfas_mixtures_results_final_v2.csv"))
+                  "chs_pfas_mixtures_results_final_v3.csv"))
 
 mwas_results_long <- list(solar = sol_mwas_results_long, 
                           chs = chs_mwas_results_long)
@@ -96,7 +96,7 @@ top_50 <- mwas_results_annotated_wide %>%
            filter(mass_error_ppm == min(mass_error_ppm)) %>%
            ungroup() %>%
            select(sum_abs_est, everything()) %>%
-           slice_max(order_by = max_est, n = 1000))
+           slice_max(order_by = max_est, n = 100))
 
 # Save results for temp analysis of metabolites 
 # write_csv(top_50$solar, fs::path(dir_results, "top 50.csv"))
@@ -148,52 +148,52 @@ col_labels <- map2(col_labels,dend1,
 # Clustering of metabolites based on chemical class ---------------------------
 
 # Create string var
-top_50 <- top_50 %>% 
-  modify(~mutate(.x, 
-                 pathstring = str_c(super_class, 
-                                    main_class, 
-                                    sub_class,
-                                    refmet_name,
-                                    sep = "_") %>% tolower()))
-
-# Subset solar only
-solar <- top_50$solar
-
-# Create dataframe to calcualte distance
-txtdat <- full_join(tibble(ps = solar$pathstring, 
-                           s = solar$super_class, 
-                           m = solar$main_class, 
-                           sb = solar$sub_class, 
-                           met = solar$refmet_name), 
-                    tibble(ps = solar$pathstring, 
-                           s = solar$super_class, 
-                           m = solar$main_class, 
-                           sb = solar$sub_class, 
-                           met = solar$refmet_name), 
-                    by = character()) %>% 
-  mutate(across(everything(), as.character))
-
-
-# Calculate distance 
-txtdat2 <- txtdat %>% 
-  mutate(dst = 0,  
-         dst1 = case_when(s.x  != s.y ~ dst + .2,
-                          m.x  != m.y ~ dst + .1,
-                          sb.x != sb.y ~ dst + .05,
-                          met.x  != met.y ~ dst + .01,
-                          TRUE ~ dst)) %>% 
-  select(ps.x, ps.y, dst1) %>% 
-  pivot_wider(id_cols = ps.x, names_from = ps.y, values_from = dst1) %>% 
-  column_to_rownames(var = "ps.x") %>% 
-  as.matrix()
-
-# Convert to distance matrix
-txtdat2[upper.tri(txtdat2)] <- c(0)
-diag(txtdat2) <- 0
-txtdat2 <- as.dist(txtdat2)  
-
-
-met_cluster <- as.dendrogram(hclust(txtdat2))
+# top_50 <- top_50 %>% 
+#   modify(~mutate(.x, 
+#                  pathstring = str_c(super_class, 
+#                                     main_class, 
+#                                     sub_class,
+#                                     refmet_name,
+#                                     sep = "_") %>% tolower()))
+# 
+# # Subset solar only
+# solar <- top_50$solar
+# 
+# # Create dataframe to calcualte distance
+# txtdat <- full_join(tibble(ps = solar$pathstring, 
+#                            s = solar$super_class, 
+#                            m = solar$main_class, 
+#                            sb = solar$sub_class, 
+#                            met = solar$refmet_name), 
+#                     tibble(ps = solar$pathstring, 
+#                            s = solar$super_class, 
+#                            m = solar$main_class, 
+#                            sb = solar$sub_class, 
+#                            met = solar$refmet_name), 
+#                     by = character()) %>% 
+#   mutate(across(everything(), as.character))
+# 
+# 
+# # Calculate distance 
+# txtdat2 <- txtdat %>% 
+#   mutate(dst = 0,  
+#          dst1 = case_when(s.x  != s.y ~ dst + .2,
+#                           m.x  != m.y ~ dst + .1,
+#                           sb.x != sb.y ~ dst + .05,
+#                           met.x  != met.y ~ dst + .01,
+#                           TRUE ~ dst)) %>% 
+#   select(ps.x, ps.y, dst1) %>% 
+#   pivot_wider(id_cols = ps.x, names_from = ps.y, values_from = dst1) %>% 
+#   column_to_rownames(var = "ps.x") %>% 
+#   as.matrix()
+# 
+# # Convert to distance matrix
+# txtdat2[upper.tri(txtdat2)] <- c(0)
+# diag(txtdat2) <- 0
+# txtdat2 <- as.dist(txtdat2)  
+# 
+# 
+# met_cluster <- as.dendrogram(hclust(txtdat2))
 
 
 
@@ -204,7 +204,6 @@ out <- data.frame(super_class = unique(top_50$solar$super_class),
 
 top_50 <- top_50 %>%
   modify(~.x %>% 
-           # select(-color) %>% 
            left_join(out))
 
 # Plot Heatmap ------------------------------------------------------------
@@ -213,7 +212,8 @@ top_50 <- top_50 %>%
 color.scheme <- rev(diverging_hcl(palette = "Cork",n = 100))
 
 # Create Plot
-jpeg(file=fs::path(dir_reports, "Heatmaps", "SOLAR PFAS Mixtures Heatmap.jpg"))
+tiff(file=fs::path(dir_reports, "Heatmaps", "SOLAR PFAS Mixtures Heatmap_v3.tiff"),
+     width=5, height=5, res=300, units="in")  
 out <-
 heatmap.2(efest$solar,
           Colv = dend1$solar,
@@ -248,16 +248,9 @@ heatmap.2(efest$solar,
 )
 dev.off()
 
-
-
-
-
-
 # CHS Heatmap -------------------------------------------------------------
-
-jpeg(file=fs::path(dir_reports,
-                   "Heatmaps",
-                   "CHS PFAS Mixtures Heatmap.jpg"))
+tiff(file=fs::path(dir_reports, "Heatmaps", "CHS PFAS Mixtures Heatmap_v3.tiff"),
+     width=5, height=5, res=300, units="in")  
 out <-
 heatmap.2(efest$chs,# reorderfun = 
           Colv = dend1$chs,

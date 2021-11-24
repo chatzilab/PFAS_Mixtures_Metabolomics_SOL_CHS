@@ -1,6 +1,6 @@
 # Mixtures Analysis 
 library(purrr)
-
+library(tidyverse)
 # Read in data that will be loaded on the HPC 
 
 # Read and restructure results from mixtures analysis performed on HPC
@@ -8,12 +8,15 @@ library(purrr)
 # The issue: Each node writes results to a single row, so data is not rectangular 
 # (because each node does not run exactly the same number of models, as 23173 is
 # not divisible by 128 nodes). 
+source(here::here("!directories.r"))
+source(here::here("!set_exposure_outcome_vars.r"))
+source(here::here("!load_data.r"))
 
 # SOLAR -------------------------------------------------------------------
 # Read in data, without headers.
 sol_og_for_colnames <- read.table(fs::path(dir_results, 
                                            "PFAS_mixtures",
-                                           "solar_pfas_mixtures_mwas_from_HPC_v2.csv"),
+                                           "solar_pfas_mixtures_mwas_from_HPC_v3.csv"),
                                   sep = ",", na.strings = "",
                                   as.is = TRUE, fill = TRUE, header = FALSE)
 
@@ -34,7 +37,7 @@ col_names <- c("beta",
 # Read in final data with headers
 sol_og <- read.table(fs::path(dir_results, 
                                            "PFAS_mixtures",
-                                           "solar_pfas_mixtures_mwas_from_HPC_v2.csv"),
+                                           "solar_pfas_mixtures_mwas_from_HPC_v3.csv"),
                                   sep = ",",col.names = col_names,
                                   na.strings = "",
                                   as.is = TRUE, fill = TRUE, header = TRUE) %>% 
@@ -65,32 +68,49 @@ sol_2 <- cnms_bygroup %>%
   modify(~dplyr::select(sol_1, all_of(.$cnms)))
 
 # rename all cols to match names, then cbind
-sol_final <- sol_2 %>% 
+sol_3 <- sol_2 %>% 
   modify(~rename_all(., ~str_split_fixed(., "_", 2)[,1])) %>% 
   bind_rows() %>% 
   filter(!is.na(metabolite)) %>% 
   mutate(var = str_remove(var, ".beta") %>% 
            str_replace("psi", "Mixture effect")) %>% 
   rename(exposure = var, 
-         estimate = mean)
+         estimate = mean) 
+
+
+# Calculate new p values
+sol_4 <- sol_3 %>% 
+  mutate(wald = (estimate/sd),
+         p = 2*(1-pnorm(abs(wald),0,1)),
+         p_value = pchisq(wald^2, df = 1,lower.tail = FALSE),
+         p_value = if_else(wald^2 > 2000, 4.6*(10^ (-256)), p_value),
+         neg_log_p = -log10(p_value)) %>% 
+  group_by(exposure) %>% 
+  mutate(q_value = p.adjust(p_value, method = "fdr"), 
+         significance = if_else(p_value < 0.05, "p < 0.05", "Not Sig."), 
+         significancefdr = if_else(q_value < 0.05, "q < 0.05", "Not Sig.")) %>% 
+  ungroup()
+
 
 # Join with ft_metadata
-sol_final <- left_join(ft_metadata, sol_final, by = c("feature" = "metabolite"))
+sol_final <- left_join(ft_metadata, sol_4, by = c("feature" = "metabolite"))
+
 
 
 # Save 
 write_csv(sol_final, 
           file = fs::path(dir_results, 
                           'PFAS_Mixtures', 
-                          "sol_pfas_mixtures_results_final_v2.csv"))
+                          "sol_pfas_mixtures_results_final_v3.csv"))
 
 rm(cnms_bygroup, new_colnames, row1, col_names, 
-   sol_1, sol_2, sol_final, sol_og, sol_og_for_colnames)
+   sol_1, sol_2,sol_3, sol_4, sol_final, sol_og, sol_og_for_colnames)
+
 # CHS -------------------------------------------------------------------
 # Read in data, without headers.
 chs_og_for_colnames <- read.table(fs::path(dir_results, 
                                            "PFAS_mixtures",
-                                           "chs_pfas_mixtures_mwas_from_HPC_v2.csv"),
+                                           "chs_pfas_mixtures_mwas_from_HPC_v3.csv"),
                                   sep = ",", na.strings = "",
                                   as.is = TRUE, fill = TRUE, header = FALSE)
 
@@ -110,7 +130,7 @@ col_names <- c("beta",
 # Read in final data with headers
 chs_og <- read.table(fs::path(dir_results, 
                               "PFAS_mixtures",
-                              "chs_pfas_mixtures_mwas_from_HPC_v2.csv"),
+                              "chs_pfas_mixtures_mwas_from_HPC_v3.csv"),
                      sep = ",",
                      col.names = col_names,
                      na.strings = "",
@@ -142,7 +162,7 @@ chs_2 <- cnms_bygroup %>%
   modify(~dplyr::select(chs_1, all_of(.$cnms)))
 
 # rename all cols to match names, then cbind
-chs_final <- chs_2 %>% 
+chs_3 <- chs_2 %>% 
   modify(~rename_all(., ~str_split_fixed(., "_", 2)[,1])) %>% 
   bind_rows() %>% 
   filter(!is.na(metabolite))  %>% 
@@ -151,20 +171,34 @@ chs_final <- chs_2 %>%
   rename(exposure = var, 
          estimate = mean)
 
-# Check the number of unique metabolites (should be 23,176)
-length(unique(chs_final$metabolite))
 
+
+# Calculate new p values
+chs_4 <- chs_3 %>% 
+  mutate(wald = (estimate/sd),
+         p = 2*(1-pnorm(abs(wald),0,1)),
+         p_value = pchisq(wald^2, df = 1,lower.tail = FALSE),
+         p_value = if_else(wald^2 > 2000, 4.6*(10^ (-256)), p_value),
+         neg_log_p = -log10(p_value)) %>% 
+  group_by(exposure) %>% 
+  mutate(q_value = p.adjust(p_value, method = "fdr"), 
+         significance = if_else(p_value < 0.05, "p < 0.05", "Not Sig."), 
+         significancefdr = if_else(q_value < 0.05, "q < 0.05", "Not Sig.")) %>% 
+  ungroup()
+
+# Check the number of unique metabolites (should be 23,176)
+length(unique(chs_4$metabolite))
 
 
 # Join with ft_metadata
-chs_final <- left_join(ft_metadata, chs_final, by = c("feature" = "metabolite"))
+chs_final <- left_join(ft_metadata, chs_4, by = c("feature" = "metabolite"))
 
 # Save 
 write_csv(chs_final, 
           file = fs::path(dir_results, 
                           'PFAS_Mixtures', 
-                          "chs_pfas_mixtures_results_final_v2.csv"))
+                          "chs_pfas_mixtures_results_final_v3.csv"))
 
 
 rm(cnms_bygroup, new_colnames, row1, col_names, 
-   chs_1, chs_2, chs_final, chs_og, chs_og_for_colnames)
+   chs_1, chs_2,chs_3, chs_4, chs_final, chs_og, chs_og_for_colnames)

@@ -31,6 +31,7 @@ rename_pfas <- function(pfas_names, include_asterisk = FALSE,
       pfas == "x82fts" ~ "8:2 FTS†", 
       pfas == "pfhxa" ~ "PFHxA†", 
       pfas == "pfdoa" ~ "PFDoDA†",
+      pfas == "Mixture effect" ~ "Mixture effect",
       TRUE ~ toupper(pfas)) %>% 
         as.factor() %>% 
         fct_relevel(., 
@@ -50,7 +51,8 @@ rename_pfas <- function(pfas_names, include_asterisk = FALSE,
                     "PFDoDA†", 
                     "PFUnDA†",
                     "PFNS†",
-                    "PFHxA†")) 
+                    "PFHxA†", 
+                    "Mixture effect")) 
   
   if(include_asterisk == TRUE){ 
     pfas2 <-  x %>%
@@ -67,7 +69,8 @@ rename_pfas <- function(pfas_names, include_asterisk = FALSE,
         pfas == "pfbs" ~ "PFBS*",
         pfas == "x82fts" ~ "8:2 FTS*", 
         pfas == "pfhxa" ~ "PFHxA*", 
-        pfas == "pfdoa" ~ "PFDoDA*",
+        pfas == "pfdoa" ~ "PFDoDA*", 
+        pfas == "Mixture effect" ~ "Mixture effect",
         TRUE ~ toupper(pfas)) %>% 
           as.factor() %>% 
           fct_relevel(., 
@@ -87,7 +90,8 @@ rename_pfas <- function(pfas_names, include_asterisk = FALSE,
                       "PFDoDA*", 
                       "PFUnDA*",
                       "PFNS*",
-                      "PFHxA*")) 
+                      "PFHxA*", 
+                      "Mixture effect")) 
   }
   
   if(arrange_by_class == TRUE){ 

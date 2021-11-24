@@ -36,7 +36,7 @@ model <- function(i){
 coefs <- pbdLapply(1:n_met, model, pbd.mode = "spmd")
 
 # Save results
-comm.write.csv(coefs,  file = "results/solar_pfas_mixtures_mwas.csv")
+comm.write.csv(coefs,  file = "results/sol_pfas_mixtures_mwas.csv")
 
 # message(paste("SUCCESS from rank", comm.rank()))
 

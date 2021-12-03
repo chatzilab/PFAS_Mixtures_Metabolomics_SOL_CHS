@@ -1,6 +1,6 @@
 # Script to perform Bayesian Ridge Regression with g prior and selection for mixtures
 # author: "Jingxuan He"
-# last updated: 11/03/21
+# last updated: 12/03/21
 
 # Description:
 
@@ -23,7 +23,7 @@ library(R2jags)
 # Functions
 BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   
-  # # JAGS MODEL ----------------------------------------------
+  # JAGS model
   ridge.BDL.model <- 
     "model {
   for(i in 1:N) {
@@ -125,20 +125,25 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   
   # run jags
   jdata <- list(N=N, Y=Y, X=X, R=R, U=U, P=P, Q=Q, profiles=profiles, LOD=LOD,XtX=XtX, prop.mu.beta=prop.mu.beta, prop.sd.beta=prop.sd.beta)
-  var.s <- c("beta", "psi")
+  var.s <- c("beta", "gamma", "eta.low", "eta.high",  "psi")
   model.fit <- jags.model(file=textConnection(ridge.BDL.model), data=jdata, n.chains=1, n.adapt=4000, quiet=T)
   update(model.fit, n.iter=1000, progress.bar="none")
   model.fit <- coda.samples(model=model.fit, variable.names=var.s, n.iter=5000, thin=1, progress.bar="none")
   
   # summarize results
   r <- summary(model.fit)
-  var.names <- c(paste(exposure.Names, "beta", sep="."),"psi")
-  ridge.BDL.results <- data.frame(var.names, round(r$statistics[,1:2],3), round(r$quantiles[,c(1,5)],3))
+  var.names <- c(paste(exposure.Names, "beta", sep="."),
+                 "eta.high",
+                 "eta.low",
+                 paste(exposure.Names, "gamma", sep="."),
+                 "psi")
+  ridge.BDL.results <- data.frame(var.names, 
+                                  r$statistics[,1:2], 
+                                  r$quantiles[,c(1,5)])
   wald = abs(ridge.BDL.results[,"Mean"]/ridge.BDL.results[,"SD"])
-  ridge.BDL.results$p.val = round(2*(1-pnorm(wald,0,1)), 3)
+  ridge.BDL.results$p.val = (2*(1-pnorm(wald,0,1)))
   return(ridge.BDL.results)
 }
 
 # example function call:
 # BHRMA(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles)
-

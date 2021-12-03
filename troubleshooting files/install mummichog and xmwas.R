@@ -46,3 +46,17 @@ devtools::install_github("xia-lab/MetaboAnalystR", build = TRUE, build_vignettes
 
 # Check to see if it will load:
 library(MetaboAnalystR)
+
+
+
+
+
+
+# Install xmwas -----------------------------------------------------------
+
+BiocManager::install(c("GO.db","graph","RBGL","impute","preprocessCore","mixOmics"),
+                     dependencies=TRUE)
+
+library(devtools); install_github("kuppal2/xMWAS")
+
+

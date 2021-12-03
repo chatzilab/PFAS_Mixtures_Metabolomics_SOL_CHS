@@ -307,3 +307,25 @@ ggsave(chs_figure,
        filename = fs::path(dir_reports, 
                            "CHS PFAS Mixtures and Glutamate metabolites.jpg"), 
        width = 10, height = 6, units = "in")
+
+
+# 5) Combined Figure --------------------------------
+pw_eff_est_wide_glutamate <- pw_eff_est_wide
+
+glu_met_comp <- ggplot(pw_eff_est_wide_glutamate,
+                       aes(x = estimate_solar, y = estimate_chs, 
+                           color = sig)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+  geom_vline(xintercept = 0) + 
+  geom_abline(intercept = 0, slope = 1, linetype = 2, color = "grey30") +
+  facet_wrap(~exposure2) + 
+  ylab("Beta (CHS)") + 
+  xlab("Beta (SOLAR)") + 
+  ggtitle("Glutamate Metabolites")
+
+
+ggsave(glu_met_comp, 
+       filename = fs::path(dir_reports, 
+                           "SOL CHS Scatter plot of glutamate metabolites.jpg"), 
+       width = 8, height = 7, units = "in")

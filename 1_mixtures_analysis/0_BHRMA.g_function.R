@@ -114,7 +114,6 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
     reg <- glm(Y~x, family=gaussian)    # perform logistic regression
     s.reg <- summary(reg)                 # get the summary for the regression
     c.reg <- s.reg$coef["x",]             # select the coefficients for the exposure
-    
     return(c.reg)                         # to avoid potential memory issues only return coefficients if small number of exposures
   }, simplify=T))
   univariate.results <- data.frame(exposure.Names,univariate.results)

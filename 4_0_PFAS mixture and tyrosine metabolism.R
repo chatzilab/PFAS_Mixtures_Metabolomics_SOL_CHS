@@ -66,7 +66,9 @@ key_pw_met2 <- key_pw_met %>%
              str_detect(met_name_all,  
                         "Ascorbate, Glucuronolactone") ~ "Glucuronolactone", 
              str_detect(met_name_all, 
-                        "Phosphorylcholine, Vanylglycol") ~ "Vanylglycol", 
+                        "Phosphorylcholine, Vanylglycol") ~ "Vanylglycol",
+             str_detect(met_name_all, 
+                        "Morphine, 2-Hydroxycarbamazepine") ~ "2-Hydroxycarbamazepine",
              TRUE ~ met_name_first_only))
 
 
@@ -163,8 +165,8 @@ single_pfas_eff_est <- single_pfas_eff_est %>%
   mutate(matched_compound = fct_reorder(matched_compound,mean_effect), 
          met_name = fct_reorder(met_name,mean_effect), 
          met_name_first_only = fct_reorder(met_name_first_only,
-                                           mean_effect)) 
-                                           # estimate_solar)) 
+                                           # mean_effect)) 
+                                           estimate_solar))
 
 
 
@@ -230,20 +232,20 @@ pw_eff_est_w_2 <- pw_eff_est_wide %>%
                                     align = "h"))
 
 # Save Figure
-ggsave(solar_figure,
-       filename =  fs::path(dir_reports, 
-                            "SOLAR PFAS Mixtures and Tyrosine metabolites.jpg"), 
-       width = 12, height = 12, units = "in")
+# ggsave(solar_figure,
+#        filename =  fs::path(dir_reports, 
+#                             "SOLAR PFAS Mixtures and Tyrosine metabolites.jpg"), 
+#        width = 12, height = 12, units = "in")
 
 
 # 4) CHS Figure ------------------------
-## Reorder metabolites by mean effect  --------------
-# single_pfas_eff_est <- single_pfas_eff_est %>% 
-#   arrange(mean_effect) %>%
-#   mutate(matched_compound = fct_reorder(matched_compound,mean_effect), 
-#          met_name = fct_reorder(met_name,mean_effect), 
-#          met_name_first_only = fct_reorder(met_name_first_only,
-#                                            estimate_chs)) 
+# Reorder metabolites by mean effect  --------------
+single_pfas_eff_est <- single_pfas_eff_est %>%
+  arrange(mean_effect) %>%
+  mutate(matched_compound = fct_reorder(matched_compound,mean_effect),
+         met_name = fct_reorder(met_name,mean_effect),
+         met_name_first_only = fct_reorder(met_name_first_only,
+                                           estimate_chs))
 
 
 
@@ -309,7 +311,56 @@ pw_eff_est_w_2 <- pw_eff_est_wide %>%
                                     axis = "tb",
                                     align = "h"))
 
-ggsave(chs_figure,
-       filename =  fs::path(dir_reports, 
-                            "CHS PFAS Mixtures and Tyrosine metabolites.jpg"), 
-       width = 12, height = 12, units = "in")
+# ggsave(chs_figure,
+#        filename =  fs::path(dir_reports, 
+#                             "CHS PFAS Mixtures and Tyrosine metabolites.jpg"), 
+#        width = 12, height = 12, units = "in")
+
+
+
+# 5) Combined Figure --------------------------------
+pw_eff_est_sig_only <- pw_eff_est_wide %>% 
+  filter(p_meta < 0.05, exposure == "Mixture effect")
+  
+
+pw_eff_est_wide_tyrosine <- pw_eff_est_wide
+
+(tyr_met_comp <- ggplot(pw_eff_est_wide_tyrosine, aes(x = estimate_solar, y = estimate_chs, 
+                            color = sig)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+  geom_vline(xintercept = 0) + 
+  geom_abline(intercept = 0, slope = 1, linetype = 2, color = "grey30") +
+  facet_wrap(~exposure2) + 
+  ylab("Beta (CHS)") + 
+  xlab("Beta (SOLAR)") + 
+  ggtitle("Tyrosine Metabolites"))
+
+
+
+ggsave(tyr_met_comp, 
+       filename = fs::path(dir_reports, 
+                           "SOL CHS Scatter plot of tyrosine metabolites.jpg"), 
+       width = 8, height = 7, units = "in")
+
+
+
+
+
+
+
+
+# Create figure of all metabolites 
+pw_eff_est_wide
+
+
+(temp_fig <- ggplot(pw_eff_est_wide, aes(x = estimate_solar, y = estimate_chs, 
+                                                      color = sig)) + 
+    geom_point() + 
+    geom_hline(yintercept = 0) + 
+    geom_vline(xintercept = 0) + 
+    geom_abline(intercept = 0, slope = 1, linetype = 2, color = "grey30") +
+    facet_wrap(~exposure2) + 
+    ylab("Beta (CHS)") + 
+    xlab("Beta (SOLAR)") + 
+    ggtitle("Tyrosine Metabolites"))

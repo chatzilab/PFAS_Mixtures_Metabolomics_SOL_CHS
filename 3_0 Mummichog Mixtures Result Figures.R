@@ -9,13 +9,16 @@ mum_pw_wide <- read_rds(
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
   mutate(q_meta = p.adjust(fet_meta), 
+         sig_meta = if_else(fet_meta < 0.05, "Sig.", "Not. Sig"), 
          sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
          hits_sig_meta = (hits_sig_solar + hits_sig_chs)/2) 
+
+# Reshape dataframe to be long format for pathway/cohort 
 
 # #Pivot longer on all values
 longer_df1 <- mum_pw_wide %>% 
   select(effect, path, path_2, super_pathway, 
-         functional_groupings, sig,sig_fdr,q_meta,
+         functional_groupings, sig,sig_fdr, q_meta,
          fet_solar, fet_chs, fet_meta,
          hits_sig_solar, hits_sig_chs,hits_sig_meta,
          enrichment_solar, enrichment_chs, enrichment_meta,
@@ -36,7 +39,9 @@ mum_pw_long <- longer_df1 %>%
   pivot_wider(names_from = name, values_from = value) 
 
 
-
+# Join back in with sig.meta data 
+mum_pw_long <- left_join(mum_pw_long, 
+                         mum_pw_wide %>% select(path, sig_meta, fet_meta))
 
 # A) Scatter plot of pathways ---------------------------
 
@@ -87,7 +92,8 @@ ggsave(pfas_mum_pathwayfig,
 # Bubble plot ----------------------------------------------------
 mum_pw_long2 <- mum_pw_long %>%
   # filter(sig == "Sig. Both Cohorts") %>%
-  filter(sig != "Not Significant") %>%
+  filter(sig_meta == "Sig.") %>%
+  # filter(sig != "Not Significant") %>%
   arrange(super_pathway, q_meta) %>%
   mutate(path_2 = fct_inorder(path_2))
 
@@ -101,14 +107,17 @@ mum_pw_long2 <- mum_pw_long %>%
     geom_vline(xintercept = -log10(0.05),
                color = "grey50", 
                linetype = 2) + 
-    facet_grid(~cohort, scales = "free_y", space = "free") + 
+    facet_grid(super_pathway~cohort, 
+               scales = "free_y", 
+               space = "free") + 
     scale_size(name = "Sig. Hits") +
     theme(panel.background = element_rect(fill="grey95"), 
-          strip.background = element_rect(fill = "white"), 
+          strip.background = element_rect(fill = "white"),
+          legend.position = "bottom",
           strip.text.y = element_text(angle = 0, hjust = 0)) +
+    guides(colour="none") +
     xlab("-log P") +
-    ylab(NULL)+
-    scale_color_discrete_qualitative(name = "Super pathway"))
+    ylab(NULL))
 
 
 
@@ -116,7 +125,7 @@ mum_pw_long2 <- mum_pw_long %>%
 ggsave(pfas_pw_bubbleplot,
        filename = fs::path(dir_reports,
                            "Mummichog bubble plot PFAS Mixtures.jpeg"),
-       width = 14, height = 11)
+       width = 14, height = 9)
 
 
 

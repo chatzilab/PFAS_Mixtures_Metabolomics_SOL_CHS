@@ -8,8 +8,11 @@ library(ggrepel)
 library(fs)
 ggplot2::theme_set(cowplot::theme_cowplot())
 
+
 # Source setup scripts
-source(here::here("2_mummichog", "2_3_Combine_mum_pw_between_chrts_mixtures.R"))
+source(here::here("!directories.R"))
+source(here::here("!set_exposure_outcome_vars.R"))
+# source(here::here("2_3_Combine_mum_pw_between_chrts_mixtures.R"))
 
 
 #1) Get Empirical compound to Pathway Key -------------------------------------
@@ -22,7 +25,7 @@ source(here::here("2_mummichog", "2_3_Combine_mum_pw_between_chrts_mixtures.R"))
 
 #2) Read in mz/rt data for all modes ------------------------------------------
 mz_rt_key_files <- fs::path(dir_results_mum_mixtures,
-                            "Mixture effect", cohort[1], modes, 
+                            "Mixture effect w09", cohort[1], 
                             "mummichog_matched_compound_all.csv")
 
 # Get mz and retention time key
@@ -68,7 +71,7 @@ rm(mz_rt_key, mz_rt_key_files, mzrtkey1)
 # Create pw to ec dataset -------------------------------------
 # Read in raw mum_ results files
 raw_mum_rslts <- read_rds(fs::path(dir_results_mum_mixtures,
-                                   "mum_pathway_results", 
+                                   "mum_pathway_results_w_09", 
                                    "raw_mum_results_files.RDS"))
 
 # #renamefxn
@@ -101,21 +104,19 @@ ecd_pw_key <- map2(mum_pw_ecs, mum_pw_names,
 # get cohort, pfas, and mode
 ecd_pw_key_2 <- ecd_pw_key %>% 
   mutate(cohort = str_split_fixed(chrt_pfas_mode,"_", n = 3)[,1], 
-         effect = str_split_fixed(chrt_pfas_mode,"_", n = 3)[,2], 
-         mode = str_split_fixed(chrt_pfas_mode,"_", n = 3)[,3]) %>%
-  select(cohort, effect, mode, pathway, empcpd_num, value) %>% 
-  rename(empirical_compound = value) %>% 
-  mutate(ec_mode = str_c(empirical_compound, mode, sep = "_"))
+         effect = str_split_fixed(chrt_pfas_mode,"_", n = 3)[,2]) %>%
+  select(cohort, effect, pathway, empcpd_num, value) %>% 
+  rename(empirical_compound = value) 
 
 # Remove duplicates
 ecd_pw_key_final <- ecd_pw_key_2 %>% 
-  select(mode, pathway, empirical_compound, ec_mode) %>%
-  distinct()
+  select(pathway, empirical_compound) %>%
+  tidylog::distinct()
 
 # Combine mzrt key and ecd_pw_key -----------------------------------------
 final_key <- tidylog::full_join(ecd_pw_key_final, 
                                 mzrtkey_primary_ions, 
-                                by = c("ec_mode", "mode", "empirical_compound")) %>% 
+                                by = c("empirical_compound")) %>% 
   tidylog::filter(!is.na(feature)) %>% 
   rename(name = feature) %>% 
   distinct()
@@ -130,9 +131,6 @@ length(unique(final_key$matched_compound))
 #                    "Supporting Files", 
 #                    "Cpd id to name keys",
 #                    "Mummichog cpd id to cpd name key raw.csv"))
-# 
-# 
-# 
 # 
 # write_rds(final_key, fs::path(dir_data_local,
 #                               "Supporting Files", 

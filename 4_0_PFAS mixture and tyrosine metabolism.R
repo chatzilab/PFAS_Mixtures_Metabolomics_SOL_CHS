@@ -6,10 +6,11 @@ library(colorspace)
 library(janitor)
 
 # Set vars
-pfas_name <- "Mixture effect"
-cohort_name <- "solar"
+# cohort_name <- "solar"
 pw_name = "Tyrosine metabolism"
 
+
+source(here::here("0_0_1_format_vars_funs.R"))
 
 # 1) read in data  ------------------------
 ## Mummichog Data ------------------------------------
@@ -19,7 +20,9 @@ mum_pw_wide <- read_rds(
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
   mutate(q_meta = p.adjust(fet_meta), 
-         sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
+         sig_fdr = if_else(q_meta < 0.2, 
+                           "Sig. FDR < 0.2",
+                           "Not. Sig"), 
          mean_num_sig = (hits_sig_solar + hits_sig_chs)/2)
 
 
@@ -61,16 +64,20 @@ key_pw_met2 <- key_pw_met %>%
               str_remove(" \\(1\\)") ) %>% 
   mutate(met_name_first_only = 
            case_when(
-             str_detect(met_name_all,  
-                        "3-methyl pyruvic acid, Acetoacetic acid") ~ "Acetoacetic acid", 
-             str_detect(met_name_all,  
-                        "Ascorbate, Glucuronolactone") ~ "Glucuronolactone", 
-             str_detect(met_name_all, 
-                        "Phosphorylcholine, Vanylglycol") ~ "Vanylglycol",
-             str_detect(met_name_all, 
-                        "Morphine, 2-Hydroxycarbamazepine") ~ "2-Hydroxycarbamazepine",
+             str_detect(
+               met_name_all,  
+               "3-methyl pyruvic acid, Acetoacetic acid") ~ "Acetoacetic acid", 
+             str_detect(
+               met_name_all,  
+               "Ascorbate, Glucuronolactone") ~ "Glucuronolactone", 
+             str_detect(
+               met_name_all, 
+               "Phosphorylcholine, Vanylglycol") ~ "Vanylglycol",
+             str_detect(
+               met_name_all, 
+               "Morphine, 2-Hydroxycarbamazepine") ~ 
+               "2-Hydroxycarbamazepine",
              TRUE ~ met_name_first_only))
-
 
 
 # Get pathway specific effect estimates for main exposure
@@ -83,7 +90,7 @@ pw_eff_est_annotated_allfts <- mwas_beta_coefs %>%
 # select only a single feature from each compound
 most_altered_fts <- pw_eff_est_annotated_allfts %>% 
   group_by(name, matched_compound, exposure, exposure2) %>% 
-  summarise(estimate_mean = mean(estimate)) %>%
+  summarise(estimate_mean = mean(estimate_beta)) %>%
   # mutate(rownum = row_number()) %>%
   ungroup() %>% 
   # select(name, matched_compound, exposure, exposure2, rownum)
@@ -105,8 +112,10 @@ pw_eff_est_annotated <- left_join(most_altered_fts,
 pw_eff_est_wide <- pw_eff_est_annotated %>%
   pivot_wider(., 
               names_from = cohort,
-              values_from = c("estimate", "p_value", 
-                              "q_value", "lcl", "ucl"),
+              values_from = c("estimate_beta", "p_value", 
+                              "q_value", 
+                              "lcl_beta", "ucl_beta", 
+                              "estimate_pip", ),
               id_cols = c("name", "exposure", "exposure2",
                           "met_name",
                           "met_name_first_only",
@@ -118,7 +127,7 @@ pw_eff_est_wide <- pw_eff_est_annotated %>%
 # set weights 
 wgt_sol = sqrt(310); wgt_chs = sqrt(136)
 
-# Run analysis
+# calculate meta-analysis p-values
 pw_eff_est_wide <- pw_eff_est_wide %>% 
   mutate(p_value_solar = if_else(p_value_solar > 0.999, 0.999, p_value_solar), 
          p_value_chs = if_else(p_value_chs > 0.999, 0.999, p_value_chs)) %>%
@@ -139,14 +148,14 @@ pw_eff_est_wide <- pw_eff_est_wide %>%
                          TRUE ~ "Non. Sig"), 
          sig_solar = case_when(q_value_solar < 0.2 ~  "q<0.02", 
                                p_value_solar < 0.05 ~ "p<0.05",
-                               # p_meta < 0.05 ~ "Meta-analysis: p<0.05",
+                               p_meta < 0.05 ~ "Meta-analysis: p<0.05",
                                TRUE ~ "Not Sig."),
          sig_chs = case_when(q_value_chs < 0.2 ~ "q<0.02", 
                              p_value_chs < 0.05 ~ "p<0.05",
-                             # p_meta < 0.05 ~ "Meta-analysis: p<0.05",
+                             p_meta < 0.05 ~ "Meta-analysis: p<0.05",
                              TRUE ~ "Not Sig."),
-         mean_effect = ((estimate_solar*wgt_sol)+
-                          (estimate_chs*wgt_chs))/(wgt_sol+wgt_chs)) %>% 
+         mean_effect = ((estimate_beta_solar*wgt_sol)+
+                          (estimate_beta_chs*wgt_chs))/(wgt_sol+wgt_chs)) %>% 
   mutate(across(c(sig_solar, sig_chs), 
                 ~fct_relevel(., "q<0.02", "p<0.05",
                              # "Meta-analysis: p<0.05",
@@ -155,7 +164,7 @@ pw_eff_est_wide <- pw_eff_est_wide %>%
 
 # Create dataframe for single exposure of interest (mixture effect)
 single_pfas_eff_est <- pw_eff_est_wide %>% 
-  filter(exposure2 == pfas_name)
+  filter(exposure2 == "MIXTURE")
 
 
 # 3) SOLAR Figure ------------------
@@ -166,18 +175,18 @@ single_pfas_eff_est <- single_pfas_eff_est %>%
          met_name = fct_reorder(met_name,mean_effect), 
          met_name_first_only = fct_reorder(met_name_first_only,
                                            # mean_effect)) 
-                                           estimate_solar))
+                                           estimate_beta_solar))
 
 
 
 ## Panel a: Coefficient plots -------------------------------
 (solar_efest_fig <- ggplot(single_pfas_eff_est,
                            aes(x = met_name_first_only,
-                               y = estimate_solar,
+                               y = estimate_beta_solar,
                                color = sig_solar)) +
    geom_point(size = 1) +
-   geom_errorbar(aes(ymin = lcl_solar,
-                     ymax = ucl_solar),
+   geom_errorbar(aes(ymin = lcl_beta_solar,
+                     ymax = ucl_beta_solar),
                  width = 0) +
    geom_hline(yintercept = 0, linetype = 2) +
    scale_y_continuous(name = "Beta (95% CI)",
@@ -186,7 +195,7 @@ single_pfas_eff_est <- single_pfas_eff_est %>%
    xlab("Metabolite") +
    ggtitle("A) PFAS Mixture") + 
    # scale_color_brewer(palette = "Set1") +
-   scale_color_manual(values = c("red", "black", "grey50")) +
+   # scale_color_manual(values = c("red", "black", "grey50")) +
    theme(axis.title.y =  element_blank(),
          legend.position = "bottom",
          # legend.justification='left',
@@ -251,9 +260,9 @@ single_pfas_eff_est <- single_pfas_eff_est %>%
 
 ## Panel a: Coefficient plots -------------------------------
 (chs_efest_fig <- ggplot(single_pfas_eff_est,
-                           aes(x = met_name_first_only,
-                               y = estimate_chs,
-                               color = sig_chs)) +
+                         aes(x = met_name_first_only,
+                             y = estimate_chs,
+                             color = sig_chs)) +
    geom_point(size = 1) +
    geom_errorbar(aes(ymin = lcl_chs,
                      ymax = ucl_chs),
@@ -306,10 +315,10 @@ pw_eff_est_w_2 <- pw_eff_est_wide %>%
 
 
 (chs_figure <- cowplot::plot_grid(chs_efest_fig,
-                                    chs_heatmap,
+                                  chs_heatmap,
                                   rel_widths = c(1,.9),
-                                    axis = "tb",
-                                    align = "h"))
+                                  axis = "tb",
+                                  align = "h"))
 
 # ggsave(chs_figure,
 #        filename =  fs::path(dir_reports, 
@@ -321,20 +330,20 @@ pw_eff_est_w_2 <- pw_eff_est_wide %>%
 # 5) Combined Figure --------------------------------
 pw_eff_est_sig_only <- pw_eff_est_wide %>% 
   filter(p_meta < 0.05, exposure == "Mixture effect")
-  
+
 
 pw_eff_est_wide_tyrosine <- pw_eff_est_wide
 
 (tyr_met_comp <- ggplot(pw_eff_est_wide_tyrosine, aes(x = estimate_solar, y = estimate_chs, 
-                            color = sig)) + 
-  geom_point() + 
-  geom_hline(yintercept = 0) + 
-  geom_vline(xintercept = 0) + 
-  geom_abline(intercept = 0, slope = 1, linetype = 2, color = "grey30") +
-  facet_wrap(~exposure2) + 
-  ylab("Beta (CHS)") + 
-  xlab("Beta (SOLAR)") + 
-  ggtitle("Tyrosine Metabolites"))
+                                                      color = sig)) + 
+    geom_point() + 
+    geom_hline(yintercept = 0) + 
+    geom_vline(xintercept = 0) + 
+    geom_abline(intercept = 0, slope = 1, linetype = 2, color = "grey30") +
+    facet_wrap(~exposure2) + 
+    ylab("Beta (CHS)") + 
+    xlab("Beta (SOLAR)") + 
+    ggtitle("Tyrosine Metabolites"))
 
 
 
@@ -355,7 +364,7 @@ pw_eff_est_wide
 
 
 (temp_fig <- ggplot(pw_eff_est_wide, aes(x = estimate_solar, y = estimate_chs, 
-                                                      color = sig)) + 
+                                         color = sig)) + 
     geom_point() + 
     geom_hline(yintercept = 0) + 
     geom_vline(xintercept = 0) + 

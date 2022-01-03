@@ -1,8 +1,7 @@
 # RUN MUMMICHOG METABOANALYST code
 library(tidyverse)
-library(fs)
 library(MetaboAnalystR)
-
+library(igraph)
 
 source(here::here("!directories.R"))
 source(file = fs::path(dir_home,
@@ -12,16 +11,9 @@ source(file = fs::path(dir_home,
 
 # Set important vars
 exposure_type = "PFAS"
-exposures = c("Mixture effect",
-              "pfda",
-              "pfhps",
-              "pfhxs",
-              "pfna",
-              "pfoa",
-              "pfos")
-
+exposures = c("Mixture effect")
 cohort = c("solar", "chs")
-modes = c("c18pos","c18neg", "hilicpos", "hilicneg")
+modes = c("mixed")
 
 
 # Get Dataframe of all conbinations
@@ -35,14 +27,11 @@ all_mum_comb <- expand.grid(list(modes = modes,
 
 rm(modes, cohort, exposures)
 
-# # Error: "Begin pfhps solar c18neg" (row 18)
-
 # Temp Results folder architecture:
 ## Exposure Name > Cohort > modes
 
-i = 18
-all_mum_comb$exposures[i]
 # Run all analyses -------------------------
+i = 2
 for(i in 1:nrow(all_mum_comb)){
   # Get names of variables
   exposures = all_mum_comb$exposures[i]
@@ -56,13 +45,9 @@ for(i in 1:nrow(all_mum_comb)){
               "-- Analysis", i, "out of", nrow(all_mum_comb)))
   t1 <- Sys.time()
   #  Set working directory for first folder
-  setwd(fs::path(dir_results_mum_mixtures,exposures, chrt, mode))
+  setwd(fs::path(dir_results_mum_mixtures,
+                 paste0(exposures, " w09"), chrt))
   
-  xxx<-read_csv("solar_pfhps_c18neg_MWAS.csv")
-  table(xxx$p.value<0.05)
-  
-  # Get mode for mummichog analysis
-  pos_neg =if_else(str_detect(mode, "pos"), "positive", "negative")
   
   ## Set up for mummichog -------------------------
   ##  Create objects for storing data from the MS peaks to pathways module
@@ -78,15 +63,13 @@ for(i in 1:nrow(all_mum_comb)){
   mSet<-UpdateInstrumentParameters(mSet, 
                                    force_primary_ion = TRUE,
                                    instrumentOpt = 5.0, # Mass accuracy
-                                   msModeOpt = pos_neg,  # mode
+                                   msModeOpt = "mixed",  # mode
                                    rt_tol = 20) 
   # Read in MWAS results
   mSet <- Read.PeakListData(
     mSetObj = mSet, 
     filename =  paste(chrt, 
-                      exposures,
-                      mode, 
-                      "MWAS.csv", 
+                      "mixture_effect_mixed_mode_MWAS.csv",
                       sep = "_"))
   
   
@@ -95,7 +78,7 @@ for(i in 1:nrow(all_mum_comb)){
   # Set peak enrichment algorithm options
   mSet <- SetPeakEnrichMethod(mSet, algOpt = "integ", version = "v2")
   ## Set mummichog p value:  # THIS MATTERS A LOT!
-  mSet <- SetMummichogPval(mSet, 0.05)
+  mSet <- SetMummichogPval(mSet, 0.2)
   ##  Perform mummichog algorithm 
   Set <- PerformPSEA(mSet, 
                      "hsa_mfn", 
@@ -105,16 +88,15 @@ for(i in 1:nrow(all_mum_comb)){
   ## Save mummichog output
   saveRDS(Set, 
           file = paste(chrt, 
-                       exposures, 
-                       mode, 
-                       "mummichog.RDS", 
+                       "mixture_effect_mixed_mode_mummichog.RDS", 
                        sep = "_"))
   
   
   ## Get pathway data from mum results -------------
   pathways <- Set$mummi.resmat
   
-  pathways <- as_tibble(pathways, rownames = "pathway") %>% 
+  pathways <- as_tibble(pathways, 
+                        rownames = "pathway") %>% 
     janitor::clean_names() %>% 
     mutate(mode = mode, 
            exposure = exposures) %>% 
@@ -123,7 +105,7 @@ for(i in 1:nrow(all_mum_comb)){
   # Write pathway results 
   write_csv(pathways, 
             fs::path(dir_results_mum_mixtures, 
-                     "mum_pathway_results",
+                     "mum_pathway_results_w_09",
                      chrt,
                      paste(exposures,
                            mode,
@@ -134,5 +116,3 @@ for(i in 1:nrow(all_mum_comb)){
   print(paste(all_mum_comb$exposures[i], chrt, mode, "Complete"))
   rm(mSet)
 } 
-
-

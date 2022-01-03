@@ -9,7 +9,7 @@
 # Y: A N-length vector for a continuous outcome
 # U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation)
 # LOD: A P-length vector of LODs for each exposure. Individuals with missing data will have data imputed below this level of detection  
-# profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the expsoures are standardized wihin the funciton, these profiles should be on the standard normal scale)
+# profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the expsoures are standardized within the funciton, these profiles should be on the standard normal scale)
 
 
 # Future tasks for improvement:
@@ -67,8 +67,8 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   #pi ~ dbeta(P, 1)
 
   # semi-Bayes
-  G <- w/(1-w)
-  w <- .99   # w -> 0 shrink to common mean; as w -> inf toward the maximum likelihood estimate
+  #G <- w/(1-w)
+  #w <- 0.9   # w -> 0 shrink to common mean; as w -> inf toward the maximum likelihood estimate
 
   # Zellner and Siow prior on G
   #b0 <- 0.5*N
@@ -77,10 +77,10 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   #w <- G/(G+1)
 
   # Hyper-g prior (following Perrakis 2018, note that this is on the G^-1 so the Beta distribution is switchd in terms of a and b from Li and Clyde 2019 equation 34)
-  #a <- 3
-  #bw <- a/2 - 1
-  #w~dbeta(1,bw)
-  #G <- w/(1-w)
+  a <- 3
+  bw <- a/2 - 1
+  w~dbeta(1,bw)
+  G <- w/(1-w)
 
   # Hyper-g/n prior (following Perrakis 2018, note that this is on the G^-1 so the Beta distribution is switchd in terms of a and b from Li and Clyde 2019 equation 34)
   #a <- 3

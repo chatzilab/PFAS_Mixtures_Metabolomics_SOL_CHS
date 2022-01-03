@@ -9,10 +9,10 @@ library(pbdMPI)
 init()
 
 #Set working directory
-setwd("/project/dconti_624/Users/jagoodri/sol_chs")
+setwd("/project/dconti_624/Users/jagoodri/sol")
 
 # Load Data
-load("SOLAR_mixtures_datasets.Rdata")
+load("SOLAR_mixtures_datasets_w_09.Rdata")
 
 # Get number of metabolites
 n_met <- ncol(Y)
@@ -36,7 +36,7 @@ model <- function(i){
 coefs <- pbdLapply(1:n_met, model, pbd.mode = "spmd")
 
 # Save results
-comm.write.csv(coefs,  file = "results/sol_pfas_mixtures_mwas.csv")
+comm.write.csv(coefs,  file = "results/sol_pfas_mixtures_mwas_w_09.csv")
 
 # message(paste("SUCCESS from rank", comm.rank()))
 

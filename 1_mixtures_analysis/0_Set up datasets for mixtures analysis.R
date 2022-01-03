@@ -1,10 +1,6 @@
 # Set up data_for_mixtures_analysis on HPC
-library(tibble)
-library(tidyverse)
-library(readr)
-library(purrr)
-library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
-library(stringr)
+library("tidyverse")
+library("purrr")
 
 rm(list = ls())
 source(here::here("!directories.R"))
@@ -29,19 +25,23 @@ solar_eo <- exposure_outcome$solar %>%
          wave.num = ifelse(wave == "first wave", 1 ,2))
 
 
-# Join exposures and metabolites \
+# Join exposures and metabolites 
 solar <- left_join(solar_eo, 
                    sol_metab_dat %>% mutate(id = as.character(id)), 
                    by = "id")
 
 # PFAS
-X.obs = solar[exposures_continuous] %>% 
+# X.obs = solar[exposures_continuous] %>% 
+# X.obs = solar[c("pfhxs", "pfos")] %>%
+X.obs = solar[setdiff(exposures_continuous,
+                      c("pfhxs", "pfos"))] %>%
   mutate(across(everything(), ~scale(log2(.))))
 
 # exclude outcome, leave only predictors:
 Y = solar %>%
   dplyr::select(colnames(sol_metab_dat)[2]:ncol(solar)) %>% 
   scale(center = F, scale = F) 
+
 
 dim(Y)
 
@@ -71,7 +71,7 @@ rm(list = setdiff(ls(), c("X.obs",
 save.image(file = fs::path(dirname(here::here()),
                            "0_Data", 
                            "data_for_mixtures_analysis", 
-                           "SOLAR_mixtures_datasets_v3.Rdata"))
+                           "SOLAR_mixtures_datasets_pfcas_hyper_g_prior.Rdata"))
 
 rm(list = ls())
 
@@ -83,7 +83,7 @@ source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!load_data.R"))
 source(here::here("1_mixtures_analysis", "0_BHRMA.g_function.R"))
 
-# Get all metabolite data
+# Get all metabolite data in single dataframe
 chs_metab_dat <- purrr::reduce(ftdata$chs, .f = left_join)
 
 # Create numeric vars
@@ -98,7 +98,10 @@ chs <- left_join(chs_eo,
                    by = "id")
 
 # PFAS
-X.obs = chs[exposures_continuous]  %>% 
+# X.obs = chs[exposures_continuous] %>% 
+# X.obs = chs[c("pfhxs", "pfos")] %>%
+X.obs = chs[setdiff(exposures_continuous,
+                      c("pfhxs", "pfos"))] %>%
   mutate(across(everything(), ~scale(log2(.))))
 
 Y = chs %>%
@@ -116,7 +119,6 @@ U = cbind.data.frame(age = as.numeric(chs$age),
 P = ncol(X.obs)
 LOD = c(0.01, 0.01, 0.05, 0.01, 0.01, 0.01, 0.43, 0.01)
 profiles = c(-1,1)*matrix(.5, nrow=2, ncol=P)
-# exposure.Names = colnames(X.obs)
 
 
 rm(list = setdiff(ls(), c("X.obs",
@@ -124,15 +126,12 @@ rm(list = setdiff(ls(), c("X.obs",
                           "U",
                           "LOD",
                           "profiles", 
-                          # "exposure.Names",
                           "ridge.BDL.model", 
                           "BHRMA.g")))
 
 save.image(file = fs::path(dirname(here::here()),
                            "0_Data", 
                            "data_for_mixtures_analysis", 
-                           "chs_mixtures_datasets_v3.Rdata"))
+                           "chs_mixtures_datasets_pfcas_hyper_g_prior.Rdata"))
 
 rm(list = ls())
-
-

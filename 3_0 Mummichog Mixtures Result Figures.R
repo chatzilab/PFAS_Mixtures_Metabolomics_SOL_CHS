@@ -5,7 +5,7 @@ exposure_type = "PFAS_Mixtures"
 
 mum_pw_wide <- read_rds(
   fs::path(dir_results_mum_mixtures, 
-           "mum_pathway_results", 
+           "mum_pathway_results_w_09", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
   mutate(q_meta = p.adjust(fet_meta), 
@@ -86,7 +86,7 @@ mum_pw_wide2 <- left_join(mum_pw_wide, mum_pw_w_onlysig) %>%
 # Save Fig
 ggsave(pfas_mum_pathwayfig,
        filename = fs::path(dir_reports,
-                           "PFAS Mixtures Mummichog Pathways All PFAS SOL CHS.jpeg"),
+                           "PFAS Mixtures Mummichog Pathways All PFAS SOL CHS w09.jpeg"),
        width = 8, height = 6)
 
 # Bubble plot ----------------------------------------------------

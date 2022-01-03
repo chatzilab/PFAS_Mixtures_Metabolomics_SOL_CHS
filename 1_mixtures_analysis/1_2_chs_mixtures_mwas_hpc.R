@@ -12,7 +12,7 @@ init()
 setwd("/project/dconti_624/Users/jagoodri/chs")
 
 # Load Data
-load("chs_mixtures_datasets.Rdata")
+load("chs_mixtures_datasets_w_09.Rdata")
 
 # Get number of metabolites
 n_met <- ncol(Y)
@@ -35,7 +35,7 @@ model <- function(i){
 coefs <- pbdLapply(1:n_met, model, pbd.mode = "spmd")
 
 # Save results
-comm.write.csv(coefs,  file = "results/chs_pfas_mixtures_mwas.csv")
+comm.write.csv(coefs,  file = "results/chs_pfas_mixtures_mwas_w_09.csv")
 
 # message(paste("SUCCESS from rank", comm.rank()))
 

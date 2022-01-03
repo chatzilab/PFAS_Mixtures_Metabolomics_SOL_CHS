@@ -14,11 +14,13 @@ source(here::here("!load_data.r"))
 
 # SOLAR -------------------------------------------------------------------
 # Read in data, without headers.
-sol_og_for_colnames <- read.table(fs::path(dir_results, 
-                                           "PFAS_mixtures",
-                                           "solar_pfas_mixtures_mwas_from_HPC_v3.csv"),
-                                  sep = ",", na.strings = "",
-                                  as.is = TRUE, fill = TRUE, header = FALSE)
+sol_og_for_colnames <- read.table(
+  fs::path(dir_results, 
+           "PFAS_mixtures",
+           "from_hpc",
+           "sol_pfas_mixtures_mwas_w_09.csv"),
+  sep = ",", na.strings = "",
+  as.is = TRUE, fill = TRUE, header = FALSE)
 
 # Get temp col names. Col names are not indexed correctly though- they 
 # Need to be shifted to the right by 1, and we need to 
@@ -33,16 +35,15 @@ col_names <- c("beta",
                "p.val.9999",      
                "metabolite.9999")
 
-
 # Read in final data with headers
 sol_og <- read.table(fs::path(dir_results, 
-                                           "PFAS_mixtures",
-                                           "solar_pfas_mixtures_mwas_from_HPC_v3.csv"),
-                                  sep = ",",col.names = col_names,
-                                  na.strings = "",
-                                  as.is = TRUE, fill = TRUE, header = TRUE) %>% 
+                              "PFAS_mixtures",
+                              "from_hpc",
+                              "sol_pfas_mixtures_mwas_w_09.csv"),
+                     sep = ",",col.names = col_names,
+                     na.strings = "",
+                     as.is = TRUE, fill = TRUE, header = TRUE) %>% 
   dplyr::select(-beta)
-
 
 # Clean Col names
 sol_1 <- sol_og %>% 
@@ -71,19 +72,45 @@ sol_2 <- cnms_bygroup %>%
 sol_3 <- sol_2 %>% 
   modify(~rename_all(., ~str_split_fixed(., "_", 2)[,1])) %>% 
   bind_rows() %>% 
-  filter(!is.na(metabolite)) %>% 
-  mutate(var = str_remove(var, ".beta") %>% 
-           str_replace("psi", "Mixture effect")) %>% 
+  filter(!is.na(metabolite))
+
+# Separate beta and pips
+sol_4 <- sol_3 %>% 
+  mutate(effect = case_when(str_detect(var, "beta") ~ "beta", 
+                            str_detect(var, "gamma") ~ "pip",
+                            str_detect(var, "psi") ~ "beta", 
+                            str_detect(var, "eta") ~ "eta"), 
+         var = str_remove(var, ".beta") %>% 
+           str_remove(".gamma") %>% 
+           str_remove("eta.") %>%
+           str_replace("psi", "mixture")) %>% 
   rename(exposure = var, 
-         estimate = mean) 
+         estimate = mean, 
+         p_value = p) %>% 
+  dplyr::select(exposure, effect, everything())
+
+
+# Select Profiles data (for later? )
+eta_profiles <- sol_4 %>% 
+  filter(exposure == "high" | exposure == "low") %>% 
+  dplyr::select(-p_value)
+
+# Pivot wider
+sol_5 <- sol_4 %>% 
+  filter(exposure != "high", exposure != "low") %>%
+  pivot_wider(id_cols = c("metabolite", "exposure"), names_from = effect, 
+              values_from = c(estimate, sd, lcl, ucl, p_value)) %>% 
+  dplyr::select(metabolite, exposure, contains("beta"), contains("pip")) %>% 
+  dplyr::select(-p_value_pip) %>% 
+  dplyr::rename(p_value = p_value_beta)
 
 
 # Calculate new p values
-sol_4 <- sol_3 %>% 
-  mutate(wald = (estimate/sd),
-         p = 2*(1-pnorm(abs(wald),0,1)),
+sol_6 <- sol_5 %>% 
+  mutate(wald = (estimate_beta/sd_beta), 
+         # p = 2*(1-pnorm(abs(wald),0,1)),
          p_value = pchisq(wald^2, df = 1,lower.tail = FALSE),
-         p_value = if_else(wald^2 > 2000, 4.6*(10^ (-256)), p_value),
+         p_value = if_else(wald^2 > 2000, 4.6*(10^(-256)), p_value),
          neg_log_p = -log10(p_value)) %>% 
   group_by(exposure) %>% 
   mutate(q_value = p.adjust(p_value, method = "fdr"), 
@@ -91,9 +118,19 @@ sol_4 <- sol_3 %>%
          significancefdr = if_else(q_value < 0.05, "q < 0.05", "Not Sig.")) %>% 
   ungroup()
 
-
 # Join with ft_metadata
-sol_final <- left_join(ft_metadata, sol_4, by = c("feature" = "metabolite"))
+sol_final <- left_join(ft_metadata, sol_6, by = c("feature" = "metabolite"))
+
+
+# Remove PFAS from data: 
+sol_final <- sol_final %>% 
+  tidylog::filter(feature != "412.9662665_238.1521714",    # PFOA,  C18 neg
+                  feature != "499.9333381_260.9808557",    # PFOS,  C18 neg
+                  feature != "398.9360546_243.5838959",    # PFHxS, C18 neg
+                  feature != "398.936398885251_33.3622678197535", # PFHxS, HELIC Neg
+                  feature != "462.962944_247.5910964",     # PFNA
+                  feature != "448.9331458_253.4631484",    # PFHpS
+                  feature != "412.966235310664_35.0213619776204") # PFOA, HELIC Neg 
 
 
 
@@ -101,16 +138,17 @@ sol_final <- left_join(ft_metadata, sol_4, by = c("feature" = "metabolite"))
 write_csv(sol_final, 
           file = fs::path(dir_results, 
                           'PFAS_Mixtures', 
-                          "sol_pfas_mixtures_results_final_v3.csv"))
+                          "sol_pfas_mixtures_results_w_09.csv"))
 
-rm(cnms_bygroup, new_colnames, row1, col_names, 
-   sol_1, sol_2,sol_3, sol_4, sol_final, sol_og, sol_og_for_colnames)
+rm(cnms_bygroup, new_colnames, row1, col_names,
+   sol_1, sol_2,sol_3, sol_4,sol_5, sol_6, sol_final, sol_og, sol_og_for_colnames)
 
 # CHS -------------------------------------------------------------------
 # Read in data, without headers.
 chs_og_for_colnames <- read.table(fs::path(dir_results, 
                                            "PFAS_mixtures",
-                                           "chs_pfas_mixtures_mwas_from_HPC_v3.csv"),
+                                           "from_hpc",
+                                           "chs_pfas_mixtures_mwas_w_09.csv"),
                                   sep = ",", na.strings = "",
                                   as.is = TRUE, fill = TRUE, header = FALSE)
 
@@ -130,7 +168,8 @@ col_names <- c("beta",
 # Read in final data with headers
 chs_og <- read.table(fs::path(dir_results, 
                               "PFAS_mixtures",
-                              "chs_pfas_mixtures_mwas_from_HPC_v3.csv"),
+                              "from_hpc",
+                              "chs_pfas_mixtures_mwas_w_09.csv"),
                      sep = ",",
                      col.names = col_names,
                      na.strings = "",
@@ -165,20 +204,44 @@ chs_2 <- cnms_bygroup %>%
 chs_3 <- chs_2 %>% 
   modify(~rename_all(., ~str_split_fixed(., "_", 2)[,1])) %>% 
   bind_rows() %>% 
-  filter(!is.na(metabolite))  %>% 
-  mutate(var = str_remove(var, ".beta") %>% 
-           str_replace("psi", "Mixture effect")) %>% 
-  rename(exposure = var, 
-         estimate = mean)
+  filter(!is.na(metabolite))
 
+# Separate beta and pips
+chs_4 <- chs_3 %>% 
+  mutate(effect = case_when(str_detect(var, "beta") ~ "beta", 
+                            str_detect(var, "gamma") ~ "pip",
+                            str_detect(var, "psi") ~ "beta", 
+                            str_detect(var, "eta") ~ "eta"), 
+         var = str_remove(var, ".beta") %>% 
+           str_remove(".gamma") %>% 
+           str_remove("eta.") %>%
+           str_replace("psi", "mixture")) %>% 
+  rename(exposure = var, 
+         estimate = mean, 
+         p_value = p) %>% 
+  dplyr::select(exposure, effect, everything())
+
+# Select Profiles data (for later? )
+eta_profiles <- chs_4 %>% 
+  filter(exposure == "high" | exposure == "low") %>% 
+  dplyr::select(-p_value)
+
+# Pivot wider
+chs_5 <- chs_4 %>% 
+  filter(exposure != "high", exposure != "low") %>%
+  pivot_wider(id_cols = c("metabolite", "exposure"), names_from = effect, 
+              values_from = c(estimate, sd, lcl, ucl, p_value)) %>% 
+  dplyr::select(metabolite, exposure, contains("beta"), contains("pip")) %>% 
+  dplyr::select(-p_value_pip) %>% 
+  dplyr::rename(p_value = p_value_beta)
 
 
 # Calculate new p values
-chs_4 <- chs_3 %>% 
-  mutate(wald = (estimate/sd),
-         p = 2*(1-pnorm(abs(wald),0,1)),
+chs_6 <- chs_5 %>% 
+  mutate(wald = (estimate_beta/sd_beta), 
+         # p = 2*(1-pnorm(abs(wald),0,1)),
          p_value = pchisq(wald^2, df = 1,lower.tail = FALSE),
-         p_value = if_else(wald^2 > 2000, 4.6*(10^ (-256)), p_value),
+         p_value = if_else(wald^2 > 2000, 4.6*(10^(-256)), p_value),
          neg_log_p = -log10(p_value)) %>% 
   group_by(exposure) %>% 
   mutate(q_value = p.adjust(p_value, method = "fdr"), 
@@ -186,19 +249,27 @@ chs_4 <- chs_3 %>%
          significancefdr = if_else(q_value < 0.05, "q < 0.05", "Not Sig.")) %>% 
   ungroup()
 
-# Check the number of unique metabolites (should be 23,176)
-length(unique(chs_4$metabolite))
-
-
 # Join with ft_metadata
-chs_final <- left_join(ft_metadata, chs_4, by = c("feature" = "metabolite"))
+chs_final <- left_join(ft_metadata, chs_6, by = c("feature" = "metabolite"))
+
+
+# Remove PFAS from data: 
+chs_final <- chs_final %>% 
+  tidylog::filter(feature != "412.9662665_238.1521714",    # PFOA,  C18 neg
+                  feature != "499.9333381_260.9808557",    # PFOS,  C18 neg
+                  feature != "398.9360546_243.5838959",    # PFHxS, C18 neg
+                  feature != "398.936398885251_33.3622678197535", # PFHxS, HELIC Neg
+                  feature != "462.962944_247.5910964",     # PFNA
+                  feature != "448.9331458_253.4631484",    # PFHpS
+                  feature != "412.966235310664_35.0213619776204") # PFOA, HELIC Neg 
+
 
 # Save 
 write_csv(chs_final, 
           file = fs::path(dir_results, 
                           'PFAS_Mixtures', 
-                          "chs_pfas_mixtures_results_final_v3.csv"))
+                          "chs_pfas_mixtures_results_w_09.csv"))
 
 
-rm(cnms_bygroup, new_colnames, row1, col_names, 
+rm(cnms_bygroup, new_colnames, row1, col_names,
    chs_1, chs_2,chs_3, chs_4, chs_final, chs_og, chs_og_for_colnames)

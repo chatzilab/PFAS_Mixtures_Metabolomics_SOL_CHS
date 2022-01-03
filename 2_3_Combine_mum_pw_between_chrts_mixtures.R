@@ -1,9 +1,7 @@
 library(tidyverse)
 library(ggplot2)
 library(cowplot)
-library(here)
 library(ggrepel)
-library(fs)
 ggplot2::theme_set(cowplot::theme_cowplot())
 
 # Source setup scripts
@@ -12,28 +10,24 @@ source(here::here("!directories.R"))
 source(here::here("!set_exposure_outcome_vars.R"))
 
 # Temp Results folder architecture:
-## Exposure Type > Exposure Name > Cohort > modes
+## Exposure Type > Exposure Name > Cohort 
 
 #Key for superpathways
-superpathwaykey <- readxl::read_xlsx(fs::path(dir_data, 
-                                  "Supporting files",  
-                                  "superpathway_key_sept_21.xlsx")) %>% 
+superpathwaykey <- readxl::read_xlsx(
+  fs::path(dir_data, 
+           "Supporting files",  
+           "superpathway_key_sept_21.xlsx")) %>% 
   rename(path = pathway)
 
 # Get list of all results folders ------------------------
-dir_results_exposures <- fs::path(dir_results_mixtures, "mummichog", "Mixture effect") 
+dir_results_exposures <- fs::path(dir_results_mixtures, 
+                                  "mummichog", 
+                                  "Mixture effect w09") 
 
 
 dir_results_exposures_chrt_mode <- map(dir_results_exposures,
-                                    ~fs::path(.x, cohort)) %>% 
-  unlist() %>% 
-  map(., ~fs::path(.x, modes)) %>% 
-  unlist()
-
-# Remove folder locations where mum. was not run.
-dir_results_exposures_chrt_mode <- dir_results_exposures_chrt_mode[
-  file_exists(fs::path(dir_results_exposures_chrt_mode, 
-                       "mummichog_pathway_enrichment.csv"))]
+                                       ~fs::path(.x, cohort)) %>% 
+  unlist() 
 
 # Get list of all mummichog files
 mum_rds_files = dir(dir_results_exposures_chrt_mode, 
@@ -52,7 +46,7 @@ mum_rds_files = dir(dir_results_exposures_chrt_mode,
 # names(mum_results) <-  mum_rds_files_base
 # write_rds(mum_results,
 #           fs::path(dir_results_mum_mixtures,
-#                    "mum_pathway_results",
+#                    "mum_pathway_results_w_09",
 #                    "raw_mum_results_files.RDS"))
 # 
 # 1) Load Mummichog pathway results --------------------------------------------
@@ -63,7 +57,7 @@ mum_pw <- read_csv(fs::path(dir_results_exposures_chrt_mode,
   rename(path = x1) %>% 
   mutate(file_name = str_replace_all(file_name, "/", "_") %>% 
            str_remove("_mummichog_pathway_enrichment.csv"), 
-         )
+  )
 
 
 # Get columns for PFAS, cohort, and mode
@@ -75,8 +69,7 @@ mum_pw1 <- mum_pw %>%
       map_chr(1),
     cohort = str_split(temp,  '_') %>% 
       map_chr(2), 
-    mode = str_split(temp,  '_') %>% 
-      map_chr(3), 
+    mode = "mixed_mode", 
     enrichment = hits_sig/hits_total, 
     neg_logp = -log10(fet),
     name = str_c(cohort, effect, mode, sep = "_") %>% 
@@ -92,17 +85,8 @@ mum_pw_lst <- mum_pw1 %>%
   filter(pathway_total > 3) %>% 
   split(., f = .$name)
 
-
-# Collapse across modes, within effect
-mum_pw2 <- mum_pw1 %>% 
-  filter(pathway_total > 3) %>% 
-  group_by(effect, path, cohort) %>% 
-  filter(fet == min(fet)) %>% 
-  ungroup()
-
-
 # Pivot wider
-mum_pw_w1 <- pivot_wider(mum_pw2, 
+mum_pw_w1 <- pivot_wider(mum_pw1, 
                          id_cols = c(effect,  path, path_2), 
                          names_from = cohort, 
                          values_from = c(mode, pathway_total:neg_logp))
@@ -116,7 +100,7 @@ mum_pw_w1 <- mum_pw_w1 %>%
          fet_chs2 = if_else(is.na(fet_chs), .99, fet_chs)) %>%
   rowwise() %>% 
   mutate(fet_meta = metap::sumz(p = c_across(fet_solar2:fet_chs2), 
-                                    weights = c(wgt_sol, wgt_chs))$p, 
+                                weights = c(wgt_sol, wgt_chs))$p, 
          enrichment_meta = 
            ((enrichment_solar*wgt_sol)+(enrichment_chs*wgt_chs))/(wgt_sol+wgt_chs), 
          neg_logp_meta = -log10(fet_meta), 
@@ -150,12 +134,11 @@ rm(mum_pw, mum_pw1, mum_pw2, mum_pw_w1, wgt_chs, wgt_sol, mum_rds_files)
 # Save Data 
 write_rds(mum_pw_final_w,
           fs::path(dir_results_mum_mixtures,
-                     "mum_pathway_results",
-                     "SOL CHS PFAS Mummichog wide sig PW.RDS"))
+                   "mum_pathway_results_w_09",
+                   "SOL CHS PFAS Mummichog wide sig PW.RDS"))
 
 
 write_rds(mum_pw_final,
           fs::path(dir_results_mum_mixtures,
-                     "mum_pathway_results",
-                     "SOL CHS PFAS Mummichog long sig PW.RDS"))
-
+                   "mum_pathway_results_w_09",
+                   "SOL CHS PFAS Mummichog long sig PW.RDS"))

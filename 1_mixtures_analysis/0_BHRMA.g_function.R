@@ -97,7 +97,7 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   # g-estimation
   eta.low <- inprod(b[1:P], profiles[1,1:P])
   eta.high <- inprod(b[1:P], profiles[2,1:P])
-  psi <-eta.high-eta.low
+  psi <- eta.high-eta.low
   
 }"
   

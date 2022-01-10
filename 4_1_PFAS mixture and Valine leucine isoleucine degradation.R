@@ -7,7 +7,7 @@ library(janitor)
 
 # Set vars
 # cohort_name <- "solar"
-pw_name = "Tyrosine metabolism"
+pw_name = "Bile acid biosynthesis"
 
 
 source(here::here("0_0_1_format_vars_funs.R"))
@@ -134,7 +134,7 @@ pw_eff_est_wide <- pw_eff_est_wide %>%
   ungroup() 
 
 # Create Significance variables 
-pw_eff_est_wide_tyrosine <- pw_eff_est_wide %>% 
+pw_eff_est_wide_bile_acids <- pw_eff_est_wide %>% 
   mutate(sig = case_when(q_value_solar < 0.2 & q_value_chs < 0.2 ~ "q<0.2 both cohorts", 
                          p_value_solar < 0.05 & p_value_chs < 0.05 ~ 
                            "p<0.05 Both Cohorts",
@@ -157,9 +157,8 @@ pw_eff_est_wide_tyrosine <- pw_eff_est_wide %>%
 
 
 # Create dataframe for single exposure of interest (mixture effect)
-single_pfas_eff_est <- pw_eff_est_wide_tyrosine %>% 
-  filter(exposure == "Mixture effect", 
-         p_meta < 0.2)
+single_pfas_eff_est <- pw_eff_est_wide_bile_acids %>% 
+  filter(exposure == "Mixture effect")
 
 
 # 3) SOLAR Figure ------------------
@@ -267,7 +266,7 @@ pw_eff_est_w_2 <- pw_eff_est_wide %>%
 ggsave(solar_figure,
        filename =  fs::path(
          dir_reports,
-         "SOLAR PFAS Mixtures hyper_g Tyrosine metabolites q020.jpg"),
+         "SOLAR PFAS Mixtures hyper_g bile_acid metabolites.jpg"),
        width = 14, height = 5, units = "in")
 
 
@@ -372,7 +371,7 @@ pw_eff_est_w_2 <- pw_eff_est_wide %>%
 
 ggsave(chs_figure,
        filename =  fs::path(dir_reports,
-                            "CHS PFAS Mixtures hyper_g Tyrosine metabolites q020.jpg"),
+                            "CHS PFAS Mixtures hyper_g bile_acid metabolites q020.jpg"),
        width = 14, height = 5, units = "in")
 
 
@@ -381,9 +380,9 @@ ggsave(chs_figure,
 #   filter(p_meta < 0.05, exposure == "Mixture effect")
 # 
 # 
-# pw_eff_est_wide_tyrosine <- pw_eff_est_wide
+# pw_eff_est_wide_bile_acid <- pw_eff_est_wide
 # 
-# (tyr_met_comp <- ggplot(pw_eff_est_wide_tyrosine, aes(x = estimate_solar, y = estimate_beta_chs, 
+# (tyr_met_comp <- ggplot(pw_eff_est_wide_bile_acid, aes(x = estimate_solar, y = estimate_beta_chs, 
 #                                                       color = sig)) + 
 #     geom_point() + 
 #     geom_hline(yintercept = 0) + 
@@ -392,13 +391,13 @@ ggsave(chs_figure,
 #     facet_wrap(~exposure) + 
 #     ylab("Beta (CHS)") + 
 #     xlab("Beta (SOLAR)") + 
-#     ggtitle("Tyrosine Metabolites"))
+#     ggtitle("bile_acid Metabolites"))
 # 
 # 
 # 
 # ggsave(tyr_met_comp, 
 #        filename = fs::path(dir_reports, 
-#                            "SOL CHS Scatter plot of tyrosine metabolites.jpg"), 
+#                            "SOL CHS Scatter plot of bile_acid metabolites.jpg"), 
 #        width = 8, height = 7, units = "in")
 # 
 # 
@@ -421,4 +420,4 @@ ggsave(chs_figure,
 #     facet_wrap(~exposure) + 
 #     ylab("Beta (CHS)") + 
 #     xlab("Beta (SOLAR)") + 
-#     ggtitle("Tyrosine Metabolites"))
+#     ggtitle("bile_acid Metabolites"))

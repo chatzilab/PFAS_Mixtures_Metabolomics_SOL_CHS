@@ -5,7 +5,7 @@ exposure_type = "PFAS_Mixtures"
 
 mum_pw_wide <- read_rds(
   fs::path(dir_results_mum_mixtures, 
-           "mum_pathway_results_w_09", 
+           "mum_pathway_results_hyper_g", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
   mutate(q_meta = p.adjust(fet_meta), 
@@ -13,9 +13,7 @@ mum_pw_wide <- read_rds(
          sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
          hits_sig_meta = (hits_sig_solar + hits_sig_chs)/2) 
 
-# Reshape dataframe to be long format for pathway/cohort 
-
-# #Pivot longer on all values
+# Pivot longer on pathway/cohort 
 longer_df1 <- mum_pw_wide %>% 
   select(effect, path, path_2, super_pathway, 
          functional_groupings, sig,sig_fdr, q_meta,
@@ -84,10 +82,11 @@ mum_pw_wide2 <- left_join(mum_pw_wide, mum_pw_w_onlysig) %>%
    ylab("-log P (CHS)"))
 
 # Save Fig
-ggsave(pfas_mum_pathwayfig,
-       filename = fs::path(dir_reports,
-                           "PFAS Mixtures Mummichog Pathways All PFAS SOL CHS w09.jpeg"),
-       width = 8, height = 6)
+# ggsave(pfas_mum_pathwayfig,
+#        filename = fs::path(
+#          dir_reports,
+#          "PFAS Mixtures Mummichog Pathways All PFAS SOL CHS hyper_g.jpeg"),
+#        width = 8, height = 6)
 
 # Bubble plot ----------------------------------------------------
 mum_pw_long2 <- mum_pw_long %>%
@@ -102,7 +101,7 @@ mum_pw_long2 <- mum_pw_long %>%
                               aes(x = neg_logp,
                                   y = fct_rev(path_2),
                                   color = super_pathway,
-                                  size = hits_sig)) +
+                                  size = enrichment)) +
     geom_point(alpha = .75) +
     geom_vline(xintercept = -log10(0.05),
                color = "grey50", 
@@ -110,7 +109,7 @@ mum_pw_long2 <- mum_pw_long %>%
     facet_grid(super_pathway~cohort, 
                scales = "free_y", 
                space = "free") + 
-    scale_size(name = "Sig. Hits") +
+    scale_size(name = "Enrichment") +
     theme(panel.background = element_rect(fill="grey95"), 
           strip.background = element_rect(fill = "white"),
           legend.position = "bottom",
@@ -119,31 +118,8 @@ mum_pw_long2 <- mum_pw_long %>%
     xlab("-log P") +
     ylab(NULL))
 
-
-
 # Save Fig
 ggsave(pfas_pw_bubbleplot,
        filename = fs::path(dir_reports,
-                           "Mummichog bubble plot PFAS Mixtures.jpeg"),
-       width = 14, height = 9)
-
-
-
-
-# Save dataframe of results 
-temp_df <- mum_pw_long2 %>%
-  filter(cohort == "Combined") %>%
-  dplyr::select(effect, 
-                path, 
-                super_pathway, 
-                functional_groupings, 
-                neg_logp) %>% 
-  arrange(path) %>% 
-  mutate(neg_logp = neg_logp[,1])
-
-length(unique(temp_df$path))
-# Save
-write_csv(temp_df, 
-          file = fs::path(dir_results_mixtures,
-                          "Mummichog pathway results.csv"))
-
+                           "Mummichog bubble plot PFAS Mixtures hyper g.jpeg"),
+       width = 14, height = 6)

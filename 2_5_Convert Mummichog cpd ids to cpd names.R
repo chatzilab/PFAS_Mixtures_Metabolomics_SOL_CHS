@@ -1,19 +1,19 @@
 # Compound ID to Compound Names
 library(janitor)
 
-# read in key linking -----------------------------------
+# read in hand created key -----------------------------------
 file_location <- fs::path(
   dir_data_local,
   "Supporting Files", 
   "Cpd id to name keys",
   "Mummichog cpd id to cpd name key with db matches.xlsx")
 
-
 # Modify annotated data to get common compound names ------------------------
 # read annotated cmpd data
-annotated_fts_from_mum <- read_rds(fs::path(dir_data_local,
-                                            "Supporting Files", 
-                                            "mummichog_pw_ec_feature_key_cpd_id_only.rds"))
+annotated_fts_from_mum <- read_rds(
+  fs::path(dir_data_local,
+           "Supporting Files", 
+           "mummichog_pw_ec_feature_key_cpd_id_only.rds"))
 
 
 # Read in metaboanalyst key 
@@ -43,8 +43,8 @@ mbrole_w <- nm_conv_mbrole %>%
   summarise(input_source = paste(unique(input_source),collapse = "; "), 
             output = str_c(unique(output), collapse = "; ")) %>% 
   tidylog::pivot_wider(names_from = "output_source", 
-              values_from = c("output") , 
-              values_fn = list) %>% 
+                       values_from = c("output") , 
+                       values_fn = list) %>% 
   janitor::clean_names() %>%
   unnest(cas:lipid_maps) %>% 
   tidylog::select(-ymdb)
@@ -52,8 +52,8 @@ mbrole_w <- nm_conv_mbrole %>%
 
 # Combine all annotations
 name_cpd_key <- tidylog::full_join(nm_conv_metaboanalyst, 
-                          mbrole_w, by = "chem_id", 
-                          suffix = c("_metab", "_mbrole")) %>%
+                                   mbrole_w, by = "chem_id", 
+                                   suffix = c("_metab", "_mbrole")) %>%
   tidylog::full_join(nm_conv_metanet,  
                      by = "chem_id", 
                      suffix = c("", "_metanet"))
@@ -72,7 +72,6 @@ name_cpd_key2 <- name_cpd_key %>%
 colnames(name_cpd_key2)
 
 # Join Annotated fts from mumichog with names of compounds 
-
 final_annotated_cpds <- tidylog::left_join(annotated_fts_from_mum,
                                            name_cpd_key2)
 

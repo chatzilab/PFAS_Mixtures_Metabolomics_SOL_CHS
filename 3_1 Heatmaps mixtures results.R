@@ -6,28 +6,16 @@ library(gplots)
 
 # Read in MWAS Beta Coefficients --------------------
 # read in mwas beta coefs 
-sol_mwas_results_long <- read_csv(
-  file = fs::path(dir_results, 
-                  'PFAS_Mixtures', 
-                  "sol_pfas_mixtures_results_final_v4.csv"))
-
-chs_mwas_results_long <- read_csv(
-  file = fs::path(dir_results, 
-                  'PFAS_Mixtures', 
-                  "chs_pfas_mixtures_results_final_v4.csv"))
-
-mwas_results_long <- list(solar = sol_mwas_results_long, 
-                          chs = chs_mwas_results_long)
-
-# Clean environment
-rm(sol_mwas_results_long, chs_mwas_results_long)
+mwas_results_long  <- read_rds(
+  file = fs::path(dir_results_mixtures, 
+                  "SOL CHS all Mixtures MWAS results long hyper_g.rds"))
 
 # # select all features p < 0.05
-# p_05 <- mwas_results_long %>% 
-#   filter(p < 0.05)
-# 
-# met_any_pfas_05 <- p_05 %>% 
-#   filter(metabolite %in% p_05$metabolite)
+p_05 <- mwas_results_long %>%
+  modify(., ~filter(., p_value < 0.05))
+ 
+# met_any_pfas_05 <- p_05 %>%
+#   modify(., ~filter(., feature %in% p_05$feature))
 
 # Scale estimates 
 # mwas_results_long <- mwas_results_long %>% 
@@ -43,10 +31,10 @@ mwas_results_wide <- mwas_results_long %>%
            #       estimate_scaled = if_else(p < 0.05, 
            #                                 estimate_scaled, 
            #                                 estimate_scaled)) %>%
-           select(exposure, feature, estimate_scaled, estimate_pip) %>% 
+           select(exposure, feature, estimate_beta, estimate_pip) %>% 
            pivot_wider(id_cols = feature, 
                        names_from = exposure, 
-                       values_from = c(estimate_scaled, estimate_pip)) %>% 
+                       values_from = c(estimate_beta, estimate_pip)) %>% 
            select(-contains("mixture")))
 
 
@@ -85,10 +73,10 @@ top_50 <- mwas_results_annotated_wide %>%
   modify(~ .x %>%
            rowwise() %>%
            mutate(sum_abs_est = sum(abs(c_across(
-             estimate_scaled_pfda:estimate_scaled_pfos))),
+             estimate_beta_pfda:estimate_beta_pfos))),
                   # max_mix_effect = abs(`Mixture effect`),
                   max_est = max(abs(c_across(
-                    estimate_scaled_pfda:estimate_scaled_pfos)))) %>%
+                    estimate_beta_pfda:estimate_beta_pfos)))) %>%
            ungroup() %>%
            group_by(refmet_name) %>%
            filter( # max_mix_effect == abs(`Mixture effect`),
@@ -129,18 +117,17 @@ eff_est <- top_50 %>%
   modify(
     ~select(.x, 
             refmet_name, 
-            all_of(str_c("estimate_scaled_",
+            all_of(str_c("estimate_beta_",
                          unique(mwas_results_long$chs$exposure)[-7]))) %>% 
-      rename_all(~str_remove(., "estimate_scaled_")) %>% 
+      rename_all(~str_remove(., "estimate_beta_")) %>% 
       column_to_rownames(var = "refmet_name") %>% 
       as.matrix())
-
 
 
 # Hierarchical clustering of Exposures  ----------------------------------
 
 # Run Correlation Matrix
-exposure_cor_matrix <- map(pips, ~cor(.x, method = "spearman") )
+exposure_cor_matrix <- map(eff_est, ~cor(.x, method = "spearman") )
 
 # Get pearson dissimilarity & run clustering
 temp_dend_exposure <- map(exposure_cor_matrix, 
@@ -229,10 +216,10 @@ top_50 <- top_50 %>%
 color.scheme <- rev(diverging_hcl(palette = "Cork",n = 100))
 
 # Create Plot
-tiff(file=fs::path(dir_reports, "Heatmaps", "SOLAR PFAS Mixtures PIPS_v4.tiff"),
+tiff(file=fs::path(dir_reports, "Heatmaps", "SOLAR PFAS Mixtures hyper_g.tiff"),
      width=5, height=5, res=300, units="in")  
 out <-
-heatmap.2(pips$solar,
+heatmap.2(eff_est$solar,
           Colv = dend1$solar,
           # Rowv = met_cluster,
           dendrogram = "both", #c("both","row","column","none"),
@@ -267,10 +254,10 @@ dev.off()
 
 # CHS Heatmap -------------------------------------------------------------
 tiff(file=fs::path(dir_reports, "Heatmaps", 
-                   "CHS PFAS Mixtures PIPs Heatmap_v4.tiff"),
+                   "CHS PFAS Mixtures Heatmap_hyper_g.tiff"),
      width=5, height=5, res=300, units="in")  
 out <-
-heatmap.2(pips$chs,# reorderfun = 
+heatmap.2(eff_est$chs,# reorderfun = 
           Colv = dend1$chs,
           # Rowv = met_cluster,
           dendrogram = "both", #c("both","row","column","none"),

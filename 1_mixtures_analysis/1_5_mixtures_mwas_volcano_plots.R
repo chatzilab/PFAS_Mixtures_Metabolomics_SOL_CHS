@@ -1,47 +1,40 @@
 # Volcano Plots
+library("jag2")
+library("tidyverse")
+source(here::here("!directories.r"))
 
 # SOLAR Volcano Plots ----------------------------------------------
-sol_mwas <- read_csv(
-  file = fs::path(dir_results, 
-                  'PFAS_Mixtures', 
-                  "sol_pfas_mixtures_results_w_09.csv")) %>% 
+mwas_results <- read_csv(
+  file = fs::path(dir_results_mixtures, 
+                  "all_pfas_mixtures_results_hyper_g.csv")) %>% 
   as_tibble()
 
 # Get reduced dataset
-sol_mwas_reduced <- sol_mwas %>% 
+mwas_reduced <- mwas_results %>% 
   filter(p_value  < 0.99)
 
 # Volcano Plot
-(solar_volcano_plot <- ggplot(sol_mwas_reduced,
+solar_volcano_plot <- ggplot(mwas_reduced %>% filter(cohort == "SOL"),
                               aes(x = estimate_beta, y = -log(p_value))) +
     geom_point(size = 1, alpha = 0.5) + 
     geom_vline(xintercept = 0, color = "grey20", linetype = 2) +
     facet_wrap(~exposure, scales = "free") +
     ylab("-log10 p") +
     xlab("Effect Estimate") +
-    ggtitle("SOLAR"))
+    ggtitle("SOLAR")
 
 # Save and clean env.
 ggsave(solar_volcano_plot,
-       filename =  fs::path(dir_reports,
-                            "Volcano plots",
-                            "SOLAR Mixtures analysis volcano plots_p_original_w_09.jpg"), 
+       filename = fs::path(
+         dir_reports,
+         "Volcano plots",
+         "SOLAR Mixtures analysis volcano plots p_original_hyper_g.jpg"), 
        width = 6, height = 5)
 rm(solar_volcano_plot)
 
 
 # CHS Volcano Plots ----------------------------------------------
-chs_mwas <- read_csv(
-  file = fs::path(dir_results, 
-                  'PFAS_Mixtures', 
-                  "chs_pfas_mixtures_results_w_09.csv")) 
-
-# Get reduced dataset
-chs_mwas_reduced <- chs_mwas %>% 
-  filter(p_value  < 0.99)
-
-# Volcano Plot
-chs_volcano_plot <- ggplot(chs_mwas_reduced,
+chs_volcano_plot <- ggplot(mwas_reduced %>% filter(cohort == "CHS"),
                            aes(x = estimate_beta, y = -log(p_value))) +
   geom_point(size = 1, alpha = 0.5) + 
   geom_vline(xintercept = 0, color = "grey20", linetype = 2) +
@@ -55,5 +48,5 @@ ggsave(chs_volcano_plot,
        filename =  fs::path(
          dir_reports,
          "Volcano plots",
-         "chs Mixtures analysis volcano plots_p_from_original_w_09.jpg"),
+         "chs Mixtures analysis volcano plots_p_from_original_hyper_g.jpg"),
        width = 6.5, height = 5)

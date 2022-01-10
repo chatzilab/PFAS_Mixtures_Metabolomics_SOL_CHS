@@ -161,8 +161,3 @@ temp_df <- mum_pw_long2 %>%
                 neg_logp) %>% 
   arrange(path) %>% 
   mutate(neg_logp = neg_logp[,1])
-
-length(unique(temp_df$path))
-write_csv(temp_df, 
-          file = fs::path(dir_results, "Mummichog pathway results.csv"))
-

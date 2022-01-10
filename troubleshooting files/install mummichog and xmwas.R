@@ -28,8 +28,12 @@ metanr_packages()
 
 # SSPA is not available in the current version of Bioconductor.
 # (https://bioconductor.org/about/removed-packages/)
-# I had to download the source packates off of bioconductor, but you also need:
+# I had to download the source packages off of bioconductor, but you also need:
 BiocManager::install("qvalue")
+
+BiocManager::install(version = "3.13")
+BiocManager::install("SSPA", version = "3.13")
+
 
 # Test to see if it can be installed:
 library(SSPA)

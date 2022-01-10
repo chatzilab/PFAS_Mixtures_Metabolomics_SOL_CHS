@@ -1,38 +1,44 @@
 # RUN MUMMICHOG METABOANALYST code
 library(tidyverse)
 library(MetaboAnalystR)
-library(igraph)
+# library(igraph)
 
 source(here::here("!directories.R"))
 source(file = fs::path(dir_home,
-                       "1_Code", 
+                       "1_Code",
                        "troubleshooting files",
                        "internal mum variables.R"))
 
 # Set important vars
 exposure_type = "PFAS"
-exposures = c("Mixture effect")
+exposures = c("Mixture effect hyper_g")
 cohort = c("solar", "chs")
 modes = c("mixed")
 
 
 # Get Dataframe of all conbinations
-all_mum_comb <- expand.grid(list(modes = modes, 
-                                 cohort = cohort, 
-                                 exposures = exposures)) %>% 
-  as_tibble() %>% 
-  mutate(across(.cols = everything(), ~as.character(.)), 
-         row = row_number(exposures)) %>% 
-  dplyr::select(row, exposures, cohort, modes) 
+# all_mum_comb <- expand.grid(list(modes = modes, 
+#                                  cohort = cohort, 
+#                                  exposures = exposures)) %>% 
+#   as_tibble() %>% 
+#   mutate(across(.cols = everything(), ~as.character(.)), 
+#          row = row_number(exposures)) %>% 
+#   dplyr::select(row, exposures, cohort, modes) 
 
+
+all_mum_comb <- data.frame(row = 1:2, 
+           exposures = rep("Mixture effect hyper_g",2),
+           cohort = c("solar", "chs"),
+           modes = rep("mixed", 2))
+
+ 
 rm(modes, cohort, exposures)
 
 # Temp Results folder architecture:
 ## Exposure Name > Cohort > modes
-
+i = 1
 # Run all analyses -------------------------
-i = 2
-for(i in 1:nrow(all_mum_comb)){
+# for(i in 1:nrow(all_mum_comb)){
   # Get names of variables
   exposures = all_mum_comb$exposures[i]
   chrt = all_mum_comb$cohort[i]
@@ -46,7 +52,7 @@ for(i in 1:nrow(all_mum_comb)){
   t1 <- Sys.time()
   #  Set working directory for first folder
   setwd(fs::path(dir_results_mum_mixtures,
-                 paste0(exposures, " w09"), chrt))
+                 exposures, chrt))
   
   
   ## Set up for mummichog -------------------------
@@ -60,7 +66,7 @@ for(i in 1:nrow(all_mum_comb)){
   mSet<-SetRTincluded(mSet, "seconds")
   
   ## Update metaboanalyst parameters: 
-  mSet<-UpdateInstrumentParameters(mSet, 
+  mSet<-UpdateInstrumentParameters(mSet,
                                    force_primary_ion = TRUE,
                                    instrumentOpt = 5.0, # Mass accuracy
                                    msModeOpt = "mixed",  # mode
@@ -103,14 +109,14 @@ for(i in 1:nrow(all_mum_comb)){
     select(exposure, mode, everything())
   
   # Write pathway results 
-  write_csv(pathways, 
-            fs::path(dir_results_mum_mixtures, 
-                     "mum_pathway_results_w_09",
-                     chrt,
-                     paste(exposures,
-                           mode,
-                           "mum_pathways.csv", 
-                           sep = "_")))
+  # write_csv(pathways, 
+  #           fs::path(dir_results_mum_mixtures, 
+  #                    "mum_pathway_results_hyper_g",
+  #                    paste(chrt, 
+  #                          exposures,
+  #                          mode,
+  #                          "mum_pathways.csv", 
+  #                          sep = "_")))
   
   print(Sys.time()-t1)
   print(paste(all_mum_comb$exposures[i], chrt, mode, "Complete"))

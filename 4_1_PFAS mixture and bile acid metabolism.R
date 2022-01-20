@@ -16,10 +16,10 @@ source(here::here("0_0_1_format_vars_funs.R"))
 ## Mummichog Data ------------------------------------
 mum_pw_wide <- read_rds(
   fs::path(dir_results_mum_mixtures,
-           "mum_pathway_results_hyper_g", 
+           "Mixture effect hyper_g", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
-  mutate(q_meta = p.adjust(fet_meta), 
+  mutate(q_meta = p.adjust(pval_meta), 
          sig_fdr = if_else(q_meta < 0.2, 
                            "Sig. FDR < 0.2",
                            "Not. Sig"), 

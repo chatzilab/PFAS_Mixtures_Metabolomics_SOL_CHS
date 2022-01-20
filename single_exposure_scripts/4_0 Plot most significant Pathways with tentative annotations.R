@@ -12,7 +12,7 @@ mum_pw_wide <- read_rds(
            "mum_pathway_results", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
-  mutate(q_meta = p.adjust(fet_meta), 
+  mutate(q_meta = p.adjust(pval_meta), 
          sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
          mean_num_sig = (hits_sig_solar +hits_sig_chs)/2)
 
@@ -20,7 +20,7 @@ mum_pw_wide <- read_rds(
 
 # Get most significant for each PFAS
 mum_most_sig_pws <- mum_pw_wide %>% 
-  filter(fet_meta < 0.05, 
+  filter(pval_meta < 0.05, 
          sig == "Sig. Both Cohorts") %>% 
   mutate(mean_hits = (hits_sig_solar + hits_sig_chs)/2) %>% 
   arrange(-1*mean_hits)

@@ -17,17 +17,15 @@ library(jag2)
 library(broom)
 theme_set(theme_cowplot())
 
-source(here::here("!directories.R"))
+source(here::here("!directories.R")) 
 source(here::here("!set_exposure_outcome_vars.R"))
 source(here::here("0_0_1_format_vars_funs.R"))
+source(here::here("!load_data.R"))
+source(here::here("0_0_3_analysis_funs.R"))
 ```
 
 
 ```{r}
-source(here::here("!load_data.R"))
-source(here::here("0_0_3_analysis_funs.R"))
-
-
 # source(here::here("1_mixtures_analysis",
 #                   "1_3 post HPC data cleaning.R"))
 ```

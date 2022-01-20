@@ -119,12 +119,12 @@ mum_pw_w1 <- mum_pw_w1 %>%
   mutate(fet_solar2 = if_else(is.na(fet_solar), .99, fet_solar), 
          fet_chs2 = if_else(is.na(fet_chs), .99, fet_chs)) %>%
   rowwise() %>% 
-  mutate(fet_meta = metap::sumz(p = c_across(fet_solar2:fet_chs2), 
+  mutate(pval_meta = metap::sumz(p = c_across(fet_solar2:fet_chs2), 
                                     weights = c(wgt_sol, wgt_chs))$p, 
          enrichment_meta = 
            ((enrichment_solar*wgt_sol)+(enrichment_chs*wgt_chs))/(wgt_sol+wgt_chs), 
-         neg_logp_meta = -log(fet_meta), 
-         sig_meta = if_else(fet_meta < 0.01, "Sig.", "Not Sig.")) %>% 
+         neg_logp_meta = -log(pval_meta), 
+         sig_meta = if_else(pval_meta < 0.01, "Sig.", "Not Sig.")) %>% 
   ungroup()
 
 
@@ -142,7 +142,7 @@ mum_pw_final_w <- mum_pw_w1 %>%
 mum_pw_final <- tidylog::left_join(mum_pw2, 
                                    mum_pw_final_w %>% 
                                      select(pfas, path, path_2, sig,
-                                            fet_meta, enrichment_meta), 
+                                            pval_meta, enrichment_meta), 
                                    by = c("pfas", "path", "path_2")) %>% 
   tidylog::left_join(superpathwaykey) %>% 
   filter(!is.na(sig))

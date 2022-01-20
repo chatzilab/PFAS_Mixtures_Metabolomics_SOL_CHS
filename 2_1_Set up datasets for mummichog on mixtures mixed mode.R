@@ -31,13 +31,7 @@ dir.create(file.path(fs::path(dir_results_mum_mixtures,
 # save mwas in analysis folders ------------------------------
 mwas_results_cohort_list  <- read_rds(
   file = fs::path(dir_results_mixtures, 
-                  "SOL CHS all Mixtures MWAS results long hyper_g.rds"))
-
-
-
-# xxx <- mwas_results_cohort_list$solar %>% 
-#   filter(exposure == "mixture")
-# sum(xxx$p_value<0.05)#/length(xxx$p_value)
+                  "SOL CHS all Mixtures MWAS results long hyper_g_v2.rds"))
 
 
 # Format data for mummichog (data structure: m (mz), p, t, r (retention time), mode (pos/neg))
@@ -61,15 +55,40 @@ temp_mwas <- mwas_results_cohort_list %>%
 
 
 # Save SOLAR data 
-write_csv(temp_mwas[["solar"]], 
+write_csv(temp_mwas[["SOL_all pfas"]], 
           fs::path(dir_results_mum_mixtures, 
                    exposures, 
                    "solar",
-                   "solar_mixture_effect_mixed_mode_MWAS.csv"))
+                   "solar_all_pfas_mixture_effect_mixed_mode_MWAS.csv"))
 
-# Save CHS data 
-write_csv(temp_mwas[["chs"]], 
+write_csv(temp_mwas[["SOL_pfcas"]], 
           fs::path(dir_results_mum_mixtures, 
                    exposures, 
+                   "solar",
+                   "solar_pfcas_mixture_effect_mixed_mode_MWAS.csv"))
+
+write_csv(temp_mwas[["SOL_pfsas"]], 
+          fs::path(dir_results_mum_mixtures, 
+                   exposures, 
+                   "solar",
+                   "solar_pfsas_mixture_effect_mixed_mode_MWAS.csv"))
+
+
+# Save CHS data 
+write_csv(temp_mwas[["CHS_all pfas"]],
+          fs::path(dir_results_mum_mixtures,
+                   exposures,
                    "chs",
-                   "chs_mixture_effect_mixed_mode_MWAS.csv"))
+                   "chs_all_pfas_mixture_effect_mixed_mode_MWAS.csv"))
+
+write_csv(temp_mwas[["CHS_pfcas"]],
+          fs::path(dir_results_mum_mixtures,
+                   exposures,
+                   "chs",
+                   "chs_pfcas_mixture_effect_mixed_mode_MWAS.csv"))
+
+write_csv(temp_mwas[["CHS_pfsas"]],
+          fs::path(dir_results_mum_mixtures,
+                   exposures,
+                   "chs",
+                   "chs_pfsas_mixture_effect_mixed_mode_MWAS.csv"))

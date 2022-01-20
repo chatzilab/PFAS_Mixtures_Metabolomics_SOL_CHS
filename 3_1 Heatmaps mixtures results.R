@@ -40,9 +40,8 @@ mwas_results_wide <- mwas_results_long %>%
 
 # Read in Dougs annotations ------------------------------------------------
 annotations <- read_rds(
-  fs::path(dir_data_local, 
-           "4_Common_Metabolites_Annotation", 
-           "Common_Metabolites_SOLAR_CHS_V1.RDS")) %>% 
+  fs::path(dir_data, 
+           "Common_Metabolites_annotated_SOLAR_CHS_V1_from_doug.RDS")) %>% 
   bind_rows(.id = "mode")
 
 

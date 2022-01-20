@@ -1,7 +1,7 @@
 # Log in to HPC 
 # Performed analysis on the epyc-64	partition on Discovery
-ssh jagoodri@endeavour.usc.edu
-# ssh jagoodri@discovery.usc.edu
+# ssh jagoodri@endeavour.usc.edu
+ssh jagoodri@discovery.usc.edu
 
 # Change Working Directory
 cd /project/dconti_624/Users/jagoodri/sol
@@ -13,13 +13,14 @@ sbatch 1_1_solar_mixtures_mwas_hpc.job
 
 
 # Change Working Directory
-cd /project/dconti_624/Users/jagoodri/chs
+# cd /project/dconti_624/Users/jagoodri/chs
 
 # Run CHS analysis 
-dos2unix 1_2_chs_mixtures_mwas_hpc.job
-sbatch 1_2_chs_mixtures_mwas_hpc.job
+# dos2unix 1_2_chs_mixtures_mwas_hpc.job
+# sbatch 1_2_chs_mixtures_mwas_hpc.job
 
 exit
+
 
 #############################################################
 # Commands for troubleshooting and testing ------------------

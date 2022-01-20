@@ -6,10 +6,6 @@ library(jag2)
 ftdata <- read_rds(fs::path(dir_data, 
                             "sol_chs_batch_cor_scaled_untargeted_fts.rds"))
 
-# Load Sample Metadata
-samp_metadata <- read_rds(fs::path(dir_data,
-                                   "sample_metadata_with_summaries.rds"))
-
 # Obtain Feature metadata 
 ft_metadata <- ftdata$solar %>% 
   modify(~data.frame(feature = colnames(.)[-1])) %>% 
@@ -78,12 +74,6 @@ exposure_outcome <- exposure_outcome %>%
 
 # Clean Environment
 rm(chs_exposure_outcome, solar_exposure_outcome)
-
-
-# Load annotated data ----------------------------------------------
-annotated_fts <- read_rds(
-  fs::path(dir_data, 
-           "sol_chs_batch_cor_scaled_annotated_fts.rds"))
 
 
 # Load PFAS LOD Data 

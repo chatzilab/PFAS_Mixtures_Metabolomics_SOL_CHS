@@ -135,11 +135,13 @@ table1_p_overall <- t1_data %>%
     "Household education level [n (%)]" = 
       map_chr(data, ~chisq.test(.$edu_house , .$cohort)$p.value %>%
                 signif(., 2) %>% 
-                as.character(.))) %>%
-  pivot_longer(cols = "BMI, kg/m2":"Household education level [n (%)]", 
+                as.character(.)), 
+    "Sex, Female [n (%)]" = 
+      map_chr(data, ~chisq.test(.$sex , .$cohort)$p.value %>%
+              signif(., 2) %>% 
+              as.character(.))) %>%
+  pivot_longer(cols = "BMI, kg/m2":"Sex, Female [n (%)]", 
                values_to = "p_overall")
-
-
 
 
 # Join and format Table 1 ------------
@@ -192,4 +194,4 @@ writexl::write_xlsx(table1_w,
 #    solar_t1)
 
 
- 
+

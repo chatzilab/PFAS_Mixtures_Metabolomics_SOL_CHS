@@ -19,7 +19,7 @@ mum_pw_wide <- read_rds(
            "mum_pathway_results", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
-  mutate(q_meta = p.adjust(fet_meta), 
+  mutate(q_meta = p.adjust(pval_meta), 
          sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
          mean_num_sig = (hits_sig_solar + hits_sig_chs)/2)
 

@@ -16,10 +16,10 @@ source(here::here("0_0_1_format_vars_funs.R"))
 ## Mummichog Data ------------------------------------
 mum_pw_wide <- read_rds(
   fs::path(dir_results_mum_mixtures,
-           "mum_pathway_results_hyper_g", 
+           "Mixture effect hyper_g", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
-  mutate(q_meta = p.adjust(fet_meta), 
+  mutate(q_meta = p.adjust(pval_meta), 
          sig_fdr = if_else(q_meta < 0.2, 
                            "Sig. FDR < 0.2",
                            "Not. Sig"), 
@@ -34,21 +34,25 @@ mwas_beta_coefs <- read_rds(
                           rename_pfas(include_asterisk = TRUE)))
 
 ## Read in mzrt key--------------------------------------
-mzrt_key <- read_rds(fs::path(dir_data_local,
-                              "Supporting Files", 
-                              "mummichog_pw_ec_feature_key_with_cpd_names.rds"))
+mzrt_key <- read_rds(
+  fs::path(dir_data_local,
+           "Supporting Files", 
+           "mummichog_pw_ec_feature_key_with_cpd_names.rds"))
 
-# 2) Data Cleaning: filter and merge metabolites from specific pathways ------------
+# 2) Data Cleaning: filter and merge metabolites from specific pathways --------
 # Get mzrt key for specific pathway 
 key_pw_met <- mzrt_key %>% 
   filter(pathway == pw_name) %>% 
   select(pathway, met_name, everything())
 
-# Filter only primary ions; clean names of cpds with multiple names 
+# number sig in both cohorts
+key_pw_met %>% 
+  group_by(cohort) %>% 
+  summarise(n = length(unique(empirical_compound)))
+
+# clean names of cpds with multiple names 
 key_pw_met2 <- key_pw_met %>% 
-  filter(matched_form == "M+H[1+]" | matched_form == "M-H[-]") %>%
-  filter(!(matched_compound == met_name)) %>% # This drops metabolites without a name
-  group_by(name) %>% 
+  group_by(empirical_compound) %>% 
   summarise(matched_compound = toString(unique(matched_compound)), 
             mean_mass = mean(query_mass), 
             sd_mass = sd(query_mass) %>% replace_na(., 0), 
@@ -58,7 +62,8 @@ key_pw_met2 <- key_pw_met %>%
                               " (", 
                               length(unique(met_name)), 
                               ")") %>% 
-              str_remove(" \\(1\\)") ) %>% 
+              str_remove(" \\(1\\)") , 
+            mzrt = toString(unique(name))) %>% 
   mutate(met_name_first_only = 
            case_when(
              str_detect(
@@ -77,12 +82,33 @@ key_pw_met2 <- key_pw_met %>%
              TRUE ~ met_name_first_only))
 
 
-# Get pathway specific effect estimates for main exposure
-pw_eff_est_annotated_allfts <- mwas_beta_coefs %>%
-  modify(~.x %>% 
-           left_join(key_pw_met2, ., by = c("name" = "feature")))  %>% 
-  bind_rows(.id = "cohort")
+# mzrt to enframe (to get dataframe of all mzrts for each emp.cpd)
+mzrt_all <- str_split(key_pw_met2$mzrt, ", ") %>% 
+  enframe(name = "rownum", value = "mzrt_df") %>% 
+  select(-rownum)
 
+# Set Names
+mzrt_all$empirical_compound <- key_pw_met2$empirical_compound
+
+# Join with original data 
+key_pw_met3 <- left_join(key_pw_met2, mzrt_all)
+
+# Get pathway specific effect estimates for main exposure
+# pw_eff_est_annotated_allfts <- mwas_beta_coefs %>%
+#   modify(~.x %>% 
+#            left_join(key_pw_met2, ., by = c("name" = "feature")))  %>% 
+#   bind_rows(.id = "cohort")
+
+
+solar <- map(key_pw_met3$mzrt_df, 
+             ~ as_tibble(.x) %>% 
+               rename_all(function(x){return("feature")}) %>% 
+              left_join(mwas_beta_coefs$solar))
+
+
+
+as.data.frame(key_pw_met3$mzrt_df[1]) %>% 
+str(key_pw_met3$mzrt_all)
 
 # select only a single feature from each compound
 most_altered_fts <- pw_eff_est_annotated_allfts %>% 

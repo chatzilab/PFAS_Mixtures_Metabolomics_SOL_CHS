@@ -8,13 +8,16 @@ source(here::here("!set_exposure_outcome_vars.R"))
 source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!load_data.R"))
 
-
 # Get BHRMA Function
-source(here::here("1_mixtures_analysis", "0_BHRMA.g_function.R"))
+source(here::here("1_mixtures_analysis",
+                  "0_BHRMA.g_function.R"))
 
+# Solar ------------------------------------------
+# Read in PCA Data 
+pca_dat <- read_rds(fs::path(dir_results_mum_mixtures,
+                             "SOL CHS PC Scores of sig pathways.RDS"))
 
-# Solar -------------------------------------------
-sol_metab_dat <- purrr::reduce(ftdata$solar, .f = left_join)
+sol_pca_dat <- pca_dat$solar
 
 # Create numberic Vars
 solar_eo <- exposure_outcome$solar %>% 
@@ -27,21 +30,17 @@ solar_eo <- exposure_outcome$solar %>%
 
 # Join exposures and metabolites 
 solar <- left_join(solar_eo, 
-                   sol_metab_dat %>% mutate(id = as.character(id)), 
+                   sol_pca_dat %>% mutate(id = as.character(id)), 
                    by = "id")
 
 # PFAS
-# X.obs = solar[exposures_continuous] %>% 
-# X.obs = solar[c("pfhxs", "pfos")] %>%
-X.obs = solar[setdiff(exposures_continuous,
-                      c("pfhxs", "pfos"))] %>%
+X.obs = solar[exposures_continuous] %>%
   mutate(across(everything(), ~scale(log2(.))))
 
 # exclude outcome, leave only predictors:
 Y = solar %>%
-  dplyr::select(colnames(sol_metab_dat)[2]:ncol(solar)) %>% 
+  dplyr::select(colnames(sol_pca_dat)[2]:ncol(solar)) %>% 
   scale(center = F, scale = F) 
-
 
 dim(Y)
 
@@ -58,7 +57,6 @@ LOD = c(0.01,0.05, 0.01, 0.01, 0.01, 0.43)
 profiles = c(-1,1)*matrix(.5, nrow=2, ncol=P)
 # exposure.Names = colnames(X.obs)
 
-
 rm(list = setdiff(ls(), c("X.obs",
                           "Y",
                           "U",
@@ -68,10 +66,11 @@ rm(list = setdiff(ls(), c("X.obs",
                           "ridge.BDL.model", 
                           "BHRMA.g")))
 
+# Save data 
 save.image(file = fs::path(dirname(here::here()),
                            "0_Data", 
-                           "data_for_mixtures_analysis", 
-                           "SOLAR_mixtures_datasets_pfcas_hyper_g_prior.Rdata"))
+                           "data_for_mixtures_pw_pca_analysis", 
+                           "SOLAR_pw_pcs_mixtures_datasets_hyper_g_prior.Rdata"))
 
 rm(list = ls())
 
@@ -81,31 +80,34 @@ source(here::here("!directories.R"))
 source(here::here("!set_exposure_outcome_vars.R"))
 source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!load_data.R"))
-source(here::here("1_mixtures_analysis", "0_BHRMA.g_function.R"))
+source(here::here("1_mixtures_analysis",
+                  "0_BHRMA.g_function.R"))
 
-# Get all metabolite data in single dataframe
-chs_metab_dat <- purrr::reduce(ftdata$chs, .f = left_join)
+# Read in PCA Data 
+pca_dat <- read_rds(fs::path(dir_results_mum_mixtures,
+                             "SOL CHS PC Scores of sig pathways.RDS"))
+# Get chs data only
+chs_pca_dat <- pca_dat$chs
 
-# Create numeric vars
+# Create numberic Vars
 chs_eo <- exposure_outcome$chs %>% 
   mutate(id = as.character(id), 
          sex.num = ifelse(sex == "Female",1,0),
          ses.num = recode(ses, "[1,2]" = 1, "(2,4]" = 2, "(4,9]" = 3))
 
+
 # Join exposures and metabolites 
 chs <- left_join(chs_eo, 
-                 chs_metab_dat %>% mutate(id = as.character(id)), 
-                   by = "id")
+                 chs_pca_dat %>% mutate(id = as.character(id)), 
+                 by = "id")
 
 # PFAS
-# X.obs = chs[exposures_continuous] %>% 
-# X.obs = chs[c("pfhxs", "pfos")] %>%
-X.obs = chs[setdiff(exposures_continuous,
-                      c("pfhxs", "pfos"))] %>%
+X.obs = chs[exposures_continuous] %>%
   mutate(across(everything(), ~scale(log2(.))))
 
+# exclude outcome, leave only predictors:
 Y = chs %>%
-  dplyr::select(colnames(chs_metab_dat)[2]:ncol(chs)) %>% # exclude outcome, leave only predictors
+  dplyr::select(colnames(chs_pca_dat)[2]:ncol(chs)) %>% 
   scale(center = F, scale = F) 
 
 dim(Y)
@@ -117,7 +119,7 @@ U = cbind.data.frame(age = as.numeric(chs$age),
 
 
 P = ncol(X.obs)
-LOD = c(0.01, 0.01, 0.05, 0.01, 0.01, 0.01, 0.43, 0.01)
+LOD = c(0.01,0.05, 0.01, 0.01, 0.01, 0.43)
 profiles = c(-1,1)*matrix(.5, nrow=2, ncol=P)
 
 
@@ -126,12 +128,14 @@ rm(list = setdiff(ls(), c("X.obs",
                           "U",
                           "LOD",
                           "profiles", 
+                          # "exposure.Names",
                           "ridge.BDL.model", 
                           "BHRMA.g")))
 
+# Save data 
 save.image(file = fs::path(dirname(here::here()),
                            "0_Data", 
-                           "data_for_mixtures_analysis", 
-                           "chs_mixtures_datasets_pfcas_hyper_g_prior.Rdata"))
+                           "data_for_mixtures_pw_pca_analysis", 
+                           "chs_pw_pcs_mixtures_datasets_hyper_g_prior.Rdata"))
 
 rm(list = ls())

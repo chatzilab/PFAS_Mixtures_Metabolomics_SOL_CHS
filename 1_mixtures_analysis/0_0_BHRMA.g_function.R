@@ -63,7 +63,7 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
     mu.X[j] ~ dnorm(0, 1.0E-06)
     prec.X[j] <- 10000
   }
-  pi ~ dbeta(1,P)
+  pi ~ dbeta(1,P) 
   #pi ~ dbeta(P, 1)
 
   # semi-Bayes
@@ -79,7 +79,7 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   # Hyper-g prior (following Perrakis 2018, note that this is on the G^-1 so the Beta distribution is switchd in terms of a and b from Li and Clyde 2019 equation 34)
   a <- 3
   bw <- a/2 - 1
-  w~dbeta(1,bw)
+  w~dbeta(1,bw) T(0.00001,0.99999) # JG: added T(0.0001,0.9999) 
   G <- w/(1-w)
 
   # Hyper-g/n prior (following Perrakis 2018, note that this is on the G^-1 so the Beta distribution is switchd in terms of a and b from Li and Clyde 2019 equation 34)

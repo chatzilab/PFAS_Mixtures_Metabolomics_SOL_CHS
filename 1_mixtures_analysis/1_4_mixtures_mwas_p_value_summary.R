@@ -10,7 +10,7 @@ mwas_results <- read_csv(
 
 # Calculate summaries
 (mwas_summary <- mwas_results %>% 
-    group_by(cohort, mode, exposure) %>% 
+    group_by(cohort, mixture, exposure) %>% 
     summarise(n_features = length(feature), 
               percent_significant_p05 = jag2::npct(significance, 
                                                    "p < 0.05", 
@@ -21,7 +21,7 @@ mwas_results <- read_csv(
 
 # pivot summary wider
 mwas_summary_w <- pivot_wider(mwas_summary, 
-                              id_cols = c(mode, exposure, n_features),
+                              id_cols = c(exposure,mixture, n_features),
                               names_from = cohort, 
                               values_from = c(percent_significant_p05, 
                                               percent_significant_q05))

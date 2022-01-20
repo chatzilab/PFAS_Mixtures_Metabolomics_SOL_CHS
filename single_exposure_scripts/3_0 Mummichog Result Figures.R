@@ -9,7 +9,7 @@ mum_pw_wide <- read_rds(
            "mum_pathway_results", 
            "SOL CHS PFAS Mummichog wide sig PW.RDS")) %>% 
   clean_names() %>% 
-  mutate(q_meta = p.adjust(fet_meta), 
+  mutate(q_meta = p.adjust(pval_meta), 
          sig_fdr = if_else(q_meta < 0.2, "Sig. FDR < 0.2", "Not. Sig"), 
          hits_sig_meta = (hits_sig_solar + hits_sig_chs)/2) 
 
@@ -17,7 +17,7 @@ mum_pw_wide <- read_rds(
 longer_df1 <- mum_pw_wide %>% 
   select(pfas, path, path_2, super_pathway, 
          functional_groupings, sig,sig_fdr,q_meta,
-         fet_solar, fet_chs, fet_meta,
+         fet_solar, fet_chs, pval_meta,
          hits_sig_solar, hits_sig_chs,hits_sig_meta,
          enrichment_solar, enrichment_chs, enrichment_meta,
          neg_logp_solar,neg_logp_chs, neg_logp_meta) %>% 
@@ -45,7 +45,7 @@ mum_pw_long <- longer_df1 %>%
 # Select only overlapping significant pathways
 mum_pw_w_onlysig <- mum_pw_wide %>% 
   group_by(pfas) %>% 
-  slice_min(order_by = fet_meta, n = 3) %>% 
+  slice_min(order_by = pval_meta, n = 3) %>% 
   slice_max(order_by = enrichment_meta, n = 3) %>%  
   filter(sig_meta == "Sig.") %>%
   mutate(label = path_2) %>% 

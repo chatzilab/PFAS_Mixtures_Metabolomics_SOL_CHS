@@ -25,8 +25,12 @@ superpathwaykey <- readxl::read_xlsx(
 dir_results_exposures <- fs::path(dir_results_mum_mixtures, 
                                   "Mixture effect hyper_g") 
 
-cohort_mixture = c("solar/sol_all_pfas","solar/sol_pfsas","solar/sol_pfcas",
-                   "chs/chs_all_pfas","chs/chs_pfsas","chs/chs_pfcas")
+cohort_mixture = c("solar/sol_all_pfas_p05", 
+                   "solar/sol_pfsas_p05",
+                   "solar/sol_pfcas_p05",
+                   "chs/chs_all_pfas_p05",
+                   "chs/chs_pfsas_p05",
+                   "chs/chs_pfcas_p05")
 
 cohort_mixture2 = c("sol_all_pfas", "sol_pfsas", "sol_pfcas",
                     "chs_all_pfas", "chs_pfsas", "chs_pfcas")
@@ -56,7 +60,7 @@ names(pthwy_ecs) <- cohort_mixture2
 # Combine dataframes
 mum_res_lst <- map2(pthwy_pvals, pthwy_ecs, ~tidylog::full_join(.x, .y))
 
-pivot_wider()
+
 # 1) Combine cohorts ---------------------
 mum_pw <- mum_res_lst %>% 
   bind_rows(., .id = "cohort_mixture") %>% 
@@ -96,15 +100,18 @@ wgt_sol = sqrt(312)
 wgt_chs = sqrt(137)
 
 mum_pw_w1 <- mum_pw_w1 %>% 
-  mutate(pval_sol = if_else(is.na(combined_pvals_sol), 
-                              .99,
-                              combined_pvals_sol), 
-         pval_chs = if_else(is.na(combined_pvals_chs), 
-                            .99, 
-                            combined_pvals_chs)) %>%
+  mutate(pval_sol = if_else(is.na(combined_pvals_sol), .99, 
+                            combined_pvals_sol),
+         pval_chs = if_else(is.na(combined_pvals_chs), .99, 
+                            combined_pvals_chs), 
+         hits_sig_chs = replace_na(hits_sig_chs, 0), 
+         hits_sig_sol = replace_na(hits_sig_sol, 0)) %>%
   rowwise() %>% 
   mutate(pval_meta = metap::sumz(p = c_across(pval_sol:pval_chs), 
-                                 weights = c(wgt_sol, wgt_chs))$p[[1]], 
+                                 weights = c(wgt_sol, wgt_chs))$p[[1]] %>% 
+           if_else(is.na(combined_pvals_sol) | is.na(combined_pvals_chs), 
+                   NA_real_, .),
+         
          enrichment_meta = 
            ((enrichment_sol*wgt_sol)+(enrichment_chs*wgt_chs))/(wgt_sol+wgt_chs), 
          neg_logp_meta = -log10(pval_meta), 
@@ -117,21 +124,22 @@ mum_pw_w1 <- mum_pw_w1 %>%
 
 # select only pathways which were reported in both cohorts
 mum_pw_w_reduced <- mum_pw_w1 %>% 
-  filter(!is.na(combined_pvals_sol), !is.na(combined_pvals_chs)) %>%
+  tidylog::filter(pathway_total > 2, 
+                  hits_sig_sol > 3 | hits_sig_chs > 3) %>%
   mutate(sig = case_when(combined_pvals_sol < 0.05 & 
-                           combined_pvals_chs < 0.05 ~ "Sig. Both Cohorts", 
+                         combined_pvals_chs < 0.05 ~ "Sig. Both Cohorts", 
                          combined_pvals_sol < 0.05 ~ "Sig. SOLAR Only", 
-                         combined_pvals_chs   < 0.05 ~ "Sig. CHS Only", 
+                         combined_pvals_chs < 0.05 ~ "Sig. CHS Only", 
                          TRUE ~ "Not Significant"), 
          sig_overall_p = sig_meta) 
-
 
 # Combine with superpathway metadata
 mum_pw_final <- mum_pw_w_reduced %>% 
   tidylog::left_join(superpathwaykey)
 
+
 # Clean Environment
-rm(mum_pw, mum_pw1, mum_pw_w1, wgt_chs, wgt_sol)
+# rm(mum_pw, mum_pw1, mum_pw_w1, wgt_chs, wgt_sol)
 
 # Save Data 
 write_rds(mum_pw_final,
@@ -139,30 +147,51 @@ write_rds(mum_pw_final,
                    "Mixture effect hyper_g",
                    "SOL CHS PFAS Mummichog wide sig PW.RDS"))
 
+# Save csv 
+write_csv(mum_pw_final %>% filter(mixture == "all_pfas"),
+          fs::path(dir_results_mum_mixtures,
+                   "Mixture effect hyper_g",
+                   "SOL CHS PFAS Mummichog wide sig PW.csv"))
+
+
+
+
 # 3) Create long dataframe ----------------------
 sol_only <- mum_pw_final %>% 
-  select(-contains("chs"), -contains("meta")) %>% 
-  rename_all(~str_remove(., "_sol")) %>% 
+  select(everything(), -contains("chs"), -contains("meta"), sig_meta) %>% 
+  rename_all(~str_remove(., "_sol")) %>%
+  rename(sig_cohort = sig) %>%
   mutate(cohort = "solar")
 
 chs_only <- mum_pw_final %>% 
-  select(-contains("solar"), -contains("meta")) %>% 
+  select(everything(), -contains("sol"), -contains("meta"), sig_meta) %>% 
   rename_all(~str_remove(., "_chs")) %>% 
+  rename(sig_cohort = sig) %>%
   mutate(cohort = "chs")
 
 
 meta_only <- mum_pw_final %>% 
-  select(-contains("solar"), -contains("chs"), -sig) %>% 
+  select(-contains("sol"), -contains("chs"), -q_meta) %>% 
+  rename(meta_p_sig = sig_meta) %>%
   rename_all(~str_remove(., "_meta")) %>% 
+  rename(sig_meta = meta_p_sig, 
+         sig_cohort = sig) %>%
   mutate(cohort = "meta")
+
 
 # Bind cohorts
 mum_pw_final_long <- bind_rows(sol_only, chs_only, meta_only) %>% 
   select(cohort, everything())
+
+table(mum_pw_final_long$sig_cohort, 
+      mum_pw_final_long$cohort,
+      mum_pw_final_long$mixture)
+
 
 
 # Save Data 
 write_rds(mum_pw_final_long,
           fs::path(dir_results_mum_mixtures,
                    "Mixture effect hyper_g",
-                   "SOL CHS PFAS Mummichog long sig PW.RDS")) 
+                   "SOL CHS PFAS Mummichog long sig PW.RDS"))
+

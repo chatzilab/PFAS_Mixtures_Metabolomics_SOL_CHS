@@ -15,7 +15,7 @@ mwas_reduced <- mwas_results %>%
 
 # Volcano Plot
 solar_volcano_plot <- ggplot(mwas_reduced %>% filter(cohort == "SOL"),
-                              aes(x = estimate_beta, y = -log(p_value))) +
+                              aes(x = estimate_beta, y = -log10(p_value))) +
     geom_point(size = 1, alpha = 0.5) + 
     geom_vline(xintercept = 0, color = "grey20", linetype = 2) +
     facet_wrap(~exposure, scales = "free") +
@@ -35,7 +35,7 @@ rm(solar_volcano_plot)
 
 # CHS Volcano Plots ----------------------------------------------
 chs_volcano_plot <- ggplot(mwas_reduced %>% filter(cohort == "CHS"),
-                           aes(x = estimate_beta, y = -log(p_value))) +
+                           aes(x = estimate_beta, y = -log10(p_value))) +
   geom_point(size = 1, alpha = 0.5) + 
   geom_vline(xintercept = 0, color = "grey20", linetype = 2) +
   facet_wrap(~exposure, scales = "free") +
@@ -50,3 +50,4 @@ ggsave(chs_volcano_plot,
          "Volcano plots",
          "chs Mixtures analysis volcano plots_p_from_original_hyper_g.jpg"),
        width = 6.5, height = 5)
+

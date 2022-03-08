@@ -71,8 +71,8 @@ read_data_from_hpc <- function(file_path, n_col_in_df){
            estimate = mean, 
            p_value = p) %>% 
     dplyr::select(exposure, term, everything())
-
-
+  
+  
   return(results_final)
 }
 
@@ -92,89 +92,76 @@ transpose_ft <- function(ft) {
 rename_pfas <- function(pfas_names, include_asterisk = FALSE, 
                         arrange_by_class = FALSE){
   x <- tibble(pfas = pfas_names)
-  pfas2 <-  x %>%
-    mutate(pfas2 = case_when(
-      pfas == "pfhxs" ~ "PFHxS",
-      pfas == "pfhps" ~ "PFHpS",
-      pfas == "pfpes" ~ "PFPeS",
-      pfas == "pfhpa" ~ "PFHpA",
-      pfas == "nmefosaab" ~ "N-MeFOSAA-b†", 
-      pfas == "pfuda" ~ "PFUnDA†",
-      pfas == "pfds" ~ "PFDS†",
-      pfas == "netfosaa" ~ "N-EtFOSAA†",
-      pfas == "pfns" ~ "PFNS†",
-      pfas == "pfbs" ~ "PFBS†",
-      pfas == "x82fts" ~ "8:2 FTS†", 
-      pfas == "pfhxa" ~ "PFHxA†", 
-      pfas == "pfdoa" ~ "PFDoDA†",
-      pfas == "Mixture effect" ~ "Mixture effect",
-      TRUE ~ toupper(pfas)) %>% 
-        as.factor() %>% 
-        fct_relevel(., 
-                    "PFOS", 
-                    "PFOA", 
-                    "PFHxS", 
-                    "PFNA", 
-                    "PFHpS",
-                    "PFDA", 
-                    "PFPeS", 
-                    "PFHpA",
-                    "N-MeFOSAA-b†",
-                    "N-EtFOSAA†",
-                    "PFDS†",
-                    "PFBS†", 
-                    "8:2 FTS†", 
-                    "PFDoDA†", 
-                    "PFUnDA†",
-                    "PFNS†",
-                    "PFHxA†", 
-                    "Mixture effect")) 
   
-  if(include_asterisk == TRUE){ 
+  suppressWarnings(
     pfas2 <-  x %>%
       mutate(pfas2 = case_when(
         pfas == "pfhxs" ~ "PFHxS",
         pfas == "pfhps" ~ "PFHpS",
         pfas == "pfpes" ~ "PFPeS",
         pfas == "pfhpa" ~ "PFHpA",
-        pfas == "nmefosaab" ~ "N-MeFOSAA-b*", 
-        pfas == "pfuda" ~ "PFUnDA*",
-        pfas == "pfds" ~ "PFDS*",
-        pfas == "netfosaa" ~ "N-EtFOSAA*",
-        pfas == "pfns" ~ "PFNS*",
-        pfas == "pfbs" ~ "PFBS*",
-        pfas == "x82fts" ~ "8:2 FTS*", 
-        pfas == "pfhxa" ~ "PFHxA*", 
-        pfas == "pfdoa" ~ "PFDoDA*", 
+        pfas == "nmefosaab" ~ "N-MeFOSAA-b†", 
+        pfas == "pfuda" ~ "PFUnDA†",
+        pfas == "pfds" ~ "PFDS†",
+        pfas == "netfosaa" ~ "N-EtFOSAA†",
+        pfas == "pfns" ~ "PFNS†",
+        pfas == "pfbs" ~ "PFBS†",
+        pfas == "x82fts" ~ "8:2 FTS†", 
+        pfas == "pfhxa" ~ "PFHxA†", 
+        pfas == "pfdoa" ~ "PFDoDA†",
         pfas == "Mixture effect" ~ "Mixture effect",
         TRUE ~ toupper(pfas)) %>% 
           as.factor() %>% 
           fct_relevel(., 
-                      "PFOS", 
-                      "PFOA", 
-                      "PFHxS", 
-                      "PFNA", 
-                      "PFHpS",
-                      "PFDA", 
-                      "PFPeS", 
-                      "PFHpA",
-                      "N-MeFOSAA-b*",
-                      "N-EtFOSAA*",
-                      "PFDS*",
-                      "PFBS*", 
-                      "8:2 FTS*", 
-                      "PFDoDA*", 
-                      "PFUnDA*",
-                      "PFNS*",
-                      "PFHxA*", 
+                      "PFOS", "PFOA", "PFHxS", "PFNA", "PFHpS","PFDA", "PFPeS", 
+                      "PFHpA","N-MeFOSAA-b†","N-EtFOSAA†","PFDS†","PFBS†", 
+                      "8:2 FTS†", "PFDoDA†", "PFUnDA†","PFNS†","PFHxA†",
                       "Mixture effect")) 
-  }
-  
-  if(arrange_by_class == TRUE){ 
-    pfas2 <-  pfas2 %>% 
-      left_join(lod, by = "pfas") %>% 
-      mutate(pfas2 = fct_reorder(pfas2, order_by_class))
-  }
-  
-  return(pfas2$pfas2)
+    )
+    
+    if(include_asterisk == TRUE){ 
+      suppressWarnings(
+        
+       pfas2 <-  x %>%
+        mutate(pfas2 = case_when(
+          pfas == "pfhxs" ~ "PFHxS",
+          pfas == "pfhps" ~ "PFHpS",
+          pfas == "pfpes" ~ "PFPeS",
+          pfas == "pfhpa" ~ "PFHpA",
+          pfas == "nmefosaab" ~ "N-MeFOSAA-b*", 
+          pfas == "pfuda" ~ "PFUnDA*",
+          pfas == "pfds" ~ "PFDS*",
+          pfas == "netfosaa" ~ "N-EtFOSAA*",
+          pfas == "pfns" ~ "PFNS*",
+          pfas == "pfbs" ~ "PFBS*",
+          pfas == "x82fts" ~ "8:2 FTS*", 
+          pfas == "pfhxa" ~ "PFHxA*", 
+          pfas == "pfdoa" ~ "PFDoDA*", 
+          pfas == "Mixture effect" ~ "Mixture effect",
+          TRUE ~ toupper(pfas)) %>% 
+            as.factor() %>% 
+            fct_relevel(., 
+                        "PFOS", "PFOA", "PFHxS", "PFNA", "PFHpS","PFDA", "PFPeS",
+                        "PFHpA","N-MeFOSAA-b*","N-EtFOSAA*","PFDS*","PFBS*", 
+                        "8:2 FTS*", "PFDoDA*", "PFUnDA*","PFNS*","PFHxA*", 
+                        "Mixture effect")) )
+    }
+    
+    if(arrange_by_class == TRUE){ 
+      suppressWarnings(
+        
+      pfas2 <-  pfas2 %>% 
+        # left_join(lod, by = "pfas") %>% 
+        mutate(pfas2 = fct_relevel(pfas2, 
+                                   "PFOS", 
+                                   "PFHxS",
+                                   "PFHpS",
+                                   "PFPeS",
+                                   "PFOA", 
+                                   "PFNA", 
+                                   "PFDA", 
+                                   "PFHpA")))
+    }
+    
+    return(pfas2$pfas2)
 }

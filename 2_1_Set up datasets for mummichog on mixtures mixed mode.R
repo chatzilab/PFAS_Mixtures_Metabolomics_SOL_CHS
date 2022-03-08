@@ -13,20 +13,20 @@ modes = c("c18pos","c18neg", "hilicpos", "hilicneg")
 dir_results_mum_mixtures 
 
 # set up folder structure ------------------------------
-# Create Exposure Folder: Level 1 (Exposure)
-dir.create(file.path(fs::path(dir_results_mum_mixtures, 
-                              exposures)), 
-           showWarnings = TRUE)
-# Level 2 (Cohort): Create SOLAR Folder
-dir.create(file.path(fs::path(dir_results_mum_mixtures,
-                              exposures, 
-                              "solar")), 
-           showWarnings = TRUE)
-# Level 2 (Cohort): Create CHS Folder
-dir.create(file.path(fs::path(dir_results_mum_mixtures,
-                              exposures, 
-                              "chs")), 
-           showWarnings = TRUE)
+# # Create Exposure Folder: Level 1 (Exposure)
+# dir.create(file.path(fs::path(dir_results_mum_mixtures, 
+#                               exposures)), 
+#            showWarnings = TRUE)
+# # Level 2 (Cohort): Create SOLAR Folder
+# dir.create(file.path(fs::path(dir_results_mum_mixtures,
+#                               exposures, 
+#                               "solar")), 
+#            showWarnings = TRUE)
+# # Level 2 (Cohort): Create CHS Folder
+# dir.create(file.path(fs::path(dir_results_mum_mixtures,
+#                               exposures, 
+#                               "chs")), 
+#            showWarnings = TRUE)
 
 # save mwas in analysis folders ------------------------------
 mwas_results_cohort_list  <- read_rds(
@@ -49,45 +49,63 @@ temp_mwas <- mwas_results_cohort_list %>%
                                                n = 2)[,2] %>% 
                            as.numeric()) %>%
            dplyr::rename(p.value = p_value, 
-                         t.score = wald) %>%
-           dplyr::filter(exposure == "mixture") %>% 
+                         t.score = wald))
+
+
+
+# Subset datasets by effect estimates (mixtures effect vs. individual pfas effects)
+mixtures_effect <- temp_mwas %>% 
+  modify(., ~dplyr::filter(exposure == "mixture", .data = .x) %>%
            dplyr::select(m.z, p.value, t.score, r.t, mode))
 
 
+pfos_effect <- temp_mwas %>% 
+  modify(., ~dplyr::filter(exposure == "pfos", .data = .x) %>%
+           dplyr::select(m.z, p.value, t.score, r.t, mode))
+
+
+
 # Save SOLAR data 
-write_csv(temp_mwas[["SOL_all pfas"]], 
+write_csv(mixtures_effect[["SOL_all pfas"]], 
           fs::path(dir_results_mum_mixtures, 
                    exposures, 
                    "solar",
                    "solar_all_pfas_mixture_effect_mixed_mode_MWAS.csv"))
 
-write_csv(temp_mwas[["SOL_pfcas"]], 
+write_csv(mixtures_effect[["SOL_pfcas"]], 
           fs::path(dir_results_mum_mixtures, 
                    exposures, 
                    "solar",
                    "solar_pfcas_mixture_effect_mixed_mode_MWAS.csv"))
 
-write_csv(temp_mwas[["SOL_pfsas"]], 
+write_csv(mixtures_effect[["SOL_pfsas"]], 
           fs::path(dir_results_mum_mixtures, 
                    exposures, 
                    "solar",
                    "solar_pfsas_mixture_effect_mixed_mode_MWAS.csv"))
 
 
+write_csv(pfos_effect[["SOL_all pfas"]], 
+          fs::path(dir_results_mum_mixtures, 
+                   exposures, 
+                   "solar",
+                   "solar_all_pfas_pfos_effect_mixed_mode_MWAS.csv"))
+
+
 # Save CHS data 
-write_csv(temp_mwas[["CHS_all pfas"]],
+write_csv(mixtures_effect[["CHS_all pfas"]],
           fs::path(dir_results_mum_mixtures,
                    exposures,
                    "chs",
                    "chs_all_pfas_mixture_effect_mixed_mode_MWAS.csv"))
 
-write_csv(temp_mwas[["CHS_pfcas"]],
+write_csv(mixtures_effect[["CHS_pfcas"]],
           fs::path(dir_results_mum_mixtures,
                    exposures,
                    "chs",
                    "chs_pfcas_mixture_effect_mixed_mode_MWAS.csv"))
 
-write_csv(temp_mwas[["CHS_pfsas"]],
+write_csv(mixtures_effect[["CHS_pfsas"]],
           fs::path(dir_results_mum_mixtures,
                    exposures,
                    "chs",

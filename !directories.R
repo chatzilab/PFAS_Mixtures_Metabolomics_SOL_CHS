@@ -23,8 +23,6 @@ dir_data_local <- fs::path(dir_home, "0_Data")
 # Mixtures Data folder
 dir_data_mixtures <- fs::path(dir_data_local, "data_for_mixtures_analysis")
 
-
-
 # Mixtures results
 dir_results_mixtures <- fs::path(dir_results, "PFAS_mixtures")
 

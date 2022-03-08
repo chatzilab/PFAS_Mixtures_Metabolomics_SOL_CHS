@@ -25,7 +25,7 @@ mum_pws <- read_rds(fs::path(dir_results_mum_mixtures,
 mzrtkey  <- read_csv(fs::path(dir_results_mum_mixtures,
                               "Mixture effect hyper_g",
                               "solar",
-                              "sol_all_pfas",
+                              "sol_all_pfas_p05",
                               "mummichog_matched_compound_all.csv")) %>% 
   clean_names() %>%
   mutate(feature = str_c(query_mass, 
@@ -105,3 +105,4 @@ write_rds(ecd_pw_key_final,
             dir_data_local,
             "Supporting Files",
             "mummichog_pw_ec_feature_key_with_cpd_names.rds"))
+

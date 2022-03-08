@@ -30,7 +30,7 @@ source(here::here("1_mixtures_analysis",
 rm(list = ls())
 source(here::here("!set_exposure_outcome_vars.R"))
 mixtures_name = "pfsas"
-mixtures_components = c("pfos", "pfhxs")
+mixtures_components = c("pfos", "pfhxs", "pfhps")
 source(here::here("1_mixtures_analysis",
                   "0_1_SOLAR Set up datasets for mixtures analysis.R"))
 
@@ -38,7 +38,7 @@ source(here::here("1_mixtures_analysis",
 rm(list = ls())
 source(here::here("!set_exposure_outcome_vars.R"))
 mixtures_name = "pfsas"
-mixtures_components = c("pfos", "pfhxs")
+mixtures_components = c("pfos", "pfhxs", "pfhps")
 source(here::here("1_mixtures_analysis",
                   "0_2_CHS Set up datasets for mixtures analysis.R"))
 
@@ -47,7 +47,7 @@ source(here::here("1_mixtures_analysis",
 rm(list = ls())
 source(here::here("!set_exposure_outcome_vars.R"))
 mixtures_name = "pfcas"
-mixtures_components = c("pfda",  "pfhps", "pfna",  "pfoa")
+mixtures_components = c("pfda", "pfna",  "pfoa")
 source(here::here("1_mixtures_analysis",
                   "0_1_SOLAR Set up datasets for mixtures analysis.R"))
 
@@ -55,6 +55,6 @@ source(here::here("1_mixtures_analysis",
 rm(list = ls())
 source(here::here("!set_exposure_outcome_vars.R"))
 mixtures_name = "pfcas"
-mixtures_components = c("pfda",  "pfhps", "pfna",  "pfoa")
+mixtures_components = c("pfda", "pfna",  "pfoa")
 source(here::here("1_mixtures_analysis",
                   "0_2_CHS Set up datasets for mixtures analysis.R"))

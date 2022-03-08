@@ -80,7 +80,7 @@ mum_pw1 <- mum_pw %>%
     mode = str_split(temp,  '_') %>% 
       map_chr(3), 
     enrichment = hits_sig/hits_total, 
-    neg_logp = -log(fet),
+    neg_logp = -log10(fet),
     name = str_c(cohort, pfas, mode, sep = "_") %>% 
       tolower(),
     pfasog = pfas, 
@@ -123,7 +123,7 @@ mum_pw_w1 <- mum_pw_w1 %>%
                                     weights = c(wgt_sol, wgt_chs))$p, 
          enrichment_meta = 
            ((enrichment_solar*wgt_sol)+(enrichment_chs*wgt_chs))/(wgt_sol+wgt_chs), 
-         neg_logp_meta = -log(pval_meta), 
+         neg_logp_meta = -log10(pval_meta), 
          sig_meta = if_else(pval_meta < 0.01, "Sig.", "Not Sig.")) %>% 
   ungroup()
 

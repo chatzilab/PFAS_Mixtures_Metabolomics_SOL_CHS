@@ -5,7 +5,7 @@ library(broom)
 source(here::here("0_0_3_analysis_funs.R"))
 
 # Get vector of lcms modes for analysis
-modes <- names(met$solar)
+modes <- names(ftdata$solar)
 
 # Solar mwas ------------------------------
 # Initialize list of results

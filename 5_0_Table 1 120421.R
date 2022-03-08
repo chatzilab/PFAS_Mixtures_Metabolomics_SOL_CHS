@@ -76,7 +76,9 @@ table1_a <- t1_data %>%
                            " (", 
                            100*round(sum(hispanic !="Hispanic")/length(hispanic), digits = 2),
                            "%)", sep = ""),
-    
+    "Study Wave [n (%)]" = "",
+    "Wave 1 (2001-2003)" = npct(wave, "first wave", 2),
+    "Wave 2 (2010-2012)" = npct(wave, "second wave", 2),
     "Socioeconomic Status" = "",
     "Modified Hollingshead Four-Factor Index" = avg_sd_fxn(modified2factor_score, n.digits = 1),
     # Education
@@ -90,11 +92,8 @@ table1_a <- t1_data %>%
     "Graduate professional training" = 
       npct(edu_house, "Graduate professional training (graduate degree)", 2),
     "Missing" = 
-      npct(edu_house, "Missing", 2),
-    "Study Wave [n (%)]" = "",
-    "Wave 1 (2001-2003)" = npct(wave, "first wave", 2),
-    "Wave 2 (2010-2012)" = npct(wave, "second wave", 2)) %>% 
-  pivot_longer(cols = "General Characteristics":"Wave 2 (2010-2012)")
+      npct(edu_house, "Missing", 2)) %>% 
+  pivot_longer(cols = "General Characteristics":"Missing")
 
 
 # ## Table 1 Sample Size -----------------------------------------------------

@@ -154,7 +154,7 @@ pathway_name = "Tyrosine metabolism"
     rowwise() %>% 
     mutate(p_meta = metap::sumz(p = c_across(p_value_solar:p_value_chs), 
                                 weights = c(wgt_sol, wgt_chs))$p, 
-           neg_logp_meta = -log(p_meta), 
+           neg_logp_meta = -log10(p_meta), 
            sig_meta = if_else(p_meta < 0.05, "p<0.05", "p>0.05")) %>% 
     ungroup() %>% 
     arrange(mean_effect) %>%

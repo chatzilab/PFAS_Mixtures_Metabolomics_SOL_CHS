@@ -17,7 +17,7 @@ library(jag2)
 library(broom)
 library(cowplot)
 theme_set(theme_cowplot())
-
+ 
 source(here::here("!directories.R"))
 source(here::here("!set_exposure_outcome_vars.R"))
 source(here::here("0_0_1_format_vars_funs.R"))

@@ -1,4 +1,4 @@
-# Make coefficient plots based on dougs comments
+# Make coefficient plots for PFAS and FFA metabolites
 
 # Read data
 annotated_sig_ecs_ee <- read_rds(
@@ -63,32 +63,32 @@ chs <- annotated_sig_ecs_ee %>%
 # Get data on overlap
 sol_fa <- sol %>% 
   mutate(sig_both = met_name_fa_pw %in% chs$met_name_fa_pw, 
-         met_name_fa_pw_with_overlap = if_else(sig_both, 
-                                               str_c(met_name_fa_pw, "*"), 
-                                               as.character(met_name_fa_pw)) %>% 
+         met_name_fa_pw_with_overlap = if_else(
+           sig_both, 
+           str_c(met_name_fa_pw, "*"), 
+           as.character(met_name_fa_pw)) %>% 
            fct_reorder(estimate_beta_sol_mixture))
 
 
 chs_fa <- chs %>% 
   mutate(sig_both = met_name_fa_pw %in% sol$met_name_fa_pw, 
-          met_name_fa_pw_with_overlap = if_else(sig_both, 
+         met_name_fa_pw_with_overlap = if_else(sig_both, 
                                                str_c(met_name_fa_pw, "*"), 
                                                as.character(met_name_fa_pw)) %>% 
            fct_reorder(estimate_beta_chs_mixture))
 
 # Plot solar------------------------------
 (sol_met_plot <- ggplot(sol_fa, aes(x = met_name_fa_pw_with_overlap, 
-                                 y = estimate_beta_sol_mixture, 
-                                 color = borderline_sig_sol)) + 
+                                    y = estimate_beta_sol_mixture)) + 
    geom_errorbar(aes(ymin = lcl_beta_sol_mixture , 
-                     ymax = ucl_beta_sol_mixture), 
+                     ymax = ucl_beta_sol_mixture, 
+                     linetype = borderline_sig_sol), 
                  width = 0) +
-    
    geom_point() + 
-   geom_hline(yintercept = 0, linetype = 2, color = "grey50") +
-   scale_color_manual(values = c("grey60", "black")) +
+   geom_hline(yintercept = 0, linetype = 3, color = "grey50") +
    coord_flip() + 
    scale_y_continuous(limits = c(-1.75, 3)) +
+   scale_linetype_manual(values = c(5, 1)) +
    # ylab("PFAS Exposure Effect Estimate ψ (95% BCI)") +
    theme(axis.title.y = element_blank(), 
          axis.title.x = element_blank(), 
@@ -102,16 +102,16 @@ chs_fa <- chs %>%
 
 # Plot ------------------------------
 (chs_metplot <- ggplot(chs_fa, aes(x = met_name_fa_pw_with_overlap, 
-                                y = estimate_beta_chs_mixture,
-                                color = borderline_sig_chs)) + 
+                                   y = estimate_beta_chs_mixture)) + 
    geom_errorbar(aes(ymin = lcl_beta_chs_mixture , 
-                     ymax = ucl_beta_chs_mixture), 
+                     ymax = ucl_beta_chs_mixture, 
+                     linetype = borderline_sig_chs), 
                  width = 0) + 
    geom_point() +  #aes(color = tyr_subpath)
-   geom_hline(yintercept = 0, linetype = 2, color = "grey50") +
-   scale_color_manual(values = c("grey60", "black")) +
+   geom_hline(yintercept = 0, linetype = 3, color = "grey50") +
    coord_flip() + 
    scale_y_continuous(limits = c(-1.75, 3)) +
+   scale_linetype_manual(values = c(5, 1)) +
    ylab("PFAS Mixture Effect ψ (95% CI)") +
    theme(axis.title.y = element_blank(), 
          strip.text.x = element_blank(), 
@@ -122,7 +122,7 @@ chs_fa <- chs %>%
 
 
 # Combine Plots
-(figure_5 <- plot_grid(NULL, sol_met_plot, 
+(figure_4 <- plot_grid(NULL, sol_met_plot, 
                        NULL, chs_metplot, 
                        ncol = 1, align = "v", 
                        rel_heights = c(.07, 1,.07, .9),
@@ -130,7 +130,7 @@ chs_fa <- chs %>%
                                   "B) CHS", "")))
 
 # Save 
-ggsave(figure_5, 
+ggsave(figure_4, 
        filename = fs::path(dir_reports, 
-                           "Figure 5 associations of PFAS and FA metabolites.jpg"), 
+                           "Figure 4 associations of PFAS and FA metabolites.jpg"), 
        width = 5, height = 3.5)

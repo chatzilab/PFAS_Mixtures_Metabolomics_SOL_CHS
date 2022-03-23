@@ -41,7 +41,8 @@ solar_exposure_outcome <- solar_exposure_outcome  %>%
            pbde_100_ngml_detect + 
            pbde_153_ngml_detect+
            pbde_85_ngml_detect, 
-         ocs = dde_impute + hexachlorobenzene_impute) %>% 
+         ocs = dde_impute + 
+           hexachlorobenzene_impute) %>% 
   filter(id %in% ftdata$solar$c18neg$id) 
 
 

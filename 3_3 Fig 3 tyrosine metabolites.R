@@ -165,16 +165,19 @@ chs <- chs %>%
 # Plot solar------------------------------
 (sol_met_plot <- ggplot(sol, aes(x = met_name_tyr_pw_with_overlap, 
                                  y = estimate_beta_sol_mixture, 
-                                 color = borderline_sig_sol)) + 
+                                 # color = borderline_sig_sol
+                                 )) + 
    geom_errorbar(aes(ymin = lcl_beta_sol_mixture , 
-                     ymax = ucl_beta_sol_mixture), 
+                     ymax = ucl_beta_sol_mixture, 
+                     linetype = borderline_sig_sol), 
                  width = 0) + 
    geom_point() +
-   geom_hline(yintercept = 0, linetype = 2, color = "grey50") +
+   geom_hline(yintercept = 0, linetype = 3, color = "grey50") +
    facet_grid(tyr_subpath ~ .,  scales = "free_y", space = "free_y") +
-   scale_color_manual(values = c("grey60", "black")) +
+   # scale_color_manual(values = c("grey60", "black")) +
    coord_flip(clip = "off") + 
    scale_y_continuous(limits = c(-1.75, 3)) +
+   scale_linetype_manual(values = c(5, 1)) +
    # ylab("PFAS Exposure Effect Estimate ψ (95% BCI)") +
    theme(axis.title.y = element_blank(), 
          axis.title.x = element_blank(), 
@@ -187,25 +190,27 @@ chs <- chs %>%
 # Plot ------------------------------
 (chs_metplot <- ggplot(chs, aes(x = met_name_tyr_pw_with_overlap, 
                                 y = estimate_beta_chs_mixture, 
-                                color = borderline_sig_chs)) + 
-   geom_errorbar(aes(ymin = lcl_beta_chs_mixture , 
-                     ymax = ucl_beta_chs_mixture), 
-                 width = 0) + 
-   geom_point() +  #aes(color = tyr_subpath)
-   geom_hline(yintercept = 0, linetype = 2, color = "grey50") +
-   facet_grid(tyr_subpath~"1",  scales = "free_y", space = "free_y") +
-   scale_color_manual(values = c("grey60", "black"), 
-                      name = "Tyrosine Sub pathway") +
-   coord_flip() + 
-   scale_y_continuous(limits = c(-1.75, 3)) +
-   ylab("PFAS Mixture Effect ψ (95% CI)") +
-   theme(axis.title.y = element_blank(), 
-         strip.text.x = element_blank(), 
-         panel.background = element_rect(fill="grey95"), 
-         strip.background = element_rect(fill = "white"),
-         legend.position = "none",
-         strip.text.y = element_text(angle = 0, hjust = 0)))
-
+                                # color = borderline_sig_chs
+)) + 
+  geom_errorbar(aes(ymin = lcl_beta_chs_mixture , 
+                    ymax = ucl_beta_chs_mixture, 
+                    linetype = borderline_sig_chs), 
+                width = 0) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, linetype = 3, color = "grey50") +
+  facet_grid(tyr_subpath~"1",  scales = "free_y", space = "free_y") +
+  scale_linetype_manual(values = c(5, 1)) +
+  # scale_color_manual(values = c("grey60", "black"), 
+  #                    name = "Tyrosine Sub pathway") +
+  coord_flip() + 
+  scale_y_continuous(limits = c(-1.75, 3)) +
+  ylab("PFAS Mixture Effect ψ (95% CI)") +
+  theme(axis.title.y = element_blank(), 
+        strip.text.x = element_blank(), 
+        panel.background = element_rect(fill="grey95"), 
+        strip.background = element_rect(fill = "white"),
+        legend.position = "none",
+        strip.text.y = element_text(angle = 0, hjust = 0)))
 
 
 # Combine Plots
@@ -216,8 +221,8 @@ figure_3 <- plot_grid(NULL, sol_met_plot,
                       labels = c("A) SOLAR","",
                                  "B) CHS", ""))
 
-
+#Save 
 ggsave(figure_3, 
        filename = fs::path(dir_reports, 
-                           "Figure 4 associations of PFAS and tyr metabolites.jpg"), 
+                           "Figure 3 associations of PFAS and tyr metabolites.jpg"), 
        width = 8, height = 9)

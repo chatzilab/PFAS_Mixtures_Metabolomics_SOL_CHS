@@ -1,9 +1,10 @@
+# Get Correlation Matrix of Metabolomics data for each LC mode/cohort ----------
+# Figure not presented in manuscript 
 library(RColorBrewer)
 library(dendextend)
 library(gplots)
 
-# Get Correlation Matrix
-# Function
+# Function ------------------------
 met_cor_plot <- function(data, file.location){ 
   # Calculate Correlation Matrix
   temp_cor_matrix <- data %>% 
@@ -13,7 +14,7 @@ met_cor_plot <- function(data, file.location){
   # Get distance 
   temp_dist <- as.dist(1 - temp_cor_matrix)
   
-  # Run Clustering algorhitm
+  # Run Clustering algorithm
   temp_tree <- hclust(temp_dist, method="complete")
   # plot(temp_tree, cex=0.000000001)
   
@@ -45,8 +46,6 @@ met_cor_plot <- function(data, file.location){
   dev.off()
   
 }
-
-
 
 # Correlation plots, SOLAR
 met_cor_plot(met$solar$c18neg, 

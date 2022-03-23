@@ -8,8 +8,6 @@ library(janitor)
 
 # Set vars
 # cohort_name <- "solar"
-
-source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!functions.R"))
 source(here::here("!directories.R"))
 

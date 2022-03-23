@@ -1,7 +1,6 @@
 # 2) Plot Mummichog Pathway Results
 library(colorspace)
 library(janitor)
-exposure_type = "PFAS_Mixtures"
 source(here::here("!directories.R"))
 
 # Read in data

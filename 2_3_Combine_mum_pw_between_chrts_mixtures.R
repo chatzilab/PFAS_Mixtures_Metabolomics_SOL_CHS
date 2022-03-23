@@ -10,7 +10,6 @@ ggplot2::theme_set(cowplot::theme_cowplot())
 # is more complicated than it needs to be (JG 1/3/2022)
 
 # Source setup scripts
-source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!directories.R"))
 source(here::here("!set_exposure_outcome_vars.R"))
 

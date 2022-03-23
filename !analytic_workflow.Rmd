@@ -8,30 +8,31 @@ output: html_document
 
 ```{r setup_select, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-library(tidyverse)
-library(kableExtra)
-library(cowplot)
-library(here)
-library(fs)
-library(jag2)
-library(broom)
-library(cowplot)
-theme_set(theme_cowplot())
- 
+
+source(here::here("!libraries.R"))
 source(here::here("!directories.R"))
 source(here::here("!set_exposure_outcome_vars.R"))
-source(here::here("0_0_1_format_vars_funs.R"))
 source(here::here("!load_data.R"))
-source(here::here("0_0_3_analysis_funs.R"))
 source(here::here("!functions.R"))
+
+# Set ggplot theme:
+theme_set(theme_cowplot())
 ```
 
+# Descriptive Statistics  
+Code for descriptive statistics are provided in scripts beginning with "0_".   
 
+## Table 1: Participant Characteristics  
 ```{r}
-# source(here::here("1_mixtures_analysis",
-#                   "1_3 post HPC data cleaning.R"))
+source(here::here("0_1_Table 1 participant characteristics.R"))
+kableExtra::kable(table1_w)
 ```
 
+## Figure S1: Correlation matrix including histograms and scatter plot of all PFAS. 
+```{r}
+source(here::here("0_2 PFAS correlation matrix.R"))
+fig_s1
+```
 
 ## Run MWAS
 ```{r}

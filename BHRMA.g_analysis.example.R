@@ -1,6 +1,10 @@
-# Script to perform Bayesian Ridge Regression with g prior and selection for mixtures
-# author: Jingxuan He, Jesse Goodrich, and David Conti
+### BHRMA: Script to perform Bayesian Ridge Regression with g prior and selection for mixtures
+# authors: Jingxuan He, Jesse Goodrich, and David Conti
 # last updated: Mar 2022
+
+library(R2jags)
+library(tidyverse)
+
 
 # Description:
 # input variables
@@ -9,9 +13,9 @@
 # U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation)
 # LOD: A P-length vector of LODs for each exposure. Individuals with missing data will have data imputed below this level of detection  
 # profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the exposures are standardized within the function, these profiles should be on the standard normal scale)
-library(R2jags)
 
-# Functions
+
+# Create Function ---------------------------------------------
 BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   
   # JAGS model
@@ -136,5 +140,36 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   return(ridge.BDL.results)
 }
 
-# example function call:
-# BHRMA(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles)
+
+# Set up Data  -------------------------------
+simulated_data <- read_rds(here::here("simulated_data",
+                                      "simulated_data.RDS"))
+
+# X: A NxP matrix of exposures for mixture analysis (on the original scale with NA's for individuals with BLD)
+X = simulated_data %>% 
+  select(pfos, pfhxs, pfhps, pfoa, pfna, pfda)
+
+# P: the number of exposures in the mixture
+P = ncol(X)
+
+# Y: A N-length vector for a continuous outcome
+Y = simulated_data$metabolite_1
+
+# U: A NxQ matrix of covariates (variables included in the regression model but not included in the g-estimation)
+U = simulated_data %>% 
+  select(age, sex.num, bmi, tanner, ses.num, wave.num)
+
+# LOD: A P-length vector of LODs for each exposure. Individuals with missing data will have data imputed below this level of detection  
+LOD = c(0.01, 0.01, 0.05, 0.01, 0.01, 0.01, 0.43, 0.01)
+
+# profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the exposures are standardized within the function, these profiles should be on the standard normal scale)
+profiles = c(-1,1)*matrix(.5, nrow=2, ncol=P)
+
+# Names of exposures
+exposure.Names = colnames(X)
+
+# Run Function ------------------------------------------------------
+# should take ~4 minutes on a standard laptop computer
+fit = BHRMA.g(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles)
+
+fit

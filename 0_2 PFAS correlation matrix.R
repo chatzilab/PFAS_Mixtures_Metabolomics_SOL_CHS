@@ -1,17 +1,16 @@
 # Correlation plots
 library(correlation)
 library(GGally)
-source(here::here("!functions.R"))
-sol_g <- grid.grabExpr(print(sol_corplot))
-chs_g <- grid.grabExpr(print(chs_corplot))
 
-# Function:
+source(here::here("!functions.R"))
+source(here::here("!set_exposure_outcome_vars.R"))
+
+# Function for calculating correlations for plot:
 cor_func <- function(data, mapping, method, ...){
   x <- eval_data_col(data, mapping$x)
   y <- eval_data_col(data, mapping$y)
   
   corr <- cor(x, y, method=method, use='complete.obs')
-  
   
   ggally_text(
     label = formatC(corr, format = "f", 2), 
@@ -22,18 +21,16 @@ cor_func <- function(data, mapping, method, ...){
   )
 }
 
-# SOLAR  ------------------------------------------------------------------
-## Create SOLAR exposure data frame --------------
-exposures_continuous <-  c("pfos", "pfhxs", "pfhps", "pfoa", "pfna", "pfda")
-# sol_chs
-# Change 0/1s to factor and remove PFAS with 100% Below LOD (in solar, removed PFHxA)
+# Get analysis data set, select important vars ------------------
+
+# SOLAR
 solar_exposure <- exposure_outcome$solar %>% 
   select(wave, all_of(exposures_continuous))%>% 
   rename_all(toupper) %>% 
   rename(PFHxS = PFHXS, 
          PFHpS = PFHPS)
 
-
+# CHS
 chs_exposure <- exposure_outcome$chs %>% 
   select(all_of(exposures_continuous))%>% 
   rename_all(toupper) %>% 
@@ -47,7 +44,7 @@ sol_corplot <- ggpairs(solar_exposure, columns = 2:7,
                                                       method = "spearman", 
                                                       size = 5)), 
                        lower = list(continuous = wrap("points",alpha = .5, size=.75))) + 
-  xlab("Plasma Concentration (µg/L)")  +
+  xlab("Plasma Concentration (\u00b5g/L)")  +
   theme(axis.text.x = element_text(angle = 90, vjust = .5, size=12), 
         axis.text.y = element_text(size=10))
 
@@ -57,18 +54,18 @@ chs_corplot <- ggpairs(chs_exposure,
                                                       method = "spearman", 
                                                       size = 5)), 
                        lower = list(continuous = wrap("points",alpha = .5, size=.75))) + 
-  xlab("Plasma Concentration (µg/L)") +
+  xlab("Plasma Concentration (\u00b5g/L)") +
   theme(axis.text.x = element_text(angle = 90, vjust = .5, size=12),
         axis.text.y = element_text(size=10))
 
 
 
 # Combine SOLAR and CHS figs ------------------
-sol_g <- grid.grabExpr(print(sol_corplot))
-chs_g <- grid.grabExpr(print(chs_corplot))
+sol_g <- grid::grid.grabExpr(print(sol_corplot))
+chs_g <- grid::grid.grabExpr(print(chs_corplot))
 
-
-(fig1 <- plot_grid(NULL, NULL, 
+# Combine figures
+fig_s1 <- plot_grid(NULL, NULL, 
                    sol_g, 
                    chs_g,
                    labels = c("A. SOLAR Cohort", 
@@ -80,13 +77,13 @@ chs_g <- grid.grabExpr(print(chs_corplot))
                    label_size = 14,
                    # align = "vh",
                    axis = "lr",
-                   nrow = 2))
+                   nrow = 2)
 
 
 ## Save Correlation Plot All PFAS -------------------------
-ggsave(plot = fig1,
+ggsave(plot = fig_s1,
        filename = path(dir_reports, 
-                       "SOLAR CHS Correlation Plot All PFAS.jpeg"), 
+                       "Figure S1 SOLAR CHS Correlation Plot All PFAS.jpeg"), 
        width = 16, 
        height = 7)
   

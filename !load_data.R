@@ -13,10 +13,10 @@ ft_metadata <- ftdata$solar %>%
 
 # Load Exposure Outcome Data from drive  ------------------------
 sol <- read_rds(fs::path(dir_data,
-                         "SOLAR exposure outcome data HRE PFAS.rds"))
+                         "SOLAR exposure outcome data HRE PFAS 032322.rds"))
 
 chs <- read_rds(fs::path(dir_data,
-                         "CHS MetaAir exposure outcome data HRE PFAS.rds"))
+                         "CHS MetaAir exposure outcome data HRE PFAS 032322.rds"))
 
 
 # Rename Datasets and remove emory pfas

@@ -4,7 +4,6 @@
 source(here::here("!directories.R"))
 ##  Set Base Working Directory
 # rm(list = ls())
-exposure_type = "PFAS"
 exposures = c("Mixture effect hyper_g")
 cohort = c("solar", "chs")
 modes = c("c18pos","c18neg", "hilicpos", "hilicneg")

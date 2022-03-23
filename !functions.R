@@ -1,6 +1,5 @@
 # Functions
 
-
 # Read Data from HPC -----------------------------------------------------
 read_data_from_hpc <- function(file_path, n_col_in_df){
   
@@ -72,20 +71,7 @@ read_data_from_hpc <- function(file_path, n_col_in_df){
            p_value = p) %>% 
     dplyr::select(exposure, term, everything())
   
-  
   return(results_final)
-}
-
-# Create Functions for summarizing Data ---------------
-transpose_ft <- function(ft) {
-  dataout <- ft %>%
-    mutate(name = str_c(mz, time, sep = "_")) %>%
-    select(name, everything(), -mz, -time) %>%
-    gather(file_name, val, 2:ncol(.)) %>%
-    spread(name, val) %>% 
-    mutate(file_name = str_remove(file_name, "_mz_xml"))
-  
-  return(dataout)
 }
 
 # # Rename Compounds -----------------------

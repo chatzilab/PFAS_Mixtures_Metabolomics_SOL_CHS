@@ -15,7 +15,6 @@ library(MetaboAnalystR)
 #                        "internal mum variables.R"))
 # 
 # # Set important vars
-# exposure_type = "PFAS"
 # exposures = c("Mixture effect hyper_g")
 # cohort = c("solar", "chs")
 # modes = c("mixed")

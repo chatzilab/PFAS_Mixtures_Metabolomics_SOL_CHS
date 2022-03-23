@@ -289,23 +289,3 @@ heatmap.2(eff_est$chs,# reorderfun =
           # labCol = NULL
 )
 dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

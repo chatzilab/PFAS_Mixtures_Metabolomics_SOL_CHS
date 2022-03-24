@@ -176,9 +176,6 @@ pre code {
 <li><a href="#repo-contents">Repo Contents</a></li>
 <li><a href="#system-requirements">System Requirements</a></li>
 <li><a href="#demo">Demo</a></li>
-<li><a href="#results">Results</a></li>
-<li><a href="./LICENSE">License</a></li>
-<li><a href="https://github.com/ebridge2/lol/issues">Issues</a></li>
 </ul>
 </div>
 </div>
@@ -215,13 +212,13 @@ pre code {
 </div>
 <div id="programs" class="section level3">
 <h3>Programs</h3>
-<p>In order to run the BHRMA, users must download JAGS (just another gibbs sampler), which is available from sourceforge (<a href="https://sourceforge.net/projects/mcmc-jags/" class="uri">https://sourceforge.net/projects/mcmc-jags/</a>). Several additional packages from CRAN are also required:</p>
+<p>In order to run the BHRMA, users must download JAGS (just another gibbs sampler), which is available from sourceforge (<a href="https://sourceforge.net/projects/mcmc-jags/" class="uri">https://sourceforge.net/projects/mcmc-jags/</a>). Typical install time for JAGS on a normal desktop computer is less than 5 minutes. In addition, users must install r packages <code>rjags</code>, <code>R2jags</code>, and <code>tidyverse</code> (details below).</p>
 </div>
 <div id="r-package-dependencies" class="section level3">
 <h3>R Package dependencies</h3>
 <p>Users should install the following packages from CRAN prior to running the BHRMA. From an <code>R</code> terminal:</p>
 <pre><code>install.packages(c(&#39;tidyverse&#39;, &#39;rjags&#39;, &#39;R2jags&#39;))</code></pre>
-<p>Additional libraries used thourhougt this project can be installed from an <code>R</code> terminal using:</p>
+<p>Additional libraries used throughout this project can be installed from an <code>R</code> terminal using the following code:</p>
 <pre><code># Packages for analysis, parralelization, and other tasks.
 install.packages(c(&#39;purrr&#39;, &#39;broom&#39;, &#39;pbdMPI&#39;, &#39;here&#39;, &#39;fs&#39;,
                    &#39;devtools&#39;, &#39;janitor&#39;, &#39;tidylog&#39;))
@@ -230,10 +227,21 @@ install.packages(c(&#39;purrr&#39;, &#39;broom&#39;, &#39;pbdMPI&#39;, &#39;here
 install.packages(c(&#39;kableExtra&#39;, &#39;gplots&#39;, &#39;cowplot&#39;, &#39;correlation&#39;, &#39;GGally&#39;, &#39;RColorBrewer&#39;, &#39;dendextend&#39;,&#39;ggrepel&#39;,&#39;colorspace&#39;,&#39;ggExtra&#39;))
 
 # Github package containing functions for summarizing and formatting numeric and categorical variables
-devtools::install_github(&quot;JAGoodrich/jag2&quot;)
-</code></pre>
+devtools::install_github(&quot;JAGoodrich/jag2&quot;)</code></pre>
+<p>Typical install time for all <code>R</code> package dependencies on a normal desktop computer is less than 10 minutes.</p>
 </div>
 </div>
+</div>
+<div id="demo" class="section level1">
+<h1>Demo</h1>
+<p>Detailed instructions for running the BHRMA model using simulated data is provided in (./5_reproducible_example/BHRMA_g_analysis_example.R). On a normal desktop computer, the expected run time for a single model using the simulated data is approximately 3-5 minutes.</p>
+<p>The output of this function will be a data frame named “fit” with 6 columns and 15 rows. Column headers are:</p>
+<pre><code>c(&quot;var.names&quot;, &quot;Mean&quot;, &quot;SD&quot;, &quot;X2.5.&quot;, &quot;X97.5.&quot;, &quot;p.val&quot;)  </code></pre>
+<p>Where the mean, SD, X2.5, and X97.5 are the mean, SD, lower, and upper 95% confidence intervals for the posterior distribution of the specified model parameter.</p>
+<p>Model parameters are provided in rows. Specificially, each PFAS in the mixture has two rows in the data frame (provided in the var.names column): a row ending in “.beta”, which is the effect estimate for each individual PFAS towards the overall mixture effect, and a row ending in “.gamma”, which is the posterior inclusion probability (PIP) for the individual PFAS. Additionally, the output contains a row for:<br />
+* psi: the overall mixture effect for the specified counterfactual profile<br />
+* eta.high: the estimated value of the outcome at the upper limit of the counterfactual profile<br />
+* eta.low: the predicted value of the outcome at the lower limit of the counterfactual profile</p>
 </div>
 
 

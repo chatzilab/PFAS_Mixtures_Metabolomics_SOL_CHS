@@ -5,6 +5,7 @@
 - [Overview](#overview)
 - [Repo Contents](#repo-contents)
 - [System Requirements](#system-requirements)
+- [Demo](#demo)
 
 
 # Overview  
@@ -39,7 +40,7 @@ This code was written with a computer running a Windows 11 operating system. Thi
 
 ### Programs
 
-In order to run the BHRMA, users must download JAGS (just another gibbs sampler), which is available from sourceforge (https://sourceforge.net/projects/mcmc-jags/). Several additional packages from CRAN are also required: 
+In order to run the BHRMA, users must download JAGS (just another gibbs sampler), which is available from sourceforge (https://sourceforge.net/projects/mcmc-jags/). Typical install time for JAGS on a normal desktop computer is less than 5 minutes. In addition, users must install r packages `rjags`,  `R2jags`, and `tidyverse` (details below).
 
 
 ### R Package dependencies
@@ -51,7 +52,7 @@ install.packages(c('tidyverse', 'rjags', 'R2jags'))
 ```
 
 
-Additional libraries used throughout this project can be installed from an `R` terminal using: 
+Additional libraries used throughout this project can be installed from an `R` terminal using the following code:  
 
 ```
 # Packages for analysis, parralelization, and other tasks.
@@ -65,3 +66,22 @@ install.packages(c('kableExtra', 'gplots', 'cowplot', 'correlation', 'GGally', '
 devtools::install_github("JAGoodrich/jag2")
 ```
 
+Typical install time for all `R` package dependencies on a normal desktop computer is less than 10 minutes. 
+
+
+
+# Demo  
+
+Detailed instructions for running the BHRMA model using simulated data is provided in (./5_reproducible_example/BHRMA_g_analysis_example.R). On a normal desktop computer, the expected run time for a single model using the simulated data is approximately 3-5 minutes.  
+
+The output of this function will be a data frame named "fit" with 6 columns and 15 rows. Column headers are: 
+```
+c("var.names", "Mean", "SD", "X2.5.", "X97.5.", "p.val")  
+```   
+
+Where the mean, SD, X2.5, and X97.5 are the mean, SD, lower, and upper 95% confidence intervals for the posterior distribution of the specified model parameter. 
+
+Model parameters are provided in rows. Specificially, each PFAS in the mixture has two rows in the data frame (provided in the var.names column): a row ending in ".beta", which is the effect estimate for each individual PFAS towards the overall mixture effect, and a row ending in ".gamma", which is the posterior inclusion probability (PIP) for the individual PFAS. Additionally, the output contains a row for:    
+- psi: the overall mixture effect for the specified counterfactual profile    
+- eta.high: the estimated value of the outcome at the upper limit of the counterfactual profile   
+- eta.low: the predicted value of the outcome at the lower limit of the counterfactual profile   

@@ -118,7 +118,11 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   XtX <- t(as.matrix(X))%*%as.matrix(X) 
   
   # run jags
-  jdata <- list(N=N, Y=Y, X=X, R=R, U=U, P=P, Q=Q, profiles=profiles, LOD=LOD,XtX=XtX, prop.mu.beta=prop.mu.beta, prop.sd.beta=prop.sd.beta)
+  jdata <- list(N=N, Y=Y, X=X, R=R, U=U, P=P, Q=Q, 
+                profiles=profiles, LOD=LOD,XtX=XtX, 
+                prop.mu.beta=prop.mu.beta, 
+                prop.sd.beta=prop.sd.beta)
+  
   var.s <- c("beta", "gamma", "eta.low", "eta.high",  "psi")
   model.fit <- jags.model(file=textConnection(ridge.BDL.model), data=jdata, n.chains=1, n.adapt=4000, quiet=T)
   update(model.fit, n.iter=1000, progress.bar="none")

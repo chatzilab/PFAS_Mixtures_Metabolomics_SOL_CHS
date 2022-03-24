@@ -10,7 +10,7 @@
 
 # Overview  
 
-Human exposure to perfluoroalkyl substances (PFAS) is ubiquitous and has been associated with several cardiometabolic diseases. However, the metabolic pathways linking PFAS exposure and human disease are unclear. Here, we examined associations of PFAS exposure and metabolic pathways in two independent cohorts of children and young adults. We analyzed untargeted metabolomics using Bayesian hierarchical regression modeling approach (BHRMA) with g-estimation and g-computation for modeling exposure-mixtures to estimate the impact of exposure to a mixture of six ubiquitous PFAS. This repository contains all code used in the analysis of this project. It also contains a reproducible example of the BHRMA, described in detail in the manuscript.
+Human exposure to perfluoroalkyl substances (PFAS) is ubiquitous and has been associated with several cardiometabolic diseases. However, the metabolic pathways linking PFAS exposure and human disease are unclear. Here, we examined associations of PFAS exposure and metabolic pathways in two independent cohorts of children and young adults. We analyzed untargeted metabolomics using Bayesian hierarchical regression modeling approach (BHRMA) with a g-prior and g-computation for modeling exposure-mixtures to estimate the impact of exposure to a mixture of six ubiquitous PFAS. This repository contains all code used in the analysis of this project. It also contains a reproducible example of the BHRMA, described in detail in the manuscript.
 
 
 # Repo contents  

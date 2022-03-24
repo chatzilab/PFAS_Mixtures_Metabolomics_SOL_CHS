@@ -1,13 +1,13 @@
 # Set up SOLAR data_for_mixtures_analysis on HPC
 
-source(here::here("!directories.R"))
-source(here::here("!set_exposure_outcome_vars.R"))
-source(here::here("!load_data.R"))
+source(here::here("0_project_setup", "!directories.R"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.R"))
+source(here::here("0_project_setup", "!load_data.R"))
 
 # Solar -------------------------------------------
 
 # Get BHRMA Function
-source(here::here("1_mixtures_analysis",
+source(here::here("2_mixtures_MWAS",
                   "0_0_BHRMA.g_function.R"))
 
 # Change ftdata from list to dataframe

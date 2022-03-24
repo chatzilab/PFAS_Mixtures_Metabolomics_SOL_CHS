@@ -2,8 +2,8 @@
 library(correlation)
 library(GGally)
 
-source(here::here("!functions.R"))
-source(here::here("!set_exposure_outcome_vars.R"))
+source(here::here("0_project_setup", "!functions.R"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.R"))
 
 # Function for calculating correlations for plot:
 cor_func <- function(data, mapping, method, ...){

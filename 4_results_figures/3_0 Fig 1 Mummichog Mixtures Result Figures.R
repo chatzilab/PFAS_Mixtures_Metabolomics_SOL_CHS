@@ -1,7 +1,7 @@
-# 2) Plot Mummichog Pathway Results
+# Plot Mummichog Pathway Results
 library(colorspace)
 library(janitor)
-source(here::here("!directories.R"))
+source(here::here("0_project_setup", "!directories.R"))
 
 # Read in data
 mum_pw_long <- read_rds(
@@ -113,7 +113,6 @@ bubbleplot_fxn <- function(data, mixture_name){
     ylab(NULL)
 }
 
-
 # (Min is 1); max is 24
 min(mum_pw_long_final$data[[1]]$hits_sig)
 max(mum_pw_long_final$data[[1]]$hits_sig)
@@ -122,38 +121,13 @@ max(mum_pw_long_final$data[[1]]$hits_sig)
 
 
 # Run Figures
-(all_pfas <- bubbleplot_fxn(mum_pw_long_final, "all_pfas")) #+ theme(legend.position = "none"))
+(fig_1_mum_bubble <- bubbleplot_fxn(mum_pw_long_final, "all_pfas")) #+ theme(legend.position = "none"))
 # (pfsas <-    bubbleplot_fxn(mum_pw_long4, "pfsas") + theme(legend.position = "none"))
 # (pfcas <-    bubbleplot_fxn(mum_pw_long4, "pfcas"))
 
 
-
-# Save Figs
-ggsave(all_pfas,
+# Save Fig --------------------
+ggsave(fig_1_mum_bubble,
        filename = fs::path(dir_reports,
-                           "mummichog_pw_bubbleplots",
-                           "Mummichog bubble plot PFAS Mixtures hyper g all_pfas mum_p05.jpeg"),
+                           "Figure 1 Mummichog bubble plot PFAS Mixtures hyper g all_pfas mum_p05.jpeg"),
        width = 14, height = 6)
-
-# ggsave(pfsas,
-#        filename = fs::path(dir_reports,
-#                            "mummichog_pw_bubbleplots",
-#                            "Mummichog bubble plot PFAS Mixtures hyper g pfsas mum_p05.jpeg"),
-#        width = 14, height = 9)
-# 
-# ggsave(pfcas,
-#        filename = fs::path(dir_reports,
-#                            "mummichog_pw_bubbleplots",
-#                            "Mummichog bubble plot PFAS Mixtures hyper g pfcas mum_p05.jpeg"),
-#        width = 14, height = 3)
-
-
-# cowplot::plot_grid(all_pfas, 
-#                    pfsas, 
-#                    pfcas, ncol = 1, 
-#                    align = "v", 
-#                    labels = c("A. All PFAS",
-#                               "B. Perfluorinated Sulfonic Acids",
-#                               "C. Perfluorinated Carboxylic Acids"),
-#                    hjust = 0, rel_heights = c(.7, 1, .8)
-#                     )

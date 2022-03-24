@@ -1,7 +1,7 @@
 # P-value Summary
 library("jag2")
 library("tidyverse")
-source(here::here("!directories.r"))
+source(here::here("0_project_setup", "!directories.r"))
 # Read in data and calculate summary stats ----------------------------------
 mwas_results <- read_csv(
   file = fs::path(dir_results_mixtures, 

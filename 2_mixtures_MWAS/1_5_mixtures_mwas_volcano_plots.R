@@ -1,7 +1,7 @@
 # Volcano Plots
 library("jag2")
 library("tidyverse")
-source(here::here("!directories.r"))
+source(here::here("0_project_setup", "!directories.r"))
 
 # SOLAR Volcano Plots ----------------------------------------------
 mwas_results <- read_csv(

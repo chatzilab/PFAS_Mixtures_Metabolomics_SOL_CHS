@@ -1,7 +1,7 @@
 # Set up datasets for Mummichog. 
 # This was originally written to run for 
 
-source(here::here("!directories.R"))
+source(here::here("0_project_setup", "!directories.R"))
 ##  Set Base Working Directory
 # rm(list = ls())
 exposures = c("Mixture effect hyper_g")

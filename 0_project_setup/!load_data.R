@@ -1,6 +1,5 @@
 library(janitor)
 library(jag2)
-# library(tidylog)
 
 # Load Metabolomics Feature Tables --------------------------------------
 ftdata <- read_rds(fs::path(dir_data, 
@@ -13,10 +12,10 @@ ft_metadata <- ftdata$solar %>%
 
 # Load Exposure Outcome Data from drive  ------------------------
 sol <- read_rds(fs::path(dir_data,
-                         "SOLAR exposure outcome data HRE PFAS 032322.rds"))
+                         "SOLAR exposure outcome data HRE PFAS.rds"))
 
 chs <- read_rds(fs::path(dir_data,
-                         "CHS MetaAir exposure outcome data HRE PFAS 032322.rds"))
+                         "CHS MetaAir exposure outcome data HRE PFAS.rds"))
 
 
 # Rename Datasets and remove emory pfas

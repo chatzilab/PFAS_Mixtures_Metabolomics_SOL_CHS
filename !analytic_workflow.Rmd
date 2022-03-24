@@ -9,11 +9,11 @@ output: html_document
 ```{r setup_select, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-source(here::here("!libraries.R"))
-source(here::here("!directories.R"))
-source(here::here("!set_exposure_outcome_vars.R"))
-source(here::here("!load_data.R"))
-source(here::here("!functions.R"))
+source(here::here("0_project_setup", "!libraries.R"))
+source(here::here("0_project_setup", "!directories.R"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.R"))
+source(here::here("0_project_setup", "!load_data.R"))
+source(here::here("0_project_setup", "!functions.R"))
 
 # Set ggplot theme:
 theme_set(theme_cowplot())
@@ -42,15 +42,19 @@ fig_s1
 
 
 
-## Get summary details about MWAS results
+
+
+## Figure 1. 
 ```{r}
-# Creates 4 summary data frames: 
-# solar_c18_mwas_results, solar_helic_mwas_results, 
-# chs_c18_mwas_results, helic_helic_mwas_results, 
-source("1_2_MWAS_pvalue_summary.R")
-
-
-
+source(here::here("3_results_figures",
+                  "3_0 Fig 1 Mummichog Mixtures Result Figures.R"))
+fig_1_mum_bubble
 ```
 
 
+## Figure 2. 
+```{r}
+source(here::here("3_results_figures",
+                  "3_1 Fig 2 upset plots.R"))
+upsetfig_final
+```

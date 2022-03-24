@@ -8,10 +8,10 @@ library(tidyverse)
 # The issue: Each node writes results to a single row, 
 # so data is not rectangular (because each node does not run exactly
 # the same number of models, as 23173 is not divisible by 128 nodes). 
-source(here::here("!directories.r"))
-source(here::here("!set_exposure_outcome_vars.r"))
-source(here::here("!load_data.r"))
-source(here::here("!functions.r"))
+source(here::here("0_project_setup", "!directories.r"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.r"))
+source(here::here("0_project_setup", "!load_data.r"))
+source(here::here("0_project_setup", "!functions.r"))
 
 # List all files from HPC -----------------------------
 temp = list.files(path = fs::path(dir_results_mixtures, 

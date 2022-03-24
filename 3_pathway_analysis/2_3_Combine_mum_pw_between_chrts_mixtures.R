@@ -1,17 +1,9 @@
 library(tidyverse)
-library(ggplot2)
-library(cowplot)
-library(ggrepel)
 library(janitor)
-ggplot2::theme_set(cowplot::theme_cowplot())
-
-# This code was initially written for reading in results for 
-# mummichog results from both cohorts, all PFAS, and all modes, so it 
-# is more complicated than it needs to be (JG 1/3/2022)
 
 # Source setup scripts
-source(here::here("!directories.R"))
-source(here::here("!set_exposure_outcome_vars.R"))
+source(here::here("0_project_setup", "!directories.R"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.R"))
 
 #Key for superpathways
 superpathwaykey <- readxl::read_xlsx(

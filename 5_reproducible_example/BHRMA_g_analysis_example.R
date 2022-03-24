@@ -14,7 +14,6 @@ library(tidyverse)
 # LOD: A P-length vector of LODs for each exposure. Individuals with missing data will have data imputed below this level of detection  
 # profiles: A 2xP matrix of two counterfactual profiles of exposures for which a potential outcomes risk difference is calculated (as the exposures are standardized within the function, these profiles should be on the standard normal scale)
 
-
 # Create Function ---------------------------------------------
 BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   
@@ -140,9 +139,8 @@ BHRMA.g <- function(X=NULL, Y=NULL, U=NULL, LOD=NULL, profiles=NULL) {
   return(ridge.BDL.results)
 }
 
-
 # Set up Data  -------------------------------
-simulated_data <- read_rds(here::here("simulated_data",
+simulated_data <- read_rds(here::here("5_reproducible_example",
                                       "simulated_data.RDS"))
 
 # X: A NxP matrix of exposures for mixture analysis (on the original scale with NA's for individuals with BLD)
@@ -170,6 +168,6 @@ exposure.Names = colnames(X)
 
 # Run Function ------------------------------------------------------
 # should take ~4 minutes on a standard laptop computer
-fit = BHRMA.g(X=X.obs, Y=Y, U=U, LOD=LOD, profiles=profiles)
+fit = BHRMA.g(X=X, Y=Y, U=U, LOD=LOD, profiles=profiles)
 
 fit

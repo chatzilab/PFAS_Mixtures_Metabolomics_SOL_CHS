@@ -1,10 +1,10 @@
 # Set up CHS data_for_mixtures_analysis on HPC
 # Note: run this code from "0_set up datasets for mixtures analysis.R"
 # rm(list = ls())
-source(here::here("!directories.R"))
-source(here::here("!set_exposure_outcome_vars.R"))
-source(here::here("!load_data.R"))
-source(here::here("1_mixtures_analysis",
+source(here::here("0_project_setup", "!directories.R"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.R"))
+source(here::here("0_project_setup", "!load_data.R"))
+source(here::here("2_mixtures_MWAS",
                   "0_0_BHRMA.g_function.R"))
 
 # Get all metabolite data in single dataframe

@@ -10,8 +10,8 @@ library(janitor)
 ggplot2::theme_set(cowplot::theme_cowplot())
 
 # Source setup scripts
-source(here::here("!directories.R"))
-source(here::here("!set_exposure_outcome_vars.R"))
+source(here::here("0_project_setup", "!directories.R"))
+source(here::here("0_project_setup", "!set_exposure_outcome_vars.R"))
 # source(here::here("2_3_Combine_mum_pw_between_chrts_mixtures.R"))
 
 #1) Get Empirical compound to Pathway Key from metaboanalyst -----------------------

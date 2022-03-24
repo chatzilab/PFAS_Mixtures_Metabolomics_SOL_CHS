@@ -3,13 +3,13 @@ library(tidyverse)
 library(ggExtra)
 
 # 2) Plot Mummichog Pathway Results
-library(colorspace)
+# library(colorspace)
 library(janitor)
 
 # Set vars
 # cohort_name <- "solar"
-source(here::here("!functions.R"))
-source(here::here("!directories.R"))
+source(here::here("0_project_setup", "!functions.R"))
+source(here::here("0_project_setup", "!directories.R"))
 
 
 # 1) read in data  ------------------------
@@ -57,7 +57,7 @@ mwas_beta_coefs_df  <- mwas_results %>%
 
 
 # Determine the number pips>0.8 for each PFAS compound
-# (xxx <- mwas_beta_coefs_df %>% 
+# (mwas_beta_coefs_df %>% 
 #     group_by(mixture, cohort, exposure) %>% 
 #     summarise(pip80 = sum(estimate_pip>0.8), 
 #               pct = pip80/length(estimate_pip)) %>% 
@@ -68,7 +68,6 @@ mwas_beta_coefs_df  <- mwas_results %>%
 
 # Pivot data wider to get a single row for each mz/rt for each mixture analysis
 mwas_beta_coef_w <- mwas_beta_coefs_df %>% 
-  # filter(exposure == "Mixture effect") %>% 
   pivot_wider(id_cols = c(mode, mixture, feature), 
               names_from = c(cohort, exposure), 
               values_from = c(estimate_beta:q_value, beta_ci)) %>% 
@@ -206,28 +205,3 @@ tyrosine_metabolites_pfas_mixture <- annotated_sig_ecs_ee %>%
          blank2,
          contains("estimate_pip_chs"), 
          everything())
-
-
-
-
-
-# Save data 
-# write_csv(annotated_sig_ecs_ee,
-#           fs::path(dir_reports, "Table 3 p05 Jan 31st 2022.csv"), na = "")
-
-
-# (sol <- ggplot(annotated_sig_ecs_ee, 
-#                aes(x = query_mass, y = -log10(p_value_sol))) + 
-#     geom_hline(yintercept = -log10(0.05), linetype = 2) +
-#     geom_hline(yintercept = 0) +
-#     geom_point() + facet_wrap(~empirical_compound, ncol = 1))
-
-
-
-tyrosine_metabolites_pfas_mixture %>% 
-  ungroup() %>%
-  filter(p_value_sol_mixture<0.05 ) %>%
-  summarise(n = length(unique(met_name)))
-
-
-

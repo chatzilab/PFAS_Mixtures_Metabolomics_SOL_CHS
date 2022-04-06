@@ -51,14 +51,15 @@ mum_pw_long4 <- mum_pw_long3 %>%
                                   str_detect(super_pathway, "Aromatic Amino Acids") ~ 
                                     "Aromatic Amino Acid Metabolism",
                                   TRUE ~ super_pathway), 
-    path_new = path_2 %>% str_replace("metabolites formation", 
-                                         "metabolite formation") %>% 
-      str_replace("Putative anti-Inflammatory", 
-                  "Anti-inflammatory") %>% 
+    path_new = path_2 %>% 
       str_replace("met.", 
-                  "metabolism"))
+                  "metabolism") %>%
+      str_replace("Putative anti-Inflammatory metabolismbolites formation from EPA", 
+                  "Anti-Inflammatory mets. from EPA ") 
+    )
 
 table(mum_pw_long4$super_pathway_new)
+table(mum_pw_long4$path_new)
 
 
 # Filter only sig. meta p-vals, order by meta p
@@ -130,4 +131,4 @@ max(mum_pw_long_final$data[[1]]$hits_sig)
 ggsave(fig_1_mum_bubble,
        filename = fs::path(dir_reports,
                            "Figure 1 Mummichog bubble plot PFAS Mixtures hyper g all_pfas mum_p05.jpeg"),
-       width = 14, height = 6)
+       width = 10, height = 6)

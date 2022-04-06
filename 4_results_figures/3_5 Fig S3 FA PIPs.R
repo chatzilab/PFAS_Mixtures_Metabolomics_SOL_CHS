@@ -7,6 +7,10 @@ annotated_sig_ecs_ee <- read_rds(
   select(-contains("blank")) %>% 
   tidylog::filter(str_detect(pathway, "fatty acid"))
 
+annotated_sig_ecs_ee <- annotated_sig_ecs_ee %>% 
+  tidylog::mutate(met_name = str_replace(met_name, 
+                                "Oleic acid; Elaidic acid", 
+                                "Elaidic acid"))
 
 # Subset SOLAR and CHS
 sol <- annotated_sig_ecs_ee %>% 
@@ -17,7 +21,7 @@ sol <- annotated_sig_ecs_ee %>%
   filter(estimate_beta_sol_mixture == max(estimate_beta_sol_mixture)) %>% 
   ungroup() %>% 
   mutate(met_name = fct_reorder(met_name, 
-                                       estimate_beta_sol_mixture), 
+                                estimate_beta_sol_mixture), 
          cohort = "SOLAR") %>% 
   rename_all(~str_remove(., "_sol"))
 
@@ -30,7 +34,7 @@ chs <- annotated_sig_ecs_ee %>%
   tidylog::filter(estimate_beta_chs_mixture == max(estimate_beta_chs_mixture)) %>% 
   ungroup() %>% 
   mutate(met_name = fct_reorder(met_name, 
-                                       estimate_beta_chs_mixture), 
+                                estimate_beta_chs_mixture), 
          cohort = "CHS") %>% 
   rename_all(~str_remove(., "_chs"))
 
@@ -79,9 +83,9 @@ chs_data <-  fa_mets %>%
 # Plot -----------------------------------------
 
 (sol <- ggplot(sol_data, 
-                    aes(x = pfas,
-                        y = met_name,
-                        fill = estimate_pip)) + 
+               aes(x = pfas,
+                   y = met_name,
+                   fill = estimate_pip)) + 
    geom_tile() +
    theme(axis.title.y = element_blank(), 
          axis.title.x = element_blank(), 
@@ -99,7 +103,7 @@ chs_data <-  fa_mets %>%
                 show.limits = FALSE,
                 guide = "colorsteps", 
                 name = "Posterior inclusion probability"))
-  
+
 
 (chs <- ggplot(chs_data, 
                aes(x = pfas,
@@ -132,11 +136,11 @@ chs_data <-  fa_mets %>%
 
 # Combine Plots -----------------------
 (fa_met_pips <- plot_grid(NULL, sol, 
-                      NULL, chs, 
-                      ncol = 1, align = "v", 
-                      rel_heights = c(.05, 1,.05, 1.2),
-                      labels = c("A) SOLAR","",
-                                 "B) CHS", "")))
+                          NULL, chs, 
+                          ncol = 1, align = "v", 
+                          rel_heights = c(.05, 1,.05, 1.2),
+                          labels = c("A) SOLAR","",
+                                     "B) CHS", "")))
 
 
 # ggsave(fa_met_pips, 

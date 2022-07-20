@@ -21,7 +21,8 @@ temp = list.files(path = fs::path(dir_results_mixtures,
 
 # Get names
 cohort_name <- case_when(str_detect(temp, "chs_") ~ "CHS", 
-                         str_detect(temp, "SOLAR_") ~ "SOL")
+                         str_detect(temp, "SOLAR_") ~ "SOL", 
+                         str_detect(temp, "Pooled_") ~ "Pooled")
 
 mixture_name <- case_when(str_detect(temp, "pfsas") ~ "pfsas", 
                           str_detect(temp, "pfca") ~ "pfcas", 
@@ -110,7 +111,7 @@ results_final <- tidylog::inner_join(ft_metadata, results_df_w,
 write_csv(results_final, 
           file = fs::path(
             dir_results_mixtures, 
-            "all_pfas_mixtures_results_hyper_g.csv"))
+            "all_pfas_mixtures_results_hyper_g_v3.csv"))
 
 # Save MWAS results ------------------------------------------
 results_final_list <- results_final %>% 
@@ -120,7 +121,7 @@ results_final_list <- results_final %>%
 
 write_rds(results_final_list,
           fs::path(dir_results_mixtures,
-                   "SOL CHS all Mixtures MWAS results long hyper_g_v2.rds"))
+                   "SOL CHS all Mixtures MWAS results long hyper_g_v3.rds"))
 
 # Get wide data frames of betas and pips --------------------------
 # Betas
@@ -152,5 +153,4 @@ all_pfas_mwas_results_long <- left_join(mwas_betas, mwas_pips)
 # Save MWAS beta coef and pip results -------------------------------
 write_rds(all_pfas_mwas_results_long, 
           fs::path(dir_results_mixtures, 
-                   "SOL CHS all Mixtures MWAS beta coef hyper_g_v2.rds"))
-
+                   "SOL CHS all Mixtures MWAS beta coef hyper_g_v3.rds"))

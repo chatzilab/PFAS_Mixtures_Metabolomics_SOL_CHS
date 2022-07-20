@@ -4,9 +4,18 @@
 # Select Key Vars
 solar_eo <- exposure_outcome$solar %>% 
   select(cohort, sex, age, tot_pf, wave,
-         bmi_og, hispanic, edu_house, modified2factor_score, puberty, 
+         bmi_og, edu_house, modified2factor_score, puberty, 
          og_glu_5, og_glu120, guac, iuac, a1c) %>%
   rename(bmi = bmi_og) 
+
+library(correlation)
+temp <- solar_eo %>%  
+  select("edu_house", "modified2factor_score") %>% 
+  mutate(edu_house = as.factor(edu_house))
+
+correlation::correlation(temp, method = "tetrachoric", 
+                         include_factors = TRUE)
+
 
 # Create important Vars
 solar_eo$hispanic <- "Hispanic"

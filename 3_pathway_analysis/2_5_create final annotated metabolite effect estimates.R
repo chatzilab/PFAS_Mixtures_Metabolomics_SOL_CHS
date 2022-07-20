@@ -154,7 +154,8 @@ summary_annotated_ee <- all_pfas_t1 %>%
             min_p_sol = min(p_value_sol_mixture),
             min_p_chs = min(p_value_chs_mixture)) %>% 
   mutate(sig = case_when(min_p_sol   < 0.25 & 
-                           min_p_chs < 0.25 ~ "Sig. Both cohorts", 
+              
+min_p_chs < 0.25 ~ "Sig. Both cohorts",
                          min_p_sol   < 0.25 ~ "Sig. Solar",  
                          min_p_chs   < 0.25 ~ "Sig. CHS", 
                          TRUE ~ "Not sig.")) %>% 

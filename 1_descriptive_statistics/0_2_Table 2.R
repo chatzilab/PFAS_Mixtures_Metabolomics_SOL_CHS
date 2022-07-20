@@ -1,20 +1,28 @@
 # Summarize SOLAR and CHS PFAS Data -----------------
+library(tidyverse)
+library(jag2)
+
+# Wide format: Solar
 sol_pfas <- exposure_outcome$solar %>% 
   select(all_of(exposures_continuous)) %>% 
   mutate(cohort = "SOLAR")
-
+# Wide format: CHS
 chs_pfas <- exposure_outcome$chs %>% 
   select(all_of(exposures_continuous)) %>% 
   mutate(cohort = "CHS")
 
-# Bind rows and pivot longer
+# Bind cohorts and pivot longer to get a single data frame with: 
+# One column for PFAS names
+# One column for PFAS concentrations
 pfas_l <- bind_rows(sol_pfas, chs_pfas) %>% 
   pivot_longer(cols = all_of(exposures_continuous), 
                values_to = "concentration", 
                names_to = "pfas")
 
-
-# By cohort
+# By cohort, calculate:
+#  - geometric mean (fungm), 
+#  - quantiles (qntle_fxn), 
+#  - n/percent missing (npct)
 pfas_summary <- pfas_l %>% 
   group_by(cohort, pfas) %>%
   summarise(
@@ -30,7 +38,7 @@ pfas_summary <- pfas_l %>%
   arrange(cohort,pfas)
 
 
-# Calculate p-values
+# Calculate p-values. This assumes that "concentrations" is not log transformed.
 (p_values <- pfas_l %>% 
     mutate(concentration = log(concentration)) %>%
     group_by(pfas) %>% 
